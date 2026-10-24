@@ -1,0 +1,97 @@
+# Secrets and direnv config. Never commit these.
+.env
+.env.*
+.envrc
+
+# Excel workbooks with embedded VBA. These carry source market data and have
+# previously contained a hardcoded API key, so they stay out of git entirely.
+*.xlsm
+*.xlsb
+
+# Client documents and source material - not ours to publish
+AIICO_stuff/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+ENV/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Editors / OS
+.DS_Store
+.ipynb_checkpoints/
+
+# Scratch
+scratch/
+tmp.md
+
+# Machine-specific Claude config. settings.local.json holds an absolute path
+# to this checkout, and .claude/CLAUDE.md is a symlink into the home
+# directory - neither travels to another machine. Matches the convention in
+# Intern_GenAI_Examples, which tracks .claude/ content but not these two.
+.claude/settings.local.json
+.claude/CLAUDE.md
+
+# AIICO comparison: bonds.csv carries NAS figures transcribed from the
+# INTERNAL-ONLY AIICO paper, so it and its outputs follow AIICO_stuff/ above.
+analysis/aiico_2026/bonds.csv
+analysis/aiico_2026/output/
+# settings.toml carries four T-bill yields transcribed from the same
+# INTERNAL-ONLY paper, so it follows bonds.csv. The code beside it is ours and
+# holds no client figures, so it stays.
+analysis/aiico_2026/settings.toml
+
+# ---------------------------------------------------------------------------
+# Source workbooks. The .xlsm rule above already excludes the FMDQ bond
+# workbooks; these are the curve workbooks, same market data in .xlsx form, so
+# they follow the same rule. 8.6 MB each and not ours to publish.
+NAS data/
+
+# Large generated backtest data and frozen copies stay local. Source code and
+# the snapshots README are tracked; a rerun must not add bulk output to Git.
+analysis/variance_backtest_52m/cache/
+analysis/variance_backtest_52m/output/
+analysis/variance_backtest_52m/snapshots/*/
+analysis/variance_backtest_52m/*.log
+analysis/variance_backtest_52m/.r-library/
+
+# The bundle's own __pycache__ appears when the modules are imported for a
+# flat-import test. The rule above covers it, but it is listed here too because
+# the bundle directory is otherwise entirely tracked and a reader would wonder.
+python/xlwings_lite/bundle/__pycache__/
+
+# API server run logs
+python/api/logs/
+
+# TLS certificates and private keys -- never commit, never read
+python/api/certs/
+*.pem
+
+# Databases (API key store and any other local state) -- never commit
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+python/api/data/
+python/api/usage/
+
+# Load test results (python/api/load_test.py)
+python/api/load_tests/
+# Shared response cache and rate-limit counts (python/api/shared_store.py)
+python/api/cache/
+
+
+test_hetzner_api.py

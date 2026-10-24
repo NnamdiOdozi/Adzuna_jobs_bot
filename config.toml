@@ -1,0 +1,23 @@
+[search]
+base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
+location = "London"
+distance_miles = 10
+queries = ["finance", "accountant", "financial analyst", "investment analyst"]
+days_old = 7
+pages_per_query = 2
+results_per_page = 50
+shortlist_size = 20
+timeout_seconds = 30
+title_keywords = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]
+exclude_title_keywords = ["recruiter", "recruitment consultant"]
+
+[email]
+sender = "redacted@example.com"
+smtp_host = "smtp.gmail.com"
+smtp_port = 465
+timeout_seconds = 30
+subject = "London finance jobs"
+timezone = "Europe/London"
+
+[history]
+path = "state/seen.json"
