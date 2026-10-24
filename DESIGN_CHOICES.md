@@ -9,7 +9,7 @@ are repository Secrets: GMAIL_SENDER, EMAIL_USER and EMAIL_FRIEND. The user chos
 Secrets after discussing that ordinary Variables are not automatically masked
 in public logs. No fallback to public config or repository Variables is used.
 
-Locally, the approved credential launcher supplies gmail_sender, email_user and
+Locally, the approved credential launcher supplies GMAIL_SENDER, email_user and
 optional email_friend. GMAIL_SENDER must contain the actual Gmail login, separate
 from a recipient alias with a plus tag. Recipient spelling is preserved. The
 Gmail app-password label remains an informational comment, not a login setting.

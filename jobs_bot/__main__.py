@@ -37,7 +37,7 @@ def _run():
     seen = set(history)
     password = os.environ["gmail_app_password"] if args.send else None
     # Addresses come from runtime settings, never the public configuration file.
-    config["email"]["sender"] = os.environ["gmail_sender"].strip()
+    config["email"]["sender"] = os.environ["GMAIL_SENDER"].strip()
     if not os.environ["email_user"].strip():
         raise ValueError("The main recipient address is required")
     addresses = (os.environ["email_user"], os.environ.get("email_friend", ""))

@@ -57,7 +57,7 @@ When you want to send that kind of shortlist, use:
 ```
 
 The send command performs a fresh search. Addresses are supplied through runtime
-settings, not the tracked configuration. Locally, `gmail_sender` is the Gmail
+settings, not the tracked configuration. Locally, `GMAIL_SENDER` is the Gmail
 login address, `email_user` is the main recipient and `email_friend` is an
 optional second recipient. Both recipients appear in the To field. Preserve
 recipient spelling, including any plus tag, but use the actual Gmail login
@@ -114,7 +114,7 @@ logs, whereas ordinary Variables are not automatically masked. The bot also
 omits email headers and recipient addresses from its preview and routine logs.
 
 The workflow maps uppercase secret names to local runtime names: `GMAIL_SENDER`
-to `gmail_sender`, `EMAIL_USER` to `email_user`, `EMAIL_FRIEND` to `email_friend`,
+stays uppercase, `EMAIL_USER` maps to `email_user`, `EMAIL_FRIEND` to `email_friend`,
 and `GMAIL_APP_PASSWORD` to `gmail_app_password`. Adzuna names stay uppercase.
 The sender must be the Gmail account whose app password you use. Google requires
 two-step verification for app passwords, and some accounts restrict their use.

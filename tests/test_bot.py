@@ -41,7 +41,7 @@ class BotTests(unittest.TestCase):
             "ADZUNA_APP_ID": "synthetic-app-id",
             "ADZUNA_API_KEY": "synthetic-api-key",
             "gmail_app_password": "synthetic-password",
-            "gmail_sender": "sender@example.com",
+            "GMAIL_SENDER": "sender@example.com",
             "email_user": "user@example.com",
             "email_friend": "friend@example.com",
         }
