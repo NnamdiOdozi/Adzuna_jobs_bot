@@ -1,5 +1,9 @@
 # Open work
 
+- 2026-10-24 — Source: candidate-preference and ranking discussion. Implement
+  agreed onboarding filters, evidence-based description analysis, ranking and
+  shortlist visibility improvements. Status: proposals summarized in
+  [deferred_onboard_work.md](deferred_onboard_work.md); implementation deferred.
 - 2026-10-24 — Source: user request. Explore applying for jobs on the friend's
   behalf rather than only emailing vacancies. Status: deferred; no implementation
   or application submission authorized today. Agree which sites and job criteria
