@@ -63,7 +63,8 @@ recipients = ["redacted@example.com", "your-friend@example.com"]
 ```
 
 Replace the example friend address with the real address before saving. The
-shipped configuration contains only the known sender address. Both recipients
+recipient list is used exactly as written, including any plus sign in an address.
+Both recipients
 appear in the To field. The same configuration is used locally and on GitHub;
 old `email_user` and `email_friend` environment settings are no longer used.
 

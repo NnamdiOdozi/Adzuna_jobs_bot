@@ -7,7 +7,9 @@ prefers a versioned file that any repository writer can edit over Actions settin
 The same list is used locally and in GitHub Actions, with no environment override
 or fallback to old recipient variables. Passwords and Adzuna credentials remain
 outside the file. Recipient addresses become public in this public repository.
-Only the known address is included initially; the friend must be added explicitly.
+Recipients preserve the user-provided spelling, including the plus tag in the
+main recipient address. The Gmail app-password label is recorded as a comment
+for reference; Gmail authentication uses the sender address and app password.
 
 ## 2026-10-24 — Credential naming and the failed local run
 

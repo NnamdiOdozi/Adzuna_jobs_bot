@@ -7,9 +7,6 @@
   deliberate send; preserve resulting local history during migration.
   Status: corrected normal preview verified live; Gmail not tested by the agent.
   Existing local sent-job history was found and preserved.
-- 2026-10-24 — Source: recipient configuration discussion. Add the friend's actual
-  address to the recipients list in config.toml. Status: only the known sender
-  address is configured; the friend's address has not been supplied in chat.
 - 2026-10-24 — Source: GitHub Actions plan. User adds credentials as secrets, then
   verify manual preview, manual send, history commit and the daily schedule.
   Status: workflow configured for publication; secrets and live checks remain.
