@@ -1,5 +1,17 @@
 # Open work
 
+- 2026-10-24 — Source: user request. Explore applying for jobs on the friend's
+  behalf rather than only emailing vacancies. Status: deferred; no implementation
+  or application submission authorized today. Agree which sites and job criteria
+  to support, and whether each application needs her approval before submission
+  or can be submitted automatically within explicitly agreed limits. Determine
+  the minimum applicant information required: CV, contact email, phone number,
+  work history and any site-specific questions. Obtain her consent and choose
+  private storage and access controls; never commit her CV, phone number, account
+  credentials or other private applicant information to this public repository.
+  Do not invent missing qualifications or answers. Plan application history to
+  prevent duplicate submissions and distinguish a submitted application from
+  confirmed receipt. No personal documents need to be collected today.
 - 2026-10-24 — Source: deployment discussion. Decide whether to change the
   currently public repository to private. Status: public visibility retained;
   user authorized publishing the source on this date.
