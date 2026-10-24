@@ -87,9 +87,10 @@ jobs become eligible again.
 ## Move to GitHub Actions
 
 The workflow is `.github/workflows/daily-jobs.yml`, named **Daily London job
-shortlist**. It targets 06:30 in the Europe/London timezone, including summer
-clock changes. GitHub can delay scheduled runs, so this is not a guaranteed
-delivery time.
+shortlist**. It targets 06:30 Monday to Saturday in the Europe/London timezone,
+including summer clock changes. There is no scheduled Sunday email; manual send
+runs remain available on any day. GitHub can delay scheduled runs, so this is
+not a guaranteed delivery time.
 
 Before activation, add these repository Actions secrets yourself:
 

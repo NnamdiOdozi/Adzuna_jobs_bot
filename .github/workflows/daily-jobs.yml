@@ -2,7 +2,7 @@ name: Daily London job shortlist
 
 on:
   schedule:
-    - cron: '30 6 * * *'
+    - cron: '30 6 * * 1-6'
       timezone: Europe/London
   workflow_dispatch:
     inputs:
