@@ -98,10 +98,19 @@ Before activation, add these repository Actions secrets yourself:
 | `ADZUNA_APP_ID` | Adzuna application ID |
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
+
+Put recipient addresses in **Settings → Secrets and variables → Actions →
+Variables → New repository variable**:
+
+| GitHub variable name | Purpose |
+|---|---|
 | `EMAIL_USER` | Main recipient; optional if sender should receive it |
 | `EMAIL_FRIEND` | Optional second recipient |
 
-The workflow maps uppercase GitHub secret names to the names expected by the
+Recipient variables take precedence over same-named secrets; existing recipient
+secrets remain supported. Variables are ordinary settings and are not masked
+automatically in logs. The bot does not print recipient addresses in previews.
+The workflow maps uppercase GitHub settings to the names expected by the
 application. The sender in `config.toml` must be the Gmail account whose app
 password you use. Google requires two-step verification for app passwords, and
 some accounts restrict their use.
@@ -115,7 +124,8 @@ Then choose **send** for a deliberate delivery test. Scheduled runs use send mod
 
 The repository is currently public. Source, the configured sender and any
 committed job history will be visible publicly. Recipient addresses and passwords
-are supplied through secrets. Decide whether to make the repository private
+are supplied through Actions variables and secrets respectively. Decide whether
+to make the repository private
 before publishing anything you do not want visible. Public scheduled workflows
 can also be disabled after 60 days without repository activity.
 
