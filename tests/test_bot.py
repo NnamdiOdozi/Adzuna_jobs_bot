@@ -3,7 +3,6 @@
 import io
 import json
 import os
-import re
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
@@ -35,11 +34,6 @@ class BotTests(unittest.TestCase):
         self.history = Path(temporary.name) / "seen.json"
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
-        source = re.sub(
-            r"(?m)^recipients = .*$",
-            'recipients = ["user@example.com", "friend@example.com"]',
-            source,
-        )
         self.config.write_text(
             source.replace('"state/seen.json"', json.dumps(str(self.history)))
         )
@@ -47,8 +41,9 @@ class BotTests(unittest.TestCase):
             "ADZUNA_APP_ID": "synthetic-app-id",
             "ADZUNA_API_KEY": "synthetic-api-key",
             "gmail_app_password": "synthetic-password",
-            "email_user": "ignored-user@example.com",
-            "email_friend": "ignored-friend@example.com",
+            "gmail_sender": "sender@example.com",
+            "email_user": "user@example.com",
+            "email_friend": "friend@example.com",
         }
 
     def _invoke(self, jobs, send=False, failure=None):
@@ -87,7 +82,7 @@ class BotTests(unittest.TestCase):
             self.assertEqual(password, "synthetic-password")
             self.assertIn("user@example.com", str(message["To"]))
             self.assertIn("friend@example.com", str(message["To"]))
-            self.assertNotIn("ignored-", str(message["To"]))
+            self.assertEqual(message["From"], "sender@example.com")
             self.assertIsNone(message["Bcc"])
 
         self._invoke([job], send=True, failure=_accept)
@@ -103,10 +98,8 @@ class BotTests(unittest.TestCase):
 
     def test_empty_recipient_list_prevents_delivery(self):
         """Reject an empty recipient list before searching or sending."""
-        source = self.config.read_text()
-        self.config.write_text(
-            re.sub(r"(?m)^recipients = .*$", "recipients = []", source)
-        )
+        self.credentials["email_user"] = ""
+        self.credentials["email_friend"] = ""
         with self.assertRaisesRegex(ValueError, "recipient"):
             self._invoke([_job()], send=True)
 

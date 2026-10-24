@@ -56,18 +56,12 @@ When you want to send that kind of shortlist, use:
 /home/nodozi/.local/bin/run-with-secrets python3 -m jobs_bot --send
 ```
 
-The send command performs a fresh search. The sender and recipients are set in
-the `[email]` section of `config.toml`. Add your friend's address to `recipients`:
-
-```toml
-recipients = ["redacted@example.com", "your-friend@example.com"]
-```
-
-Replace the example friend address with the real address before saving. The
-recipient list is used exactly as written, including any plus sign in an address.
-Both recipients
-appear in the To field. The same configuration is used locally and on GitHub;
-old `email_user` and `email_friend` environment settings are no longer used.
+The send command performs a fresh search. Addresses are supplied through runtime
+settings, not the tracked configuration. Locally, `gmail_sender` is the Gmail
+login address, `email_user` is the main recipient and `email_friend` is an
+optional second recipient. Both recipients appear in the To field. Preserve
+recipient spelling, including any plus tag, but use the actual Gmail login
+address for the sender. These values belong in your user-managed secret setup.
 
 On another machine where the settings are already supplied securely to the
 process, use `python3 -m jobs_bot` or `python3 -m jobs_bot --send` directly.
@@ -77,7 +71,8 @@ The launcher shown above belongs to this machine and is not shipped with the bot
 
 `config.toml` holds search terms, the London search radius, how many days back to
 look, how many results to request, title preferences, title exclusions, email
-settings and the history path. The default shortlist contains at most 20 jobs
+connection settings and the history path. Addresses and passwords are supplied
+separately. The default shortlist contains at most 20 jobs
 from listings added within seven days, with no minimum salary.
 
 Two checks remove duplicates. An Adzuna ID catches the same advert appearing in
@@ -108,16 +103,21 @@ Before activation, add these repository Actions secrets yourself:
 | `ADZUNA_APP_ID` | Adzuna application ID |
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
+| `GMAIL_SENDER` | Gmail account login address used to authenticate and send |
+| `EMAIL_USER` | Main recipient address |
+| `EMAIL_FRIEND` | Optional second recipient address |
 
-Recipient addresses belong in `config.toml`, not Actions variables or secrets.
-Anyone with repository write access can edit that file on GitHub and commit to
-the default branch to change the next run's recipients. The bot does not print
-recipient addresses in previews. Existing `EMAIL_USER` and `EMAIL_FRIEND` Actions
-settings are ignored and may be left unused or removed by the repository owner.
-The workflow maps uppercase GitHub secret names to the names expected by the
-application. The sender in `config.toml` must be the Gmail account whose app
-password you use. Google requires two-step verification for app passwords, and
-some accounts restrict their use.
+Add these as repository Secrets in Settings → Secrets and variables → Actions.
+If you previously created address Variables, copy their values into Secrets;
+the workflow no longer reads Variables. GitHub masks supplied secret values in
+logs, whereas ordinary Variables are not automatically masked. The bot also
+omits email headers and recipient addresses from its preview and routine logs.
+
+The workflow maps uppercase secret names to local runtime names: `GMAIL_SENDER`
+to `gmail_sender`, `EMAIL_USER` to `email_user`, `EMAIL_FRIEND` to `email_friend`,
+and `GMAIL_APP_PASSWORD` to `gmail_app_password`. Adzuna names stay uppercase.
+The sender must be the Gmail account whose app password you use. Google requires
+two-step verification for app passwords, and some accounts restrict their use.
 
 Upload the reviewed source to the repository's default branch. The workflow
 needs permission to write repository contents because it commits updated sent
@@ -126,10 +126,13 @@ history commit succeeds before considering migration complete. In Actions,
 choose **Run workflow**, leave the mode as **preview**, and inspect the results.
 Then choose **send** for a deliberate delivery test. Scheduled runs use send mode.
 
-The repository is currently public. Source, configured sender and recipient
-addresses, and committed job history are publicly visible, including in earlier
-commits after an edit. Passwords remain in Actions secrets. Decide whether to
-make the repository private before publishing anything you do not want visible.
+The repository is currently public, including its source, job history and Actions
+run logs. Sender and recipient addresses have been removed from the current
+configuration, but earlier public commits still contain the previously committed
+addresses. This change does not erase those commits or any existing copies.
+Do not put addresses into tracked files or print them in workflow commands.
+Repository variable values require authorized access to read; they are not a
+substitute for masked Secrets when a value must stay out of public logs.
 Public scheduled workflows
 can also be disabled after 60 days without repository activity.
 

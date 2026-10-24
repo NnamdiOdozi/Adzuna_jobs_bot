@@ -36,15 +36,17 @@ def _run():
         raise ValueError("Sent-job history must be a list of keys")
     seen = set(history)
     password = os.environ["gmail_app_password"] if args.send else None
-    addresses = config["email"]["recipients"]
-    if not isinstance(addresses, list) or not all(
-        isinstance(address, str) for address in addresses
-    ):
-        raise ValueError("Email recipients must be a list of addresses in config.toml")
-    recipients = list(dict.fromkeys(address.strip() for address in addresses))
+    # Addresses come from runtime settings, never the public configuration file.
+    config["email"]["sender"] = os.environ["gmail_sender"].strip()
+    if not os.environ["email_user"].strip():
+        raise ValueError("The main recipient address is required")
+    addresses = (os.environ["email_user"], os.environ.get("email_friend", ""))
+    recipients = list(
+        dict.fromkeys(address.strip() for address in addresses if address.strip())
+    )
     if not recipients or any(
         "@" not in address or "\n" in address or "\r" in address or "," in address
-        for address in recipients
+        for address in [config["email"]["sender"], *recipients]
     ):
         raise ValueError("Each recipient setting must contain one email address")
     # Keep these names identical to the local setup and GitHub Actions mapping.

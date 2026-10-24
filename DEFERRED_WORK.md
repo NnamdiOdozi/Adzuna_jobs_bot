@@ -1,5 +1,14 @@
 # Open work
 
+- 2026-10-24 — Source: email privacy request. User moves EMAIL_USER and
+  EMAIL_FRIEND from repository Variables to Secrets and adds GMAIL_SENDER as a
+  Secret containing the actual Gmail login address. Local runs also need
+  gmail_sender alongside email_user and optional email_friend in user-managed
+  secret settings. Status: code prepared; account configuration is user-managed.
+- 2026-10-24 — Source: email privacy request. Decide whether to remove previously
+  published addresses from Git history. Status:
+  addresses removed from current configuration; earlier public commits and copies
+  may still contain them. No history rewrite authorized or performed.
 - 2026-10-24 — Source: user request. Explore applying for jobs on the friend's
   behalf rather than only emailing vacancies. Status: deferred; no implementation
   or application submission authorized today. Agree which sites and job criteria

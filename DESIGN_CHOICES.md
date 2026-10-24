@@ -1,15 +1,22 @@
 # Design choices
 
-## 2026-10-24 — Editable recipient configuration
+## 2026-10-24 — Email address privacy
 
-Sender and recipient addresses live in the email section of config.toml. The user
-prefers a versioned file that any repository writer can edit over Actions settings.
-The same list is used locally and in GitHub Actions, with no environment override
-or fallback to old recipient variables. Passwords and Adzuna credentials remain
-outside the file. Recipient addresses become public in this public repository.
-Recipients preserve the user-provided spelling, including the plus tag in the
-main recipient address. The Gmail app-password label is recorded as a comment
-for reference; Gmail authentication uses the sender address and app password.
+The user initially preferred editable recipient configuration, then requested
+removing addresses to reduce exposure to public-repository scraping. Sender and
+recipients now come only from runtime settings. In GitHub Actions these settings
+are repository Secrets: GMAIL_SENDER, EMAIL_USER and EMAIL_FRIEND. The user chose
+Secrets after discussing that ordinary Variables are not automatically masked
+in public logs. No fallback to public config or repository Variables is used.
+
+Locally, the approved credential launcher supplies gmail_sender, email_user and
+optional email_friend. GMAIL_SENDER must contain the actual Gmail login, separate
+from a recipient alias with a plus tag. Recipient spelling is preserved. The
+Gmail app-password label remains an informational comment, not a login setting.
+
+The current file no longer contains addresses, but earlier commits still do.
+History rewriting or a repository visibility change needs a separate decision;
+neither happens automatically. Secret masking also does not undo past exposure.
 
 ## 2026-10-24 — Credential naming and the failed local run
 

@@ -13,8 +13,6 @@ exclude_title_keywords = ["recruiter", "recruitment consultant"]
 
 [email]
 # Gmail app-password label: Adzuna_jobs_bot (informational only).
-sender = "redacted@example.com"
-recipients = ["redacted@example.com", "redacted@example.com"]
 smtp_host = "smtp.gmail.com"
 smtp_port = 465
 timeout_seconds = 30
