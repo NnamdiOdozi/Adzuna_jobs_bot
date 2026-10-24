@@ -127,9 +127,13 @@ choose **Run workflow**, leave the mode as **preview**, and inspect the results.
 Then choose **send** for a deliberate delivery test. Scheduled runs use send mode.
 
 The repository is currently public, including its source, job history and Actions
-run logs. Sender and recipient addresses have been removed from the current
-configuration, but earlier public commits still contain the previously committed
-addresses. This change does not erase those commits or any existing copies.
+run logs. Sender and recipient addresses are supplied through Secrets, and the
+main branch's history was rewritten on 2026-10-24 to redact previously committed
+addresses. Existing downloads, forks, old run logs and GitHub cached views may
+still contain earlier copies. Rewriting history cannot retract downloaded data.
+Other old checkouts must be cleaned or cloned afresh; merging old history back
+would reintroduce the addresses. The active local checkout was updated during
+the cleanup.
 Do not put addresses into tracked files or print them in workflow commands.
 Repository variable values require authorized access to read; they are not a
 substitute for masked Secrets when a value must stay out of public logs.

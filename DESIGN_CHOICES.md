@@ -14,9 +14,19 @@ optional email_friend. GMAIL_SENDER must contain the actual Gmail login, separat
 from a recipient alias with a plus tag. Recipient spelling is preserved. The
 Gmail app-password label remains an informational comment, not a login setting.
 
-The current file no longer contains addresses, but earlier commits still do.
-History rewriting or a repository visibility change needs a separate decision;
-neither happens automatically. Secret masking also does not undo past exposure.
+The user authorized history rewriting on 2026-10-24. The 12 existing commits were
+rewritten in an isolated repository to replace Gmail/Googlemail addresses with
+non-personal placeholders. All historical file contents and commit metadata on
+that branch were checked for remaining matches. The current tracked file tree,
+including sent-job history, was preserved exactly by the rewrite. A separate
+sender-name fix uses uppercase GMAIL_SENDER locally and in GitHub Actions.
+
+Publication uses an update guarded against unexpected remote changes. Other old
+clones must not merge their original history back. Old GitHub cached views, forks,
+run logs and downloaded copies are outside the verified main-branch cleanup;
+secret masking and history rewriting do not undo that past exposure. Repository
+visibility is unchanged. GitHub Support may be needed for eligible cached data
+removal; no support contact or deletion of run logs is authorized by this change.
 
 ## 2026-10-24 — Credential naming and the failed local run
 

@@ -1,9 +1,10 @@
 # Open work
 
-- 2026-10-24 — Source: email privacy request. Decide whether to remove previously
-  published addresses from Git history. Status:
-  addresses removed from current configuration; earlier public commits and copies
-  may still contain them. No history rewrite authorized or performed.
+- 2026-10-24 — Source: approved history cleanup. Decide whether any old public
+  run logs or GitHub cached commit views need further removal or a Support request.
+  Status: main-branch history scrubbed and checked; cached copies, forks and other
+  clones remain outside that verification. No log deletion or Support contact
+  authorized; any other old checkout must be cleaned before pushing again.
 - 2026-10-24 — Source: user request. Explore applying for jobs on the friend's
   behalf rather than only emailing vacancies. Status: deferred; no implementation
   or application submission authorized today. Agree which sites and job criteria
