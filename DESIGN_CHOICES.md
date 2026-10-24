@@ -1,5 +1,14 @@
 # Design choices
 
+## 2026-10-24 — Editable recipient configuration
+
+Sender and recipient addresses live in the email section of config.toml. The user
+prefers a versioned file that any repository writer can edit over Actions settings.
+The same list is used locally and in GitHub Actions, with no environment override
+or fallback to old recipient variables. Passwords and Adzuna credentials remain
+outside the file. Recipient addresses become public in this public repository.
+Only the known address is included initially; the friend must be added explicitly.
+
 ## 2026-10-24 — Credential naming and the failed local run
 
 The original application used the initially supplied spellings

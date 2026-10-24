@@ -37,8 +37,6 @@ jobs:
           ADZUNA_API_KEY: ${{ secrets.ADZUNA_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          email_user: ${{ vars.EMAIL_USER || secrets.EMAIL_USER }}
-          email_friend: ${{ vars.EMAIL_FRIEND || secrets.EMAIL_FRIEND }}
           SEND_EMAIL: ${{ github.event_name == 'schedule' || inputs.mode == 'send' }}
         run: |
           if [ "$SEND_EMAIL" = "true" ]; then

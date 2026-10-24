@@ -55,10 +55,17 @@ When you want to send that kind of shortlist, use:
 /home/nodozi/.local/bin/run-with-secrets python3 -m jobs_bot --send
 ```
 
-The send command performs a fresh search. The sender is set in `config.toml`.
-The recipient comes from `email_user`, falling back to the sender if that setting
-is absent. `email_friend` adds an optional second recipient. Both addresses
-appear in the To field. Each setting must contain only one address.
+The send command performs a fresh search. The sender and recipients are set in
+the `[email]` section of `config.toml`. Add your friend's address to `recipients`:
+
+```toml
+recipients = ["redacted@example.com", "your-friend@example.com"]
+```
+
+Replace the example friend address with the real address before saving. The
+shipped configuration contains only the known sender address. Both recipients
+appear in the To field. The same configuration is used locally and on GitHub;
+old `email_user` and `email_friend` environment settings are no longer used.
 
 On another machine where the settings are already supplied securely to the
 process, use `python3 -m jobs_bot` or `python3 -m jobs_bot --send` directly.
@@ -100,18 +107,12 @@ Before activation, add these repository Actions secrets yourself:
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
 
-Put recipient addresses in **Settings → Secrets and variables → Actions →
-Variables → New repository variable**:
-
-| GitHub variable name | Purpose |
-|---|---|
-| `EMAIL_USER` | Main recipient; optional if sender should receive it |
-| `EMAIL_FRIEND` | Optional second recipient |
-
-Recipient variables take precedence over same-named secrets; existing recipient
-secrets remain supported. Variables are ordinary settings and are not masked
-automatically in logs. The bot does not print recipient addresses in previews.
-The workflow maps uppercase GitHub settings to the names expected by the
+Recipient addresses belong in `config.toml`, not Actions variables or secrets.
+Anyone with repository write access can edit that file on GitHub and commit to
+the default branch to change the next run's recipients. The bot does not print
+recipient addresses in previews. Existing `EMAIL_USER` and `EMAIL_FRIEND` Actions
+settings are ignored and may be left unused or removed by the repository owner.
+The workflow maps uppercase GitHub secret names to the names expected by the
 application. The sender in `config.toml` must be the Gmail account whose app
 password you use. Google requires two-step verification for app passwords, and
 some accounts restrict their use.
@@ -123,11 +124,11 @@ history commit succeeds before considering migration complete. In Actions,
 choose **Run workflow**, leave the mode as **preview**, and inspect the results.
 Then choose **send** for a deliberate delivery test. Scheduled runs use send mode.
 
-The repository is currently public. Source, the configured sender and any
-committed job history will be visible publicly. Recipient addresses and passwords
-are supplied through Actions variables and secrets respectively. Decide whether
-to make the repository private
-before publishing anything you do not want visible. Public scheduled workflows
+The repository is currently public. Source, configured sender and recipient
+addresses, and committed job history are publicly visible, including in earlier
+commits after an edit. Passwords remain in Actions secrets. Decide whether to
+make the repository private before publishing anything you do not want visible.
+Public scheduled workflows
 can also be disabled after 60 days without repository activity.
 
 ## Checks and limitations

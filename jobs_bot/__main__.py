@@ -36,17 +36,13 @@ def _run():
         raise ValueError("Sent-job history must be a list of keys")
     seen = set(history)
     password = os.environ["gmail_app_password"] if args.send else None
-    recipients = list(
-        dict.fromkeys(
-            address.strip()
-            for address in (
-                os.environ.get("email_user") or config["email"]["sender"],
-                os.environ.get("email_friend", ""),
-            )
-            if address.strip()
-        )
-    )
-    if any(
+    addresses = config["email"]["recipients"]
+    if not isinstance(addresses, list) or not all(
+        isinstance(address, str) for address in addresses
+    ):
+        raise ValueError("Email recipients must be a list of addresses in config.toml")
+    recipients = list(dict.fromkeys(address.strip() for address in addresses))
+    if not recipients or any(
         "@" not in address or "\n" in address or "\r" in address or "," in address
         for address in recipients
     ):

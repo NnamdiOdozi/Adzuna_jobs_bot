@@ -13,6 +13,7 @@ exclude_title_keywords = ["recruiter", "recruitment consultant"]
 
 [email]
 sender = "redacted@example.com"
+recipients = ["redacted@example.com"]
 smtp_host = "smtp.gmail.com"
 smtp_port = 465
 timeout_seconds = 30
