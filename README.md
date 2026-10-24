@@ -47,7 +47,8 @@ On this machine, the existing credential launcher supplies those settings:
 
 This command searches Adzuna and prints the proposed email body. It does not send
 email or change the sent-job history. With the default configuration, a run makes
-at most eight Adzuna requests: four search terms and up to two pages per term.
+at most four Adzuna requests: four search terms and one page of up to 100 results
+per term.
 
 When you want to send that kind of shortlist, use:
 
