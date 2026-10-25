@@ -1,5 +1,14 @@
 # Design choices
 
+## 2026-10-25 — Earlier scheduled start
+
+The user moved the scheduled start from 06:30 to 02:30 Europe/London after
+observing roughly four-to-five-hour delays in the separate fixed-income standby
+workflow. Monday-to-Saturday operation is preserved. Europe/London means GMT in
+winter and BST in summer; this is not a fixed UTC hour throughout the year.
+The buffer is a temporary timing choice, not a delivery guarantee: a punctual
+run can send around 02:30 and a sufficiently delayed run can still arrive late.
+
 ## 2026-10-24 — Email address privacy
 
 The user initially preferred editable recipient configuration, then requested
