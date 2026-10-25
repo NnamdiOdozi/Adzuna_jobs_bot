@@ -1,6 +1,7 @@
 # Secrets and direnv config. Never commit these.
 .env
 .env.*
+!.env.example
 .envrc
 
 # Excel workbooks with embedded VBA. These carry source market data and have
