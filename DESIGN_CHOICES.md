@@ -1,5 +1,28 @@
 # Design choices
 
+## 2026-10-26 — Cloudflare timer and deliberate repeat sends
+
+The user requested a minimal version of the fixed-income project's GitHub
+dispatch pattern. The new Worker uses workflow dispatch, targeting only the
+existing jobs workflow with mode=send. No database, health probes, proxying,
+notification service or automatic retry is needed for this version. Dashboard
+variables supply the repository, workflow, branch, timezone and send time; a
+Worker Secret supplies the GitHub token. No public HTTP trigger is implemented.
+
+Cloudflare Cron Triggers use UTC, so `30 5,6 * * *` checks both possible UTC
+hours. The Worker uses the scheduled timestamp to select 06:30 Europe/London
+and exclude Sundays. Only one daily invocation dispatches; the other skips.
+The GitHub native schedule is removed to avoid an early or competing email.
+Deployment and dashboard configuration remain user-managed; until completed,
+there is no automatic timer. GitHub acceptance is not execution or delivery.
+Offline Node tests cover both seasons, clock-change weekends and request failure.
+No live Cloudflare invocation or GitHub dispatch has been tested by the agent.
+
+The config switch `[email].force_send`, false by default, bypasses the daily
+limit only. A warning logs its use; the vacancy filter and history still apply.
+The override also affects automated send runs if committed as true, so it must
+be reset after deliberate extra-send testing. Offline Python tests exercise this.
+
 ## 2026-10-26 — One accepted email per London date
 
 The send command checks `state/delivery.json` before loading credentials or

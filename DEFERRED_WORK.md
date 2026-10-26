@@ -1,8 +1,10 @@
 # Open work
 
-- 2026-10-26 — Source: missing morning scheduled run. Consider a Cloudflare timer
-  dispatching the existing GitHub workflow. Status: not implemented; the daily
-  send guard is implemented separately. GitHub scheduling remains unreliable.
+- 2026-10-26 — Source: approved minimal Cloudflare timer. Deploy the prepared
+  `cloudflare/worker.mjs` in the dashboard, add its variables, token Secret and
+  Cron Trigger, then verify a dispatch and email receipt. Status: code and
+  offline checks complete; user deployment pending. Native GitHub cron removed,
+  so automatic delivery requires completing `cloudflare/README.md`.
 
 - 2026-10-24 — Source: approved history cleanup. Decide whether any old public
   run logs or GitHub cached commit views need further removal or a Support request.

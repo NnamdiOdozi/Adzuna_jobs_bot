@@ -130,6 +130,21 @@ class BotTests(unittest.TestCase):
         self.assertIn("Other Bank", output)
         self.assertEqual(self.delivery.read_text(), original)
 
+    def test_force_send_bypasses_date_but_preserves_vacancy_filter(self):
+        """An explicit override permits a test email containing only unseen jobs."""
+        self._invoke([_job()], send=True)
+        self.config.write_text(
+            self.config.read_text().replace("force_send = false", "force_send = true")
+        )
+        _, deliver, _ = self._invoke(
+            [_job(), _job("new", company="Other Bank")], send=True
+        )
+        deliver.assert_called_once()
+        body = deliver.call_args.args[0].get_content()
+        self.assertIn("Other Bank", body)
+        self.assertNotIn("Example Bank", body)
+        self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
+
     def test_invalid_delivery_history_blocks_search(self):
         """Do not silently discard a damaged daily-send record."""
         self.delivery.write_text('["invalid-date"]')

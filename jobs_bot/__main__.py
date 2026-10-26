@@ -25,6 +25,9 @@ def _run():
     with Path(args.config).open("rb") as stream:
         config = tomllib.load(stream)
     today = datetime.now(ZoneInfo(config["email"]["timezone"])).date().isoformat()
+    force_send = config["email"]["force_send"]
+    if not isinstance(force_send, bool):
+        raise ValueError("force_send must be a TOML boolean")
     delivery_path = Path(config["history"]["delivery_path"])
     sent_dates = json.loads(delivery_path.read_text()) if delivery_path.exists() else []
     if not isinstance(sent_dates, list) or not all(
@@ -33,7 +36,7 @@ def _run():
     ):
         raise ValueError("Delivery history must contain ISO calendar dates")
     # Check before credentials or API calls; previews never consume a send date.
-    if args.send and today in sent_dates:
+    if args.send and today in sent_dates and not force_send:
         logging.info(
             "event=email state=requested->skipped reason=already_sent "
             "date=%s timezone=%s",
@@ -41,6 +44,8 @@ def _run():
             config["email"]["timezone"],
         )
         return
+    if args.send and force_send:
+        logging.warning("event=email state=limited->override date=%s", today)
     search = config["search"]
     for name in ("pages_per_query", "results_per_page", "shortlist_size", "days_old"):
         if not isinstance(search[name], int) or search[name] <= 0:

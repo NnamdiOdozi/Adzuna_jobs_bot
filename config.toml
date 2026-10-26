@@ -18,6 +18,8 @@ smtp_port = 465
 timeout_seconds = 30
 subject = "London finance jobs"
 timezone = "Europe/London"
+# Testing only: allow another email today, while still excluding seen vacancies.
+force_send = false
 
 [history]
 path = "state/seen.json"

@@ -1,9 +1,7 @@
 name: Daily London job shortlist
 
 on:
-  schedule:
-    - cron: '30 2 * * 1-6'
-      timezone: Europe/London
+  # Cloudflare supplies the timer; manual runs use the same entry point.
   workflow_dispatch:
     inputs:
       mode:
@@ -31,7 +29,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run tests
-        run: python -m unittest discover -s tests -v
+        run: |
+          python -m unittest discover -s tests -v
+          node --test cloudflare/worker.test.mjs
       - name: Search and optionally send
         env:
           ADZUNA_API_KEY: ${{ secrets.ADZUNA_API_KEY }}
@@ -40,7 +40,7 @@ jobs:
           GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
           email_user: ${{ secrets.EMAIL_USER }}
           email_friend: ${{ secrets.EMAIL_FRIEND }}
-          SEND_EMAIL: ${{ github.event_name == 'schedule' || inputs.mode == 'send' }}
+          SEND_EMAIL: ${{ inputs.mode == 'send' }}
         run: |
           if [ "$SEND_EMAIL" = "true" ]; then
             python -m jobs_bot --send
@@ -48,7 +48,7 @@ jobs:
             python -m jobs_bot
           fi
       - name: Persist history after Gmail accepts the message
-        if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.mode == 'send') }}
+        if: ${{ !cancelled() && inputs.mode == 'send' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

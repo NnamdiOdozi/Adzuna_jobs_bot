@@ -9,6 +9,10 @@ These are conversation checkpoints, not requirements imposed on unattended runs.
 - [x] User chose repository Secrets for email addresses after discussing public logs.
 - [x] On 2026-10-26, user requested a check against multiple daily sends after
   discussing a delayed schedule following a manual send.
+- [x] On 2026-10-26, user requested a configurable test override and a minimal
+  Cloudflare timer for 06:30, to deploy through the dashboard.
+- [ ] Confirm that force_send bypasses the daily limit for every send while true,
+  and Cloudflare dispatch acceptance does not confirm GitHub execution or email.
 - [ ] Confirm that daily-send dates and vacancy history serve different purposes,
   and separate local checkouts need current history to share the protection.
 - [ ] Confirm that preview searches but neither sends nor changes sent-job history.

@@ -94,16 +94,19 @@ without searching Adzuna or sending mail. This applies to manual and scheduled
 runs, including a delayed schedule after a manual send. Previews remain available.
 Both files are committed by the workflow; pull the latest history before a local
 send. Separate checkouts do not automatically share this protection.
+For a deliberate extra send, set `[email]`'s `force_send = true` in `config.toml`,
+then restore `false`. This bypasses only the daily limit, not vacancy deduplication.
+GitHub uses the committed config; a local edit affects only local runs.
 
 ## Move to GitHub Actions
 
 The workflow is `.github/workflows/daily-jobs.yml`, named **Daily London job
-shortlist**. It targets 02:30 Monday to Saturday in the Europe/London timezone,
-including summer clock changes. There is no scheduled Sunday email; manual send
-runs remain available on any day. GitHub can delay scheduled runs, so this is
-not a guaranteed delivery time. The schedule was moved four hours earlier on
-2026-10-25 as a buffer after long delays in another workflow. A punctual run
-can send around 02:30; this does not guarantee arrival at 06:30.
+shortlist**. A small Cloudflare Worker replaces GitHub's native timer after the
+02:30 schedule failed to produce a morning run. Once deployed, it requests a run
+at 06:30 London time Monday to Saturday, including summer clock changes. Follow
+[the Cloudflare dashboard setup](cloudflare/README.md). Until that setup is
+complete, only manual runs are available. GitHub runner availability can still
+delay execution after the request. Manual sends remain available on Sundays.
 
 Before activation, add these repository Actions secrets yourself:
 
@@ -133,7 +136,7 @@ needs permission to write repository contents because it commits updated sent
 history after delivery. Branch protections may prevent this; verify that the
 history commit succeeds before considering migration complete. In Actions,
 choose **Run workflow**, leave the mode as **preview**, and inspect the results.
-Then choose **send** for a deliberate delivery test. Scheduled runs use send mode.
+Then choose **send** for a deliberate delivery test. Cloudflare requests send mode.
 
 The repository is currently public, including its source, job history and Actions
 run logs. Sender and recipient addresses are supplied through Secrets, and the
@@ -146,8 +149,6 @@ the cleanup.
 Do not put addresses into tracked files or print them in workflow commands.
 Repository variable values require authorized access to read; they are not a
 substitute for masked Secrets when a value must stay out of public logs.
-Public scheduled workflows
-can also be disabled after 60 days without repository activity.
 
 ## Checks and limitations
 
