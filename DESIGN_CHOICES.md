@@ -1,5 +1,27 @@
 # Design choices
 
+## 2026-10-26 — One accepted email per London date
+
+The send command checks `state/delivery.json` before loading credentials or
+contacting Adzuna. An already-recorded London date produces a successful skip
+with `reason=already_sent`. Preview is unaffected. The first delivery record is
+seeded from the confirmed Gmail acceptance in manual run 40286374198 at
+2026-10-26 07:32:22 UTC. Existing vacancy keys remain unchanged.
+
+After Gmail accepts an email, the date record is saved using a temporary file
+and replacement, then vacancy history is saved. GitHub commits both files even
+if a later step fails, unless the run is cancelled. Existing workflow concurrency
+serializes manual and scheduled runs; each checks out the current default branch.
+The same-date check also covers empty shortlists. Failed Gmail submissions do
+not consume the date, allowing retries.
+
+Offline tests prove the date check, skipping before API calls, next-day delivery,
+preview behaviour and failure handling. They do not prove inbox receipt or
+exactly-once delivery: a crash after Gmail acceptance but before saving the date,
+a failed GitHub push, partial recipient acceptance, or independent stale/local
+checkouts can still permit another email. Simultaneous local sends are unsupported.
+The new record does not fix GitHub's delayed or missing scheduled triggers.
+
 ## 2026-10-25 — Earlier scheduled start
 
 The user moved the scheduled start from 06:30 to 02:30 Europe/London after

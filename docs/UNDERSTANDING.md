@@ -7,6 +7,10 @@ These are conversation checkpoints, not requirements imposed on unattended runs.
   as a four-hour buffer for GitHub delays; recipients remain visible to each other.
 - [x] User requested that previously emailed jobs be suppressed on future days.
 - [x] User chose repository Secrets for email addresses after discussing public logs.
+- [x] On 2026-10-26, user requested a check against multiple daily sends after
+  discussing a delayed schedule following a manual send.
+- [ ] Confirm that daily-send dates and vacancy history serve different purposes,
+  and separate local checkouts need current history to share the protection.
 - [ ] Confirm that preview searches but neither sends nor changes sent-job history.
 - [ ] Confirm that title-word ranking is not an assessment of candidate suitability.
 - [ ] Confirm the trade-off between suppressing reposts and hiding separate vacancies

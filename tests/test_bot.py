@@ -5,6 +5,7 @@ import json
 import os
 import unittest
 from contextlib import redirect_stdout
+from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
@@ -32,10 +33,14 @@ class BotTests(unittest.TestCase):
         temporary = TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.history = Path(temporary.name) / "seen.json"
+        self.delivery = Path(temporary.name) / "delivery.json"
+        self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
         self.config.write_text(
-            source.replace('"state/seen.json"', json.dumps(str(self.history)))
+            source.replace('"state/seen.json"', json.dumps(str(self.history))).replace(
+                '"state/delivery.json"', json.dumps(str(self.delivery))
+            )
         )
         self.credentials = {
             "ADZUNA_APP_ID": "synthetic-app-id",
@@ -54,10 +59,12 @@ class BotTests(unittest.TestCase):
         with (
             patch.dict(os.environ, self.credentials, clear=True),
             patch("sys.argv", argv),
+            patch("jobs_bot.__main__.datetime") as clock,
             patch("jobs_bot.__main__.fetch_jobs", return_value=jobs) as fetch,
             patch("jobs_bot.__main__.send_message", side_effect=failure) as deliver,
             redirect_stdout(output),
         ):
+            clock.now.return_value = self.now
             _run()
         return fetch, deliver, output.getvalue()
 
@@ -70,6 +77,7 @@ class BotTests(unittest.TestCase):
         )
         deliver.assert_not_called()
         self.assertFalse(self.history.exists())
+        self.assertFalse(self.delivery.exists())
         self.assertIn("Finance Analyst", output)
         self.assertNotIn("user@example.com", output)
 
@@ -87,6 +95,7 @@ class BotTests(unittest.TestCase):
 
         self._invoke([job], send=True, failure=_accept)
         self.assertEqual(set(json.loads(self.history.read_text())), job_keys(job))
+        self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
 
     def test_failed_send_preserves_previous_history(self):
         """Keep earlier sent records unchanged when delivery raises."""
@@ -95,6 +104,37 @@ class BotTests(unittest.TestCase):
         with self.assertRaises(ConnectionError):
             self._invoke([_job()], send=True, failure=ConnectionError("unavailable"))
         self.assertEqual(json.loads(self.history.read_text()), original)
+        self.assertFalse(self.delivery.exists())
+        _, deliver, _ = self._invoke([_job()], send=True)
+        deliver.assert_called_once()
+
+    def test_second_send_skips_search_and_delivery(self):
+        """A delayed scheduled send must skip after a manual send that day."""
+        self._invoke([_job()], send=True)
+        original = self.history.read_text()
+        self.credentials.clear()
+        with self.assertLogs(level="INFO") as logs:
+            fetch, deliver, _ = self._invoke([_job("new")], send=True)
+        fetch.assert_not_called()
+        deliver.assert_not_called()
+        self.assertEqual(self.history.read_text(), original)
+        self.assertIn("reason=already_sent", "\n".join(logs.output))
+
+    def test_preview_after_send_still_searches(self):
+        """Inspect new jobs without sending or changing the day's record."""
+        self._invoke([_job()], send=True)
+        original = self.delivery.read_text()
+        fetch, deliver, output = self._invoke([_job("new", company="Other Bank")])
+        fetch.assert_called_once()
+        deliver.assert_not_called()
+        self.assertIn("Other Bank", output)
+        self.assertEqual(self.delivery.read_text(), original)
+
+    def test_invalid_delivery_history_blocks_search(self):
+        """Do not silently discard a damaged daily-send record."""
+        self.delivery.write_text('["invalid-date"]')
+        with self.assertRaises(ValueError):
+            self._invoke([_job()], send=True)
 
     def test_empty_recipient_list_prevents_delivery(self):
         """Reject an empty recipient list before searching or sending."""
@@ -106,12 +146,16 @@ class BotTests(unittest.TestCase):
     def test_next_run_filters_sent_ids_and_probable_reposts(self):
         """Suppress both a delivered ID and a new ID for the same role."""
         self._invoke([_job()], send=True)
+        self.now = datetime(2026, 10, 27, 2, 30)
         _, deliver, _ = self._invoke(
             [_job(), _job("repost"), _job("different", company="Other Bank")], send=True
         )
         message = deliver.call_args.args[0]
         self.assertIn("Other Bank", message.get_content())
         self.assertNotIn("Example Bank", message.get_content())
+        self.assertEqual(
+            json.loads(self.delivery.read_text()), ["2026-10-26", "2026-10-27"]
+        )
 
     def test_recruiter_title_is_excluded_but_other_employer_is_retained(self):
         """Reject recruiter titles without collapsing roles at different firms."""

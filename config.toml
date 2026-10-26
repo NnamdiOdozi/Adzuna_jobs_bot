@@ -21,3 +21,4 @@ timezone = "Europe/London"
 
 [history]
 path = "state/seen.json"
+delivery_path = "state/delivery.json"

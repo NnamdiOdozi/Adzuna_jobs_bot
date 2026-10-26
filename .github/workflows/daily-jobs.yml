@@ -48,11 +48,11 @@ jobs:
             python -m jobs_bot
           fi
       - name: Persist history after Gmail accepts the message
-        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.mode == 'send') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- state/seen.json
+          git add -- state/seen.json state/delivery.json
           if ! git diff --cached --quiet; then
             git commit -m "Update sent-job history [skip ci]"
             git push origin HEAD:${{ github.event.repository.default_branch }}

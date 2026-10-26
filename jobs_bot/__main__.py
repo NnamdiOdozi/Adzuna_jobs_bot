@@ -6,7 +6,7 @@ import logging
 import os
 import sys
 import tomllib
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from uuid import uuid4
 from zoneinfo import ZoneInfo
@@ -24,6 +24,23 @@ def _run():
     args = parser.parse_args()
     with Path(args.config).open("rb") as stream:
         config = tomllib.load(stream)
+    today = datetime.now(ZoneInfo(config["email"]["timezone"])).date().isoformat()
+    delivery_path = Path(config["history"]["delivery_path"])
+    sent_dates = json.loads(delivery_path.read_text()) if delivery_path.exists() else []
+    if not isinstance(sent_dates, list) or not all(
+        isinstance(day, str) and date.fromisoformat(day).isoformat() == day
+        for day in sent_dates
+    ):
+        raise ValueError("Delivery history must contain ISO calendar dates")
+    # Check before credentials or API calls; previews never consume a send date.
+    if args.send and today in sent_dates:
+        logging.info(
+            "event=email state=requested->skipped reason=already_sent "
+            "date=%s timezone=%s",
+            today,
+            config["email"]["timezone"],
+        )
+        return
     search = config["search"]
     for name in ("pages_per_query", "results_per_page", "shortlist_size", "days_old"):
         if not isinstance(search[name], int) or search[name] <= 0:
@@ -59,14 +76,21 @@ def _run():
         len(seen),
         "send" if args.send else "preview",
     )
-    date = datetime.now(ZoneInfo(config["email"]["timezone"])).date().isoformat()
-    message = build_message(selected, config["email"], recipients, date)
+    message = build_message(selected, config["email"], recipients, today)
     if not args.send:
         # Preview only the body so recipient addresses stay out of Actions logs.
         print(message.get_content())
         return
     send_message(message, config["email"], password)
     logging.info("event=email state=pending->accepted recipients=%d", len(recipients))
+    # Save the accepted send first, even if saving the vacancy keys later fails.
+    delivery_path.parent.mkdir(parents=True, exist_ok=True)
+    pending_path = delivery_path.with_suffix(".tmp")
+    pending_path.write_text(
+        json.dumps(sorted(set(sent_dates) | {today}), indent=2) + "\n"
+    )
+    pending_path.replace(delivery_path)
+    logging.info("event=delivery state=unsent->saved date=%s", today)
     for job in selected:
         seen.update(job_keys(job))
     history_path.parent.mkdir(parents=True, exist_ok=True)

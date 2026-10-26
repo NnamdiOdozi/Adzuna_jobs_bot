@@ -88,6 +88,13 @@ create this file. If a send finds no new jobs, it sends a short no-new-jobs mess
 Preserve existing history when moving from local runs to GitHub, otherwise old
 jobs become eligible again.
 
+`state/delivery.json` records London dates on which Gmail accepted an email.
+After one successful send, further send runs on that date exit successfully
+without searching Adzuna or sending mail. This applies to manual and scheduled
+runs, including a delayed schedule after a manual send. Previews remain available.
+Both files are committed by the workflow; pull the latest history before a local
+send. Separate checkouts do not automatically share this protection.
+
 ## Move to GitHub Actions
 
 The workflow is `.github/workflows/daily-jobs.yml`, named **Daily London job

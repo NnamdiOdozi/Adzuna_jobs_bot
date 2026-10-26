@@ -1,5 +1,9 @@
 # Open work
 
+- 2026-10-26 — Source: missing morning scheduled run. Consider a Cloudflare timer
+  dispatching the existing GitHub workflow. Status: not implemented; the daily
+  send guard is implemented separately. GitHub scheduling remains unreliable.
+
 - 2026-10-24 — Source: approved history cleanup. Decide whether any old public
   run logs or GitHub cached commit views need further removal or a Support request.
   Status: main-branch history scrubbed and checked; cached copies, forks and other
