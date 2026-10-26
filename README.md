@@ -97,6 +97,11 @@ send. Separate checkouts do not automatically share this protection.
 For a deliberate extra send, set `[email]`'s `force_send = true` in `config.toml`,
 then restore `false`. This bypasses only the daily limit, not vacancy deduplication.
 GitHub uses the committed config; a local edit affects only local runs.
+For testing without emailing the normal recipients, choose workflow mode `test`
+or run `python3 -m jobs_bot --test-send` through the credential launcher. This
+sends only to `GMAIL_SENDER`, labels the subject `[TEST]`, bypasses the daily limit
+and leaves both history files unchanged. Preview still sends no email. Both
+preview and test search Adzuna; only the offline tests avoid external requests.
 
 ## Move to GitHub Actions
 

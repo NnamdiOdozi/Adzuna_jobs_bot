@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Preview results or send the email
+        description: Preview, email only the sender, or send normally
         type: choice
-        options: [preview, send]
+        options: [preview, test, send]
         default: preview
 
 permissions:
@@ -40,13 +40,14 @@ jobs:
           GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
           email_user: ${{ secrets.EMAIL_USER }}
           email_friend: ${{ secrets.EMAIL_FRIEND }}
-          SEND_EMAIL: ${{ inputs.mode == 'send' }}
+          RUN_MODE: ${{ inputs.mode }}
         run: |
-          if [ "$SEND_EMAIL" = "true" ]; then
-            python -m jobs_bot --send
-          else
-            python -m jobs_bot
-          fi
+          case "$RUN_MODE" in
+            send) python -m jobs_bot --send ;;
+            test) python -m jobs_bot --test-send ;;
+            preview) python -m jobs_bot ;;
+            *) exit 1 ;;
+          esac
       - name: Persist history after Gmail accepts the message
         if: ${{ !cancelled() && inputs.mode == 'send' }}
         run: |

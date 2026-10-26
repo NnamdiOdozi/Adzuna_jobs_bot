@@ -1,5 +1,21 @@
 # Design choices
 
+## 2026-10-26 — Sender-only test delivery
+
+The user requested testing Cloudflare through GitHub without contacting the
+friend. Workflow mode `test` runs `--test-send`, a mutually exclusive alternative
+to normal `--send`. It uses only `GMAIL_SENDER` as recipient, never the normal
+recipient settings, labels the subject `[TEST]`, and returns before either history
+write. It bypasses the daily date guard so today's normal send does not prevent
+testing, while still filtering previously emailed vacancies.
+
+The Worker accepts a validated `RUN_MODE` of preview, test or send. Omission
+preserves the deployed Worker's original send behaviour. The dashboard-managed
+Worker must be updated manually before that variable can change its behaviour.
+Offline tests check mode forwarding, rejection of invalid modes, sender-only
+message headers and preservation of existing/absent history. No live email or
+Cloudflare dispatch was performed; tests do not establish inbox delivery.
+
 ## 2026-10-26 — Cloudflare timer and deliberate repeat sends
 
 The user requested a minimal version of the fixed-income project's GitHub

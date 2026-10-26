@@ -3,8 +3,10 @@
 - 2026-10-26 — Source: approved minimal Cloudflare timer. Deploy the prepared
   `cloudflare/worker.mjs` in the dashboard, add its variables, token Secret and
   Cron Trigger, then verify a dispatch and email receipt. Status: code and
-  offline checks complete; user deployment pending. Native GitHub cron removed,
-  so automatic delivery requires completing `cloudflare/README.md`.
+  offline checks complete; user reports Worker, Cron Trigger and token deployed.
+  Verify a dispatch and receipt, then update the dashboard Worker to the new
+  RUN_MODE-capable script if testing preview/sender-only modes. Native GitHub cron
+  removed; the dashboard deployment controls the automatic timer.
 
 - 2026-10-24 — Source: approved history cleanup. Decide whether any old public
   run logs or GitHub cached commit views need further removal or a Support request.

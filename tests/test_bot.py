@@ -51,10 +51,12 @@ class BotTests(unittest.TestCase):
             "email_friend": "friend@example.com",
         }
 
-    def _invoke(self, jobs, send=False, failure=None):
+    def _invoke(self, jobs, send=False, failure=None, test_send=False):
         argv = ["jobs_bot", "--config", str(self.config)]
         if send:
             argv.append("--send")
+        if test_send:
+            argv.append("--test-send")
         output = io.StringIO()
         with (
             patch.dict(os.environ, self.credentials, clear=True),
@@ -144,6 +146,30 @@ class BotTests(unittest.TestCase):
         self.assertIn("Other Bank", body)
         self.assertNotIn("Example Bank", body)
         self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
+
+    def test_test_send_uses_sender_only_after_normal_delivery(self):
+        """Testing after a real send cannot contact the friend or consume jobs."""
+        self._invoke([_job()], send=True)
+        before = (self.history.read_text(), self.delivery.read_text())
+        self.credentials.pop("email_user")
+        self.credentials.pop("email_friend")
+        _, deliver, _ = self._invoke(
+            [_job("new", company="Other Bank")], test_send=True
+        )
+        deliver.assert_called_once()
+        message = deliver.call_args.args[0]
+        self.assertEqual(message["To"], "sender@example.com")
+        self.assertIsNone(message["Cc"])
+        self.assertIsNone(message["Bcc"])
+        self.assertTrue(message["Subject"].startswith("[TEST]"))
+        self.assertIn("Other Bank", message.get_content())
+        self.assertEqual((self.history.read_text(), self.delivery.read_text()), before)
+
+    def test_test_send_never_creates_normal_history(self):
+        """A test on a fresh checkout leaves both normal history files absent."""
+        self._invoke([_job()], test_send=True)
+        self.assertFalse(self.history.exists())
+        self.assertFalse(self.delivery.exists())
 
     def test_invalid_delivery_history_blocks_search(self):
         """Do not silently discard a damaged daily-send record."""

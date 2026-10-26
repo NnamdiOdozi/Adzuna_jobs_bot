@@ -48,3 +48,27 @@ test("GitHub rejection fails visibly without printing its response", async (t) =
     /GitHub dispatch failed: HTTP 403/,
   );
 });
+
+test("configured preview and test modes reach GitHub unchanged", async (t) => {
+  const modes = [];
+  t.mock.method(console, "log", () => {});
+  t.mock.method(globalThis, "fetch", async (url, request) => {
+    modes.push(JSON.parse(request.body).inputs.mode);
+    return { ok: true, status: 200 };
+  });
+  for (const mode of ["preview", "test"]) {
+    await worker.scheduled(
+      { scheduledTime: Date.parse("2026-10-26T06:30:00Z") },
+      { ...env, RUN_MODE: mode },
+    );
+  }
+  assert.deepEqual(modes, ["preview", "test"]);
+  await assert.rejects(
+    worker.scheduled(
+      { scheduledTime: Date.parse("2026-10-26T06:30:00Z") },
+      { ...env, RUN_MODE: "mistyped" },
+    ),
+    /RUN_MODE must be/,
+  );
+  assert.equal(modes.length, 2);
+});

@@ -17,8 +17,14 @@ from jobs_bot.shortlist import job_keys, select_jobs
 
 def _run():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
+    delivery = parser.add_mutually_exclusive_group()
+    delivery.add_argument(
         "--send", action="store_true", help="Send email and update history"
+    )
+    delivery.add_argument(
+        "--test-send",
+        action="store_true",
+        help="Email only the sender; preserve history",
     )
     parser.add_argument("--config", default="config.toml")
     args = parser.parse_args()
@@ -57,12 +63,16 @@ def _run():
     ):
         raise ValueError("Sent-job history must be a list of keys")
     seen = set(history)
-    password = os.environ["gmail_app_password"] if args.send else None
+    password = os.environ["gmail_app_password"] if args.send or args.test_send else None
     # Addresses come from runtime settings, never the public configuration file.
     config["email"]["sender"] = os.environ["GMAIL_SENDER"].strip()
-    if not os.environ["email_user"].strip():
-        raise ValueError("The main recipient address is required")
-    addresses = (os.environ["email_user"], os.environ.get("email_friend", ""))
+    if args.test_send:
+        # Test delivery must never use the normal recipients, even via an alias.
+        addresses = (config["email"]["sender"],)
+    else:
+        if not os.environ["email_user"].strip():
+            raise ValueError("The main recipient address is required")
+        addresses = (os.environ["email_user"], os.environ.get("email_friend", ""))
     recipients = list(
         dict.fromkeys(address.strip() for address in addresses if address.strip())
     )
@@ -79,15 +89,20 @@ def _run():
         len(jobs),
         len(selected),
         len(seen),
-        "send" if args.send else "preview",
+        "test" if args.test_send else "send" if args.send else "preview",
     )
     message = build_message(selected, config["email"], recipients, today)
-    if not args.send:
+    if args.test_send:
+        message.replace_header("Subject", f"[TEST] {message['Subject']}")
+    if not args.send and not args.test_send:
         # Preview only the body so recipient addresses stay out of Actions logs.
         print(message.get_content())
         return
     send_message(message, config["email"], password)
     logging.info("event=email state=pending->accepted recipients=%d", len(recipients))
+    if args.test_send:
+        logging.info("event=history state=unchanged reason=test_send")
+        return
     # Save the accepted send first, even if saving the vacancy keys later fails.
     delivery_path.parent.mkdir(parents=True, exist_ok=True)
     pending_path = delivery_path.with_suffix(".tmp")
