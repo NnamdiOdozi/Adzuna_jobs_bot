@@ -42,16 +42,18 @@
 
 ## Shortlist improvements — deferred 2026-10-24
 
-Source: candidate-preference, ranking and run-log discussions. Status: proposals
-only; no implementation, paid model calls or application submissions authorized.
+Source: candidate-preference, ranking and run-log discussions. Status: open
+extensions beyond the title rules implemented on 2026-11-04; no paid model calls
+or application submissions authorized.
 
 ## 1. Candidate preferences — deferred 2026-10-24
 
-Define an editable candidate-preference section in configuration. Agree the
-actual values with the friend before implementing filters. Separate hard
-requirements, which reject a job, from preferences, which change its rank.
+Extend the editable title criteria with candidate preferences. Agree additional
+values with the friend. Separate hard requirements, which reject a job, from
+preferences, which change its rank.
 
-- Preferred roles and seniority; unwanted roles or responsibilities.
+- More specific role specialisms and unwanted responsibilities; summer/placement
+  eligibility and whether those programmes should be included.
 - Candidate experience and acceptable job requirements. Distinguish essential
   experience from desirable experience, ranges, and equivalent experience.
 - Minimum salary and treatment of missing salary, estimated salary, and ranges
@@ -90,8 +92,8 @@ or Jev calls have been authorized or performed for these proposals.
 
 ## 3. Ranking and cost controls — deferred 2026-10-24
 
-Replace or supplement the current equal-weight title-word score with agreed
-preference weights, candidate-fit findings and recency. Explain why each job
+Extend the current junior-title preference and finance-word score with agreed
+candidate-fit weights and findings. Explain why each job
 ranked highly and identify unmet or unknown requirements separately. Apply the
 new criteria before choosing the final shortlist; scoring only the first 20
 would miss potentially better candidates elsewhere in the fetched results.

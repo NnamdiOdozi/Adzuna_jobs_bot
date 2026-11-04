@@ -2,14 +2,17 @@
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
 location = "London"
 distance_miles = 10
-queries = ["finance", "accountant", "financial analyst", "investment analyst"]
+queries = ["graduate finance", "junior financial analyst", "trainee accountant", "entry level finance"]
 days_old = 7
 pages_per_query = 1
 results_per_page = 100
 shortlist_size = 20
 timeout_seconds = 30
 title_keywords = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]
-exclude_title_keywords = ["recruiter", "recruitment consultant"]
+# Whole words/phrases, ignoring case and punctuation. Exclusions win over preferences.
+exclude_title_keywords = ["recruiter", "recruitment consultant", "senior", "sr", "manager", "director", "head of", "vice president", "vp", "chief", "principal", "lead"]
+preferred_title_keywords = ["graduate", "junior", "trainee", "entry level", "assistant"]
+deprioritise_title_keywords = ["associate"]
 
 [email]
 # Gmail app-password label: Adzuna_jobs_bot (informational only).

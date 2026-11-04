@@ -1,5 +1,30 @@
 # Design choices
 
+## 2026-11-04 — Graduate-focused searches and title rules
+
+The user supplied a 20-job email with seven clearly senior titles and requested
+ordinary code filters for a recent graduate. The previous finance-keyword count
+rewarded broad banking/investment wording without checking seniority. Four more
+targeted queries now retain the same one-page/100-results request limits.
+
+Configured senior/recruiter phrases are excluded before ranking and choosing
+the shortlist. Punctuation-normalized, whole-token matching catches Sr. and VP
+without matching words such as overhead. Junior/graduate/trainee/assistant/entry
+level titles sort first; within each group, associate titles sort lower. The
+existing finance-word count and recency break ties. Senior exclusion overrides
+junior wording, so Assistant Manager never receives the assistant preference.
+Generic analysts and ambiguous associates remain eligible, and fewer than 20
+results are sent when fewer survive. No salary or description filters are added.
+
+Offline tests cover the supplied seven senior titles, ordering, punctuation,
+word boundaries, duplicates and shorter results. These prove configured text
+matching, not candidate eligibility. Titles may still conceal required experience,
+and relevant jobs can be missed by narrower queries or broad senior exclusions
+(for example, a junior role whose title mentions a manager). Summer/placement
+programme eligibility remains a manual check. No LLM, Jev, Adzuna call or email
+is needed to validate these rules. Existing delivery and vacancy history are
+preserved from GitHub's latest daily-run commit before publishing.
+
 ## 2026-10-26 — Sender-only test delivery
 
 The user requested testing Cloudflare through GitHub without contacting the

@@ -7,9 +7,10 @@ program execution. No Azure service or large language model is involved.
 
 Adzuna supplies the listings. This application does not separately scrape job
 boards or promise coverage of any particular recruitment website. Search results
-contain shortened descriptions and links to the adverts. Ranking uses words in
-job titles, then the listing date. It is a starting shortlist, not an assessment
-of a candidate's experience or eligibility.
+contain shortened descriptions and links to the adverts. Title rules exclude
+clearly senior roles and put graduate/junior titles first. Finance keywords and
+listing date then order matches. This screens for likely career level, not
+verified experience or eligibility.
 
 ```mermaid
 flowchart TB
@@ -17,7 +18,7 @@ flowchart TB
     direction LR
     A[Daily or manual start] --> B[Load settings and sent history]
     B --> C[Query Adzuna]
-    C --> D[Rank and exclude recruiter titles]
+    C --> D[Exclude senior titles and prefer junior roles]
   end
   subgraph second[Delivery]
     direction RL
@@ -74,6 +75,28 @@ look, how many results to request, title preferences, title exclusions, email
 connection settings and the history path. Addresses and passwords are supplied
 separately. The default shortlist contains at most 20 jobs
 from listings added within seven days, with no minimum salary.
+
+The four default queries target graduate finance, junior financial analyst,
+trainee accountant and entry-level finance roles. The request limit remains
+one page of up to 100 results per query. Edit these settings in `[search]`:
+
+| Setting | Effect |
+|---|---|
+| `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director and VP, plus recruiter titles. |
+| `preferred_title_keywords` | Put graduate, junior, trainee, entry-level and assistant titles first. |
+| `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles. |
+
+Matching ignores case and punctuation: `Sr.` and `entry-level` work. Exclusions
+win, so Assistant Manager is rejected while Finance Assistant remains eligible.
+Within the preferred/non-preferred groups, non-associate titles come first,
+then finance-keyword count and recency. Generic analyst roles remain eligible
+because their titles do not establish experience requirements. The bot sends
+fewer than 20 jobs if fewer qualify; it never pads the shortlist with excluded jobs.
+Logs count excluded fetched rows by their first matching exclusion term.
+
+Description-based experience limits remain unimplemented. A retained role may
+still demand more experience, and summer/placement schemes may require current
+student status. Check the full advert; junior title wording does not prove fit.
 
 Two checks remove duplicates. An Adzuna ID catches the same advert appearing in
 multiple searches or on later days. A second key uses the employer, job title and

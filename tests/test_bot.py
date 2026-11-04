@@ -213,6 +213,17 @@ class BotTests(unittest.TestCase):
         selected = select_jobs(jobs, set(), config)
         self.assertEqual({job["id"] for job in selected}, {"one", "two"})
 
+    def test_send_filters_senior_roles_before_email_and_history(self):
+        """Use the configured graduate rules in the real command's send path."""
+        junior = _job("junior", "Junior Finance Analyst")
+        _, deliver, _ = self._invoke(
+            [_job("senior", "Senior Finance Analyst"), junior], send=True
+        )
+        body = deliver.call_args.args[0].get_content()
+        self.assertIn("Junior Finance Analyst", body)
+        self.assertNotIn("Senior Finance Analyst", body)
+        self.assertEqual(set(json.loads(self.history.read_text())), job_keys(junior))
+
 
 if __name__ == "__main__":
     unittest.main()

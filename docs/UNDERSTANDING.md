@@ -6,6 +6,8 @@ These are conversation checkpoints, not requirements imposed on unattended runs.
 - [x] On 2026-10-25, user moved the schedule to 02:30 London time Monday to Saturday
   as a four-hour buffer for GitHub delays; recipients remain visible to each other.
 - [x] User requested that previously emailed jobs be suppressed on future days.
+- [x] On 2026-11-04, user approved targeted junior searches, senior title exclusions
+  and junior-first ranking with ordinary Python rules, preserving GitHub history.
 - [x] User chose repository Secrets for email addresses after discussing public logs.
 - [x] On 2026-10-26, user requested a check against multiple daily sends after
   discussing a delayed schedule following a manual send.

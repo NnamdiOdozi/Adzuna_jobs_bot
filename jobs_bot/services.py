@@ -113,7 +113,9 @@ def build_message(jobs, config, recipients, date):
             ]
         )
     lines.append(
-        "Ranking uses job-title keywords, then listing date. Check each full advert."
+        "Title rules exclude senior roles and favour junior roles, then finance "
+        "keywords and listing date. Check experience and eligibility "
+        "in each full advert."
     )
     message.set_content("\n".join(lines))
     return message

@@ -1,10 +1,17 @@
-"""Rank finance vacancies and identify repeated advertisements."""
+"""Prefer junior finance vacancies and suppress senior or repeated adverts."""
 
+import logging
 import re
 
 
 def _normalise(value):
     return " ".join(re.findall(r"\w+", value.casefold()))
+
+
+def _matching_terms(title, terms):
+    # Padded tokens match "Sr." and "entry-level" without matching "overhead".
+    normalised = f" {_normalise(title)} "
+    return [term for term in terms if f" {_normalise(term)} " in normalised]
 
 
 def job_keys(job):
@@ -32,7 +39,7 @@ def job_keys(job):
 
 
 def select_jobs(jobs, seen, config):
-    """Rank matching titles, preferring recent ads, and remove duplicates.
+    """Exclude senior titles, prefer junior matches and remove duplicates.
 
     Parameters
     ----------
@@ -41,16 +48,42 @@ def select_jobs(jobs, seen, config):
     seen : set of str
         Keys of advertisements already sent.
     config : dict
-        Search keywords and maximum shortlist size.
+        Title exclusions, preferences, finance keywords and shortlist limit.
 
     Returns
     -------
     list of dict
         Previously unseen vacancies in rank order.
     """
+    eligible, excluded = [], {}
+    for job in jobs:
+        matches = _matching_terms(
+            job["title"], config.get("exclude_title_keywords", [])
+        )
+        if matches:
+            excluded[matches[0]] = excluded.get(matches[0], 0) + 1
+        else:
+            eligible.append(job)
+    for term, count in sorted(excluded.items()):
+        logging.info(
+            "event=title_filter state=fetched->excluded reason=title_term "
+            "term=%r count=%d",
+            term,
+            count,
+        )
     ranked = sorted(
-        jobs,
+        eligible,
         key=lambda job: (
+            bool(
+                _matching_terms(
+                    job["title"], config.get("preferred_title_keywords", [])
+                )
+            ),
+            not bool(
+                _matching_terms(
+                    job["title"], config.get("deprioritise_title_keywords", [])
+                )
+            ),
             sum(
                 word.casefold() in job["title"].casefold()
                 for word in config["title_keywords"]
@@ -61,11 +94,6 @@ def select_jobs(jobs, seen, config):
     )
     selected, used = [], set(seen)
     for job in ranked:
-        if any(
-            word.casefold() in job["title"].casefold()
-            for word in config.get("exclude_title_keywords", [])
-        ):
-            continue
         keys = job_keys(job)
         if keys & used:
             continue
