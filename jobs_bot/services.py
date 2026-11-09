@@ -1,15 +1,17 @@
 """Read Adzuna vacancies and deliver plain-text Gmail shortlists."""
 
 import json
+import logging
 import smtplib
 import ssl
 from email.message import EmailMessage
+from urllib.error import HTTPError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 
 
 def fetch_jobs(config, app_id, app_key):
-    """Fetch bounded pages of recent London vacancies over HTTPS.
+    """Fetch one combined finance search, reducing a rejected page size once.
 
     Parameters
     ----------
@@ -21,51 +23,72 @@ def fetch_jobs(config, app_id, app_key):
     Returns
     -------
     list of dict
-        Combined results; duplicates are retained for later filtering.
+        First-page results; duplicates are retained for later filtering.
     """
     endpoint = urlsplit(config["base_url"])
     if endpoint.scheme != "https" or endpoint.hostname != "api.adzuna.com":
         raise ValueError("Search endpoint must be the HTTPS Adzuna API")
-    jobs = []
-    for query in config["queries"]:
-        for page in range(1, config["pages_per_query"] + 1):
-            params = {
-                "app_id": app_id,
-                "app_key": app_key,
-                "what": query,
-                "where": config["location"],
-                "distance": config["distance_miles"],
-                "max_days_old": config["days_old"],
-                "sort_by": "date",
-                "results_per_page": config["results_per_page"],
-            }
-            request = Request(
-                f"{config['base_url']}/{page}?{urlencode(params)}",
-                headers={"Accept": "application/json"},
-            )
-            # Never log the request URL: Adzuna authenticates in its query string.
+    requested = config["results_per_page"]
+    fallback = config["fallback_results_per_page"]
+    if fallback > requested:
+        raise ValueError("Fallback page size must not exceed the requested size")
+    params = {
+        "app_id": app_id,
+        "app_key": app_key,
+        "what_or": " ".join(config["query_terms"]),
+        "where": config["location"],
+        "distance": config["distance_miles"],
+        "max_days_old": config["days_old"],
+        "sort_by": "date",
+    }
+    for attempt, limit in enumerate(dict.fromkeys((requested, fallback)), 1):
+        params["results_per_page"] = limit
+        request = Request(
+            f"{config['base_url']}/1?{urlencode(params)}",
+            headers={"Accept": "application/json"},
+        )
+        logging.info(
+            "event=adzuna_request state=ready->requested attempt=%d "
+            "results_requested=%d",
+            attempt,
+            limit,
+        )
+        try:
+            # Never log URLs or response bodies: they may contain credentials.
             with urlopen(request, timeout=config["timeout_seconds"]) as response:
                 rows = json.load(response)["results"]
-            if not isinstance(rows, list):
-                raise ValueError("Adzuna results must be a list")
-            for job in rows:
-                for field in (
-                    "id",
-                    "title",
-                    "created",
-                    "company",
-                    "location",
-                    "redirect_url",
-                ):
-                    if field not in job:
-                        raise ValueError("Adzuna returned an incomplete vacancy")
-                link = urlsplit(job["redirect_url"])
-                if link.scheme not in {"http", "https"} or not link.hostname:
-                    raise ValueError("Adzuna returned an invalid vacancy link")
-            jobs.extend(rows)
-            if len(rows) < config["results_per_page"]:
-                break
-    return jobs
+        except HTTPError as error:
+            retry = error.code == 400 and limit > fallback
+            logging.warning(
+                "event=adzuna_request state=requested->%s attempt=%d "
+                "http_status=%d results_requested=%d",
+                "fallback" if retry else "failed",
+                attempt,
+                error.code,
+                limit,
+            )
+            if not retry:
+                raise
+            error.close()
+            continue
+        break
+    if not isinstance(rows, list):
+        raise ValueError("Adzuna results must be a list")
+    for job in rows:
+        for field in ("id", "title", "created", "company", "location", "redirect_url"):
+            if field not in job:
+                raise ValueError("Adzuna returned an incomplete vacancy")
+        link = urlsplit(job["redirect_url"])
+        if link.scheme not in {"http", "https"} or not link.hostname:
+            raise ValueError("Adzuna returned an invalid vacancy link")
+    logging.info(
+        "event=adzuna_request state=requested->received attempt=%d "
+        "results_requested=%d results_returned=%d",
+        attempt,
+        limit,
+        len(rows),
+    )
+    return rows
 
 
 def build_message(jobs, config, recipients, date):

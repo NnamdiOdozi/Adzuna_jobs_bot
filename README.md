@@ -48,8 +48,12 @@ On this machine, the existing credential launcher supplies those settings:
 
 This command searches Adzuna and prints the proposed email body. It does not send
 email or change the sent-job history. With the default configuration, a run makes
-at most four Adzuna requests: four search terms and one page of up to 100 results
-per term.
+one combined Adzuna search, requesting 400 listings on the first page. HTTP 400
+triggers one retry requesting 100. That means one API request normally, two if
+the fallback is used. Smaller successful responses are accepted without more
+requests. If the fallback also fails, the run fails visibly rather than sending
+a misleading empty shortlist. Neither requested page size is guaranteed by a
+live test; Adzuna's published parameter schema gives no maximum.
 
 When you want to send that kind of shortlist, use:
 
@@ -76,9 +80,13 @@ connection settings and the history path. Addresses and passwords are supplied
 separately. The default shortlist contains at most 20 jobs
 from listings added within seven days, with no minimum salary.
 
-The four default queries target graduate finance, junior financial analyst,
-trainee accountant and entry-level finance roles. The request limit remains
-one page of up to 100 results per query. Edit these settings in `[search]`:
+The default `query_terms` are finance-related alternatives combined in one
+`what_or` search. Junior preferences and senior exclusions operate on the
+returned jobs in Python. This saves requests but can reduce coverage compared
+with separate searches; a broad result pool may contain fewer junior roles.
+`results_per_page = 400` and `fallback_results_per_page = 100` control the primary
+and fallback sizes. No additional pages are fetched. Edit these title settings
+in `[search]`:
 
 | Setting | Effect |
 |---|---|

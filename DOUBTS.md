@@ -1,5 +1,15 @@
 # Decisions to review
 
+4. 2026-11-09 — Treat the first HTTP 400 as grounds for the requested size retry.
+   **Why:** Adzuna documents 400 for invalid parameters but publishes no page-size
+   maximum or dedicated size-error code. A single retry can recover from an
+   oversized request. **Affects:** at most two API attempts per search.
+   **Assumptions:** a size rejection uses HTTP 400. An unrelated invalid parameter
+   could cause one unsuccessful extra request. Alternative considered: parse
+   error-body text, but no stable documented size-error format was found.
+   **Status:** implemented with a bounded retry; actual page-size support remains
+   unverified. See DESIGN_CHOICES.md, single combined search.
+
 3. 2026-11-09 — Apply the weekday limit to all normal sends, including manual
    force_send runs; retain weekend preview and sender-only test.
    **Why:** the same command receives both Cloudflare and manual requests;

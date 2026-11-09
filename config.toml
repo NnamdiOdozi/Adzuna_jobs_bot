@@ -2,10 +2,11 @@
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
 location = "London"
 distance_miles = 10
-queries = ["graduate finance", "junior financial analyst", "trainee accountant", "entry level finance"]
+# One combined search: any of these finance terms may match.
+query_terms = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]
 days_old = 7
-pages_per_query = 1
-results_per_page = 100
+results_per_page = 400
+fallback_results_per_page = 100
 shortlist_size = 20
 timeout_seconds = 30
 title_keywords = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]

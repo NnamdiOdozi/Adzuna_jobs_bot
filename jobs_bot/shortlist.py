@@ -44,7 +44,7 @@ def select_jobs(jobs, seen, config):
     Parameters
     ----------
     jobs : list of dict
-        Candidate vacancies from all search queries.
+        Candidate vacancies from the combined Adzuna search.
     seen : set of str
         Keys of advertisements already sent.
     config : dict

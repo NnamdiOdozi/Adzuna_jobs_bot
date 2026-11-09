@@ -69,7 +69,12 @@ def _run():
     if args.send and force_send:
         logging.warning("event=email state=limited->override date=%s", today)
     search = config["search"]
-    for name in ("pages_per_query", "results_per_page", "shortlist_size", "days_old"):
+    for name in (
+        "results_per_page",
+        "fallback_results_per_page",
+        "shortlist_size",
+        "days_old",
+    ):
         if not isinstance(search[name], int) or search[name] <= 0:
             raise ValueError("Search limits must be positive integers")
     history_path = Path(config["history"]["path"])

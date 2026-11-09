@@ -3,6 +3,10 @@
 These are conversation checkpoints, not requirements imposed on unattended runs.
 
 - [x] User clarified that the data provider is Adzuna, not Azure.
+- [x] On 2026-11-09, user clarified the intended one-request search budget and
+  requested 400 listings with a fallback to 100 if the larger request is rejected.
+- [ ] Confirm that the fallback can consume a second request and requested result
+  counts are not evidence of the provider's actual cap or remaining credits.
 - [x] On 2026-11-09, user requested Monday–Friday emails and prefers avoiding
   Cloudflare edits; the bot now enforces normal delivery days itself.
 - [x] On 2026-10-25, user moved the schedule to 02:30 London time Monday to Saturday

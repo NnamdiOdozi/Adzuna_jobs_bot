@@ -1,5 +1,30 @@
 # Design choices
 
+## 2026-11-09 — One combined search with a bounded size fallback
+
+The user clarified that the intended budget was one Adzuna request per search,
+not one per role query, then requested 400 results with a fallback to 100.
+The four-query loop and pagination setting are removed. `query_terms` supplies
+finance alternatives through the documented `what_or` parameter on page 1.
+Junior/senior title rules and all delivery/history safeguards still apply.
+
+One request is made normally. A first HTTP 400 causes exactly one smaller-page
+retry; the second failure propagates. Other HTTP errors and network failures
+are not retried. Equal configured primary/fallback sizes are deduplicated, and
+a fallback larger than the primary is rejected. Successful short or empty
+responses are used as returned, never expanded through more requests. Logs
+show attempt, requested/returned count and HTTP status without URLs, response
+bodies or credentials. Existing full-response validation remains in force.
+
+Adzuna's public OpenAPI schema documents `what_or` and a positive page size but
+no maximum. No live Adzuna request was authorized for verification. Offline
+tests prove one/two request bounds and error behaviour, not support for 400 or
+100 results, provider credit accounting or actual vacancy coverage. HTTP 400
+means invalid parameters generally, so the single size retry is a heuristic;
+an unrelated invalid parameter could also consume the second request. If 100
+is rejected too, the workflow reports failure. One broad result pool may miss
+roles that separate targeted searches would retrieve.
+
 ## 2026-11-09 — Weekday-only normal delivery
 
 The user requested Monday–Friday email without editing Cloudflare. The bot now

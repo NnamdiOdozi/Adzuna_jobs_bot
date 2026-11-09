@@ -1,5 +1,12 @@
 # Open work
 
+- 2026-11-09 — Source: single-search request-budget correction. Confirm Adzuna's
+  actual accepted/returned page size from the next normal run's request logs.
+  Status: 400→100 fallback verified offline; public schema has no maximum and no
+  live verification was made. If both sizes fail, agree a smaller configured
+  size rather than silently spending more requests. Usage balance remains
+  provider-managed; sent-job history is not an API request ledger.
+
 - 2026-10-26 — Source: approved minimal Cloudflare timer. Deploy the prepared
   `cloudflare/worker.mjs` in the dashboard, add its variables, token Secret and
   Cron Trigger, then verify a dispatch and email receipt. Status: code and
@@ -101,8 +108,8 @@ would miss potentially better candidates elsewhere in the fetched results.
 Remove known and duplicate adverts and apply cheap exact filters before paid
 analysis. Consider caching analysis for unchanged adverts. Estimate request
 volume and spending, agree a limit before any paid trial, and decide whether
-batch processing fits the morning delivery deadline. Keep the current one-page,
-100-results-per-query search limit unless explicitly changed.
+batch processing fits the morning delivery deadline. Preserve the single-search
+request budget, including its explicitly bounded page-size fallback.
 
 ## 4. Review and validation — deferred 2026-10-24
 
