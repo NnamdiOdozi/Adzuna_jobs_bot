@@ -30,7 +30,23 @@ def _run():
     args = parser.parse_args()
     with Path(args.config).open("rb") as stream:
         config = tomllib.load(stream)
-    today = datetime.now(ZoneInfo(config["email"]["timezone"])).date().isoformat()
+    local_date = datetime.now(ZoneInfo(config["email"]["timezone"])).date()
+    today = local_date.isoformat()
+    weekdays = config["email"]["send_weekdays"]
+    if not isinstance(weekdays, list) or any(
+        type(day) is not int or day not in range(7) for day in weekdays
+    ):
+        raise ValueError("send_weekdays must be a list of integers from 0 to 6")
+    # Apply the London delivery days even when Cloudflare still triggers Saturdays.
+    if args.send and local_date.weekday() not in weekdays:
+        logging.info(
+            "event=email state=requested->skipped reason=non_send_day "
+            "date=%s weekday=%d timezone=%s",
+            today,
+            local_date.weekday(),
+            config["email"]["timezone"],
+        )
+        return
     force_send = config["email"]["force_send"]
     if not isinstance(force_send, bool):
         raise ValueError("force_send must be a TOML boolean")

@@ -134,7 +134,12 @@ shortlist**. A small Cloudflare Worker replaces GitHub's native timer after the
 at 06:30 London time Monday to Saturday, including summer clock changes. Follow
 [the Cloudflare dashboard setup](cloudflare/README.md). Until that setup is
 complete, only manual runs are available. GitHub runner availability can still
-delay execution after the request. Manual sends remain available on Sundays.
+delay execution after the request. The bot's `[email].send_weekdays` setting now
+allows normal sends Monday–Friday only, using London dates. Cloudflare may still
+trigger a Saturday run; it exits successfully with `reason=non_send_day` before
+searching Adzuna or sending email. No Cloudflare update is required. This also
+applies to manual normal sends, even with `force_send = true`. Preview and
+sender-only test mode remain available on weekends.
 
 Before activation, add these repository Actions secrets yourself:
 

@@ -21,6 +21,8 @@ smtp_port = 465
 timeout_seconds = 30
 subject = "Adzuna London finance jobs"
 timezone = "Europe/London"
+# Normal email days: Monday=0 through Sunday=6. Preview and test remain available.
+send_weekdays = [0, 1, 2, 3, 4]
 # Testing only: allow another email today, while still excluding seen vacancies.
 force_send = false
 

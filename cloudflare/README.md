@@ -30,6 +30,9 @@ automatic timer until you deploy this Worker and add its Cron Trigger.
    allowing only 06:30 Monday–Saturday: 06:30 UTC in winter, 05:30 UTC in summer.
    The other invocation skips without contacting GitHub. Changing `SEND_TIME`
    also requires adjusting the UTC trigger hours/minutes accordingly.
+   The bot itself now permits normal emails Monday–Friday only. The existing
+   Saturday dispatch exits with `reason=non_send_day` before Adzuna or Gmail;
+   there is no need to change this Worker or its triggers for the weekday limit.
 5. Enable **Workers Logs** under the Worker's observability settings. Cron changes
    can take up to 15 minutes to propagate. Look for `workflow_dispatch` in the
    Worker logs and a matching run under GitHub Actions. A successful dispatch

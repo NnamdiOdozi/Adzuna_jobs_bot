@@ -3,6 +3,8 @@
 These are conversation checkpoints, not requirements imposed on unattended runs.
 
 - [x] User clarified that the data provider is Adzuna, not Azure.
+- [x] On 2026-11-09, user requested Monday–Friday emails and prefers avoiding
+  Cloudflare edits; the bot now enforces normal delivery days itself.
 - [x] On 2026-10-25, user moved the schedule to 02:30 London time Monday to Saturday
   as a four-hour buffer for GitHub delays; recipients remain visible to each other.
 - [x] User requested that previously emailed jobs be suppressed on future days.

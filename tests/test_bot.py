@@ -83,6 +83,41 @@ class BotTests(unittest.TestCase):
         self.assertIn("Finance Analyst", output)
         self.assertNotIn("user@example.com", output)
 
+    def test_weekend_normal_sends_skip_before_credentials_or_search(self):
+        """Keep Saturday Cloudflare triggers harmless, including forced sends."""
+        self.config.write_text(
+            self.config.read_text().replace("force_send = false", "force_send = true")
+        )
+        self.credentials.clear()
+        for day in (7, 8):
+            with self.subTest(day=day), self.assertLogs(level="INFO") as logs:
+                self.now = datetime(2026, 11, day, 6, 30)
+                fetch, deliver, _ = self._invoke([_job()], send=True)
+                fetch.assert_not_called()
+                deliver.assert_not_called()
+                self.assertFalse(self.history.exists())
+                self.assertFalse(self.delivery.exists())
+                self.assertIn("reason=non_send_day", "\n".join(logs.output))
+
+    def test_weekend_preview_and_sender_only_test_remain_available(self):
+        """Restrict ordinary delivery without preventing safe weekend testing."""
+        self.now = datetime(2026, 11, 7, 6, 30)
+        fetch, deliver, _ = self._invoke([_job()])
+        fetch.assert_called_once()
+        deliver.assert_not_called()
+        _, deliver, _ = self._invoke([_job()], test_send=True)
+        self.assertEqual(deliver.call_args.args[0]["To"], "sender@example.com")
+        self.assertFalse(self.history.exists())
+        self.assertFalse(self.delivery.exists())
+
+    def test_friday_and_monday_normal_sends_are_allowed(self):
+        """Allow the last weekday and the first weekday after a weekend."""
+        for day in (6, 9):
+            with self.subTest(day=day):
+                self.now = datetime(2026, 11, day, 6, 30)
+                _, deliver, _ = self._invoke([_job()], send=True)
+                deliver.assert_called_once()
+
     def test_send_saves_history_only_after_gmail_accepts(self):
         """Persist the delivered listing keys after Gmail submission succeeds."""
         job = _job()

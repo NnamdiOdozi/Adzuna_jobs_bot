@@ -1,5 +1,21 @@
 # Design choices
 
+## 2026-11-09 — Weekday-only normal delivery
+
+The user requested Monday–Friday email without editing Cloudflare. The bot now
+checks editable `[email].send_weekdays` (Monday=0, Sunday=6) against the London
+date before history, credentials or network access. Cloudflare's existing
+Saturday dispatch remains valid but logs `reason=non_send_day` and exits zero.
+Normal manual sends follow the same rule; force_send overrides only the daily
+limit, not permitted weekdays. Preview and sender-only test remain available.
+Offline tests cover both weekend days, a forced weekend send, Friday/Monday
+normal sends and weekend testing. The clock check cannot fix missing dispatches.
+
+Adzuna HTTP failures already propagate to the command's redacted exception log
+and nonzero exit, making the Actions run fail. Current logs show HTTPError but
+do not identify quota exhaustion or log the HTTP response body/URL, which may
+contain credentials. No proactive alert email is implemented by the bot.
+
 ## 2026-11-04 — Graduate-focused searches and title rules
 
 The user supplied a 20-job email with seven clearly senior titles and requested
