@@ -1,5 +1,14 @@
 # Decisions to review
 
+5. 2026-11-10 — Require both the finance category and explicit finance-title words.
+   **Why:** ranking zero-finance titles admitted 18 unrelated bulletin entries.
+   **Affects:** missing/wrong categories and generic Junior Analyst titles are
+   rejected; Accounts/Payroll/Bookkeeping/Auditor/Actuarial terms are included.
+   **Assumptions:** Adzuna category tags are useful but imperfect evidence.
+   Alternative considered: permit either category or title evidence; this could
+   retain unrelated titles misclassified in finance. **Status:** strict rule
+   implemented and disclosed within the approved relevance fix. See DESIGN_CHOICES.md.
+
 4. 2026-11-09 — Treat the first HTTP 400 as grounds for the requested size retry.
    **Why:** Adzuna documents 400 for invalid parameters but publishes no page-size
    maximum or dedicated size-error code. A single retry can recover from an

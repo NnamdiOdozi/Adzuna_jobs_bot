@@ -14,6 +14,7 @@ def _job(identifier, title, created="2026-11-04T03:00:00Z"):
         "created": created,
         "company": {"display_name": "Example Bank"},
         "location": {"display_name": "London"},
+        "category": {"tag": "accounting-finance-jobs"},
     }
 
 
@@ -44,7 +45,7 @@ class ShortlistTests(unittest.TestCase):
         """Prefer explicit junior roles to newer, keyword-heavy generic roles."""
         jobs = [
             _job("generic", "Banking Investment Finance Analyst"),
-            _job("junior", "Junior Analyst", "2026-11-01T03:00:00Z"),
+            _job("junior", "Junior Finance Analyst", "2026-11-01T03:00:00Z"),
         ]
         selected = select_jobs(jobs, set(), self.config)
         self.assertEqual([job["id"] for job in selected], ["junior", "generic"])
@@ -74,7 +75,7 @@ class ShortlistTests(unittest.TestCase):
             _job("vp", "VP, Credit"),
             _job("head", "Head-of Finance"),
             _job("overhead", "Overhead Finance Analyst"),
-            _job("entry", "Entry-level Analyst"),
+            _job("entry", "Entry-level Finance Analyst"),
             _job("juniorish", "Juniorish Banking Investment Finance Analyst"),
         ]
         selected = select_jobs(jobs, set(), self.config)
@@ -103,6 +104,74 @@ class ShortlistTests(unittest.TestCase):
         junior = _job("junior", "Graduate Finance Analyst")
         jobs = [junior, _job("senior", "Senior Finance Analyst")]
         self.assertEqual(select_jobs(jobs, set(), self.config), [junior])
+
+    def test_controller_is_excluded_even_with_assistant_preference(self):
+        """Apply the user's controller exclusion before junior ranking."""
+        jobs = [
+            _job("controller", "Financial Controller"),
+            _job("assistant_controller", "Assistant Financial Controller"),
+            _job("credit_controller", "Credit Controller"),
+            _job("assistant", "Finance Assistant"),
+        ]
+        self.assertEqual(select_jobs(jobs, set(), self.config), [jobs[-1]])
+
+    def test_unrelated_bulletin_titles_cannot_qualify_even_in_finance_category(self):
+        """Reject the unrelated November 10 titles instead of filling 20 slots."""
+        titles = [
+            "Entry-Level Executive Search Consultant",
+            "Static Maintenance Engineer",
+            "Pharmacy Support Worker - Bank",
+            "Bank Barista",
+            "Barista Supervisor",
+            "Administrator",
+            "Demand Planner",
+            "Hotel Kitchen Team Leader",
+            "Contract Support Administrator",
+            "Chef de Partie",
+            "Mechanical Maintenance Engineer",
+            "Business Operations Specialist",
+            "Head Baker",
+            "Asbestos Surveyor & Analyst - Duel Role",
+            "Beauty Artist - Selfridges London",
+            "Our clients are searching carpenters for garden furniture in Northolt",
+            "OSINT Analyst",
+            "Veterinary Surgeon",
+        ]
+        jobs = [_job(str(index), title) for index, title in enumerate(titles)]
+        self.assertEqual(select_jobs(jobs, set(), self.config), [])
+
+    def test_relevant_finance_titles_remain_eligible(self):
+        """Keep explicit finance roles, including accounts and payroll assistants."""
+        titles = [
+            "Part Time Finance support",
+            "Accountant - Hybrid",
+            "Accounts Assistant",
+            "Payroll Assistant",
+        ]
+        jobs = [_job(str(index), title) for index, title in enumerate(titles)]
+        selected = select_jobs(jobs, set(), self.config)
+        self.assertEqual({job["id"] for job in selected}, {job["id"] for job in jobs})
+
+    def test_finance_title_requires_valid_matching_category(self):
+        """Do not infer finance category from the employer or a title keyword."""
+        for category in ({"tag": "it-jobs"}, {}, None, "accounting-finance-jobs"):
+            with self.subTest(category=category):
+                job = _job("one", "Graduate Financial Software Developer")
+                job["category"] = category
+                self.assertEqual(select_jobs([job], set(), self.config), [])
+        missing = _job("missing", "Graduate Finance Analyst")
+        del missing["category"]
+        self.assertEqual(select_jobs([missing], set(), self.config), [])
+
+    def test_finance_relevance_uses_whole_words(self):
+        """Generic bank work and substrings must not count as finance evidence."""
+        jobs = [
+            _job("risky", "Junior Risky Business Assistant"),
+            _job("bank", "Bank Support Worker"),
+            _job("analyst", "Junior Analyst"),
+            _job("banking", "Junior Banking Analyst"),
+        ]
+        self.assertEqual(select_jobs(jobs, set(), self.config), [jobs[-1]])
 
 
 if __name__ == "__main__":

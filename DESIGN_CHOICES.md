@@ -1,5 +1,50 @@
 # Design choices
 
+## 2026-11-10 — Require finance relevance before ranking
+
+The supplied bulletin contained 18 titles with zero configured finance-word
+matches, including Entry-Level Executive Search Consultant, baristas and chefs.
+The combined keyword search could return incidental description matches, while
+the local code only ranked finance evidence and never required it. Junior
+wording could therefore promote a zero-finance role. The earlier seniority tests
+did not cover this failure, so their passing results did not establish relevance.
+
+The request now includes Adzuna's documented `accounting-finance-jobs` category.
+Local selection independently requires that returned category tag and a whole
+finance word/phrase in the title before senior exclusions, junior preferences,
+deduplication or the shortlist limit. Accounts, payroll, bookkeeping, auditor
+and actuarial title terms extend the explicit finance vocabulary. Missing,
+malformed or different categories are excluded. A bare Junior Analyst is now
+excluded; Junior Finance Analyst remains eligible. Rejection counts are logged.
+
+Tests include all 18 unrelated titles even with synthetic finance categories,
+incorrect/missing categories, valid finance roles, request parameters in both
+attempts and the command's actual email/history selection. These establish exact
+criteria, not semantic truth or graduate eligibility: provider misclassification
+and an unrelated role mentioning a finance word can still pass, while valid roles
+without those words or in another category can be missed. The accepted trade-off
+favours a shorter, explicitly relevant shortlist. The request budget and 400→100
+fallback are unchanged. No history records are reset.
+
+With explicit user permission, one live request was made after the offline
+checks. A wrapper prevented any second HTTP request during this verification;
+the production fallback itself was unchanged. The category-filtered request
+specified 400 and returned 50, all tagged accounting-finance-jobs. The local
+rules excluded 26 for missing finance-title evidence and 10 for senior titles;
+history filtering left 13 unseen selections. No mail was sent or history changed.
+Accounts Assistant and Finance Assistant were present, but Financial Controller
+and Finance Business Partner also survived. This confirms improved finance
+relevance, not graduate suitability; that remaining gap is in DEFERRED_WORK.md.
+The user then explicitly requested excluding controller titles. A whole-word
+controller exclusion now also rejects Assistant Financial Controller and Credit
+Controller, even though some credit-control roles can be junior. Rechecking the
+cached selection removes Financial Controller without another API request.
+
+The user's live log for 2026-11-10 shows one request specifying 400 succeeded
+with 50 returned jobs. No fallback occurred. This establishes that response's
+size and acceptance, not a universal maximum of 50. Earlier success requesting
+100 likewise did not establish the number actually returned.
+
 ## 2026-11-09 — One combined search with a bounded size fallback
 
 The user clarified that the intended budget was one Adzuna request per search,

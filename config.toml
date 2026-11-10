@@ -1,6 +1,7 @@
 [search]
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
 location = "London"
+category = "accounting-finance-jobs"
 distance_miles = 10
 # One combined search: any of these finance terms may match.
 query_terms = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]
@@ -9,9 +10,10 @@ results_per_page = 400
 fallback_results_per_page = 100
 shortlist_size = 20
 timeout_seconds = 30
-title_keywords = ["finance", "financial", "accountant", "accounting", "investment", "treasury", "audit", "credit", "risk", "banking"]
+# Required finance evidence in the title, using whole words/phrases.
+title_keywords = ["finance", "financial", "accountant", "accounting", "accounts", "investment", "treasury", "audit", "auditor", "credit", "risk", "banking", "payroll", "bookkeeper", "bookkeeping", "actuarial"]
 # Whole words/phrases, ignoring case and punctuation. Exclusions win over preferences.
-exclude_title_keywords = ["recruiter", "recruitment consultant", "senior", "sr", "manager", "director", "head of", "vice president", "vp", "chief", "principal", "lead"]
+exclude_title_keywords = ["recruiter", "recruitment consultant", "senior", "sr", "manager", "director", "head of", "vice president", "vp", "chief", "principal", "lead", "controller"]
 preferred_title_keywords = ["graduate", "junior", "trainee", "entry level", "assistant"]
 deprioritise_title_keywords = ["associate"]
 

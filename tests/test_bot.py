@@ -20,6 +20,7 @@ def _job(identifier="one", title="Finance Analyst", company="Example Bank"):
         "title": title,
         "company": {"display_name": company},
         "location": {"display_name": "London"},
+        "category": {"tag": "accounting-finance-jobs"},
         "created": "2026-10-24T10:00:00Z",
         "redirect_url": "https://example.com/vacancy",
     }
@@ -236,6 +237,7 @@ class BotTests(unittest.TestCase):
     def test_recruiter_title_is_excluded_but_other_employer_is_retained(self):
         """Reject recruiter titles without collapsing roles at different firms."""
         config = {
+            "category": "accounting-finance-jobs",
             "title_keywords": ["finance"],
             "exclude_title_keywords": ["recruiter"],
             "shortlist_size": 20,
@@ -248,15 +250,23 @@ class BotTests(unittest.TestCase):
         selected = select_jobs(jobs, set(), config)
         self.assertEqual({job["id"] for job in selected}, {"one", "two"})
 
-    def test_send_filters_senior_roles_before_email_and_history(self):
-        """Use the configured graduate rules in the real command's send path."""
+    def test_send_filters_irrelevant_and_senior_roles_before_email_and_history(self):
+        """Only finance roles surviving seniority rules reach delivery/history."""
         junior = _job("junior", "Junior Finance Analyst")
         _, deliver, _ = self._invoke(
-            [_job("senior", "Senior Finance Analyst"), junior], send=True
+            [
+                _job("senior", "Senior Finance Analyst"),
+                _job("recruitment", "Entry-Level Executive Search Consultant"),
+                _job("barista", "Bank Barista"),
+                junior,
+            ],
+            send=True,
         )
         body = deliver.call_args.args[0].get_content()
         self.assertIn("Junior Finance Analyst", body)
         self.assertNotIn("Senior Finance Analyst", body)
+        self.assertNotIn("Executive Search", body)
+        self.assertNotIn("Barista", body)
         self.assertEqual(set(json.loads(self.history.read_text())), job_keys(junior))
 
 

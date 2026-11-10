@@ -39,7 +39,7 @@ def job_keys(job):
 
 
 def select_jobs(jobs, seen, config):
-    """Exclude senior titles, prefer junior matches and remove duplicates.
+    """Require finance evidence, exclude senior titles and rank junior matches.
 
     Parameters
     ----------
@@ -56,7 +56,16 @@ def select_jobs(jobs, seen, config):
         Previously unseen vacancies in rank order.
     """
     eligible, excluded = [], {}
+    irrelevant = {"wrong_or_missing_category": 0, "no_finance_title_match": 0}
     for job in jobs:
+        category = job.get("category")
+        if not isinstance(category, dict) or category.get("tag") != config["category"]:
+            irrelevant["wrong_or_missing_category"] += 1
+            continue
+        # Junior wording alone must never qualify a non-finance vacancy.
+        if not _matching_terms(job["title"], config["title_keywords"]):
+            irrelevant["no_finance_title_match"] += 1
+            continue
         matches = _matching_terms(
             job["title"], config.get("exclude_title_keywords", [])
         )
@@ -64,6 +73,13 @@ def select_jobs(jobs, seen, config):
             excluded[matches[0]] = excluded.get(matches[0], 0) + 1
         else:
             eligible.append(job)
+    for reason, count in irrelevant.items():
+        if count:
+            logging.info(
+                "event=relevance_filter state=fetched->excluded reason=%s count=%d",
+                reason,
+                count,
+            )
     for term, count in sorted(excluded.items()):
         logging.info(
             "event=title_filter state=fetched->excluded reason=title_term "
@@ -84,10 +100,7 @@ def select_jobs(jobs, seen, config):
                     job["title"], config.get("deprioritise_title_keywords", [])
                 )
             ),
-            sum(
-                word.casefold() in job["title"].casefold()
-                for word in config["title_keywords"]
-            ),
+            len(_matching_terms(job["title"], config["title_keywords"])),
             job["created"],
         ),
         reverse=True,

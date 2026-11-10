@@ -7,8 +7,9 @@ program execution. No Azure service or large language model is involved.
 
 Adzuna supplies the listings. This application does not separately scrape job
 boards or promise coverage of any particular recruitment website. Search results
-contain shortened descriptions and links to the adverts. Title rules exclude
-clearly senior roles and put graduate/junior titles first. Finance keywords and
+contain shortened descriptions and links to the adverts. A finance category and
+finance title terms are required before senior exclusions and junior ranking.
+Finance keywords and
 listing date then order matches. This screens for likely career level, not
 verified experience or eligibility.
 
@@ -18,7 +19,7 @@ flowchart TB
     direction LR
     A[Daily or manual start] --> B[Load settings and sent history]
     B --> C[Query Adzuna]
-    C --> D[Exclude senior titles and prefer junior roles]
+    C --> D[Require finance relevance and rank junior roles]
   end
   subgraph second[Delivery]
     direction RL
@@ -81,8 +82,10 @@ separately. The default shortlist contains at most 20 jobs
 from listings added within seven days, with no minimum salary.
 
 The default `query_terms` are finance-related alternatives combined in one
-`what_or` search. Junior preferences and senior exclusions operate on the
-returned jobs in Python. This saves requests but can reduce coverage compared
+`what_or` search within Adzuna's Accounting & Finance category. Python also
+requires the returned category to match and at least one configured finance
+term in the title before junior preferences or senior exclusions. This saves
+requests but can reduce coverage compared
 with separate searches; a broad result pool may contain fewer junior roles.
 `results_per_page = 400` and `fallback_results_per_page = 100` control the primary
 and fallback sizes. No additional pages are fetched. Edit these title settings
@@ -90,17 +93,21 @@ in `[search]`:
 
 | Setting | Effect |
 |---|---|
-| `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director and VP, plus recruiter titles. |
+| `category` | Restrict the request and returned jobs to `accounting-finance-jobs`. Missing or different categories are excluded. |
+| `title_keywords` | Require at least one whole finance word/phrase in the title; count matches when ranking. |
+| `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director, VP and controller, plus recruiter titles. |
 | `preferred_title_keywords` | Put graduate, junior, trainee, entry-level and assistant titles first. |
 | `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles. |
 
 Matching ignores case and punctuation: `Sr.` and `entry-level` work. Exclusions
 win, so Assistant Manager is rejected while Finance Assistant remains eligible.
 Within the preferred/non-preferred groups, non-associate titles come first,
-then finance-keyword count and recency. Generic analyst roles remain eligible
-because their titles do not establish experience requirements. The bot sends
+then finance-keyword count and recency. Finance Analyst and Credit Analyst remain
+eligible, but a bare Junior Analyst title lacks finance evidence and is excluded.
+The bot sends
 fewer than 20 jobs if fewer qualify; it never pads the shortlist with excluded jobs.
-Logs count excluded fetched rows by their first matching exclusion term.
+Logs count exclusions for wrong/missing category, missing finance title evidence
+and the first matching senior/recruiter title term.
 
 Description-based experience limits remain unimplemented. A retained role may
 still demand more experience, and summer/placement schemes may require current

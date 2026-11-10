@@ -39,6 +39,7 @@ class SearchRequestTests(unittest.TestCase):
             "created": "2026-11-09T06:00:00Z",
             "company": {"display_name": "Example Bank"},
             "location": {"display_name": "London"},
+            "category": {"tag": "accounting-finance-jobs"},
             "redirect_url": "https://example.com/job",
         }
 
@@ -58,6 +59,7 @@ class SearchRequestTests(unittest.TestCase):
         params = parse_qs(url.query)
         self.assertTrue(url.path.endswith("/search/1"))
         self.assertEqual(params["what_or"], [" ".join(self.config["query_terms"])])
+        self.assertEqual(params["category"], ["accounting-finance-jobs"])
         self.assertNotIn("what", params)
         self.assertEqual(params["results_per_page"], ["400"])
 

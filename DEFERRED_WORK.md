@@ -1,11 +1,13 @@
 # Open work
 
-- 2026-11-09 — Source: single-search request-budget correction. Confirm Adzuna's
-  actual accepted/returned page size from the next normal run's request logs.
-  Status: 400→100 fallback verified offline; public schema has no maximum and no
-  live verification was made. If both sizes fail, agree a smaller configured
-  size rather than silently spending more requests. Usage balance remains
-  provider-managed; sent-job history is not an API request ledger.
+- 2026-11-10 — Source: authorized one-request relevance check. Tighten graduate
+  suitability separately from finance relevance: Finance Business Partner survived
+  the title exclusions; controller roles have since been excluded at the user's
+  request. Status: observed and
+  disclosed; no experience parsing or blanket rejection of generic accountant/
+  analyst roles implemented. Agree additional senior role phrases or stronger
+  junior evidence before changing that policy. The finance gate also excludes
+  valid roles whose titles lack the configured words (e.g. Purchase Ledger Clerk).
 
 - 2026-10-26 — Source: approved minimal Cloudflare timer. Deploy the prepared
   `cloudflare/worker.mjs` in the dashboard, add its variables, token Secret and

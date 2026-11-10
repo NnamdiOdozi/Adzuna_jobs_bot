@@ -37,6 +37,7 @@ def fetch_jobs(config, app_id, app_key):
         "app_key": app_key,
         "what_or": " ".join(config["query_terms"]),
         "where": config["location"],
+        "category": config["category"],
         "distance": config["distance_miles"],
         "max_days_old": config["days_old"],
         "sort_by": "date",
@@ -136,8 +137,8 @@ def build_message(jobs, config, recipients, date):
             ]
         )
     lines.append(
-        "Title rules exclude senior roles and favour junior roles, then finance "
-        "keywords and listing date. Check experience and eligibility "
+        "Requires a finance category and finance words in the title; excludes senior "
+        "titles and favours junior roles. Check experience and eligibility "
         "in each full advert."
     )
     message.set_content("\n".join(lines))
