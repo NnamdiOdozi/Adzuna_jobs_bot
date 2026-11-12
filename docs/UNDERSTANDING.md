@@ -2,6 +2,14 @@
 
 These are conversation checkpoints, not requirements imposed on unattended runs.
 
+- [x] On 2026-11-12, user requested historical filter backtesting, prioritizing
+  fewer unsuitable jobs without losing suitable matches, and agreed AVP/lawyer
+  exclusions. Analysis is saved; application rules have not yet changed.
+- [ ] Confirm that replaying sent titles cannot measure recall without rejected
+  candidates and suitability labels, and junior wording need not be compulsory.
+- [ ] Agree the trade-off for changed-location repeats: ignoring location can
+  suppress reposts but also genuine separate openings at the same employer.
+
 - [x] User clarified that the data provider is Adzuna, not Azure.
 - [x] On 2026-11-10, user approved fixing finance relevance before junior ranking
   after unrelated jobs appeared in the bulletin, then authorized one live check.

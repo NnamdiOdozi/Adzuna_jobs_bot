@@ -1,5 +1,14 @@
 # Open work
 
+- 2026-11-12 — Source: requested historical filter backtest. Offline title replay
+  of 273 history records is in `reports/filter_backtest_2026-11-12.md` and its CSV.
+  Status: analysis complete, live rules unchanged. User agreed AVP/lawyer
+  exclusions; implement these and agree the wider legal/occupation phrases,
+  narrow finance-title exceptions and changed-location duplicate policy from
+  the report. Preserve ordinary analyst/accountant matches. Future evaluation
+  needs saved pre-filter candidates and suitability labels; old sent history
+  alone cannot establish recall. No new Adzuna or model calls were made.
+
 - 2026-11-10 — Source: authorized one-request relevance check. Tighten graduate
   suitability separately from finance relevance: Finance Business Partner survived
   the title exclusions; controller roles have since been excluded at the user's
