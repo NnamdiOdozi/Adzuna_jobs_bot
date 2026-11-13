@@ -2,6 +2,31 @@
 
 These are conversation checkpoints, not requirements imposed on unattended runs.
 
+- [x] On 2026-11-13, user requested a distinct JSearch API failure email.
+- [ ] Confirm that an accepted normal failure notice consumes today's email
+  allowance, leaves seen jobs unchanged and still marks the workflow failed.
+- [x] On 2026-11-13, user requested automatic JSearch backup for Adzuna HTTP
+  errors, empty responses and no unseen matching jobs; if JSearch also has no
+  matches, send a short no-matches notice and record normal email acceptance.
+- [x] On 2026-11-13, user chose eight JSearch pages after recognizing that ten
+  pages per weekday can exceed the 200-credit monthly free allowance.
+- [x] User accepts Greater London and surrounding/Home Counties, including Hemel
+  Hempstead, and reduced the proposed JSearch radius from 100 km to 50 km.
+- [x] On 2026-11-13, user agreed to shared history across Adzuna and JSearch,
+  preserving cross-source role suppression with provider-prefixed IDs.
+- [ ] Confirm that the API radius is not an independently verified county map.
+- [ ] Confirm deliberate JSearch activation needs its GitHub Secret and provider
+  config change; an eight-page preview is a fresh, credit-consuming search.
+
+- [x] On 2026-11-13, user chose completion checks in the existing Cloudflare
+  Worker and Ntfy-only alerts, without Hetzner or an email-alert service.
+- [x] On 2026-11-13, user published a terminal curl test to the separate jobs
+  topic and confirmed receipt in the phone app; no web account was needed.
+- [ ] Confirm that unknown GitHub history still triggers a notification attempt
+  at alert time, but does not establish that the jobs email was not sent.
+- [ ] Confirm that the new watchdog needs another script deployment, additional
+  settings and a combined cron; the old deployed retry version lacks checks.
+
 - [x] On 2026-11-12, user requested historical filter backtesting, prioritizing
   fewer unsuitable jobs without losing suitable matches, and agreed AVP/lawyer
   exclusions. Analysis is saved; application rules have not yet changed.

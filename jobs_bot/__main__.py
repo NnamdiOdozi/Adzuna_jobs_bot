@@ -8,11 +8,24 @@ import sys
 import tomllib
 from datetime import date, datetime
 from pathlib import Path
+from urllib.error import HTTPError
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
+from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
+
+
+def _jsearch_result(config):
+    try:
+        return fetch_jsearch(config["jsearch"], os.environ["JSEARCH_API_KEY"]), None
+    except Exception as error:
+        logging.error(
+            "event=search state=jsearch->failed type=%s details=redacted",
+            type(error).__name__,
+        )
+        return [], error
 
 
 def _run():
@@ -69,6 +82,12 @@ def _run():
     if args.send and force_send:
         logging.warning("event=email state=limited->override date=%s", today)
     search = config["search"]
+    provider = search.get("provider", "adzuna")
+    if provider not in {"adzuna", "jsearch"}:
+        raise ValueError("Search provider must be adzuna or jsearch")
+    fallback = search.get("fallback_provider", "")
+    if fallback not in {"", "jsearch"}:
+        raise ValueError("Fallback provider must be empty or jsearch")
     for name in (
         "results_per_page",
         "fallback_results_per_page",
@@ -103,8 +122,37 @@ def _run():
     ):
         raise ValueError("Each recipient setting must contain one email address")
     # Keep these names identical to the local setup and GitHub Actions mapping.
-    jobs = fetch_jobs(search, os.environ["ADZUNA_APP_ID"], os.environ["ADZUNA_API_KEY"])
-    selected = select_jobs(jobs, seen, search)
+    jobs = []
+    search_error = None
+    if provider == "adzuna":
+        try:
+            jobs = fetch_jobs(
+                search, os.environ["ADZUNA_APP_ID"], os.environ["ADZUNA_API_KEY"]
+            )
+        except HTTPError as error:
+            if fallback != "jsearch":
+                raise
+            error.close()
+            logging.warning(
+                "event=provider state=adzuna->jsearch http_status=%d", error.code
+            )
+            provider = "jsearch"
+        if provider == "adzuna" and not jobs and fallback == "jsearch":
+            logging.warning(
+                "event=provider state=adzuna->jsearch reason=empty_response"
+            )
+            provider = "jsearch"
+    if provider == "jsearch":
+        jobs, search_error = _jsearch_result(config)
+    # The backup has different finance evidence; filter and label its actual source.
+    selected = select_jobs(jobs, seen, {**search, "provider": provider})
+    if not selected and provider == "adzuna" and fallback == "jsearch":
+        logging.warning("event=provider state=adzuna->jsearch reason=no_unseen_matches")
+        provider = "jsearch"
+        jobs, search_error = _jsearch_result(config)
+        selected = select_jobs(jobs, seen, {**search, "provider": provider})
+    config["email"]["source"] = "JSearch" if provider == "jsearch" else "Adzuna"
+    config["email"]["search_failed"] = search_error is not None
     logging.info(
         "event=shortlist fetched=%d selected=%d history_keys=%d mode=%s",
         len(jobs),
@@ -118,11 +166,15 @@ def _run():
     if not args.send and not args.test_send:
         # Preview only the body so recipient addresses stay out of Actions logs.
         print(message.get_content())
+        if search_error is not None:
+            raise RuntimeError("JSearch API failed; preview only") from None
         return
     send_message(message, config["email"], password)
     logging.info("event=email state=pending->accepted recipients=%d", len(recipients))
     if args.test_send:
         logging.info("event=history state=unchanged reason=test_send")
+        if search_error is not None:
+            raise RuntimeError("JSearch API failed; test notice accepted") from None
         return
     # Save the accepted send first, even if saving the vacancy keys later fails.
     delivery_path.parent.mkdir(parents=True, exist_ok=True)
@@ -132,6 +184,9 @@ def _run():
     )
     pending_path.replace(delivery_path)
     logging.info("event=delivery state=unsent->saved date=%s", today)
+    if search_error is not None:
+        # Preserve the accepted notice without claiming a successful vacancy search.
+        raise RuntimeError("JSearch API failed; failure notice accepted") from None
     for job in selected:
         seen.update(job_keys(job))
     history_path.parent.mkdir(parents=True, exist_ok=True)

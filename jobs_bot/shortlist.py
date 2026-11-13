@@ -20,7 +20,7 @@ def job_keys(job):
     Parameters
     ----------
     job : dict
-        Adzuna vacancy with an ID, employer, title and location.
+        Normalized vacancy with an ID, employer, title and location.
 
     Returns
     -------
@@ -56,15 +56,20 @@ def select_jobs(jobs, seen, config):
         Previously unseen vacancies in rank order.
     """
     eligible, excluded = [], {}
-    irrelevant = {"wrong_or_missing_category": 0, "no_finance_title_match": 0}
+    jsearch = config.get("provider", "adzuna") == "jsearch"
+    finance_reason = "no_finance_evidence" if jsearch else "no_finance_title_match"
+    irrelevant = {"wrong_or_missing_category": 0, finance_reason: 0}
     for job in jobs:
         category = job.get("category")
-        if not isinstance(category, dict) or category.get("tag") != config["category"]:
+        if not jsearch and (
+            not isinstance(category, dict) or category.get("tag") != config["category"]
+        ):
             irrelevant["wrong_or_missing_category"] += 1
             continue
         # Junior wording alone must never qualify a non-finance vacancy.
-        if not _matching_terms(job["title"], config["title_keywords"]):
-            irrelevant["no_finance_title_match"] += 1
+        evidence = job["title"] + (" " + job.get("description", "") if jsearch else "")
+        if not _matching_terms(evidence, config["title_keywords"]):
+            irrelevant[finance_reason] += 1
             continue
         matches = _matching_terms(
             job["title"], config.get("exclude_title_keywords", [])

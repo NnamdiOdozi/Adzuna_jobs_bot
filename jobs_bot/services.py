@@ -114,19 +114,33 @@ def build_message(jobs, config, recipients, date):
     message = EmailMessage()
     message["From"] = config["sender"]
     message["To"] = ", ".join(recipients)
-    message["Subject"] = f"{config['subject']} — {date} ({len(jobs)} new)"
-    lines = ["Previously unseen London finance jobs, sourced from Adzuna.", ""]
+    source = config.get("source", "Adzuna")
+    subject = config["subject"].replace("{source}", source)
+    if config.get("search_failed"):
+        message["Subject"] = f"{subject} — {date} (JSearch API failed)"
+        message.set_content(
+            "Today's job shortlist could not be prepared because the JSearch API "
+            "failed. This is a search failure, not a confirmation that no matching "
+            "jobs are available. We will try again at the next regular morning run."
+        )
+        return message
+    message["Subject"] = f"{subject} — {date} ({len(jobs)} new)"
+    lines = [f"Previously unseen London-area finance jobs, sourced from {source}.", ""]
     if not jobs:
-        lines.append("No new matching jobs were found in the searched results today.")
+        lines.append(
+            "No matching jobs found today. No new vacancies passed the filters."
+        )
     for index, job in enumerate(jobs, 1):
         lines.extend(
             [
                 f"{index}. {job['title']}",
                 f"{job['company'].get('display_name', 'Employer unspecified')} | "
                 f"{job['location'].get('display_name', 'Location unspecified')}",
-                f"Listed: {job['created']}",
+                f"Listed: {job['created'] or 'not supplied'}",
                 f"Salary: {job.get('salary_min', 'not supplied')} to "
-                f"{job.get('salary_max', 'not supplied')} GBP"
+                f"{job.get('salary_max', 'not supplied')} "
+                f"{job.get('salary_currency', 'GBP')}"
+                + (f" ({job['salary_period']})" if job.get("salary_period") else "")
                 + (
                     " (Adzuna estimate)"
                     if str(job.get("salary_is_predicted")) == "1"
@@ -137,8 +151,8 @@ def build_message(jobs, config, recipients, date):
             ]
         )
     lines.append(
-        "Requires a finance category and finance words in the title; excludes senior "
-        "titles and favours junior roles. Check experience and eligibility "
+        "Requires finance wording; excludes senior titles and favours junior roles. "
+        "Check experience, location and eligibility "
         "in each full advert."
     )
     message.set_content("\n".join(lines))

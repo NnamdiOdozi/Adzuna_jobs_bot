@@ -1,5 +1,25 @@
 # Decisions to review
 
+7. 2026-11-13 — Keep shared history and use description evidence for JSearch.
+   **Why:** provider categories are incompatible, generic graduate titles can be
+   relevant, and separate histories could repeat roles when switching sources.
+   **Affects:** JSearch may admit incidental finance mentions; common role keys
+   can suppress cross-source adverts but may merge distinct matching vacancies.
+   **Assumptions:** the never-emailed-before requirement outweighs separate
+   provider files; radius remains a provider filter rather than a guaranteed
+   county boundary. **Status:** shared history explicitly approved by the user;
+   implemented and explained. Adzuna's stricter
+   relevance rule and old history stay unchanged. The user subsequently approved
+   automatic Adzuna-to-JSearch fallback for HTTP errors or no unseen matches.
+
+6. 2026-11-13 — Use one combined cron for send, recovery and alert tasks.
+   **Why:** one edit to the existing trigger is simpler than adding schedules;
+   the script already selects exact London times. **Affects:** nine invocations
+   per weekday, six skipping before network access. **Assumptions:** keep the
+   documented distinct task times; reconfigure cron if those times move outside
+   its UTC hours/minutes. **Status:** implemented locally and documented, pending
+   dashboard deployment. Same-Worker hosting and Ntfy-only alerts were user choices.
+
 5. 2026-11-10 — Require both the finance category and explicit finance-title words.
    **Why:** ranking zero-finance titles admitted 18 unrelated bulletin entries.
    **Affects:** missing/wrong categories and generic Junior Analyst titles are

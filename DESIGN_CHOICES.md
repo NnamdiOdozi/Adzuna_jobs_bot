@@ -1,5 +1,149 @@
 # Design choices
 
+## 2026-11-13 — Email JSearch failures distinctly
+
+The user clarified that a JSearch failure must itself produce an email, rather
+than leave recipients waiting or imply a successful zero-results search.
+JSearch fetch/configuration/response exceptions are caught only around the
+JSearch call. Raw exceptions, response bodies and credential-bearing URLs are
+never included in the message. Normal send uses the usual recipients and a
+clear JSearch API failed subject/body. Preview prints without sending; sender-
+only test sends only to the sender and leaves normal history unchanged.
+
+After Gmail accepts a normal failure notice, the existing daily email date is
+saved and seen-job keys are left untouched. The search then raises a safe error
+so Actions reports failure; the existing persist step still commits the email
+date. The watchdog confirms an accepted email and stays quiet. This deliberately
+uses the day's email allowance, preventing automatic repeated failure notices;
+a later same-day search needs force_send. If Gmail rejects the notice, no date
+is saved and normal recovery/Ntfy remains available. If the history push fails,
+duplicate notices remain possible, as with ordinary delivery.
+
+Offline tests cover failure preview, sender-only and normal notices, accepted
+date persistence, unchanged seen history, safe message text, and failed Gmail
+submission. No live API or email calls were made; the tests do not establish
+inbox receipt or live quota status. No new completion file or Worker update
+is needed for this behaviour.
+
+## 2026-11-13 — Automatic backup and informative no-matches email
+
+The user requested Adzuna first, with JSearch backup after an HTTP error, then
+clarified that zero unseen matching jobs must also trigger it. The primary's
+HTTP 400 smaller-page retry still completes first. Successful empty responses,
+all-filtered results and all-seen results each lead to at most one JSearch
+batch. A non-empty shortlist does not trigger a top-up. JSearch does not cycle
+back to Adzuna. Non-HTTP network errors and malformed data remain failures.
+
+The configured fallback_provider=jsearch enables this; an empty string disables
+it. Filtering and email labels use the actual source for that run, preserving
+JSearch description evidence and shared duplicate suppression. Logs identify
+the source transition with a safe HTTP status or an empty-response/shortlist
+reason. No quota diagnosis is inferred merely from an HTTP status.
+
+If JSearch also has no unseen matches, the user explicitly wants a short 'No
+matching jobs found today' email. After Gmail accepts it, the normal send date
+is recorded and no vacancy keys are added. The existing watchdog treats it as
+completed; no extra completion file or Worker change is necessary. If JSearch
+fails, the later user-requested failure-notice policy above applies. A failed
+Gmail submission leaves the date available for normal recovery.
+
+Healthy Adzuna runs consume no JSearch credits. Each backup can consume the
+configured eight-page allowance; previews, test sends and scheduled recovery
+can also invoke it. Enable the GitHub Secret before publishing. Offline tests
+exercise HTTP errors, empty/filtered/seen primary results, backup failure,
+disabled fallback, source-specific filtering and no-matches delivery. No live
+search, email or history modification was performed for this change.
+
+## 2026-11-13 — Configurable Adzuna/JSearch provider
+
+The user authorized the build after one live JSearch request returned ten
+graduate-oriented results. They chose eight pages against the advertised
+200-credit monthly limit and reduced the search radius to 50 km. The query
+remains graduate finance jobs in London, UK; country gb, language en and the
+past week. Eight pages can return up to 80 jobs and cost up to eight page
+credits in one HTTP request. Twenty-three weekday runs can consume 184 credits
+before previews, tests and recovery. No actual remaining-balance meter exists.
+
+`[search].provider` selects the primary source. Adzuna remains first choice;
+the subsequent automatic-backup decision above supersedes manual-only switching.
+JSearch settings live in their own TOML section. Only the selected provider's
+credentials are read, plus backup credentials only when it is invoked.
+Cloudflare dispatch and normal daily-send safeguards are
+unchanged. The JSearch adapter uses a 60-second timeout, refuses redirects and
+makes one request without following cursors or retrying. Repeating a multi-page
+request can consume another batch of credits; explicit operator or scheduled
+recovery is separate. Adzuna's existing 400-to-100 fallback is preserved.
+
+Returned fields are translated, not given a fabricated Adzuna category. JSearch
+uses configured finance words in the title or description because valid generic
+graduate titles in the cached sample lacked finance wording. Adzuna retains
+its category-and-title requirement. Senior exclusions and title ranking remain
+shared. Incidental description mentions can admit unsuitable roles; no experience
+or eligibility interpretation is implemented. The API's free-form query is not
+evidence of an LLM or a strict geographical guarantee. Radius is provider-side;
+the bot does not geocode or independently measure it. Home Counties are not
+all inside the selected circle, and a Jersey title labelled London still needs
+human checking. Hemel Hempstead and surrounding counties are acceptable to the
+user; they are not excluded as unsuitable merely for being outside London.
+
+JSearch IDs are prefixed while all old Adzuna keys stay unchanged. One shared
+seen.json allows the existing title/employer/location key to suppress roles
+across providers. Separate histories would weaken the never-emailed-before
+requirement; differing metadata can still evade this suppression. Email source
+and subject follow the provider. JSearch salary periods are preserved and no
+missing currency is inferred as GBP. Neither history file is reset or migrated.
+
+Offline tests cover one-request bounds, malformed payloads, key destination,
+page/radius parameters, normalization, provider choice without Adzuna credentials,
+preview preservation and mock-delivery persistence. A cached replay of the ten
+live results passes through the new adapter and selection without new requests.
+These checks do not prove live eight-page latency, radius accuracy, current
+balance, cross-source identity or graduate suitability. Only the earlier
+one-page trial was live; no further API request or email was made for this build.
+The new GitHub Secret, publication, deliberate activation and a separately
+authorized live preview remain operator steps described in docs/JSEARCH.md.
+
+## 2026-11-13 — Same-Worker completion checks and Ntfy-only alerts
+
+The user chose the existing jobs-timer Worker rather than Hetzner or another
+Worker, and selected Ntfy without an email fallback. Dashboard settings select
+the normal send, recovery and alert times (06:30, 06:45 and 07:00 London time).
+The combined cron `0,30,45 5,6,7 * * MON-FRI` covers summer and winter with one
+trigger. Of nine daily invocations, only three perform network work. Code now
+skips both weekend days; preview/test modes disable recovery and alerts.
+
+The checker reads raw JSON from the configured DELIVERY_HISTORY_PATH in the
+configured GitHub branch. Only a valid list of ISO dates can establish confirmed
+or missing status. HTTP errors, failed reads and invalid records mean unknown.
+At recovery time, only missing status requests another normal workflow. Unknown
+status does not authorize a speculative recovery. At alert time, missing and
+unknown both attempt Ntfy, with different wording. GitHub failure cannot bypass
+that notification step; notification uses its own request and timeout.
+
+The existing retry loop now serves GitHub dispatch, history reads and Ntfy.
+It preserves the request bounds, timeouts and redacted errors. GitHub headers
+are never forwarded to Ntfy. The private topic comes from a Worker Secret;
+NTFY_URL is the existing HTTPS server address. No new Ntfy account token, Resend
+integration, database, public HTTP route or delivery-history writer is added.
+The public GitHub repository is readable with fine-grained tokens' public-read
+access; Contents read permission becomes relevant if the repository is private.
+
+No Adzuna call is needed to check completion. A recovery workflow can search and
+send normally, subject to existing concurrency and the daily-send guard. A
+successful delivery date establishes recorded Gmail acceptance, not inbox
+receipt. A failed history push can cause false unconfirmed alerts or recovery
+after submission. Ambiguous POST responses can also duplicate dispatches or
+phone notifications. The same Cloudflare deployment/outage can affect both
+sending and checking; Ntfy is the sole alert route in this version.
+
+Offline tests cover confirmed/missing/unknown records, malformed data, recovery,
+independent notification after GitHub failure, retry exhaustion, summer dates,
+weekends, mode skips and safe errors. They establish these programmed decisions,
+not live credentials, dashboard configuration, timer reliability, phone delivery
+or semantic job suitability. No live service request or notification was made.
+The prepared script still needs dashboard deployment and settings from the
+updated runbook; old deployed retry-only code does not include this watchdog.
+
 ## 2026-11-13 — Retry temporary GitHub dispatch failures
 
 The Cloudflare screenshot shows the cron invocation at 06:30:40 GMT and

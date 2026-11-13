@@ -1,95 +1,33 @@
-# Daily jobs timer
+# Daily jobs timer and completion check
 
-Cloudflare supplies the clock; GitHub still searches Adzuna, sends the email and
-saves history. This replaces GitHub's delayed native schedule. There is no
-automatic timer until you deploy this Worker and add its Cron Trigger.
+Cloudflare supplies the clock. GitHub searches Adzuna, sends the jobs email and
+saves its delivery record. The same Cloudflare Worker also checks completion
+and can notify the operator through Ntfy. No new Worker, email-alert service,
+database, package installation or public web endpoint is required.
 
-## Update the existing Worker after a failed dispatch
+| London time, Monday–Friday | Action |
+|---|---|
+| 06:30 | Request the normal GitHub workflow, with bounded retries. |
+| 06:45 | Read today's delivery record. If missing, request one recovery run. |
+| 07:00 | Check again. If missing or unreadable, publish an Ntfy alert. |
 
-On 13 November the timer fired, but GitHub dispatch returned HTTP 500. This
-replacement script retries temporary failures; it does not add a watchdog.
-Use the dashboard for this update because the existing Worker is managed there.
-Pushing files to GitHub does not deploy it, and no Wrangler setup is required.
+These are separate scheduled invocations, not a process waiting for 30 minutes.
+An unreadable record means unknown, not proof of failed delivery. The 06:45
+check does not dispatch recovery on unknown evidence. At 07:00 it still tries
+Ntfy even if GitHub is unreachable. If today's date is present, checks finish
+quietly. Preview and sender-only test modes disable recovery and alerts.
 
-1. From the current **Observability** screen, click **Settings** in the top row.
-   Check that the breadcrumb still names **adzuna-jobs-timer → Production**.
-2. Find **Variables and Secrets** and add these two **Text** variables using
-   **Add** or **Edit**, depending on the panel shown. These values are not secrets.
+## Deploy the update in your existing Cloudflare Worker
 
-   | Variable name | Exact value | Meaning |
-   |---|---|---|
-   | `DISPATCH_RETRY_DELAYS_SECONDS` | `2,5` | Two waits, allowing three attempts altogether |
-   | `DISPATCH_TIMEOUT_SECONDS` | `10` | Maximum wait for each GitHub response |
+The prepared script is local until committed/pushed. Neither a local edit nor a
+GitHub push deploys this dashboard-managed Worker. Use the console for this
+update; setting up Wrangler is unnecessary. Only the jobs-timer Worker changes.
+The fixed-income Worker and shared ukba.workers.dev subdomain are unaffected.
 
-   Save the variables and click **Deploy** if offered. Add them before replacing
-   the script: the old script ignores them; the new script requires them.
-   Keep all existing variables and the `GITHUB_DISPATCH_TOKEN` Secret.
-3. Open the local `cloudflare/worker.mjs` file in your editor and copy its entire
-   contents. It contains code, not credentials. In Cloudflare click **Edit code**
-   at the top right, select the existing script contents and replace them with
-   the complete contents of that file. Keep the existing editor filename, even
-   if Cloudflare calls it `worker.js`. Do not paste `worker.test.mjs`.
-4. Click **Deploy** in the editor and wait for its success confirmation. Return
-   to **Deployments** and check that the new deployment is active in Production.
-   If the editor only saves a version, deploy that version to Production before
-   leaving. The location or wording of the final deploy button may vary.
-5. Under **Settings**, check the existing Cron Trigger still reads
-   `30 5,6 * * MON-FRI`, as confirmed in the 13 November dashboard. Keep
-   `TIMEZONE=Europe/London`, `SEND_TIME=06:30` and normal `RUN_MODE=send`.
-   No trigger or shared `ukba.workers.dev` subdomain change is needed.
-
-This updates only the jobs timer. It does not alter the fixed-income Worker,
-GitHub secrets, job filters, Adzuna request logic or sent-job history. It will
-not automatically replay today's missed run. Monday–Friday scheduling means
-the next normal morning after Friday 13 November is Monday 16 November.
-
-### Verify retries without sending mail or spending API requests
-
-From a terminal in this repository, run:
-
-```sh
-node --test cloudflare/worker.test.mjs
-```
-
-These local tests replace GitHub requests and retry waits with simulations.
-They do not contact Cloudflare, GitHub, Adzuna or Gmail and do not change history.
-They cover server failures, network errors/timeouts, eventual success, exhausted
-retries and authentication errors that stop immediately. Passing them checks
-the script's logic; it does not verify what was pasted into the dashboard.
-
-At the next normal scheduled run, open **Observability**, set its date range to
-include 06:30 and expand the `workflow_dispatch` entry if necessary to see JSON.
-Healthy dispatch shows `state: accepted`, normally `status: 204`, `attempt: 1`.
-A temporary failure shows `state: retry`, `status: 500` (or another retryable
-status), `attempt: 1`, `retry_in_ms: 2000`. A successful second attempt shows
-`state: accepted`, `attempt: 2`. After three failed attempts it shows
-`state: failed` and an error. A matching GitHub Actions run must also appear;
-then inspect its Gmail-acceptance and history-save events. Dispatch acceptance
-alone is not proof that email was submitted or received.
-
-For a deliberate live test without recipients, follow the existing preview
-instructions below. Preview still spends an Adzuna request; `test` sends a real
-sender-only email. Do not change the timer merely to run the free offline tests.
-
-The configured retries cover HTTP 500/502/503/504 and fetch errors, including
-timeouts. Other HTTP statuses stop immediately; 401/403 require investigating
-credentials/permissions, and 429 requires checking rate limits before retrying.
-Each attempt has a fresh timeout. Logs omit tokens, request headers, response
-bodies and network exception messages. With values above, three timed-out
-attempts take approximately 37 seconds including waits.
-
-An ambiguous failure can still have created a workflow run. GitHub concurrency
-and the bot's daily-send history reduce repeat-send risk, but Gmail acceptance
-followed by a history/push failure can still permit a duplicate. Retries do not
-monitor email completion or recover a prolonged outage. A separate watchdog
-remains a possible future addition, requiring its own deployment and permissions.
-
-## Set up in the Cloudflare dashboard
-
-1. Create a Worker named `adzuna-jobs-timer`. Open **Edit code**, replace the
-   starter script with all of `worker.mjs` in this folder, and deploy it.
-   The script has no imports, packages, database or other Worker dependencies.
-2. Under **Settings → Variables and Secrets**, add these plain-text variables:
+1. In Cloudflare, go to **Workers & Pages → adzuna-jobs-timer → Production**.
+   From the current Observability page, click **Settings** in the top row.
+2. Under **Variables and Secrets**, use **Add** or **Edit** to set these **Text**
+   variables. Keep the first eight existing values; add the watchdog settings.
 
    | Name | Value |
    |---|---|
@@ -98,89 +36,138 @@ remains a possible future addition, requiring its own deployment and permissions
    | `GITHUB_REF` | `main` |
    | `TIMEZONE` | `Europe/London` |
    | `SEND_TIME` | `06:30` |
-   | `RUN_MODE` | `send` normally; `preview` or `test` for testing |
+   | `RUN_MODE` | `send` |
    | `DISPATCH_RETRY_DELAYS_SECONDS` | `2,5` |
    | `DISPATCH_TIMEOUT_SECONDS` | `10` |
+   | `RECOVERY_TIME` | `06:45` |
+   | `ALERT_TIME` | `07:00` |
+   | `DELIVERY_HISTORY_PATH` | `state/delivery.json` |
+   | `NTFY_URL` | Your existing Ntfy server base address, using HTTPS |
 
-3. Add a **Secret** named `GITHUB_DISPATCH_TOKEN`. Supply a GitHub fine-grained
-   personal access token restricted to this repository with **Actions: Read and
-   write** permission. Keep the token private and note its expiry date. The
-   fixed-income token can be reused only if its repository access and permissions
-   cover this repository; the Worker code does not require the same token.
-4. Under **Settings → Triggers → Cron Triggers**, add the custom expression
-   `30 5,6 * * MON-FRI` and save it. Cloudflare uses UTC. The Worker checks London
-   time, allowing 06:30: 06:30 UTC in winter, 05:30 UTC in summer.
-   The other invocation skips without contacting GitHub. Changing `SEND_TIME`
-   also requires adjusting the UTC trigger hours/minutes accordingly.
-   The bot also permits normal emails Monday–Friday only. Older daily cron
-   expressions remain safe: Saturday dispatch exits with `reason=non_send_day`
-   before Adzuna or Gmail, and the Worker itself skips Sundays.
-5. Enable **Workers Logs** under the Worker's observability settings. Cron changes
-   can take up to 15 minutes to propagate. Look for `workflow_dispatch` in the
-   Worker logs and a matching run under GitHub Actions. A successful dispatch
-   confirms GitHub accepted the request, not successful execution or email receipt.
+   For NTFY_URL, use the address already configured as the Text variable of the
+   same name in your fixed-income Cloudflare Worker. This is the server address,
+   not the full topic URL. Save/deploy the variable changes if prompted.
+3. Keep the existing **Secret** `GITHUB_DISPATCH_TOKEN`. Add a **Secret** named
+   `NTFY_TOPIC`, entering the existing topic you subscribe to in the Ntfy app.
+   Reusing that topic means jobs alerts appear alongside your existing alerts,
+   with the distinct title **Adzuna jobs bot: delivery unconfirmed**. Cloudflare
+   cannot reveal a saved Secret; obtain the topic from your own subscription or
+   private records. Do not paste it into chat, source code or GitHub.
+4. The GitHub token must still allow **Actions: Read and write** for this repo.
+   The repository is public, and fine-grained tokens include public repository
+   read access. No extra permission should be needed for this public file.
+   If the repo becomes private, the token will also need **Contents: Read-only**.
+   Do not replace or broaden a shared token unnecessarily. This implementation
+   uses the existing topic-based Ntfy publishing setup; it does not add a
+   separate Ntfy account access token.
+5. Open local `cloudflare/worker.mjs` in your editor and copy all of it.
+   In Cloudflare click **Edit code** at the top right. Replace the existing
+   script contents with the complete file, keeping the editor's filename even
+   if it is `worker.js`. Do not paste `worker.test.mjs`.
+6. Click **Deploy**, wait for confirmation, and verify the new version is active
+   in **Deployments → Production**. Saving an undeployed version is insufficient.
+7. Return to **Settings → Triggers → Cron Triggers**. The section may instead
+   be labelled **Trigger Events**. Edit the existing cron through its menu,
+   choose the custom-expression field, and replace its expression with:
 
-There is no public HTTP endpoint to trigger an email. Visiting the Worker's URL
-does not run the scheduled handler. A dashboard test of the scheduled handler at
-06:30 London time sends a real GitHub request and may cause a real email. Use the
-offline checks below for testing without services.
+   ```text
+   0,30,45 5,6,7 * * MON-FRI
+   ```
 
-## Daily limit and testing
+   Save it. Replace the existing schedule rather than leaving duplicate triggers.
+   Cloudflare documents up to 15 minutes for trigger changes to propagate.
 
-There are three workflow modes:
+The expression produces nine invocations per weekday. The script selects only
+06:30, 06:45 and 07:00 London time; the other six finish without external
+requests. This covers both winter and British Summer Time using one trigger.
+The normal script requires both retry variables; absent recovery/alert times
+leave those checks inactive. Use the exact distinct times in the table.
 
-| Mode | Email | Normal history |
-|---|---|---|
-| `preview` | None; prints the shortlist in GitHub logs | Unchanged |
-| `test` | Only the Gmail account in `GMAIL_SENDER`; subject starts `[TEST]` | Unchanged |
-| `send` | Normal configured recipients | Updated after acceptance |
+Deployment does not replay a missed morning automatically. The recovery and
+alert tasks run at their scheduled times. On Friday 13 November after 07:00,
+the next normal cycle is Monday 16 November.
 
-Preview and test still search Adzuna. Test sends a real email to the sender,
-never reads the normal recipient settings, and works after today's normal send.
-It still excludes previously emailed jobs, so an empty test shortlist is possible.
-No email address needs to be added to the public code.
+## What to look for in the logs
 
-To use the new modes from Cloudflare, first replace its deployed code with the
-latest `worker.mjs` here and deploy. Changing GitHub files alone does not update
-the dashboard-managed Worker. In **Settings → Variables and Secrets**, add or
-edit the Text variable `RUN_MODE`, set it to `test` (or `preview` for no email),
-and click **Deploy**. If omitted, the Worker retains its original `send` behaviour.
+Open **Observability**, choose a time range containing the scheduled tasks and
+expand an entry to inspect its JSON fields. The scheduled timestamp and London
+date identify the daily cycle. The actual timestamp and attempt identify retries.
 
-For a complete Cloudflare-to-GitHub test today, choose a London time at least
-20 minutes ahead. Set `SEND_TIME` to that time in `HH:MM` form and deploy. Under
-**Settings → Triggers → Cron Triggers**, temporarily edit the existing expression
-to `* * * * *`. It will check every minute but dispatch only at your chosen time;
-Sunday remains excluded. Allow up to 15 minutes for the trigger change to apply.
-Watch Worker logs for `workflow_dispatch` with `mode: test`, then the GitHub
-Actions run and your own inbox. With `preview`, inspect GitHub logs instead.
+- At 06:30, `workflow_dispatch` should show `state: accepted`, normally status
+  204. A temporary failure shows `state: retry` and its wait; exhausting all
+  attempts produces `state: failed` and an error.
+- At 06:45, `delivery_check` shows `confirmed`, `missing` or `unknown`.
+  Missing is followed by a recovery `workflow_dispatch`; unknown is not.
+- At 07:00, a missing or unknown result is followed by `ntfy_alert`.
+  Accepted means Ntfy accepted the publication, not that the phone displayed it.
+  Exhausted notification attempts produce a visible failure.
+- `dispatch_skipped` at the unused UTC times is expected. In preview/test mode,
+  `watchdog_skipped` is expected, with no history read or notification.
 
-Afterwards, restore `SEND_TIME` to `06:30`, `RUN_MODE` to `send`, and the Cron
-Trigger to `30 5,6 * * MON-FRI`. Save/deploy the settings. Until restored, the timer
-will continue using the test time or test mode. To test GitHub alone without
-Cloudflare, use **Actions → Daily London job shortlist → Run workflow → test**.
-Locally, use the approved launcher with `python3 -m jobs_bot --test-send`.
+Also inspect GitHub Actions for the jobs run, Gmail acceptance and saved history.
+The checker reads GitHub's committed delivery record, not local laptop state.
+That record proves Gmail accepted a submission, not inbox receipt. A delayed or
+failed history push may cause a recovery attempt or an unconfirmed-delivery
+alert even though Gmail already accepted the message.
 
-In the root `config.toml`, `[email]` contains `force_send = false`. Set it to
-`true` for a deliberate extra email on the same day, then restore `false`.
-The override still filters previously emailed vacancies. It also still makes
-real Adzuna requests and sends real mail when you use send mode. A local config
-edit affects local commands; GitHub uses the version committed to `main`.
-While `true` is published, every send run can bypass the daily limit.
+## Test without contacting services
 
-Run from the repository root:
+From this repository, run:
 
 ```sh
-python3 -m unittest discover -s tests -v
 node --test cloudflare/worker.test.mjs
 ```
 
-These checks use synthetic credentials and replace service calls. Python 3.12+
-and Node.js 22+ suffice; no packages or manual downloads are needed. Tests cover
-winter/summer, the clock-change weekends, Sundays, the GitHub request and rejected
-requests. They do not prove deployed credentials, actual timer delivery or inbox
-receipt. Retries are bounded and there is no delivery monitor; check GitHub if
-an email is missing. GitHub runner availability can still delay execution after
-Cloudflare's request.
+Node.js 22+ suffices, with no packages or manual downloads. Tests replace requests
+and waits with simulations. They contact no Cloudflare, GitHub, Adzuna, Gmail or
+Ntfy service and alter no delivery history. They cover temporary failure,
+timeouts, retry bounds, both seasons, weekends, recovery, malformed history,
+mode skips and Ntfy attempts despite GitHub failures.
 
-References: [Cloudflare Cron Triggers](https://developers.cloudflare.com/workers/configuration/cron-triggers/)
-and [GitHub workflow dispatch](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event).
+These checks prove programmed decisions and timeout wiring. They do not prove
+the deployed script/settings match, actual timer delivery, live credentials,
+network cancellation or phone/inbox receipt. No live Ntfy publication was made
+while preparing this update. A live notification test would need deliberate
+authorization and would send a real phone notification.
+
+For GitHub-only preview/test, choose **Actions → Daily London job shortlist →
+Run workflow** and select a mode. Preview makes a real Adzuna search but sends
+nothing. Test makes a search and sends only to the Gmail sender with a [TEST]
+subject. Both leave normal history unchanged; neither tests the watchdog.
+
+A complete Cloudflare preview/test can be scheduled deliberately: choose a
+London SEND_TIME at least 20 minutes ahead, set RUN_MODE to preview or test,
+deploy, then temporarily use cron `* * * * *`. Only that chosen time dispatches.
+Allow trigger propagation, then restore all normal values and the combined
+cron above. Watchdog tasks are disabled during these modes.
+
+## Request bounds and remaining limitations
+
+All three types of network work use the configured request timeout and retry
+waits: GitHub dispatch, delivery-history reads and Ntfy publication. Values 2,5
+allow three attempts, waiting two then five seconds. HTTP 500/502/503/504 and
+fetch failures are retried. Other statuses stop immediately; 401/403 need
+credentials/permissions investigation and 429 needs rate-limit investigation.
+A successful response ends retries. Logs omit private URLs, topics, tokens,
+response bodies and exception messages.
+
+Healthy daily operation makes one workflow dispatch and two GitHub history
+reads. Checking completion spends no Adzuna credits. A recovery workflow can
+make a real Adzuna search and send a real email to normal recipients. The
+existing daily-send check and workflow concurrency remain in force; keep
+`force_send=false` in the bot config during ordinary operation.
+
+Ambiguous POST failures can cause duplicate dispatches or phone alerts.
+Gmail acceptance followed by a failed history save/push can still permit
+duplicate email. There is no new persistent notification ledger or alert storm
+loop: checks happen at the configured times, with bounded request attempts.
+
+A Cloudflare outage or broken Worker deployment can stop both sending and
+checking. A prolonged GitHub outage cannot be repaired by retrying. An Ntfy
+outage can prevent alerts; there is no Resend/email fallback in this version.
+
+References: [Cloudflare scheduling](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/),
+[Cron configuration](https://developers.cloudflare.com/workers/configuration/cron-triggers/),
+[GitHub repository contents](https://docs.github.com/en/rest/repos/contents),
+[GitHub token permissions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+and [Ntfy publishing](https://docs.ntfy.sh/publish/).

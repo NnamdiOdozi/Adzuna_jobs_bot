@@ -1,4 +1,7 @@
 [search]
+# Backup follows HTTP errors or no unseen matching jobs; empty disables it.
+provider = "adzuna"
+fallback_provider = "jsearch"
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
 location = "London"
 category = "accounting-finance-jobs"
@@ -17,12 +20,24 @@ exclude_title_keywords = ["recruiter", "recruitment consultant", "senior", "sr",
 preferred_title_keywords = ["graduate", "junior", "trainee", "entry level", "assistant"]
 deprioritise_title_keywords = ["associate"]
 
+[jsearch]
+base_url = "https://api.openwebninja.com/jsearch/search-v2"
+query = "graduate finance jobs in London, UK"
+country = "gb"
+language = "en"
+num_pages = 8
+date_posted = "week"
+# Kilometres: includes a broad catchment around London, not county boundaries.
+radius = 50
+# Give a multi-page batch time to finish; no automatic retry spends extra credits.
+timeout_seconds = 60
+
 [email]
 # Gmail app-password label: Adzuna_jobs_bot (informational only).
 smtp_host = "smtp.gmail.com"
 smtp_port = 465
 timeout_seconds = 30
-subject = "Adzuna London finance jobs"
+subject = "{source} London finance jobs"
 timezone = "Europe/London"
 # Normal email days: Monday=0 through Sunday=6. Preview and test remain available.
 send_weekdays = [0, 1, 2, 3, 4]

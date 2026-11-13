@@ -1,13 +1,28 @@
 # Open work
 
+- 2026-11-13 — Source: approved JSearch build. Provider switch, eight-page/50 km
+  settings, Secret mapping and offline tests are complete. User reports adding
+  GitHub JSEARCH_API_KEY. Pending: a separately authorized live preview using
+  docs/JSEARCH.md. Adzuna remains primary with
+  automatic JSearch backup after HTTP errors or no unseen matching jobs. If
+  both have no matches, send the user-requested informative notice. A JSearch
+  failure sends a distinct failure email; accepted notices use the daily limit
+  while Actions still reports search failure. Eight-page latency/radius and quota are not
+  live-verified; only the earlier one-page trial ran. Shared history preserves
+  cross-source duplicate checks; exact county boundaries/identity remain limits.
+
 - 2026-11-13 — Source: missed morning email and requested Cloudflare instructions.
   Replacement Worker with bounded dispatch retries and offline tests is ready.
   User reports adding both Text variables and pasting the new script into
   Cloudflare. Confirm the Production deployment and next scheduled dispatch
   using `cloudflare/README.md`; live retry recovery has not been verified.
-  A separate watchdog was discussed, not implemented or deployed: it would check
-  today's email-submission record, recover or alert, and ideally run outside
-  Cloudflare. Its hosting, permissions and notification route remain undecided.
+  User subsequently chose a same-Worker watchdog and Ntfy only. That code and
+  offline tests are now prepared locally: recovery checks at 06:45, alerts at
+  07:00 London time. User reports updating the script, settings, Secret and cron,
+  and successfully publishing a direct curl test to the new topic: the phone
+  received it. Status: topic/subscription verified by user; confirm Production
+  deployment and scheduled delivery checks. The direct test does not establish
+  that Cloudflare's saved topic or watchdog works. No agent notification was sent.
 
 - 2026-11-12 — Source: requested historical filter backtest. Offline title replay
   of 273 history records is in `reports/filter_backtest_2026-11-12.md` and its CSV.

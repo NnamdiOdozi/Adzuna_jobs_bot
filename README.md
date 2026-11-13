@@ -1,14 +1,16 @@
 # London finance jobs bot
 
-This bot asks Adzuna for recent London finance vacancies, removes listings that
+This bot asks Adzuna or JSearch for recent London-area finance vacancies, removes listings that
 have already been emailed, and sends a daily shortlist through Gmail. It can
 run locally now and later run on GitHub Actions, GitHub's service for scheduled
 program execution. No Azure service or large language model is involved.
 
-Adzuna supplies the listings. This application does not separately scrape job
-boards or promise coverage of any particular recruitment website. Search results
-contain shortened descriptions and links to the adverts. A finance category and
-finance title terms are required before senior exclusions and junior ranking.
+Adzuna is the primary source, with JSearch as backup after an HTTP error or no
+unseen matching jobs. This
+application does not separately scrape job boards or promise coverage of any
+particular recruitment website. Adzuna requires a finance category and finance
+title terms. JSearch can use description wording as finance evidence before
+senior exclusions and junior ranking. See [switching providers](docs/JSEARCH.md).
 Finance keywords and
 listing date then order matches. This screens for likely career level, not
 verified experience or eligibility.
@@ -18,7 +20,7 @@ flowchart TB
   subgraph first[Search]
     direction LR
     A[Daily or manual start] --> B[Load settings and sent history]
-    B --> C[Query Adzuna]
+    B --> C[Query the selected provider]
     C --> D[Require finance relevance and rank junior roles]
   end
   subgraph second[Delivery]
@@ -36,7 +38,8 @@ Run commands from the project root with Python 3.12 or later. The bot uses only
 Python's built-in libraries, so there are no application dependencies to install
 and no virtual environment is required.
 
-Your credential setup must supply `ADZUNA_APP_ID` and `ADZUNA_API_KEY`. The names
+Your credential setup must supply `ADZUNA_APP_ID` and `ADZUNA_API_KEY` for Adzuna,
+and `JSEARCH_API_KEY` when JSearch is selected or the enabled backup is needed. Names
 are case-sensitive. Sending also needs `gmail_app_password`. Keep their values
 in your user-managed secret configuration, never in this repository or a command.
 The Gmail app label is only a label; it is not the sender address or password.
@@ -47,13 +50,17 @@ On this machine, the existing credential launcher supplies those settings:
 /home/nodozi/.local/bin/run-with-secrets python3 -m jobs_bot
 ```
 
-This command searches Adzuna and prints the proposed email body. It does not send
+This command searches the selected provider and prints the proposed email body. It does not send
 email or change the sent-job history. With the default configuration, a run makes
 one combined Adzuna search, requesting 400 listings on the first page. HTTP 400
 triggers one retry requesting 100. That means one API request normally, two if
 the fallback is used. Smaller successful responses are accepted without more
-requests. If the fallback also fails, the run fails visibly rather than sending
-a misleading empty shortlist. Neither requested page size is guaranteed by a
+requests. If Adzuna still returns an HTTP error or leaves no unseen matching jobs,
+the configured JSearch backup makes one eight-page search. If both sources have
+no matches, the normal email says 'No matching jobs found today'. If JSearch
+fails, send mode emails a distinct failure notice and the run still fails
+visibly. Gmail acceptance records that day's email, including a failure notice;
+seen-job keys stay untouched on failure. Neither requested Adzuna page size is guaranteed by a
 live test; Adzuna's published parameter schema gives no maximum.
 
 When you want to send that kind of shortlist, use:
@@ -81,7 +88,7 @@ connection settings and the history path. Addresses and passwords are supplied
 separately. The default shortlist contains at most 20 jobs
 from listings added within seven days, with no minimum salary.
 
-The default `query_terms` are finance-related alternatives combined in one
+With Adzuna, `query_terms` are finance-related alternatives combined in one
 `what_or` search within Adzuna's Accounting & Finance category. Python also
 requires the returned category to match and at least one configured finance
 term in the title before junior preferences or senior exclusions. This saves
@@ -146,21 +153,23 @@ preview and test search Adzuna; only the offline tests avoid external requests.
 The workflow is `.github/workflows/daily-jobs.yml`, named **Daily London job
 shortlist**. A small Cloudflare Worker replaces GitHub's native timer after the
 02:30 schedule failed to produce a morning run. Once deployed, it requests a run
-at 06:30 London time Monday to Saturday, including summer clock changes. Follow
-[the Cloudflare dashboard setup](cloudflare/README.md). Until that setup is
-complete, only manual runs are available. GitHub runner availability can still
-delay execution after the request. The bot's `[email].send_weekdays` setting now
-allows normal sends Monday–Friday only, using London dates. Cloudflare may still
-trigger a Saturday run; it exits successfully with `reason=non_send_day` before
-searching Adzuna or sending email. No Cloudflare update is required. This also
-applies to manual normal sends, even with `force_send = true`. Preview and
-sender-only test mode remain available on weekends.
+at 06:30 London time Monday–Friday, including summer clock changes. The latest
+Worker also checks the saved delivery record at 06:45, requests recovery if
+missing, and attempts an Ntfy alert at 07:00 if completion remains unconfirmed.
+These checks need the additional settings and replacement cron in
+[the Cloudflare dashboard setup](cloudflare/README.md); pushing code alone does
+not deploy them. GitHub runner availability can still delay execution. The
+bot independently restricts normal sends to `[email].send_weekdays`, including
+manual runs with `force_send = true`. Preview and sender-only tests remain
+available on weekends. The saved date confirms Gmail acceptance, not inbox
+receipt, and a Cloudflare outage can stop both the timer and its checks.
 
 Before activation, add these repository Actions secrets yourself:
 
 | GitHub secret name | Purpose |
 |---|---|
 | `ADZUNA_APP_ID` | Adzuna application ID |
+| `JSEARCH_API_KEY` | OpenWeb Ninja key, required only when JSearch is selected |
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
 | `GMAIL_SENDER` | Gmail account login address used to authenticate and send |

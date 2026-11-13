@@ -9,6 +9,11 @@ const env = {
   GITHUB_DISPATCH_TOKEN: "synthetic-token",
   TIMEZONE: "Europe/London",
   SEND_TIME: "06:30",
+  RECOVERY_TIME: "06:45",
+  ALERT_TIME: "07:00",
+  DELIVERY_HISTORY_PATH: "state/delivery.json",
+  NTFY_URL: "https://ntfy.example",
+  NTFY_TOPIC: "synthetic-topic",
   DISPATCH_RETRY_DELAYS_SECONDS: "2,5",
   DISPATCH_TIMEOUT_SECONDS: "10",
 };
@@ -25,7 +30,7 @@ test("timer dispatches exactly at London's allowed time", async (t) => {
     ["2026-10-26T06:30:00Z", true],
     ["2026-07-20T05:30:00Z", true],
     ["2026-07-20T06:30:00Z", false],
-    ["2026-10-24T05:30:00Z", true],
+    ["2026-10-24T05:30:00Z", false],
     ["2026-10-25T06:30:00Z", false],
     ["2027-03-28T05:30:00Z", false],
     ["2027-03-29T05:30:00Z", true],
@@ -119,6 +124,85 @@ test("dispatch retries temporary failures with bounded waits and request timeout
       assert.equal(requests, scenario.outcomes.length);
       assert.deepEqual(waits, scenario.waits);
       assert.deepEqual(timeouts, Array(requests).fill(10000));
+    });
+  }
+});
+
+test("watchdog checks delivery before independent recovery and alerts", async (t) => {
+  const cases = [
+    { name: "confirmed delivery prevents recovery", time: "06:45", history: ["2026-10-26"], actions: ["history"] },
+    { name: "confirmed delivery prevents alert", time: "07:00", history: ["2026-10-26"], actions: ["history"] },
+    { name: "missing delivery triggers recovery", time: "06:45", history: ["2026-10-23"], actions: ["history", "dispatch"] },
+    { name: "missing delivery triggers alert", time: "07:00", history: [], actions: ["history", "alert"], message: /missing/i },
+    { name: "GitHub exhausted retries still alerts", time: "07:00", statuses: [500, 500, 500], actions: ["history", "history", "history", "alert"], message: /unable.*confirm|cannot.*confirm|unconfirmed/i },
+    { name: "forbidden history is unknown", time: "07:00", statuses: [403], actions: ["history", "alert"], message: /unable.*confirm|cannot.*confirm|unconfirmed/i },
+    { name: "invalid JSON is unknown", time: "07:00", malformed: true, actions: ["history", "alert"], message: /unable.*confirm|cannot.*confirm|unconfirmed/i },
+    { name: "invalid schema is unknown", time: "07:00", history: { date: "2026-10-26" }, actions: ["history", "alert"], message: /unable.*confirm|cannot.*confirm|unconfirmed/i },
+    { name: "invalid date is unknown", time: "07:00", history: ["yesterday"], actions: ["history", "alert"], message: /unable.*confirm|cannot.*confirm|unconfirmed/i },
+    { name: "unknown does not trigger recovery", time: "06:45", statuses: [403], actions: ["history"] },
+    { name: "unreachable history does not trigger recovery", time: "06:45", statuses: ["network", "network", "network"], actions: ["history", "history", "history"] },
+    { name: "Saturday recovery skips", date: "2026-10-24", time: "06:45", actions: [] },
+    { name: "Sunday alert skips", date: "2026-10-25", time: "07:00", actions: [] },
+    { name: "summer recovery uses London time", date: "2026-07-20", time: "05:45", history: [], actions: ["history", "dispatch"] },
+    { name: "summer alert uses London date", date: "2026-07-20", time: "06:00", history: ["2026-07-20"], actions: ["history"] },
+    ...["preview", "test"].flatMap((mode) => ["06:45", "07:00"].map((time) => ({ name: `${mode} skips ${time}`, mode, time, actions: [] }))),
+    { name: "recovery dispatch retries", time: "06:45", history: [], dispatch: [502, 204], actions: ["history", "dispatch", "dispatch"] },
+    { name: "notification retries then visibly fails safely", time: "07:00", history: [], alert: ["network", 503, 503], actions: ["history", "alert", "alert", "alert"], error: true },
+  ];
+  for (const scenario of cases) {
+    await t.test(scenario.name, async (subtest) => {
+      const actions = [], timeouts = [], waits = [], logs = [], notifications = [];
+      const counters = { history: 0, dispatch: 0, alert: 0 };
+      subtest.mock.method(console, "log", (line) => logs.push(line));
+      subtest.mock.method(globalThis, "setTimeout", (callback, delay) => { waits.push(delay); callback(); return 0; });
+      subtest.mock.method(AbortSignal, "timeout", (delay) => { timeouts.push(delay); return new AbortController().signal; });
+      subtest.mock.method(globalThis, "fetch", async (url, request) => {
+        const action = url.includes("/contents/") ? "history" : url.includes("ntfy.example") ? "alert" : "dispatch";
+        actions.push(action);
+        assert.ok(request.signal instanceof AbortSignal);
+        const index = counters[action]++;
+        const status = (action === "history" ? scenario.statuses : scenario[action])?.[index] ?? 200;
+        if (action === "history") {
+          assert.equal(url, "https://api.github.com/repos/example/jobs/contents/state/delivery.json?ref=main");
+          assert.equal(request.method ?? "GET", "GET");
+          assert.equal(new Headers(request.headers).get("Accept"), "application/vnd.github.raw+json");
+          assert.equal(new Headers(request.headers).get("Authorization"), "Bearer synthetic-token");
+        } else if (action === "dispatch") {
+          assert.equal(url, "https://api.github.com/repos/example/jobs/actions/workflows/daily-jobs.yml/dispatches");
+          assert.equal(request.method, "POST");
+          assert.deepEqual(JSON.parse(request.body), { ref: "main", inputs: { mode: "send" } });
+        } else {
+          assert.equal(url, "https://ntfy.example/synthetic-topic");
+          assert.equal(request.method, "POST");
+          assert.equal(new Headers(request.headers).has("Authorization"), false);
+          notifications.push(request.body);
+        }
+        if (status === "network") throw new TypeError("private https://ntfy.example/synthetic-topic synthetic-token");
+        return { ok: status >= 200 && status < 300, status, json: async () => {
+          if (scenario.malformed) throw new SyntaxError("private response body");
+          return scenario.history;
+        } };
+      });
+      const date = scenario.date ?? "2026-10-26";
+      const run = worker.scheduled({ scheduledTime: Date.parse(`${date}T${scenario.time}:00Z`) }, { ...env, RUN_MODE: scenario.mode ?? "send" });
+      if (scenario.error) {
+        let failure;
+        await assert.rejects(run, (error) => { failure = error.message; return true; });
+        const visible = [failure, ...logs].join(" ");
+        assert.doesNotMatch(visible, /synthetic-token|synthetic-topic|ntfy\.example|private response body/);
+        assert.ok(logs.some((line) => JSON.parse(line).state === "failed"));
+      } else await run;
+      assert.deepEqual(actions, scenario.actions);
+      assert.deepEqual(timeouts, Array(actions.length).fill(10000));
+      const retries = scenario.actions.length - new Set(scenario.actions).size;
+      assert.deepEqual(waits, [2000, 5000].slice(0, retries));
+      if (scenario.message) {
+        assert.match(notifications[0], scenario.message);
+        assert.match(notifications[0], new RegExp(date));
+        if (scenario.history === undefined || !Array.isArray(scenario.history) || scenario.history.includes("yesterday")) {
+          assert.doesNotMatch(notifications[0], /delivery (?:is )?missing|email (?:was )?not (?:sent|delivered)/i);
+        }
+      }
     });
   }
 });
