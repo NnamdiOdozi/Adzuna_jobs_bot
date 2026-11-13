@@ -1,5 +1,40 @@
 # Design choices
 
+## 2026-11-13 — Retry temporary GitHub dispatch failures
+
+The Cloudflare screenshot shows the cron invocation at 06:30:40 GMT and
+`GitHub dispatch failed: HTTP 500`; GitHub had no run that morning. The timer
+worked, but the original Worker made only one dispatch attempt. This evidence
+does not establish the underlying cause of the server error or Adzuna's quota.
+
+The replacement Worker reads dashboard Text variables
+`DISPATCH_RETRY_DELAYS_SECONDS=2,5` and `DISPATCH_TIMEOUT_SECONDS=10`. With these
+settings it makes at most three attempts, waits two and five seconds, and gives
+each fetch a fresh ten-second timeout. The variables are required and validated;
+they must be added before deploying this script. No imports or packages are
+needed. Only HTTP 500/502/503/504 and fetch errors are retried. Other statuses
+fail immediately, including authentication errors and rate limiting; this
+change does not implement Retry-After handling or automatically retry 429s.
+
+Every attempt logs scheduled timestamp, actual timestamp, attempt, mode, status
+and accepted/retry/failed state. Retry entries include the next wait. Exceptions,
+tokens, headers, response bodies and credentials are never logged. Retries make
+GitHub dispatch requests, not direct Adzuna searches. A successful dispatch can
+start the ordinary workflow, which still has its existing Adzuna request policy.
+
+A failed or timed-out POST is ambiguous: GitHub might have accepted it before
+the response failed. Workflow concurrency and the persisted daily-send check
+reduce duplicates but do not prove exactly-once email delivery, particularly
+if Gmail accepts before history is saved/pushed. Acknowledgement still does not
+prove execution or delivery. No independent watchdog or alert has been added.
+
+Offline Node tests simulate recovery, bounded failure, timeouts, waits and
+immediate stopping for authentication errors. They establish retry decisions
+and timeout wiring, not live Cloudflare timing, actual network cancellation,
+credential validity or inbox delivery. No real API or email call was made.
+Local edits/GitHub publication do not deploy the dashboard-managed Worker.
+The runbook contains the exact variable, paste, deploy and verification steps.
+
 ## 2026-11-10 — Require finance relevance before ranking
 
 The supplied bulletin contained 18 titles with zero configured finance-word

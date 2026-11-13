@@ -1,5 +1,14 @@
 # Open work
 
+- 2026-11-13 — Source: missed morning email and requested Cloudflare instructions.
+  Replacement Worker with bounded dispatch retries and offline tests is ready.
+  User reports adding both Text variables and pasting the new script into
+  Cloudflare. Confirm the Production deployment and next scheduled dispatch
+  using `cloudflare/README.md`; live retry recovery has not been verified.
+  A separate watchdog was discussed, not implemented or deployed: it would check
+  today's email-submission record, recover or alert, and ideally run outside
+  Cloudflare. Its hosting, permissions and notification route remain undecided.
+
 - 2026-11-12 — Source: requested historical filter backtest. Offline title replay
   of 273 history records is in `reports/filter_backtest_2026-11-12.md` and its CSV.
   Status: analysis complete, live rules unchanged. User agreed AVP/lawyer
