@@ -1,5 +1,49 @@
 # Design choices
 
+## 2026-11-16 — Archived candidates and manual Nemotron comparisons
+
+Approved architecture and module contracts are in
+`docs/RANKING_EXPERIMENT_PLAN.md`; user instructions are in
+`docs/RANKING_EXPERIMENTS.md`. Snapshot capture occurs after successful response
+validation but before title/experience filtering, including an empty primary
+response followed by fallback. A single snapshot module owns writes. Snapshot
+save/upload failures warn without stopping normal delivery. Files contain
+allowlisted advert/search fields and run identity, never request URLs/headers,
+arbitrary provider metadata, email configuration or credentials. Canonical hashes
+detect changed content but do not authenticate the source.
+
+Daily ranking defaults to rules. The direct ranker uses the same Token Factory
+Nemotron model as the lab's active local branch. The manual comparison workflow
+can read one recorded provider batch or explicitly fetch a new one. It does not
+make a second search simply because a semantic ranker selects nothing. The
+normal daily fallback behavior is preserved. Both semantic routes receive unseen,
+deduplicated records before the rules' title/experience exclusions.
+
+Direct calls are bounded batches, without charged retries or automatic output
+repair. Complete IDs, fixed suitability enums, input/prompt hashes and verbatim
+quotes are checked before selecting jobs. Those constraints cannot establish
+semantic suitability, degree equivalence, work authorization or overall hiring
+eligibility. Batch order, not an extra global model pass, breaks within-tier ties.
+Descriptions truncated at the configured budget are explicitly identified.
+
+The genuine GitHub Agentic Workflow uses Copilot BYOK with Nebius Chat
+Completions, compiler-managed credential isolation, a restricted network, no
+Gmail/job-provider credentials and read-only repository permissions. Its local
+file output is untrusted. The comparison job starts from a fresh checkout and
+revalidates both model outputs. Code checks also compile the Markdown definition
+without inference so prompt/frontmatter edits cannot leave stale executable YAML.
+Only test-email delivery receives Gmail credentials and the sender; the friend's
+address is not supplied. Normal sent/delivery history has no experiment writer.
+
+Independent offline review reproduced two integrity gaps during construction:
+a failed direct report could retain unvalidated selections, and test-email could
+accept an edited comparison. Failure selections must now be empty, and delivery
+requires the original snapshot plus full receipt/assessment/selection validation.
+Workflow-level timeout or missing artifact is recorded as failed, not silently
+converted to a successful model result. No live compatibility claim follows from
+mocked tests or successful compilation; provider/model/tool behavior and actual
+sender inbox receipt require an explicitly chosen live run.
+
 ## 2026-11-16 — Test on changes and verify before delivery
 
 `code-checks.yml` runs both mocked suites on pushes and pull requests. The push

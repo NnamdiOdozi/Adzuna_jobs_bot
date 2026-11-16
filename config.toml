@@ -49,3 +49,43 @@ force_send = false
 [history]
 path = "state/seen.json"
 delivery_path = "state/delivery.json"
+
+[archive]
+enabled = true
+directory = "artifacts/candidates"
+artifact_name = "job-candidates"
+retention_days = 30
+
+[candidate]
+profile = "Finance master's graduate; completed master's in 2025; zero to two years of professional experience; seeking early-career finance work in London and the surrounding area covered by the search. Work authorization, professional qualifications and student eligibility are not supplied."
+
+[ranking]
+# Daily delivery stays on rules. Experiments explicitly select nebius_llm.
+method = "rules"
+base_url = "https://api.tokenfactory.nebius.com/v1"
+model = "nvidia/nemotron-3-super-120b-a12b"
+prompt_path = "prompts/job_suitability.md"
+batch_size = 10
+max_candidates = 100
+max_calls = 10
+max_output_tokens = 8192
+timeout_seconds = 90
+max_elapsed_seconds = 600
+max_description_chars = 12000
+max_reason_chars = 1200
+max_evidence_chars = 2000
+temperature = 0
+allowed_labels = ["strong_fit", "possible_fit", "unlikely_fit", "insufficient_information"]
+selected_labels = ["strong_fit", "possible_fit"]
+
+[experiment]
+directory = "artifacts/ranking"
+snapshot_name = "snapshot.json"
+result_artifact_name = "ranking-comparison"
+retention_days = 30
+agent_output_name = "agent-assessments.json"
+test_subject = "[TEST] Finance jobs ranking comparison"
+
+[agentic]
+# A chosen request budget, not a claim about the model's maximum context window.
+max_prompt_tokens = 65536

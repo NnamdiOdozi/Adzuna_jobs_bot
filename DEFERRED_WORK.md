@@ -1,5 +1,15 @@
 # Open work
 
+- 2026-11-16 — Source: approved manual Nebius ranking experiments. Snapshot,
+  direct ranker, comparison/test-email CLI and compiled Agentic Workflow are
+  implemented with offline tests. Pending: first explicit live compatibility
+  test using `docs/RANKING_EXPERIMENTS.md`; user supplies NEBIUS_API_KEY as a
+  repository Secret. Synthetic example mode avoids job-search credits, but a
+  model run still consumes Nebius credits. Daily artifact capture and GitHub
+  hosted compilation need confirmation after publication/next scheduled run.
+  Actual Nemotron structured output/tool calling and sender inbox delivery remain
+  unverified. Daily ranking stays on rules until separately chosen activation.
+
 - 2026-11-13 — Source: approved JSearch build. Provider switch, eight-page/50 km
   settings, Secret mapping and offline tests are complete. User reports adding
   GitHub JSEARCH_API_KEY. Pending: a separately authorized live preview using

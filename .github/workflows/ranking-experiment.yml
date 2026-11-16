@@ -1,0 +1,247 @@
+name: Compare finance job rankings
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Archive run ID; blank selects the latest default-branch archive
+        type: string
+        default: ''
+      snapshot_filename:
+        description: Optional JSON filename; blank selects the latest provider batch
+        type: string
+        default: ''
+      fresh_search:
+        description: Spend job API credits on a fresh search instead of replaying
+        type: boolean
+        default: false
+      example_data:
+        description: Use bundled synthetic jobs instead of an archive or job API
+        type: boolean
+        default: false
+      provider:
+        description: Provider for an explicitly requested fresh search
+        type: choice
+        options: [adzuna, jsearch]
+        default: adzuna
+      include_agent:
+        description: Also run the GitHub Agentic Workflow using Nebius credits
+        type: boolean
+        default: false
+      mode:
+        description: Preview reports or email the comparison only to the sender
+        type: choice
+        options: [preview, test]
+        default: preview
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      result_name: ${{ steps.settings.outputs.result_name }}
+      retention: ${{ steps.settings.outputs.result_retention }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read experiment settings
+        id: settings
+        run: python -m jobs_bot.workflow_inputs settings
+      - name: Reject conflicting input choices
+        env:
+          FRESH_SEARCH: ${{ inputs.fresh_search }}
+          EXAMPLE_DATA: ${{ inputs.example_data }}
+        run: |
+          if [ "$FRESH_SEARCH" = "true" ] && [ "$EXAMPLE_DATA" = "true" ]; then
+            echo 'Choose example data or a fresh search, not both.'
+            exit 1
+          fi
+      - name: Resolve existing archive
+        if: ${{ !inputs.fresh_search && !inputs.example_data }}
+        id: archive
+        uses: actions/github-script@v7
+        env:
+          ARCHIVE_RUN_ID: ${{ inputs.source_run_id }}
+          ARCHIVE_NAME: ${{ steps.settings.outputs.archive_name }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        with:
+          script: |
+            let run = process.env.ARCHIVE_RUN_ID.trim();
+            if (run && !/^[0-9]+$/.test(run)) throw new Error('Archive run ID must be numeric');
+            if (!run) {
+              const {data} = await github.rest.actions.listArtifactsForRepo({
+                ...context.repo, name: process.env.ARCHIVE_NAME, per_page: 100
+              });
+              const artifact = data.artifacts.find(a => !a.expired &&
+                a.workflow_run?.head_branch === process.env.DEFAULT_BRANCH);
+              if (!artifact) throw new Error('No saved archive yet. Wait for a daily run or explicitly choose a fresh search.');
+              run = String(artifact.workflow_run.id);
+            }
+            core.setOutput('run_id', run);
+      - name: Download archived candidates
+        if: ${{ !inputs.fresh_search && !inputs.example_data }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.settings.outputs.archive_name }}
+          run-id: ${{ steps.archive.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: artifacts/input
+      - name: Prepare saved candidates without a job API request
+        if: ${{ !inputs.fresh_search && !inputs.example_data }}
+        env:
+          SNAPSHOT_FILENAME: ${{ inputs.snapshot_filename }}
+        run: |
+          snapshot=$(python -m jobs_bot.workflow_inputs choose --directory artifacts/input --filename "$SNAPSHOT_FILENAME")
+          python -m jobs_bot.experiments prepare --snapshot "$snapshot" --output artifacts/ranking/snapshot.json
+      - name: Prepare explicitly selected synthetic example data
+        if: ${{ inputs.example_data && !inputs.fresh_search }}
+        run: python -m jobs_bot.experiments prepare --snapshot examples/candidates.json --output artifacts/ranking/snapshot.json
+      - name: Fetch one new provider batch only when requested
+        if: ${{ inputs.fresh_search }}
+        env:
+          PROVIDER: ${{ inputs.provider }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_API_KEY: ${{ secrets.ADZUNA_API_KEY }}
+          JSEARCH_API_KEY: ${{ secrets.JSEARCH_API_KEY }}
+        run: python -m jobs_bot.experiments prepare --fresh --provider "$PROVIDER" --output artifacts/ranking/snapshot.json
+      - name: Calculate rules baseline without inference
+        run: |
+          python -m jobs_bot.experiments rank --snapshot artifacts/ranking/snapshot.json --method rules --output artifacts/ranking/rules.json
+      - name: Prepare shared input for a requested agent comparison
+        if: ${{ inputs.include_agent }}
+        run: |
+          python -m jobs_bot.experiments agent-input --snapshot artifacts/ranking/snapshot.json --output artifacts/ranking/agent-input.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ranking-input
+          path: artifacts/ranking/*.json
+          retention-days: ${{ steps.settings.outputs.result_retention }}
+          if-no-files-found: error
+      - name: Preserve a deliberately fetched batch for later replay
+        if: ${{ always() && inputs.fresh_search }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.settings.outputs.archive_name }}
+          path: artifacts/ranking/snapshot.json
+          retention-days: ${{ steps.settings.outputs.archive_retention }}
+  direct:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ranking-input
+          path: artifacts/ranking
+      - name: Rank through the configured Nebius model
+        env:
+          NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+        run: python -m jobs_bot.experiments rank --snapshot artifacts/ranking/snapshot.json --method nebius_llm --output artifacts/ranking/direct.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ranking-direct
+          path: artifacts/ranking/direct.json
+          retention-days: ${{ needs.prepare.outputs.retention }}
+          if-no-files-found: error
+  agent:
+    needs: prepare
+    if: ${{ inputs.include_agent }}
+    uses: ./.github/workflows/agentic-ranking.lock.yml
+    with:
+      source_run_id: ${{ github.run_id }}
+    secrets:
+      NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+  compare:
+    needs: [prepare, direct, agent]
+    if: ${{ always() && needs.prepare.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ranking-input
+          path: artifacts/ranking
+      - uses: actions/download-artifact@v4
+        id: direct_artifact
+        continue-on-error: true
+        with:
+          name: ranking-direct
+          path: artifacts/ranking
+      - name: Record a direct job failure even if its result artifact is missing
+        env:
+          DIRECT_RESULT: ${{ needs.direct.result }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from jobs_bot.snapshots import load_snapshot
+          output = Path('artifacts/ranking/direct.json')
+          if not output.exists():
+              if os.environ['DIRECT_RESULT'] == 'success':
+                  raise RuntimeError('Successful direct job has no result artifact')
+              snapshot = load_snapshot('artifacts/ranking/snapshot.json')
+              output.write_text(json.dumps({'schema_version': 1,
+                  'snapshot_hash': snapshot['content_hash'], 'snapshot_id': snapshot['snapshot_id'],
+                  'method': 'nebius_llm', 'status': 'failed', 'selected': [],
+                  'error_type': 'workflow_job_failed_before_report'}))
+          PY
+      - name: Download successful agent output as untrusted data
+        if: ${{ inputs.include_agent && needs.agent.result == 'success' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ranking-agent
+          path: artifacts/ranking
+      - name: Validate all results on a fresh checkout
+        env:
+          INCLUDE_AGENT: ${{ inputs.include_agent }}
+          AGENT_RESULT: ${{ needs.agent.result }}
+        run: |
+          agent_status=not_run
+          agent_args=()
+          if [ "$INCLUDE_AGENT" = "true" ]; then
+            agent_status=failed
+            if [ "$AGENT_RESULT" = "success" ]; then
+              agent_status=success
+              agent_args=(--agent artifacts/ranking/agent-assessments.json)
+            fi
+          fi
+          python -m jobs_bot.experiments compare --snapshot artifacts/ranking/snapshot.json --rules artifacts/ranking/rules.json --direct artifacts/ranking/direct.json --agent-status "$agent_status" "${agent_args[@]}" --output-dir artifacts/comparison
+          cat artifacts/comparison/comparison.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Send one test email only to the sender
+        if: ${{ inputs.mode == 'test' }}
+        env:
+          GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
+          gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python -m jobs_bot.experiments test-email --snapshot artifacts/ranking/snapshot.json --report artifacts/comparison/comparison.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ needs.prepare.outputs.result_name }}
+          path: artifacts/comparison
+          retention-days: ${{ needs.prepare.outputs.retention }}
+          if-no-files-found: warn
+      - name: Keep failed model executions visible
+        if: ${{ needs.direct.result != 'success' || (inputs.include_agent && needs.agent.result != 'success') }}
+        run: exit 1

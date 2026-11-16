@@ -36,13 +36,14 @@ class BotTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.history = Path(temporary.name) / "seen.json"
         self.delivery = Path(temporary.name) / "delivery.json"
+        self.archive = Path(temporary.name) / "candidates"
         self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
         self.config.write_text(
-            source.replace('"state/seen.json"', json.dumps(str(self.history))).replace(
-                '"state/delivery.json"', json.dumps(str(self.delivery))
-            )
+            source.replace('"artifacts/candidates"', json.dumps(str(self.archive)))
+            .replace('"state/seen.json"', json.dumps(str(self.history)))
+            .replace('"state/delivery.json"', json.dumps(str(self.delivery)))
         )
         self.credentials = {
             "ADZUNA_APP_ID": "synthetic-app-id",

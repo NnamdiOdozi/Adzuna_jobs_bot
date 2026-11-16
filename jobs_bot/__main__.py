@@ -13,8 +13,27 @@ from uuid import uuid4
 from zoneinfo import ZoneInfo
 
 from jobs_bot.jsearch import fetch_jsearch
+from jobs_bot.model_ranking import rank_jobs
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
+from jobs_bot.snapshots import record_snapshot
+
+
+def _select(jobs, seen, config, provider):
+    """Choose the configured ranker while retaining code-owned delivery state."""
+    method = config.get("ranking", {}).get("method", "rules")
+    if method == "rules":
+        return select_jobs(jobs, seen, {**config["search"], "provider": provider})
+    if method != "nebius_llm":
+        raise ValueError("Ranking method must be rules or nebius_llm")
+    selected, receipt = rank_jobs(jobs, seen, config)
+    logging.info(
+        "event=ranking state=candidates->assessed method=%s model=%s calls=%d",
+        method,
+        config["ranking"]["model"],
+        receipt["calls"],
+    )
+    return selected
 
 
 def _jsearch_result(config):
@@ -129,6 +148,7 @@ def _run():
             jobs = fetch_jobs(
                 search, os.environ["ADZUNA_APP_ID"], os.environ["ADZUNA_API_KEY"]
             )
+            record_snapshot(jobs, provider, config, seen)
         except HTTPError as error:
             if fallback != "jsearch":
                 raise
@@ -144,13 +164,17 @@ def _run():
             provider = "jsearch"
     if provider == "jsearch":
         jobs, search_error = _jsearch_result(config)
+        if search_error is None:
+            record_snapshot(jobs, provider, config, seen)
     # The backup has different finance evidence; filter and label its actual source.
-    selected = select_jobs(jobs, seen, {**search, "provider": provider})
+    selected = _select(jobs, seen, config, provider)
     if not selected and provider == "adzuna" and fallback == "jsearch":
         logging.warning("event=provider state=adzuna->jsearch reason=no_unseen_matches")
         provider = "jsearch"
         jobs, search_error = _jsearch_result(config)
-        selected = select_jobs(jobs, seen, {**search, "provider": provider})
+        if search_error is None:
+            record_snapshot(jobs, provider, config, seen)
+        selected = _select(jobs, seen, config, provider)
     config["email"]["source"] = "JSearch" if provider == "jsearch" else "Adzuna"
     config["email"]["search_failed"] = search_error is not None
     logging.info(

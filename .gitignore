@@ -20,6 +20,9 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 
+# Downloadable daily snapshots and experiment outputs are Actions artifacts.
+artifacts/
+
 # Environments
 .venv/
 venv/

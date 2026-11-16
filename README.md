@@ -243,6 +243,15 @@ substitute for masked Secrets when a value must stay out of public logs.
 
 ## Checks and limitations
 
+Daily fetched candidates are now retained as **job-candidates** artifacts on each
+Actions run, before suitability filtering. Their available descriptions make
+later ranking comparisons possible without repeating a paid search. The separate
+**Compare finance job rankings** workflow supports replay, synthetic example data,
+direct Nebius assessment and an optional GitHub Agentic Workflow. It offers preview
+or one test email to the sender only. Daily ranking remains rules-based by default.
+See [the GitHub setup and experiment runbook](docs/RANKING_EXPERIMENTS.md) for the
+required Secret, exact Run workflow choices, costs, archive retention and limits.
+
 GitHub's **Code checks** workflow runs both the Python and Cloudflare test suites
 on pushes and pull requests. Only pushes changing solely `state/seen.json` and
 `state/delivery.json` are exempt. No API credentials or email secrets are supplied

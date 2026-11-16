@@ -28,3 +28,21 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Run mocked Cloudflare tests
         run: node --test cloudflare/worker.test.mjs
+  agentic-definition:
+    name: Compile agentic workflow without inference
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the reviewed compiler version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh extension install github/gh-aw --pin v1.2.2
+      - name: Check Markdown and generated workflow stay in sync
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh aw compile agentic-ranking --strict
+          git diff --exit-code -- .github/workflows/agentic-ranking.lock.yml .github/aw/actions-lock.json

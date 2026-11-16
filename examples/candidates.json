@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "7443a12159934b65a56a6814e928f379",
+  "captured_at": "2026-11-16T00:00:00+00:00",
+  "provider": "adzuna",
+  "jobs": [
+    {
+      "description": "0–2 years experience required. Graduate finance analysis.",
+      "redirect_url": "https://example.com/jobs/graduate",
+      "title": "Graduate Finance Analyst",
+      "id": "graduate",
+      "source": "Synthetic example",
+      "created": "2026-11-16T00:00:00Z",
+      "company": {
+        "display_name": "Synthetic Example Employer"
+      },
+      "location": {
+        "display_name": "London"
+      },
+      "category": {
+        "tag": "accounting-finance-jobs"
+      }
+    },
+    {
+      "description": "Entry-level accounting and finance support; training provided.",
+      "redirect_url": "https://example.com/jobs/ledger",
+      "title": "Purchase Ledger Clerk",
+      "id": "ledger",
+      "source": "Synthetic example",
+      "created": "2026-11-16T00:00:00Z",
+      "company": {
+        "display_name": "Synthetic Example Employer"
+      },
+      "location": {
+        "display_name": "London"
+      },
+      "category": {
+        "tag": "accounting-finance-jobs"
+      }
+    },
+    {
+      "description": "Requires 5 years experience.",
+      "redirect_url": "https://example.com/jobs/senior",
+      "title": "Finance Analyst",
+      "id": "senior",
+      "source": "Synthetic example",
+      "created": "2026-11-16T00:00:00Z",
+      "company": {
+        "display_name": "Synthetic Example Employer"
+      },
+      "location": {
+        "display_name": "London"
+      },
+      "category": {
+        "tag": "accounting-finance-jobs"
+      }
+    },
+    {
+      "description": "Qualified solicitor required for banking legal advice.",
+      "redirect_url": "https://example.com/jobs/legal",
+      "title": "Finance Lawyer",
+      "id": "legal",
+      "source": "Synthetic example",
+      "created": "2026-11-16T00:00:00Z",
+      "company": {
+        "display_name": "Synthetic Example Employer"
+      },
+      "location": {
+        "display_name": "London"
+      },
+      "category": {
+        "tag": "accounting-finance-jobs"
+      }
+    },
+    {
+      "description": "No experience required; credit analysis training.",
+      "redirect_url": "https://example.com/jobs/seen",
+      "title": "Graduate Credit Analyst",
+      "id": "seen",
+      "source": "Synthetic example",
+      "created": "2026-11-16T00:00:00Z",
+      "company": {
+        "display_name": "Synthetic Example Employer"
+      },
+      "location": {
+        "display_name": "London"
+      },
+      "category": {
+        "tag": "accounting-finance-jobs"
+      }
+    }
+  ],
+  "seen": [
+    "id:seen"
+  ],
+  "config": {
+    "search": {
+      "location": "London",
+      "days_old": 7,
+      "query_terms": [
+        "finance",
+        "financial",
+        "accountant",
+        "accounting",
+        "investment",
+        "treasury",
+        "audit",
+        "credit",
+        "risk",
+        "banking"
+      ],
+      "provider": "adzuna",
+      "shortlist_size": 20,
+      "max_experience_years": 2,
+      "title_keywords": [
+        "finance",
+        "financial",
+        "accountant",
+        "accounting",
+        "accounts",
+        "investment",
+        "treasury",
+        "audit",
+        "auditor",
+        "credit",
+        "risk",
+        "banking",
+        "payroll",
+        "bookkeeper",
+        "bookkeeping",
+        "actuarial"
+      ],
+      "exclude_title_keywords": [
+        "recruiter",
+        "recruitment consultant",
+        "senior",
+        "sr",
+        "manager",
+        "director",
+        "head of",
+        "vice president",
+        "vp",
+        "chief",
+        "principal",
+        "lead",
+        "controller"
+      ],
+      "category": "accounting-finance-jobs",
+      "distance_miles": 10,
+      "results_per_page": 400,
+      "fallback_provider": "jsearch",
+      "fallback_results_per_page": 100,
+      "preferred_title_keywords": [
+        "graduate",
+        "junior",
+        "trainee",
+        "entry level",
+        "assistant"
+      ],
+      "deprioritise_title_keywords": [
+        "associate"
+      ],
+      "timeout_seconds": 30
+    },
+    "jsearch": {
+      "country": "gb",
+      "num_pages": 8,
+      "date_posted": "week",
+      "language": "en",
+      "radius": 50,
+      "query": "graduate finance jobs in London, UK",
+      "timeout_seconds": 60
+    }
+  },
+  "metadata": {
+    "run_id": "synthetic-example",
+    "commit": "synthetic-example"
+  },
+  "content_hash": "9e0cb4be9f14c0866b260b2f184824a02f01df7994f1da45163efdffb5e75830"
+}
