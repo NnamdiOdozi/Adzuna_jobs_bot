@@ -47,7 +47,14 @@
   Nebius quotation-based experiment remains separate and retains its older format.
   Human-reviewed labels, daily artifact capture on a scheduled run and sender
   inbox confirmation for the original experiment also remain unverified.
-  Daily ranking stays on rules until separately chosen activation.
+  Daily ranking is now separately selected as Jev. Qwen SDK, CLI and native
+  Copilot connection experiments are tracked in
+  `reports/agent_connection_experiments_2026-11-16.md`; the CLI variant remains
+  isolated on `experiment/qwen-cli`, not selected for normal delivery.
+  Qwen SDK reproduced the metadata failure. CLI trials stopped before inference
+  on missing-model and unresolved-auto configuration errors; its model selection
+  still needs investigation. The separate 33-line native Copilot probe passed
+  exit/nonempty-response checks, without establishing full ranking suitability.
 
 - 2026-11-13 — Source: approved JSearch build. Provider switch, eight-page/50 km
   settings, Secret mapping and offline tests are complete. User reports adding
