@@ -11,9 +11,9 @@ application does not separately scrape job boards or promise coverage of any
 particular recruitment website. Adzuna requires a finance category and finance
 title terms. JSearch can use description wording as finance evidence before
 senior exclusions and junior ranking. See [switching providers](docs/JSEARCH.md).
-Finance keywords and
-listing date then order matches. This screens for likely career level, not
-verified experience or eligibility.
+Explicit experience wording, title preferences and listing date then order
+matches for a candidate with a finance master's degree and 0–2 years of experience.
+This screens for likely career level, not verified eligibility.
 
 ```mermaid
 flowchart TB
@@ -101,24 +101,40 @@ in `[search]`:
 | Setting | Effect |
 |---|---|
 | `category` | Restrict the request and returned jobs to `accounting-finance-jobs`. Missing or different categories are excluded. |
-| `title_keywords` | Require at least one whole finance word/phrase in the title; count matches when ranking. |
+| `title_keywords` | Require at least one whole finance word/phrase in the title. |
 | `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director, VP and controller, plus recruiter titles. |
-| `preferred_title_keywords` | Put graduate, junior, trainee, entry-level and assistant titles first. |
-| `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles. |
+| `preferred_title_keywords` | Prefer graduate, junior, trainee, entry-level and assistant titles within each experience group. |
+| `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles; explicit junior wording remains stronger. |
 
 Matching ignores case and punctuation: `Sr.` and `entry-level` work. Exclusions
 win, so Assistant Manager is rejected while Finance Assistant remains eligible.
-Within the preferred/non-preferred groups, non-associate titles come first,
-then finance-keyword count and recency. Finance Analyst and Credit Analyst remain
+Roles with explicit experience requirements compatible with 0–2 years come first,
+then junior title preferences, non-associate titles and recency. Equal ranks retain
+provider order. Finance keyword count does not affect rank. Finance Analyst and Credit Analyst remain
 eligible, but a bare Junior Analyst title lacks finance evidence and is excluded.
 The bot sends
 fewer than 20 jobs if fewer qualify; it never pads the shortlist with excluded jobs.
 Logs count exclusions for wrong/missing category, missing finance title evidence
-and the first matching senior/recruiter title term.
+and the first matching senior/recruiter title term, plus experience exclusions.
 
-Description-based experience limits remain unimplemented. A retained role may
-still demand more experience, and summer/placement schemes may require current
-student status. Check the full advert; junior title wording does not prove fit.
+For both providers, explicit years-of-experience wording in titles and available
+descriptions overrides junior title preferences. A minimum above two years is
+excluded when a direct applicant requirement is recognized, including
+`Requires 3+ years experience`, `at least three years' relevant experience`
+and `minimum of 4–6 years of professional experience`. Bare experience numbers
+without mandatory wording remain unknown. Ranges use their lower bound, so
+`1–3 years` and `2+ years` remain eligible. Wording such as `0–2 years experience`
+with required wording, or `no experience required`, supports a junior fit. Preferred/desirable experience,
+negated requirements, third-party experience and upper bounds such as `up to 5 years` do not establish
+a required minimum or improve rank. A missing description remains uncertain.
+
+These English wording rules are deliberately bounded. They can miss unusual
+phrasing, HTML markup, abbreviated units, or requirements absent from a truncated
+description. Complex sentence structures remain unknown rather than being
+interpreted as direct applicant requirements.
+A retained role may still demand more experience. The bot does not verify degree
+requirements, professional qualifications or current student status for placement
+schemes. Check the full advert; junior wording does not prove fit.
 
 Two checks remove duplicates. An Adzuna ID catches the same advert appearing in
 multiple searches or on later days. A second key uses the employer, job title and

@@ -80,8 +80,114 @@ class ShortlistTests(unittest.TestCase):
         ]
         selected = select_jobs(jobs, set(), self.config)
         self.assertEqual(
-            [job["id"] for job in selected], ["entry", "juniorish", "overhead"]
+            [job["id"] for job in selected], ["entry", "overhead", "juniorish"]
         )
+
+    def test_experience_requirements_override_misleading_junior_titles(self):
+        """Screen the description for both providers before filling slots."""
+        descriptions = [
+            "Requires 3+ years of experience.",
+            "At least three years' relevant experience required.",
+            "Minimum of 4–6 years of professional experience.",
+            "No less than 3 years experience required.",
+            "You need five to seven years of finance experience.",
+            "2 years experience in finance; 3 years audit experience required.",
+        ]
+        for provider in ("adzuna", "jsearch"):
+            for description in descriptions:
+                with self.subTest(provider=provider, description=description):
+                    config = dict(self.config, provider=provider, shortlist_size=1)
+                    junior = dict(_job("junior", "Junior Finance Analyst"),
+                                  description=description)
+                    eligible = _job("eligible", "Credit Analyst")
+                    self.assertEqual(select_jobs([junior, eligible], set(), config),
+                                     [eligible])
+
+    def test_experience_in_title_is_also_checked(self):
+        job = _job("one", "Finance Analyst - 3+ years experience required")
+        self.assertEqual(select_jobs([job], set(), self.config), [])
+
+    def test_supported_experience_precedes_uncertain_junior_title(self):
+        """Explicit requirements are stronger evidence than a junior label."""
+        for description in (
+            "0–2 years of experience required.",
+            "One to three years of relevant experience required.",
+            "2+ years experience required.",
+            "Two or more years experience required.",
+            "Zero to three years experience required.",
+            "No prior experience is required.",
+        ):
+            with self.subTest(description=description):
+                supported = dict(_job("supported", "Credit Analyst"),
+                                 description=description)
+                unknown = _job("unknown", "Graduate Finance Analyst")
+                self.assertEqual(select_jobs([unknown, supported], set(), self.config),
+                                 [supported, unknown])
+
+    def test_optional_experience_and_upper_bounds_do_not_imply_a_minimum(self):
+        """Retain uncertain roles without promoting them as confirmed fits."""
+        for description in (
+            "3 years experience preferred.",
+            "Ideally five years of experience.",
+            "4 years of experience would be a bonus.",
+            "Up to 5 years of experience.",
+            "At most 4 years experience.",
+            "Maximum of 5 years experience.",
+            "Less than 4 years experience.",
+            "3 years experience is not required.",
+        ):
+            with self.subTest(description=description):
+                uncertain = dict(_job("uncertain", "Credit Analyst"),
+                                 description=description)
+                junior = _job("junior", "Graduate Finance Analyst")
+                self.assertEqual(select_jobs([uncertain, junior], set(), self.config),
+                                 [junior, uncertain])
+
+    def test_missing_description_and_unrelated_years_are_uncertain(self):
+        for provider in ("adzuna", "jsearch"):
+            for description in (None, "", "Founded 30 years ago. Salary £35000.",
+                                "A two year training programme.",
+                                "Support a manager with ten years’ experience.",
+                                "Must support a manager with ten years experience.",
+                                "Our company has 30 years experience.",
+                                "3 years experience."):
+                with self.subTest(provider=provider, description=description):
+                    job = dict(_job("one", "Finance Analyst"), description=description)
+                    config = dict(self.config, provider=provider)
+                    self.assertEqual(select_jobs([job], set(), config), [job])
+
+    def test_required_experience_is_not_cancelled_by_optional_clause(self):
+        for separator in ("; ", ", ", " but ", ". ", "\n"):
+            with self.subTest(separator=separator):
+                job = dict(_job("one", "Graduate Finance Analyst"), description=(
+                    "3 years experience required" + separator
+                    + "5 years experience preferred."
+                ))
+                self.assertEqual(select_jobs([job], set(), self.config), [])
+
+    def test_graduate_associate_retains_explicit_junior_preference(self):
+        jobs = [_job("associate", "Graduate Investment Associate"),
+                _job("analyst", "Credit Analyst")]
+        self.assertEqual(select_jobs(jobs, set(), self.config), jobs)
+
+    def test_finance_keyword_count_does_not_outweigh_recency(self):
+        jobs = [
+            _job("crowded", "Banking Investment Finance Analyst", "2026-11-01"),
+            _job("plain", "Credit Analyst", "2026-11-04"),
+        ]
+        self.assertEqual(select_jobs(jobs, set(), self.config), jobs[::-1])
+
+    def test_equal_rank_preserves_input_order(self):
+        jobs = [_job("first", "Credit Analyst"), _job("second", "Finance Analyst")]
+        self.assertEqual(select_jobs(jobs, set(), self.config), jobs)
+
+    def test_experience_exclusions_are_logged(self):
+        job = dict(_job("one", "Finance Analyst"),
+                   description="3 years experience required.")
+        with self.assertLogs(level="INFO") as logs:
+            self.assertEqual(select_jobs([job], set(), self.config), [])
+        self.assertTrue(any("reason=experience_above_two_years count=1" in message
+                            for message in logs.output))
 
     def test_deduplication_and_limit_still_apply_after_senior_filter(self):
         """Fill slots from eligible unseen roles, never duplicates or senior roles."""
