@@ -25,9 +25,13 @@ safe-outputs:
   report-missing-data: false
   noop:
     report-as-issue: false
-timeout-minutes: 15
+timeout-minutes: 5
+max-turns: 12
 engine:
   id: copilot
+  harness:
+    max-retries: 0
+  # Keep this outside engine.env: the pinned compiler excludes that expression.
   model: ${{ needs.settings.outputs.model }}
   env:
     COPILOT_PROVIDER_BASE_URL: ${{ needs.settings.outputs.base_url }}
@@ -62,7 +66,7 @@ jobs:
         run: python -m jobs_bot.workflow_inputs settings
   agent:
     needs: [settings]
-    timeout-minutes: 25
+    timeout-minutes: 10
 steps:
   - uses: actions/download-artifact@v4
     with:
@@ -96,6 +100,11 @@ Use Python to inspect the JSON in manageable groups of candidates rather than
 printing duplicate full message/candidate representations. This is a bounded
 ranking exercise, not an open-ended research task. Do not run a second inference
 client yourself: the configured agent engine is the only inference route.
+
+Make the suitability decisions yourself, then use the file-writing tool to write
+JSON directly. Do not create or execute assessment scripts, implement scoring
+rules, or copy the input request/schema into Python source. JSON is data, not
+a Python program. Python may only inspect input or validate the finished JSON.
 
 Write only `artifacts/ranking/agent-assessments.json`, containing a JSON object
 with `snapshot_hash` and `input_hash` copied exactly from output_contract, plus
