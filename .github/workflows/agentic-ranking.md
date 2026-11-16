@@ -28,8 +28,8 @@ safe-outputs:
 timeout-minutes: 15
 engine:
   id: copilot
-  model: ${{ needs.settings.outputs.model }}
   env:
+    GH_AW_MODEL_FALLBACK: ${{ needs.settings.outputs.model }}
     COPILOT_PROVIDER_BASE_URL: ${{ needs.settings.outputs.base_url }}
     COPILOT_PROVIDER_API_KEY: ${{ secrets.NEBIUS_KEY }}
     COPILOT_PROVIDER_TYPE: openai
