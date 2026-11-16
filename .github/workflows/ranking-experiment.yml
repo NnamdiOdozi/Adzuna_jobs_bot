@@ -162,6 +162,11 @@ jobs:
   agent:
     needs: prepare
     if: ${{ inputs.include_agent }}
+    # The compiler's conclusion job reserves issue permission; inference is read-only.
+    permissions:
+      actions: read
+      contents: read
+      issues: write
     uses: ./.github/workflows/agentic-ranking.lock.yml
     with:
       source_run_id: ${{ github.run_id }}

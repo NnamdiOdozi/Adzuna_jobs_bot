@@ -1,5 +1,22 @@
 # Design choices
 
+## 2026-11-16 — Validate reusable workflow permissions on GitHub
+
+The first manually dispatched comparison failed at startup before any job ran:
+the generated agentic workflow requested issue/check/PR permissions that the
+caller did not permit. Compilation and individual YAML linting did not validate
+this cross-workflow permission envelope. Disable auto-injected issue creation,
+failure issues, status comments, reactions and auxiliary detection for this
+artifact-only workflow. The independent trusted comparison still validates the
+agent's JSON before test delivery, and failures remain visible in run status.
+
+Compiler v1.2.2 still reserves `issues: write` on its conclusion job despite
+disabled issue output. Grant that scope only on the reusable caller job, alongside
+read-only contents/actions, rather than on the whole comparison workflow. The
+actual inference job's generated permissions remain read-only. A false-condition
+reusable call in Code checks lets GitHub validate this envelope without running
+the agent, accessing a real model key, spending credits or emailing anyone.
+
 ## 2026-11-16 — Archived candidates and manual Nemotron comparisons
 
 Approved architecture and module contracts are in

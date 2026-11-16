@@ -1,6 +1,8 @@
 ---
 name: Agentic finance ranking
 on:
+  reaction: none
+  status-comment: false
   workflow_call:
     inputs:
       source_run_id:
@@ -13,6 +15,16 @@ on:
 permissions:
   contents: read
   actions: read
+safe-outputs:
+  # No repository output is published; a separate job validates local JSON.
+  threat-detection: false
+  create-issue: false
+  report-failure-as-issue: false
+  report-failed-jobs: false
+  report-missing-tool: false
+  report-missing-data: false
+  noop:
+    report-as-issue: false
 timeout-minutes: 15
 engine:
   id: copilot
@@ -95,3 +107,5 @@ Do not output Markdown, executable code, remote images or additional fields.
 
 A separate trusted GitHub job will check completeness, IDs, quotations and input
 hashes before the result can enter a comparison or a sender-only test email.
+After writing the file, record completion with the framework's noop tool. This
+logs completion only; automatic issue publishing is disabled.

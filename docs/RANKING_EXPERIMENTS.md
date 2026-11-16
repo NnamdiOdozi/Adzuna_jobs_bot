@@ -140,3 +140,8 @@ The handwritten YAML passes actionlint. The generated workflow uses newer
 GitHub.com contexts and queue syntax that actionlint v1.7.12 does not recognize;
 it is checked by the official compiler and by GitHub's workflow loader instead.
 The new contexts are not supported on GitHub Enterprise Server.
+
+The reusable caller permits issue-write for the compiler's conclusion job; the
+inference job itself has only read permissions. Automatic issue publishing is
+disabled. Code checks includes a deliberately skipped reusable call so GitHub
+validates the nested permissions before running tests, without inference.
