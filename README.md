@@ -95,12 +95,13 @@ term in the title before junior preferences or senior exclusions. This saves
 requests but can reduce coverage compared
 with separate searches; a broad result pool may contain fewer junior roles.
 `results_per_page = 400` and `fallback_results_per_page = 100` control the primary
-and fallback sizes. No additional pages are fetched. Edit these title settings
+and fallback sizes. No additional pages are fetched. Edit these shortlist settings
 in `[search]`:
 
 | Setting | Effect |
 |---|---|
 | `category` | Restrict the request and returned jobs to `accounting-finance-jobs`. Missing or different categories are excluded. |
+| `max_experience_years` | Set the experience limit used to assess explicit mandatory applicant requirements. The default is 2 years. Zero and fractional values are supported. |
 | `title_keywords` | Require at least one whole finance word/phrase in the title. |
 | `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director, VP and controller, plus recruiter titles. |
 | `preferred_title_keywords` | Prefer graduate, junior, trainee, entry-level and assistant titles within each experience group. |
@@ -108,31 +109,48 @@ in `[search]`:
 
 Matching ignores case and punctuation: `Sr.` and `entry-level` work. Exclusions
 win, so Assistant Manager is rejected while Finance Assistant remains eligible.
-Roles with explicit experience requirements compatible with 0–2 years come first,
+Roles with explicit requirements compatible with the experience limit come first,
 then junior title preferences, non-associate titles and recency. Equal ranks retain
-provider order. Finance keyword count does not affect rank. Finance Analyst and Credit Analyst remain
-eligible, but a bare Junior Analyst title lacks finance evidence and is excluded.
+provider order. Finance keyword count does not affect rank. Finance Analyst and
+Credit Analyst remain eligible. A bare Junior Analyst title lacks finance
+evidence and is excluded.
 The bot sends
 fewer than 20 jobs if fewer qualify; it never pads the shortlist with excluded jobs.
 Logs count exclusions for wrong/missing category, missing finance title evidence
 and the first matching senior/recruiter title term, plus experience exclusions.
 
-For both providers, explicit years-of-experience wording in titles and available
-descriptions overrides junior title preferences. A minimum above two years is
-excluded when a direct applicant requirement is recognized, including
-`Requires 3+ years experience`, `at least three years' relevant experience`
-and `minimum of 4–6 years of professional experience`. Bare experience numbers
-without mandatory wording remain unknown. Ranges use their lower bound, so
-`1–3 years` and `2+ years` remain eligible. Wording such as `0–2 years experience`
-with required wording, or `no experience required`, supports a junior fit. Preferred/desirable experience,
-negated requirements, third-party experience and upper bounds such as `up to 5 years` do not establish
-a required minimum or improve rank. A missing description remains uncertain.
+Both providers use the same experience checks. These read the title and any
+available description. A recognized mandatory minimum above `max_experience_years`
+causes exclusion, even if the title says junior. Examples include `Requires 3+
+years experience` and `The successful candidate must have 5 years experience`.
+The default limit is two years. Changing this limit does not change the existing
+finance relevance or senior-title filters.
+
+Decimal values are compared as written. With the default limit, `1.5 years
+experience required` remains eligible; `2.5 years experience required` does not.
+Ranges use their lower endpoint. This keeps `1–3 years` and `2+ years` eligible.
+A compatible mandatory requirement improves rank. So does an unconditional
+statement such as `no experience required`.
+
+Preferred experience does not cause exclusion or improve rank. For example,
+`3 years experience preferred` remains uncertain. An unrelated preference cannot
+cancel a separate mandatory minimum: `3 years experience required and Python
+preferred` is still excluded. Bare experience numbers, negated requirements and
+upper bounds such as `up to 5 years` remain uncertain. Missing descriptions and
+experience belonging to a manager or company also remain uncertain.
+
+Sentences containing a recognized alternative or condition are left unknown.
+For example, `Requires 3 years experience or a relevant masters degree` is
+retained without an experience ranking improvement. The same applies to `No
+experience required for graduates; 3 years experience required for non-graduates`.
+The checks do not decide whether a particular degree meets an alternative.
 
 These English wording rules are deliberately bounded. They can miss unusual
 phrasing, HTML markup, abbreviated units, or requirements absent from a truncated
-description. Complex sentence structures remain unknown rather than being
-interpreted as direct applicant requirements.
-A retained role may still demand more experience. The bot does not verify degree
+description. They recognize only a small set of conditions and alternatives.
+They cannot reliably connect exceptions across separate sentences or fields.
+Other complex wording can also be misinterpreted. A retained role may still
+demand more experience. The bot does not verify degree
 requirements, professional qualifications or current student status for placement
 schemes. Check the full advert; junior wording does not prove fit.
 

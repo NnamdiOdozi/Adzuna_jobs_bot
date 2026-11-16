@@ -12,6 +12,8 @@ days_old = 7
 results_per_page = 400
 fallback_results_per_page = 100
 shortlist_size = 20
+# Maximum applicant experience to target when checking mandatory requirements.
+max_experience_years = 2
 timeout_seconds = 30
 # Required finance evidence in the title, using whole words/phrases.
 title_keywords = ["finance", "financial", "accountant", "accounting", "accounts", "investment", "treasury", "audit", "auditor", "credit", "risk", "banking", "payroll", "bookkeeper", "bookkeeping", "actuarial"]

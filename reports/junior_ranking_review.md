@@ -22,12 +22,48 @@ Baseline: `3af73ec77fa67d75700bf970e0da1ffa4477cb70`.
    junior wording, the existing associate penalty and recency. Equal scores
    retain input order.
 
-The wording parser accepts bounded English forms such as `requires 3+ years
-experience`, `minimum three years experience`, `you need five years experience`
-and `3 years experience required`. It intentionally leaves other formulations
-unknown. It is not a semantic eligibility classifier. It does not verify degree,
-qualification, student or work authorization requirements, or missing details
-in provider snippets.
+The wording checks recognize a small set of direct applicant requirements.
+Examples include `requires 3+ years experience`, `minimum three years experience`
+and `3 years experience required`. They also recognize `The successful candidate
+must have 5 years experience` and `You will need at least 3 years experience`.
+
+The experience limit is set by `[search].max_experience_years` in `config.toml`.
+It defaults to two years. Zero and fractional limits are supported. Invalid
+values cause an explicit error.
+
+These checks do not establish overall eligibility. They cannot verify degree,
+qualification, student or work authorization requirements. They also cannot
+recover details that are absent from a provider's description.
+
+## Corrections following review
+
+The review reproduced three interpretation errors in the first version. The
+following cases now have regression tests.
+
+| Wording | Revised treatment |
+|---|---|
+| `1.5 years experience required` | Keep the decimal intact and retain the role. |
+| `2.5 years experience required` | Compare the actual value and exclude it at the default limit. |
+| `Requires 3 years experience or a relevant masters degree` | Keep the alternative uncertain and retain the role. |
+| `No experience required for graduates; 3 years experience required for non-graduates` | Leave the conditional sentence uncertain. Do not exclude or promote the role on that sentence. |
+| `3 years experience required and Python preferred` | Apply the mandatory experience requirement. The Python preference does not cancel it. |
+| `3 years experience preferred and Python required` | Keep the experience uncertain. The Python requirement does not make it mandatory. |
+| `Support a manager with ten years' experience` | Leave the manager's experience uncertain. Do not attribute it to the applicant. |
+
+Sentence splitting preserves decimal points. Recognized alternatives are checked
+before splitting clauses, so a semicolon cannot detach the graduate exception
+from its requirement. Independent requirements joined by `and` or `but` are
+then separated before preference wording is interpreted.
+
+The experience checks also recognize title requirements after a colon or inside
+parentheses. They previously handled only the spaced dash form consistently.
+
+These are still limited English wording rules. An unrelated alternative in the
+same sentence may leave a mandatory requirement unknown. An exception in a
+different sentence or field may not be connected to its requirement. The checks
+can also miss HTML markup, abbreviated units and other unrecognized language.
+The regression examples provide evidence about those examples. They do not
+establish correct interpretation of arbitrary adverts.
 
 ## Historical replay
 
@@ -69,8 +105,16 @@ evidence exists to validate mandatory-experience decisions against real adverts.
 Synthetic tests cover mandatory requirements above two years for both providers,
 preferred experience, lower-bound overlap (`0–3`, `1–3`, `2+`, `two or more`),
 missing descriptions, manager/company experience, and graduate associates.
+The review regressions add fractional years, alternative qualifications,
+conditional graduate exceptions and unrelated preference wording. They also
+cover title punctuation, direct applicant subjects and configurable limits.
 Existing senior exclusions, relevance gates, deduplication and shortlist limits
-remain tested. All 64 Python tests and 36 Cloudflare tests pass.
+remain tested. All 72 Python tests and 36 Cloudflare tests pass. Ruff checks and
+formatting checks pass for the changed Python files.
+
+Repeating the same 273-record replay after these corrections produces the same
+counts and exactly the same CSV as before. That is expected: these saved titles
+do not supply the description evidence needed to evaluate the new regressions.
 
 No live searches, API credits, email submission, history writes or workflow
 configuration changes were used. Better real-world validation needs a reviewed,

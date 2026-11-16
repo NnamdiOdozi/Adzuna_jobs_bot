@@ -1,62 +1,96 @@
 """Prefer junior finance vacancies and suppress senior or repeated adverts."""
 
 import logging
+import math
 import re
 
-
 _NUMBER_WORDS = dict(
-    zip("zero one two three four five six seven eight nine ten".split(), range(11))
+    zip(
+        "zero one two three four five six seven eight nine ten".split(),
+        range(11),
+        strict=True,
+    )
 )
+_NUMBER = r"(?:\d+(?:\.\d+)?|\.\d+)"
 _YEARS_EXPERIENCE = re.compile(
-    r"\b(?P<low>\d+)\s*(?:(?:-|–|—|to)\s*\d+|or more)?\s*\+?\s*years?"
+    rf"(?<![\w.,])(?P<low>{_NUMBER})\s*"
+    rf"(?:(?:-|–|—|to)\s*{_NUMBER}|or more)?\s*\+?\s*years?"
     r"[’']?\s+(?:of\s+)?(?:[a-z]+\s+){0,3}experience\b"
 )
+_SENTENCE_BREAK = r"[!?\n]|\.(?!\d)"
+_CLAUSE_BREAK = r";|(?<!\d),|,(?!\d)|\b(?:and|but)\b"
+_CONDITIONAL = re.compile(
+    r"\b(?:or(?!\s+more\b)|if|unless|except|alternatively|equivalent|"
+    r"depending on|in lieu)\b|"
+    r"\bfor\s+(?:(?:non[- ]?)?graduates?|candidates|applicants|those)\b"
+)
+_OPTIONAL = re.compile(r"\b(preferred|desirable|ideally|advantage|bonus)\b")
+_CANDIDATE = (
+    r"(?:you (?:(?:will )?need|must have)|"
+    r"(?:the successful candidate|candidates|applicants) must have|"
+    r"requires?|must have)"
+)
+_MINIMUM = r"(?:at least|(?:a )?minimum(?: of)?|no less than)"
+_MANDATORY_PREFIX = re.compile(rf"(?:{_CANDIDATE}\s+)?{_MINIMUM}|{_CANDIDATE}")
+_MANDATORY_SUFFIX = re.compile(r"\s+(?:is\s+)?(?:required|essential|mandatory)\b")
+_NEGATED_SUFFIX = re.compile(
+    r"\s+(?:is\s+)?not\s+(?:required|necessary|essential|mandatory)\b"
+)
+_NO_EXPERIENCE = re.compile(
+    r"^no\s+(?:prior\s+|professional\s+)?experience\s+"
+    r"(?:is\s+)?(?:required|necessary)\b"
+)
 
 
-def _experience_fit(job):
-    """Return (incompatible, supported) from explicit experience wording.
+def _experience_fit(job, max_years):
+    """Return (incompatible, supported) from direct applicant requirements.
 
-    Use the lower end of ranges. Optional experience and upper bounds do not
-    establish a minimum. Missing or unrecognized wording remains uncertain.
-    This is a bounded English-language heuristic, not an eligibility decision.
+    Keep decimals intact and use the lower end of ranges. Alternative and
+    conditional sentences remain unknown. Split independent requirements before
+    interpreting optional wording. Unrecognized language also remains unknown.
     """
     supported = False
-    title = re.sub(r"\s[-–—|]\s", "\n", job["title"])
-    text = title + "\n" + (job.get("description") or "")
-    for clause in re.split(r"[.!?;,\n]|\bbut\b", text.casefold()):
-        clause = re.sub(
+    for field in ("title", "description"):
+        text = (job.get(field) or "").casefold()
+        text = re.sub(
             r"\b(" + "|".join(_NUMBER_WORDS) + r")\b",
             lambda match: str(_NUMBER_WORDS[match[0]]),
-            clause,
+            text,
         )
-        if re.search(r"\b(preferred|desirable|ideally|advantage|bonus)\b", clause):
-            continue
-        if re.search(
-            r"\bno\s+(?:prior\s+|professional\s+)?experience\s+"
-            r"(?:is\s+)?(?:required|necessary)\b", clause
-        ):
-            supported = True
-        for match in _YEARS_EXPERIENCE.finditer(clause):
-            prefix = clause[:match.start()].strip(" *•:-")
-            suffix = clause[match.end():]
-            # Only accept a direct requirement on the applicant. A manager's
-            # or employer's experience, and bare numbers, remain uncertain.
-            candidate = (
-                r"(?:you (?:need|must have)|(?:candidates|applicants) must have|"
-                r"requires?|must have)"
-            )
-            minimum = r"(?:at least|(?:a )?minimum(?: of)?|no less than)"
-            mandatory_prefix = re.fullmatch(
-                rf"(?:{candidate}\s+)?{minimum}|{candidate}", prefix
-            )
-            mandatory_suffix = not prefix and re.match(
-                r"\s+(?:is\s+)?(?:required|essential|mandatory)\b", suffix
-            )
-            if not (mandatory_prefix or mandatory_suffix):
+        for sentence in re.split(_SENTENCE_BREAK, text):
+            # Check alternatives before splitting clauses. Otherwise an exception
+            # after a semicolon or comma could be detached from its requirement.
+            if _CONDITIONAL.search(sentence):
                 continue
-            if int(match["low"]) > 2:
-                return True, False
-            supported = True
+            breaks = _CLAUSE_BREAK
+            if field == "title":
+                breaks += r"|\s[-–—|]\s|[():]"
+            for clause in re.split(breaks, sentence):
+                clause = clause.strip(" *•:-")
+                if _NO_EXPERIENCE.match(clause):
+                    supported = True
+                for match in _YEARS_EXPERIENCE.finditer(clause):
+                    prefix = clause[: match.start()].strip()
+                    suffix = clause[match.end() :]
+                    mandatory_suffix = _MANDATORY_SUFFIX.match(suffix)
+                    # A later optional skill cannot undo an immediate "required"
+                    # modifier. Without that boundary, keep optional text unknown.
+                    if (
+                        _OPTIONAL.search(prefix)
+                        or (_OPTIONAL.search(suffix) and not mandatory_suffix)
+                        or _NEGATED_SUFFIX.match(suffix)
+                    ):
+                        continue
+                    # A direct applicant subject is required. We do not borrow
+                    # experience from a manager, colleague or company.
+                    mandatory = _MANDATORY_PREFIX.fullmatch(prefix) or (
+                        not prefix and mandatory_suffix
+                    )
+                    if not mandatory:
+                        continue
+                    if float(match["low"]) > max_years:
+                        return True, False
+                    supported = True
     return False, supported
 
 
@@ -95,7 +129,7 @@ def job_keys(job):
 
 
 def select_jobs(jobs, seen, config):
-    """Require finance evidence and rank roles for a 0–2-year candidate.
+    """Require finance evidence and rank roles within the candidate experience limit.
 
     Parameters
     ----------
@@ -111,6 +145,14 @@ def select_jobs(jobs, seen, config):
     list of dict
         Previously unseen vacancies in rank order.
     """
+    max_years = config.get("max_experience_years", 2)
+    if (
+        isinstance(max_years, bool)
+        or not isinstance(max_years, (int, float))
+        or not math.isfinite(max_years)
+        or max_years < 0
+    ):
+        raise ValueError("max_experience_years must be a finite non-negative number")
     eligible, excluded = [], {}
     experience_supported = {}
     jsearch = config.get("provider", "adzuna") == "jsearch"
@@ -118,7 +160,7 @@ def select_jobs(jobs, seen, config):
     irrelevant = {
         "wrong_or_missing_category": 0,
         finance_reason: 0,
-        "experience_above_two_years": 0,
+        "experience_above_limit": 0,
     }
     for job in jobs:
         category = job.get("category")
@@ -128,7 +170,9 @@ def select_jobs(jobs, seen, config):
             irrelevant["wrong_or_missing_category"] += 1
             continue
         # Junior wording alone must never qualify a non-finance vacancy.
-        evidence = job["title"] + (" " + (job.get("description") or "") if jsearch else "")
+        evidence = job["title"] + (
+            " " + (job.get("description") or "") if jsearch else ""
+        )
         if not _matching_terms(evidence, config["title_keywords"]):
             irrelevant[finance_reason] += 1
             continue
@@ -138,9 +182,9 @@ def select_jobs(jobs, seen, config):
         if matches:
             excluded[matches[0]] = excluded.get(matches[0], 0) + 1
             continue
-        incompatible, supported = _experience_fit(job)
+        incompatible, supported = _experience_fit(job, max_years)
         if incompatible:
-            irrelevant["experience_above_two_years"] += 1
+            irrelevant["experience_above_limit"] += 1
             continue
         experience_supported[id(job)] = supported
         eligible.append(job)
