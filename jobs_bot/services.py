@@ -1,4 +1,14 @@
-"""Read Adzuna vacancies and deliver plain-text Gmail shortlists."""
+"""Provide the Adzuna request, shared email layout and Gmail submission boundary.
+
+The daily coordinator calls ``fetch_jobs`` for the primary search, then passes
+its ranked original records to ``build_message``. That builder is shared by all
+daily ranking methods, so switching between rules, Jev and Qwen does not give
+the model control over salary text, vacancy links or email layout.
+
+``send_message`` submits the prepared email to Gmail. The coordinator owns the
+subsequent history update; Gmail acceptance is not proof of inbox delivery.
+JSearch fetching and field normalization live separately in ``jobs_bot.jsearch``.
+"""
 
 import json
 import logging

@@ -1,4 +1,15 @@
-"""Archive provider candidates before filtering, without delivery configuration."""
+"""Save replayable vacancy batches before suitability filtering takes place.
+
+The daily coordinator records each successful provider batch here, including
+the combined pool when JSearch supplements Adzuna. Snapshots retain allowlisted
+job fields, search settings, prior sent-job keys and source-run metadata. They
+are normalized vacancy records, not untouched provider HTTP responses.
+
+Each JSON snapshot has a content hash for detecting changes during replay.
+Local files remain under the configured archive directory; GitHub Actions owns
+their artifact upload and expiry. Snapshot creation does not mark any job sent,
+and capture failures are logged without preventing the morning email.
+"""
 
 import hashlib
 import json

@@ -1,4 +1,16 @@
-"""Compare vacancy ranking methods without delivery history writes."""
+"""Run the manual ranking comparison using saved or explicitly fetched jobs.
+
+The Compare finance job rankings workflow invokes this command-line module to
+prepare a shared candidate snapshot, run direct rankings, prepare agent input
+and validate the results returned by the separate agent job. Saved snapshots
+allow methods to see the same jobs without paying for another provider search.
+
+Comparison JSON and readable reports are written for Actions artifact upload.
+The optional test-email command sends only to the configured sender. None of
+these commands marks vacancies as delivered or consumes the daily send date.
+Structural and quotation checks establish valid, input-bound output; agreement
+between methods does not establish that their suitability judgments are correct.
+"""
 
 import argparse
 import json

@@ -1,4 +1,14 @@
-"""Validate ranking configuration and evidence without trusting model claims."""
+"""Check the shape and source evidence of quotation-based model assessments.
+
+The direct Nebius ranker and the agentic comparison use these checks before
+accepting assessments. Every supplied candidate must occur exactly once, labels
+must come from configuration and evidence quotations must occur in the original
+field. These are Python checks, not a second model reviewing the first one.
+
+A matching quotation can still be misinterpreted. Passing this validator proves
+structural consistency and textual presence, not job suitability. Jev's separate
+adapter validates its fixed-choice probabilities rather than quoted evidence.
+"""
 
 import math
 

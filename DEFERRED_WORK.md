@@ -1,13 +1,15 @@
 # Open work
 
 - 2026-11-16 — Source: user wants experimental data kept beyond artifact expiry
-  and chose a separate private GitHub archive with no automatic deletion.
-  Proposed: `Adzuna_jobs_bot_archive`, automatic copies of vacancy/assessment/
-  comparison JSON with hashes after daily and experiment runs, separate failure
-  status so archiving cannot block email. Design confirmation is pending before
-  implementation. Local artifact settings are raised to the public-repository
-  maximum of 90 days; this does not extend existing uploads. Archive repository,
-  automation and user-managed write-token Secret remain to be configured.
+  and now prefers a folder in this repository over a separate private archive.
+  Revised proposal: commit allowlisted vacancy/assessment/comparison JSON under
+  `archive/`, grouped by source run, with hashes and no automatic deletion.
+  Use a separate trusted job with repository-write permission; agents keep their
+  read-only token. This avoids another repository and cross-repository token,
+  but the archived data would be public and increase checkout size. Raw runner
+  logs remain expiring Actions artifacts. Folder publication/automation and
+  copying existing uploads are not implemented. Artifact retention is published
+  at the public-repository maximum of 90 days; existing expiry dates are unchanged.
 
 - 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
   trial of the forty saved JSearch candidates completed in two twenty-question

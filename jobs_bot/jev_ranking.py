@@ -1,4 +1,15 @@
-"""Assess vacancy suitability with bounded, probability-producing Jev requests."""
+"""Choose suitable vacancies through Jev's fixed-choice classification API.
+
+The daily coordinator uses this adapter when ``ranking.method`` is ``jev``.
+Shared preparation removes seen and duplicate adverts, then each bounded batch
+is assessed against the candidate profile and editable suitability policy.
+Validated class probabilities determine acceptance and ordering.
+
+The returned shortlist contains original provider records, preserving the data
+used by the email builder. The accompanying assessment record contains decisions,
+probabilities and usage metadata for the coordinator to save. Jev neither runs
+agent tools nor formats emails or updates delivery history in this path.
+"""
 
 import json
 import logging

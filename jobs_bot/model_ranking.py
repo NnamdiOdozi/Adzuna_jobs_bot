@@ -1,4 +1,15 @@
-"""Rank unseen vacancies with bounded inference and quoted evidence checks."""
+"""Prepare model inputs and support the quotation-based Nebius ranking path.
+
+Shared candidate preparation removes seen and duplicate provider records before
+any model call. Jev and compact Qwen reuse that preparation; Qwen also reuses the
+bounded HTTPS inference transport defined here.
+
+The older direct Nebius comparison path requests a suitability decision, reason
+and source quotations for each candidate. The experiments module uses its input
+contract for comparison with agent output. Evidence validation is implemented in
+``ranking_validation``: matching a quote proves textual presence, not that the
+job suits the candidate. Email delivery and history persistence belong elsewhere.
+"""
 
 import hashlib
 import json

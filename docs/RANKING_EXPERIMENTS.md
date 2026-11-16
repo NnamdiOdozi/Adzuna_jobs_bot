@@ -87,8 +87,11 @@ Only allowlisted public advert data and non-secret run/search metadata are saved
 Compiled agent artifacts also use 90 days, configured in `.github/workflows/aw.json`.
 This is GitHub's maximum for public repositories. Omitting retention selects a
 repository default rather than permanent storage. Changes apply to new artifacts;
-existing uploads keep their original expiry. Planned long-term JSON preservation
-will use a separate private archive; it must not rely on artifact retention.
+existing uploads keep their original expiry. The revised long-term proposal is
+to commit selected JSON under `archive/` in this repository, rather than create
+another repository. That automation is not implemented yet. Committed archives
+would be public and increase checkout size; credentials and raw runner logs
+must stay out of the committed dataset.
 
 ## Read and compare results
 

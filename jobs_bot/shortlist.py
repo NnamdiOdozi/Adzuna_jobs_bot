@@ -1,4 +1,12 @@
-"""Prefer junior finance vacancies and suppress senior or repeated adverts."""
+"""Apply the deterministic shortlist rules and identify repeated vacancies.
+
+The daily coordinator selects this ranking path when ``ranking.method`` is
+``rules``. Title relevance, seniority and explicit experience requirements are
+checked in Python before suitable jobs are ordered using configured preferences.
+Model-based ranking uses shared duplicate keys but makes its own suitability
+decisions. This module returns selections and keys; it neither calls external
+services nor writes the sent-job history or builds an email.
+"""
 
 import logging
 import math

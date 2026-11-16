@@ -1,4 +1,20 @@
-"""Run a preview or send a shortlist and retain the sent-job history."""
+"""Coordinate the daily job search, ranking, email and delivery history.
+
+Both local ``python -m jobs_bot`` commands and the Daily London job shortlist
+GitHub workflow enter here. Cloudflare triggers that workflow; it does not
+fetch or rank vacancies itself.
+
+The run checks delivery dates, loads sent-job keys, fetches Adzuna/JSearch jobs
+and records candidate snapshots before choosing the configured ranking method.
+Rules, Jev and direct Qwen all return original job records to the same email
+builder, preserving their provider links and salary information.
+
+Normal sends update delivery dates and sent-job keys only after Gmail accepts
+the message. Preview and sender-only test modes preserve that history. Candidate
+snapshots and model assessment records are separate evidence files; Actions
+uploads them as artifacts. The independent agentic comparison enters through
+``jobs_bot.experiments`` instead and does not perform normal daily delivery.
+"""
 
 import argparse
 import json
@@ -22,7 +38,12 @@ from jobs_bot.snapshots import record_snapshot
 
 
 def _select(jobs, seen, config, provider):
-    """Choose the configured ranker while retaining code-owned delivery state."""
+    """Select original vacancies through rules or the configured model adapter.
+
+    Model adapters return both a shortlist and an assessment record, which this
+    function saves for later inspection. Email formatting and sent-job history
+    remain the caller's responsibility, whichever ranking method is selected.
+    """
     method = config.get("ranking", {}).get("method", "rules")
     if method == "rules":
         return select_jobs(jobs, seen, {**config["search"], "provider": provider})
@@ -55,6 +76,7 @@ def _select(jobs, seen, config, provider):
 
 
 def _record_ranking(record, config):
+    """Save assessment evidence for artifact upload without marking jobs sent."""
     directory = config["ranking"].get("receipt_directory")
     if directory:
         path = Path(directory) / f"ranking-{uuid4().hex}.json"
@@ -64,6 +86,7 @@ def _record_ranking(record, config):
 
 
 def _jsearch_result(config):
+    """Return backup vacancies or a failure for the explicit notice-email path."""
     try:
         return fetch_jsearch(config["jsearch"], os.environ["JSEARCH_API_KEY"]), None
     except Exception as error:
@@ -75,6 +98,12 @@ def _jsearch_result(config):
 
 
 def _run():
+    """Execute one configured preview, sender-only test or normal delivery.
+
+    The order matters: enforce the send-day limit before spending API credits,
+    archive fetched candidates before ranking, and persist delivery state only
+    after email submission. Model selection cannot bypass those controls.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     delivery = parser.add_mutually_exclusive_group()
     delivery.add_argument(
@@ -170,7 +199,8 @@ def _run():
         for address in [config["email"]["sender"], *recipients]
     ):
         raise ValueError("Each recipient setting must contain one email address")
-    # Keep these names identical to the local setup and GitHub Actions mapping.
+    # Provider fallback belongs here so every successful batch can be archived
+    # before ranking, including both sources when JSearch tops up Adzuna.
     jobs = []
     search_error = None
     jsearch_attempted = False
@@ -244,6 +274,7 @@ def _run():
         len(seen),
         "test" if args.test_send else "send" if args.send else "preview",
     )
+    # Rankers choose records; this shared builder owns the visible email format.
     message = build_message(selected, config["email"], recipients, today)
     if args.test_send:
         message.replace_header("Subject", f"[TEST] {message['Subject']}")

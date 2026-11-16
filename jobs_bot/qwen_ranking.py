@@ -1,4 +1,14 @@
-"""Rank vacancies with compact, fixed-slot non-thinking model responses."""
+"""Rank vacancies by calling Qwen directly for compact structured assessments.
+
+This is the daily ``ranking.method = qwen`` adapter, separate from Copilot's
+tool-using agentic workflow. Prepared unseen adverts are grouped into bounded
+batches, with one named response slot per job to limit output repetition.
+
+Qwen supplies suitability categories and discrete ranking scores. Python checks
+those values, orders acceptable jobs across batches and returns original records
+plus assessment metadata. The daily coordinator saves that metadata and uses the
+same email builder and delivery-history controls as the Jev and rules paths.
+"""
 
 import json
 import logging

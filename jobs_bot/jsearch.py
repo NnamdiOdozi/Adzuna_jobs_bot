@@ -1,4 +1,13 @@
-"""Fetch one budgeted JSearch batch and translate vacancies for the shortlist."""
+"""Fetch JSearch vacancies and translate them into the shared job record format.
+
+The daily coordinator calls this provider when JSearch is selected directly,
+when Adzuna needs backup, or when a small Adzuna batch needs supplementation.
+One request asks for the configured pages; page count still affects API credits.
+
+Provider fields are normalized here so snapshots, ranking methods and the email
+builder can reuse the same records. This module does not select suitable jobs,
+save snapshots, send email or change duplicate-suppression history.
+"""
 
 import json
 import logging
