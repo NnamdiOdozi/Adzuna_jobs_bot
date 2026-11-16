@@ -56,7 +56,7 @@ delivery_path = "state/delivery.json"
 enabled = true
 directory = "artifacts/candidates"
 artifact_name = "job-candidates"
-retention_days = 30
+retention_days = 90
 
 [candidate]
 profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
@@ -104,7 +104,7 @@ score_levels = ["clearly incompatible", "poor fit", "unresolved eligibility", "p
 directory = "artifacts/ranking"
 snapshot_name = "snapshot.json"
 result_artifact_name = "ranking-comparison"
-retention_days = 30
+retention_days = 90
 agent_output_name = "agent-assessments.json"
 test_subject = "[TEST] Finance jobs ranking comparison"
 

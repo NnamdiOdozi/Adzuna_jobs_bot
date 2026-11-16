@@ -1,5 +1,14 @@
 # Open work
 
+- 2026-11-16 — Source: user wants experimental data kept beyond artifact expiry
+  and chose a separate private GitHub archive with no automatic deletion.
+  Proposed: `Adzuna_jobs_bot_archive`, automatic copies of vacancy/assessment/
+  comparison JSON with hashes after daily and experiment runs, separate failure
+  status so archiving cannot block email. Design confirmation is pending before
+  implementation. Local artifact settings are raised to the public-repository
+  maximum of 90 days; this does not extend existing uploads. Archive repository,
+  automation and user-managed write-token Secret remain to be configured.
+
 - 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
   trial of the forty saved JSearch candidates completed in two twenty-question
   requests, without retries: 32,257 input tokens, 2,126 output tokens, about

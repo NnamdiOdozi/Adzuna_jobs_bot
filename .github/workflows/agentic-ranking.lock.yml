@@ -260,7 +260,7 @@ jobs:
           path: /tmp/gh-aw/agentic-workflow-usage-scan-v2.jsonl
           overwrite: true
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '3' }}
+          retention-days: 90
       - name: Check for OAuth tokens
         id: check-oauth-tokens
         run: bash "${RUNNER_TEMP}/gh-aw/actions/check_oauth_tokens.sh"
@@ -544,7 +544,7 @@ jobs:
           name: ${{ steps.artifact-prefix.outputs.prefix }}info
           path: /tmp/gh-aw/aw_info.json
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '0' }}
+          retention-days: 90
       - name: Stage prompt files for artifact upload
         run: |
           mkdir -p /tmp/gh-aw/aw-prompts
@@ -570,7 +570,7 @@ jobs:
             /tmp/gh-aw/.github/skills
             /tmp/gh-aw/skill_inventory.json
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '1' }}
+          retention-days: 90
 
   agent:
     name: agent
@@ -1317,7 +1317,7 @@ jobs:
           if-no-files-found: error
           name: ranking-agent
           path: artifacts/ranking/agent-assessments.json
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || (needs.settings.outputs.result_retention) }}
+          retention-days: 90
 
       - name: Validate recovery envelopes before upload
         id: validate_final_recovery_envelopes
@@ -1360,7 +1360,7 @@ jobs:
             /tmp/gh-aw/sandbox/firewall/audit/api-proxy-logs/model-routing.jsonl
             /tmp/gh-aw/awf-resolved-config.json
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '0' }}
+          retention-days: 90
       - name: Upload agent artifacts
         if: always() && steps.redact_secrets.outcome == 'success' && steps.validate_recovery_envelopes.outcome == 'success' && steps.validate_final_recovery_envelopes.outcome == 'success'
         continue-on-error: true
@@ -1398,7 +1398,7 @@ jobs:
             /tmp/gh-aw/sandbox/firewall/audit/
             /tmp/gh-aw/sandbox/firewall/awf-reflect.json
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '0' }}
+          retention-days: 90
 
   conclusion:
     name: conclusion
@@ -1641,7 +1641,7 @@ jobs:
             /tmp/gh-aw/usage/experiment/assignments.json
             /tmp/gh-aw/usage/activity/summary.json
           if-no-files-found: ignore
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '0' }}
+          retention-days: 90
       - name: Wait before retrying usage artifact upload
         if: always() && steps.upload-usage-artifact.outcome == 'failure'
         run: sleep 10
@@ -1681,7 +1681,7 @@ jobs:
             /tmp/gh-aw/usage/activity/summary.json
           if-no-files-found: ignore
           overwrite: true
-          retention-days: ${{ vars.GH_AW_DEFAULT_ARTIFACT_RETENTION_DAYS || '0' }}
+          retention-days: 90
 
   pre_activation:
     name: pre_activation

@@ -79,11 +79,16 @@ The experiment does not trigger another provider merely because a ranker finds
 no matches. The existing daily fallback policy is unchanged.
 
 Snapshots are downloadable Actions artifacts, not daily Git commits. Retention
-defaults to 30 days in `[archive]` and `[experiment]` in `config.toml`; expired or
+defaults to 90 days in `[archive]` and `[experiment]` in `config.toml`; expired or
 deleted archives cannot be replayed. Archive upload/save failures warn without
 blocking the normal morning email. GitHub artifacts are not private-secret
 storage: people with repository read access and GitHub access can download them.
 Only allowlisted public advert data and non-secret run/search metadata are saved.
+Compiled agent artifacts also use 90 days, configured in `.github/workflows/aw.json`.
+This is GitHub's maximum for public repositories. Omitting retention selects a
+repository default rather than permanent storage. Changes apply to new artifacts;
+existing uploads keep their original expiry. Planned long-term JSON preservation
+will use a separate private archive; it must not rely on artifact retention.
 
 ## Read and compare results
 
