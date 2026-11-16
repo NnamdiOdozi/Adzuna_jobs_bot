@@ -33,7 +33,7 @@ def settings(config):
         "archive_retention": archive["retention_days"],
         "result_name": experiment["result_artifact_name"],
         "result_retention": experiment["retention_days"],
-        "model": config["ranking"]["model"],
+        "model": config["agentic"].get("model", config["ranking"]["model"]),
         "base_url": config["ranking"]["base_url"],
         "prompt_tokens": config["agentic"]["max_prompt_tokens"],
         "output_tokens": config["ranking"]["max_output_tokens"],

@@ -13,7 +13,8 @@ from uuid import uuid4
 _SEARCH_FIELDS = frozenset(
     "provider fallback_provider location category distance_miles query_terms days_old "
     "results_per_page fallback_results_per_page shortlist_size max_experience_years "
-    "timeout_seconds title_keywords exclude_title_keywords preferred_title_keywords "
+    "timeout_seconds jsearch_top_up_threshold title_keywords exclude_title_keywords "
+    "preferred_title_keywords "
     "deprioritise_title_keywords".split()
 )
 _JSEARCH_FIELDS = frozenset(
@@ -117,7 +118,7 @@ def _validate(snapshot):
         raise ValueError("Invalid snapshot keys")
     if type(snapshot["schema_version"]) is not int or snapshot["schema_version"] != 1:
         raise ValueError("Unsupported snapshot schema")
-    if snapshot["provider"] not in ("adzuna", "jsearch"):
+    if snapshot["provider"] not in ("adzuna", "jsearch", "combined"):
         raise ValueError("Invalid snapshot provider")
     if not isinstance(snapshot["snapshot_id"], str) or not re.fullmatch(
         r"[0-9a-f]{32}", snapshot["snapshot_id"]
@@ -164,7 +165,7 @@ def create_snapshot(
     jobs : list of dict
         Validated provider vacancies, before suitability filtering.
     provider : str
-        Actual provider, either adzuna or jsearch.
+        Actual provider: adzuna, jsearch or their combined candidate pool.
     config : dict
         Application settings; only allowlisted search settings are retained.
     seen : iterable of str

@@ -16,8 +16,10 @@
   pass are complete: `reports/finance_model_faceoff_2026-11-16.md`.
   Standard-workflow Jev adapter, editable policy, configuration method switch,
   repository Secret mapping, assessment artifacts and offline tests are implemented.
-  Pending: user supplies TYPESAFE_API_KEY as a repository Secret, explicit daily
-  activation, and sender-only end-to-end verification. Daily method remains rules.
+  The user selected method=jev for normal delivery. The Qwen config option and
+  <=25-job Adzuna top-up are implemented with offline tests. Pending: user ensures
+  TYPESAFE_API_KEY is configured as a repository Secret, and verifies the first
+  normal Jev delivery or a sender-only end-to-end run.
   Local evaluation artifacts are not available in a fresh GitHub checkout.
   Graduation-date and finance-sales preferences remain open. The legacy agentic
   comparison is separate; Jev does not depend on it.
@@ -41,8 +43,8 @@
   The user has since chosen Jev, so no further paid Nemotron budget trial is
   planned. Diagnostic changes are now published with the Jev integration. Retain
   the agent-runtime experiment as an optional route with its limitation disclosed.
-  If Qwen is later chosen for normal delivery, adapt the compact fixed-slot format;
-  the legacy Nebius ranker's array/quotation response was not changed to that format.
+  Normal delivery now has a separate compact fixed-slot Qwen adapter. The legacy
+  Nebius quotation-based experiment remains separate and retains its older format.
   Human-reviewed labels, daily artifact capture on a scheduled run and sender
   inbox confirmation for the original experiment also remain unverified.
   Daily ranking stays on rules until separately chosen activation.

@@ -155,14 +155,19 @@ def select_jobs(jobs, seen, config):
         raise ValueError("max_experience_years must be a finite non-negative number")
     eligible, excluded = [], {}
     experience_supported = {}
-    jsearch = config.get("provider", "adzuna") == "jsearch"
-    finance_reason = "no_finance_evidence" if jsearch else "no_finance_title_match"
+    provider = config.get("provider", "adzuna")
+    finance_reason = (
+        "no_finance_title_match" if provider == "adzuna" else "no_finance_evidence"
+    )
     irrelevant = {
         "wrong_or_missing_category": 0,
         finance_reason: 0,
         "experience_above_limit": 0,
     }
     for job in jobs:
+        jsearch = provider == "jsearch" or (
+            provider == "combined" and str(job.get("id", "")).startswith("jsearch:")
+        )
         category = job.get("category")
         if not jsearch and (
             not isinstance(category, dict) or category.get("tag") != config["category"]

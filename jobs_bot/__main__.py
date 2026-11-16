@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo
 from jobs_bot.jev_ranking import rank_jobs as rank_jev
 from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.model_ranking import RankingFailure, rank_jobs
+from jobs_bot.qwen_ranking import rank_jobs as rank_qwen
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
 from jobs_bot.snapshots import record_snapshot
@@ -25,9 +26,12 @@ def _select(jobs, seen, config, provider):
     method = config.get("ranking", {}).get("method", "rules")
     if method == "rules":
         return select_jobs(jobs, seen, {**config["search"], "provider": provider})
-    if method not in ("nebius_llm", "jev"):
-        raise ValueError("Ranking method must be rules, nebius_llm or jev")
-    ranker = rank_jev if method == "jev" else rank_jobs
+    rankers = {"nebius_llm": rank_jobs, "jev": rank_jev, "qwen": rank_qwen}
+    if method not in rankers:
+        raise ValueError(
+            "Ranking method must be rules, jev or qwen (legacy: nebius_llm)"
+        )
+    ranker = rankers[method]
     try:
         selected, receipt = ranker(jobs, seen, config)
     except RankingFailure as error:
@@ -130,6 +134,9 @@ def _run():
     fallback = search.get("fallback_provider", "")
     if fallback not in {"", "jsearch"}:
         raise ValueError("Fallback provider must be empty or jsearch")
+    top_up_threshold = search.get("jsearch_top_up_threshold", 0)
+    if type(top_up_threshold) is not int or top_up_threshold < 0:
+        raise ValueError("JSearch top-up threshold must be a nonnegative integer")
     for name in (
         "results_per_page",
         "fallback_results_per_page",
@@ -166,6 +173,7 @@ def _run():
     # Keep these names identical to the local setup and GitHub Actions mapping.
     jobs = []
     search_error = None
+    jsearch_attempted = False
     if provider == "adzuna":
         try:
             jobs = fetch_jobs(
@@ -186,19 +194,48 @@ def _run():
             )
             provider = "jsearch"
     if provider == "jsearch":
+        jsearch_attempted = True
         jobs, search_error = _jsearch_result(config)
         if search_error is None:
             record_snapshot(jobs, provider, config, seen)
-    # The backup has different finance evidence; filter and label its actual source.
-    selected = _select(jobs, seen, config, provider)
-    if not selected and provider == "adzuna" and fallback == "jsearch":
+    if (
+        provider == "adzuna"
+        and fallback == "jsearch"
+        and top_up_threshold
+        and 0 < len(jobs) <= top_up_threshold
+    ):
+        jsearch_attempted = True
+        logging.info(
+            "event=provider state=adzuna->top_up fetched=%d threshold=%d",
+            len(jobs),
+            top_up_threshold,
+        )
+        extra, search_error = _jsearch_result(config)
+        if search_error is None:
+            record_snapshot(extra, "jsearch", config, seen)
+            if extra:
+                jobs = [*jobs, *extra]
+                provider = "combined"
+                record_snapshot(jobs, provider, config, seen)
+    # Rank the merged pool once, retaining each provider's evidence rules.
+    selected = [] if search_error is not None else _select(jobs, seen, config, provider)
+    if (
+        not selected
+        and provider == "adzuna"
+        and fallback == "jsearch"
+        and not jsearch_attempted
+    ):
         logging.warning("event=provider state=adzuna->jsearch reason=no_unseen_matches")
         provider = "jsearch"
         jobs, search_error = _jsearch_result(config)
         if search_error is None:
             record_snapshot(jobs, provider, config, seen)
         selected = _select(jobs, seen, config, provider)
-    config["email"]["source"] = "JSearch" if provider == "jsearch" else "Adzuna"
+    config["email"]["source"] = {
+        "adzuna": "Adzuna",
+        "jsearch": "JSearch",
+        "combined": "Adzuna + JSearch",
+    }[provider]
     config["email"]["search_failed"] = search_error is not None
     logging.info(
         "event=shortlist fetched=%d selected=%d history_keys=%d mode=%s",

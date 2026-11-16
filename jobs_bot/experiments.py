@@ -22,6 +22,7 @@ from jobs_bot.model_ranking import (
     ranking_request,
     validate_assessments,
 )
+from jobs_bot.qwen_ranking import rank_jobs as rank_qwen
 from jobs_bot.services import fetch_jobs, send_message
 from jobs_bot.shortlist import select_jobs
 from jobs_bot.snapshots import create_snapshot, load_snapshot, save_snapshot
@@ -91,7 +92,7 @@ def _rank(args, snapshot, config):
         report = _report(snapshot, "rules", selected=_rules(snapshot, config))
     else:
         try:
-            ranker = rank_jev if args.method == "jev" else rank_jobs
+            ranker = {"jev": rank_jev, "qwen": rank_qwen}.get(args.method, rank_jobs)
             selected, receipt = ranker(snapshot["jobs"], set(snapshot["seen"]), config)
             report = _report(snapshot, args.method, selected=selected, receipt=receipt)
         except Exception as error:
@@ -310,7 +311,9 @@ def _parser():
     prepare.add_argument("--output", required=True)
     rank = commands.add_parser("rank")
     rank.add_argument("--snapshot", required=True)
-    rank.add_argument("--method", choices=("rules", "nebius_llm", "jev"), required=True)
+    rank.add_argument(
+        "--method", choices=("rules", "nebius_llm", "jev", "qwen"), required=True
+    )
     rank.add_argument("--output", required=True)
     agent = commands.add_parser("agent-input")
     agent.add_argument("--snapshot", required=True)

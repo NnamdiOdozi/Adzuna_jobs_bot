@@ -2,6 +2,8 @@
 # Backup follows HTTP errors or no unseen matching jobs; empty disables it.
 provider = "adzuna"
 fallback_provider = "jsearch"
+# At or below this raw Adzuna count, merge one JSearch batch before ranking; 0 disables.
+jsearch_top_up_threshold = 25
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
 location = "London"
 category = "accounting-finance-jobs"
@@ -60,14 +62,15 @@ retention_days = 30
 profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
 
 [ranking]
-# Switch: rules disables model ranking; jev or nebius_llm enables that provider.
-method = "rules"
+# Daily switch: rules (no model), jev, or qwen. Agentic experiments are separate.
+method = "jev"
 receipt_directory = "artifacts/ranking"
 base_url = "https://api.tokenfactory.nebius.com/v1"
-model = "nvidia/nemotron-3-super-120b-a12b"
+# Legacy quotation-based experiments use this model; daily Qwen uses [qwen].
+model = "Qwen/Qwen3-235B-A22B-Instruct-2507"
 prompt_path = "prompts/job_suitability.md"
 batch_size = 10
-max_candidates = 100
+max_candidates = 150
 max_calls = 10
 max_output_tokens = 8192
 timeout_seconds = 90
@@ -86,6 +89,17 @@ policy_path = "prompts/jev_suitability.json"
 batch_size = 20
 timeout_seconds = 60
 
+[qwen]
+base_url = "https://api.tokenfactory.nebius.com/v1"
+model = "Qwen/Qwen3-235B-A22B-Instruct-2507"
+# Shared categories keep the daily Jev/Qwen selection policy comparable.
+policy_path = "prompts/jev_suitability.json"
+batch_size = 20
+max_output_tokens = 8192
+timeout_seconds = 90
+temperature = 0.7
+score_levels = ["clearly incompatible", "poor fit", "unresolved eligibility", "plausible junior role", "good fit", "strong graduate/junior fit"]
+
 [experiment]
 directory = "artifacts/ranking"
 snapshot_name = "snapshot.json"
@@ -95,5 +109,7 @@ agent_output_name = "agent-assessments.json"
 test_subject = "[TEST] Finance jobs ranking comparison"
 
 [agentic]
+# Independent experimental Copilot driver; daily method=jev does not select it.
+model = "Qwen/Qwen3-235B-A22B-Instruct-2507"
 # A chosen request budget, not a claim about the model's maximum context window.
 max_prompt_tokens = 65536

@@ -3,6 +3,7 @@
 import io
 import json
 import os
+import re
 import unittest
 from contextlib import redirect_stdout
 from datetime import datetime
@@ -11,7 +12,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
 
-from jobs_bot.__main__ import _run
+from jobs_bot.__main__ import _run, _select
 from jobs_bot.shortlist import job_keys, select_jobs
 
 
@@ -40,6 +41,11 @@ class BotTests(unittest.TestCase):
         self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
+        # Isolate delivery tests from the user's selected paid-model mode/top-up.
+        source = re.sub(r'(?m)^method\s*=\s*"[^"]*"', 'method = "rules"', source)
+        source = source.replace(
+            "jsearch_top_up_threshold = 25", "jsearch_top_up_threshold = 0"
+        )
         self.config.write_text(
             source.replace('"artifacts/candidates"', json.dumps(str(self.archive)))
             .replace('"state/seen.json"', json.dumps(str(self.history)))
@@ -121,6 +127,71 @@ class BotTests(unittest.TestCase):
             self.assertEqual(set(json.loads(self.history.read_text())), job_keys(job))
             self.assertEqual(fetch.call_count, 2)
             self.assertEqual(fetch.call_args.args[1], "synthetic-jsearch-key")
+
+    def _enable_top_up(self):
+        """Enable the configured small-result top-up in this isolated fixture."""
+        self.config.write_text(
+            self.config.read_text().replace(
+                "jsearch_top_up_threshold = 0", "jsearch_top_up_threshold = 25"
+            )
+        )
+        self.credentials["JSEARCH_API_KEY"] = "synthetic-jsearch-key"
+
+    def test_top_up_at_twenty_five_merges_and_ranks_once_with_shared_history(self):
+        """Retain primary jobs and backup evidence, suppressing shared duplicates."""
+        self._enable_top_up()
+        primary_jobs = [_job(str(i), company=f"Company {i}") for i in range(25)]
+        duplicate = {**primary_jobs[0], "id": "jsearch:duplicate"}
+        extra = _job("jsearch:extra", "Graduate Business Analyst", "Backup employer")
+        extra.pop("category")
+        extra["description"] = "Entry-level finance operations."
+        with (
+            patch(
+                "jobs_bot.__main__.fetch_jsearch", return_value=[duplicate, extra]
+            ) as backup,
+            patch("jobs_bot.__main__._select", wraps=_select) as ranker,
+        ):
+            primary, deliver, output = self._invoke(primary_jobs)
+        primary.assert_called_once()
+        backup.assert_called_once()
+        ranker.assert_called_once()
+        self.assertEqual(len(ranker.call_args.args[0]), 27)
+        self.assertEqual(ranker.call_args.args[3], "combined")
+        self.assertIn(extra["title"], output)
+        self.assertEqual(output.count("Finance Analyst"), 19)
+        deliver.assert_not_called()
+        snapshots = [
+            json.loads(path.read_text()) for path in self.archive.glob("*.json")
+        ]
+        self.assertTrue(
+            any(s["provider"] == "combined" and len(s["jobs"]) == 27 for s in snapshots)
+        )
+
+    def test_top_up_empty_backup_is_not_requested_again(self):
+        """Do not spend a second backup request when the merged pool has no match."""
+        self._enable_top_up()
+        with patch("jobs_bot.__main__.fetch_jsearch", return_value=[]) as backup:
+            self._invoke([_job(title="Senior Finance Manager")])
+        backup.assert_called_once()
+
+    def test_top_up_above_threshold_does_not_call_jsearch(self):
+        """Keep a healthy primary pool on the single-provider request budget."""
+        self._enable_top_up()
+        with patch("jobs_bot.__main__.fetch_jsearch") as backup:
+            self._invoke([_job(str(i), company=f"Company {i}") for i in range(26)])
+        backup.assert_not_called()
+
+    def test_top_up_failure_sends_notice_without_marking_primary_jobs_seen(self):
+        """A backup failure must not claim that unsent primary listings were emailed."""
+        self._enable_top_up()
+        with patch(
+            "jobs_bot.__main__.fetch_jsearch", side_effect=RuntimeError("unavailable")
+        ) as backup:
+            with self.assertRaises(RuntimeError):
+                self._invoke([_job()], send=True)
+        backup.assert_called_once()
+        self.assertFalse(self.history.exists())
+        self.assertTrue(self.delivery.exists())
 
     def test_adzuna_http_error_uses_jsearch_filtering_and_delivery(self):
         """Record the backup's jobs after delivery, without logging HTTP details."""

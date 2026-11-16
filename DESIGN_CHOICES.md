@@ -1,5 +1,28 @@
 # Design choices
 
+## 2026-11-16 — Explicit daily Qwen and small Adzuna result top-up
+
+The user selected Jev for the next normal delivery and requested Qwen as another
+config-only choice. `rules`, `jev` and `qwen` now route through the same daily
+orchestrator. Qwen reuses the existing Nebius transport but constrains output to
+one named slot per advert, with categorical suitability and finite ordinal
+scores. Candidate filtering, history, delivery guards and email formatting are
+unchanged. `[agentic].model` independently selects the experimental agent driver;
+it is now Qwen, while its previously reported runtime incompatibility remains open.
+
+Adzuna responses with 25 or fewer raw jobs trigger one JSearch top-up before
+model assessment. The threshold is configurable, with zero disabling top-up.
+Record source batches and the final combined pool, then rank once; retain source-
+specific relevance handling when rules are selected. A flag prevents a second
+JSearch request after an empty top-up. Failed top-ups preserve the existing
+explicit failure notice and never mark unsent primary jobs as emailed.
+The shared candidate limit is 150 to accommodate up to 25 plus 80 raw jobs.
+
+Recent live logs for 10, 11, 13 and 16 November each requested 400 and returned
+50. These observations do not establish whether a response cap or search yield
+caused the counts. Top-up uses actual returned count, not an inferred cause.
+All checks for this change use mocks; no new paid API trial or email is needed.
+
 ## 2026-11-16 — Jev in the existing daily workflow, with an explicit switch
 
 Use the existing `[ranking].method` selector rather than another workflow or

@@ -3,8 +3,8 @@
 Jev replaces the suitability/ranking step while Python retains responsibility
 for vacancy fetching, history, selecting up to twenty jobs and email formatting.
 It does not need Copilot, an agentic workflow or another Cloudflare Worker.
-`[ranking] method = "rules"` is still the default; this keeps current delivery
-behaviour until you deliberately enable Jev.
+The user has selected `[ranking] method = "jev"` for normal delivery. Setting
+it to `"rules"` disables model assessment; `"qwen"` uses the compact Qwen client.
 
 ## Enable or disable
 
@@ -13,8 +13,10 @@ behaviour until you deliberately enable Jev.
    TypeSafe credential and select **Add secret**. The existing local secret
    launcher already supplied this name successfully in the trials. Local secret
    configuration is user-managed and has not been inspected or modified.
-2. In `config.toml`, set `[ranking] method = "jev"` to enable Jev or `"rules"` to
-   use the original rules. `[jev]` supplies the pinned model, endpoint, batch size,
+2. In `config.toml`, choose `[ranking] method = "jev"`, `"qwen"` or `"rules"`.
+   Qwen requires repository Secret **NEBIUS_KEY** and uses the settings under
+   `[qwen]`; its fixed answer slots bound output and its scores are suitability,
+   not confidence. `[jev]` supplies the pinned model, endpoint, batch size,
    timeout and criteria-file path. Shared ranking settings bound candidates,
    calls, elapsed time and description length. There is no automatic model retry
    or silent fallback to rules on inference failure.
@@ -49,7 +51,12 @@ The manual ranking command also accepts Jev:
 This spends Jev credits only. It sends no email and does not alter normal history.
 The snapshot is local and ignored by Git; a fresh clone does not contain it.
 The existing **Compare finance job rankings** agentic experiment remains the
-legacy Nebius path and is not repurposed as the Jev daily workflow.
+separate Nebius path and is not repurposed as the Jev daily workflow. Its agent
+driver is configured by `[agentic].model`, independently of the daily method.
+It now names Qwen, but the earlier Copilot-runtime provider-discovery failure
+has not been fixed or live-retested. Do not rely on that experiment for morning mail.
+The legacy `nebius_llm` selector is retained for older experiments; use `qwen`
+for the bounded standard-workflow client. The replay command also accepts `qwen`.
 
 ## What selection and validation mean
 

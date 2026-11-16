@@ -181,6 +181,9 @@ class SnapshotIntegrationTests(unittest.TestCase):
         self.config_path = self.directory / "config.toml"
         self.config_path.write_text("")
         self.config = tomllib.loads(Path("config.toml").read_text())
+        # Archive tests isolate capture ordering from optional paid ranking/top-up.
+        self.config["ranking"]["method"] = "rules"
+        self.config["search"]["jsearch_top_up_threshold"] = 0
         self.config["history"] = {
             "path": str(self.directory / "seen.json"),
             "delivery_path": str(self.directory / "delivery.json"),

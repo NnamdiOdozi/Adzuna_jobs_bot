@@ -2,18 +2,20 @@
 
 This bot asks Adzuna or JSearch for recent London-area finance vacancies, removes listings that
 have already been emailed, and sends a daily shortlist through Gmail. It can
-run locally now and later run on GitHub Actions, GitHub's service for scheduled
-program execution. No Azure service or large language model is involved.
+run locally or on GitHub Actions, triggered each morning by Cloudflare. Python
+owns fetching, history and email delivery; suitability can use rules, Jev or Qwen.
 
 Adzuna is the primary source, with JSearch as backup after an HTTP error or no
-unseen matching jobs. This
+unseen matching jobs, or as a top-up when Adzuna returns 25 jobs or fewer. This
 application does not separately scrape job boards or promise coverage of any
 particular recruitment website. Adzuna requires a finance category and finance
-title terms. JSearch can use description wording as finance evidence before
-senior exclusions and junior ranking. See [switching providers](docs/JSEARCH.md).
-Explicit experience wording, title preferences and listing date then order
-matches for a candidate with a finance master's degree and 0–2 years of experience.
-This screens for likely career level, not verified eligibility.
+title terms when rules are selected. JSearch rules can also use descriptions.
+Jev and Qwen instead assess the available advert text against the candidate
+profile and shared categories. The target is a Finance and Accounting master's
+graduate with 0–2 years' experience; graduate training and relevant complaints
+operations are eligible, while legal occupations and mid-level/senior work are
+excluded. This screens for plausible matches, not verified eligibility.
+See [switching sources](docs/JSEARCH.md) and [model selection](docs/JEV_RANKING.md).
 
 ```mermaid
 flowchart TB
@@ -21,11 +23,11 @@ flowchart TB
     direction LR
     A[Daily or manual start] --> B[Load settings and sent history]
     B --> C[Query the selected provider]
-    C --> D[Require finance relevance and rank junior roles]
+    C --> D[Remove seen and duplicate adverts]
   end
   subgraph second[Delivery]
     direction RL
-    E[Remove already sent jobs] --> F[Preview or send shortlist]
+    E[Rank with rules, Jev or Qwen] --> F[Preview or send shortlist]
     F --> G[After send: save history]
     G --> H[On GitHub: commit history]
   end
@@ -255,11 +257,13 @@ Actions run, before suitability filtering. Their available descriptions make
 later ranking comparisons possible without repeating a paid search. The separate
 **Compare finance job rankings** workflow supports replay, synthetic example data,
 direct Nebius assessment and an optional GitHub Agentic Workflow. It offers preview
-or one test email to the sender only. Daily ranking remains rules-based by default.
-To enable Jev in that same daily workflow, set `[ranking] method = "jev"` in
-`config.toml`; `method = "rules"` switches it off. Candidate preferences live in
+or one test email to the sender only. The daily workflow now selects Jev in config.
+Use `[ranking] method = "jev"` or `"qwen"` to choose the model;
+`method = "rules"` switches model assessment off. Candidate preferences live in
 `[candidate]`, and Jev's editable categories are in `prompts/jev_suitability.json`.
 Model assessment receipts appear as **job-ranking-receipts** Actions artifacts.
+An Adzuna response of 25 jobs or fewer triggers one JSearch top-up before ranking;
+the threshold is editable under `[search].jsearch_top_up_threshold`.
 See [Jev setup and the model comparison](docs/JEV_RANKING.md). Local edits take
 effect on GitHub after publication; Cloudflare's timer does not change.
 See [the GitHub setup and experiment runbook](docs/RANKING_EXPERIMENTS.md) for the

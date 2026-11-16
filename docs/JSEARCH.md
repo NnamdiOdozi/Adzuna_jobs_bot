@@ -2,7 +2,8 @@
 
 The bot normally tries Adzuna first and can use JSearch as its automatic backup.
 Cloudflare still requests the same GitHub workflow; the source that succeeds supplies vacancies before the existing
-ranking, preview/email and sent-history steps. No LLM is involved.
+ranking, preview/email and sent-history steps. The configured rules, Jev or Qwen
+ranker assesses the resulting pool; fetching does not itself use an LLM.
 
 ## Configuration
 
@@ -11,13 +12,20 @@ In `config.toml`, the normal settings under `[search]` are:
 ```toml
 provider = "adzuna"
 fallback_provider = "jsearch" # An empty string disables the automatic backup.
+jsearch_top_up_threshold = 25 # Raw returned jobs; zero disables top-up.
 ```
 
 The backup runs if Adzuna raises an HTTP error or produces no unseen matching
 jobs, including an empty response or listings all rejected/previously emailed.
-Adzuna first completes its existing smaller-page retry for HTTP 400. If at
-least one unseen match survives, JSearch is not contacted; it does not top up
-a short Adzuna email. Set provider to jsearch for direct JSearch use instead.
+Adzuna first completes its existing smaller-page retry for HTTP 400. When it
+returns 25 or fewer raw jobs, one JSearch request tops up that pool before ranking.
+Both sources are merged and the ranker applies shared history/duplicate checks.
+Above 25, a nonempty surviving shortlist does not call JSearch. Set provider to
+jsearch for direct JSearch use instead. A successful empty top-up is not fetched
+again if no jobs survive. An unsuccessful top-up uses the existing explicit
+JSearch-failure notice, not a misleading no-matches message; no jobs are marked
+sent by that notice. Separate source snapshots and a final combined snapshot
+preserve replay of the pool actually assessed.
 JSearch is tried at most once per run, never cycling back to Adzuna. Add its
 GitHub Secret before publishing the enabled backup. A missing key, malformed
 primary data or a non-HTTP network error still fails visibly; those failures

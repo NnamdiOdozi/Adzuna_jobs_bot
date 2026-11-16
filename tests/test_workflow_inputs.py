@@ -109,6 +109,13 @@ class WorkflowInputTests(unittest.TestCase):
             },
         )
 
+    def test_agentic_model_is_independent_of_daily_method(self):
+        """Selecting Jev for daily delivery must not replace the agent driver."""
+        config = _config()
+        config["ranking"]["method"] = "jev"
+        config["agentic"]["model"] = "Qwen/Qwen3-235B-A22B-Instruct-2507"
+        self.assertEqual(settings(config)["model"], config["agentic"]["model"])
+
     def test_settings_rejects_newline_output_injection(self):
         """Prevent a setting from writing an extra GitHub step-output variable."""
         for section, key in (
