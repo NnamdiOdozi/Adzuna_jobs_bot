@@ -1,0 +1,33 @@
+name: Native Copilot connection probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  copilot-requests: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Copilot CLI
+        run: npm install -g @github/copilot@1.0.103
+      - name: Ask about two synthetic roles without repository tools
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          timeout 120 copilot -s -p 'Connection test only. Candidate: Finance and Accounting masters graduate, 0–2 years experience, seeking junior finance/accounting work. For each title say suitable or unsuitable in one sentence: Graduate Accounts Assistant; Senior Finance Lawyer. Do not use tools or access files.' > answer.txt
+          test -s answer.txt
+          cat answer.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve response for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-copilot-response
+          path: answer.txt
+          if-no-files-found: warn
+          retention-days: 7
