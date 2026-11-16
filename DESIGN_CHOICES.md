@@ -623,3 +623,20 @@ Automated tests establish preview/send/history behaviour with simulated services
 They cannot establish live Gmail delivery, Adzuna coverage, GitHub write permissions
 or a particular recipient's job suitability. Each deployment still needs a live
 preview, a deliberate send and confirmation that history persists successfully.
+
+## 2026-11-16: external-model agent execution uses CLI
+
+The optional manual agentic ranker uses Copilot CLI with its model supplied by
+`engine.model` from configuration. With gh-aw v1.2.2, putting the dynamic model
+expression in `engine.env` caused the generated sandbox command to exclude it.
+Keep the provider credentials in the proxy-owned environment, but do not restore
+that redundant model environment override. Qwen SDK discovery also failed on
+missing supported-endpoint metadata; changing models alone did not repair it.
+
+Live run 43939683674 completed the CLI ranking and independent output validation.
+Earlier execution copied JSON booleans into Python source and failed. The task
+now explicitly asks for direct JSON, with bounded requests, time and retries.
+The successful agent still created a scratch script, so those prompt constraints
+are instructions, not enforced capability restrictions. The validator checks IDs,
+hashes and quotations, not suitability or compliance with every instruction.
+This remains a manual experiment; daily email delivery stays on Jev.

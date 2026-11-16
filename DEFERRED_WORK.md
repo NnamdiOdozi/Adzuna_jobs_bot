@@ -24,37 +24,13 @@
   Graduation-date and finance-sales preferences remain open. The legacy agentic
   comparison is separate; Jev does not depend on it.
 
-- 2026-11-16 — Source: approved manual Nebius ranking experiments. Snapshot,
-  direct ranker, comparison/test-email CLI and compiled Agentic Workflow are
-  implemented with offline tests. Live run 43874086629 on 2026-11-16 verified
-  direct Nemotron structured output: four synthetic unseen jobs assessed in one
-  call, with the expected decisions. Sender-only test email submission succeeded.
-  GitHub agent execution aborted during provider discovery with no supported
-  SDK wire API; investigate runtime compatibility before another paid trial.
-  Evaluation: `reports/ranking_experiment_43874086629_2026-11-16.md`.
-  A 40-candidate JSearch evaluation now has provisional Codex labels and a rules
-  baseline: `reports/jsearch_ranking_evaluation_2026-11-16.md`. Direct local
-  ranking initially failed with only a generic RuntimeError recorded. Safe
-  diagnostics and preservation of validated batches are now implemented locally
-  and covered by 139 passing offline tests. One authorized ten-job diagnostic
-  trial returned HTTP 200, finish_reason=length, 8192 completion tokens and zero
-  final-answer characters after about 34 seconds. The local direct failure is
-  now confirmed as output-budget exhaustion, not connection failure. No retry.
-  The user has since chosen Jev, so no further paid Nemotron budget trial is
-  planned. Diagnostic changes are now published with the Jev integration. Retain
-  the agent-runtime experiment as an optional route with its limitation disclosed.
-  Normal delivery now has a separate compact fixed-slot Qwen adapter. The legacy
-  Nebius quotation-based experiment remains separate and retains its older format.
-  Human-reviewed labels, daily artifact capture on a scheduled run and sender
-  inbox confirmation for the original experiment also remain unverified.
-  Daily ranking is now separately selected as Jev. Qwen SDK, CLI and native
-  Copilot connection experiments are tracked in
-  `reports/agent_connection_experiments_2026-11-16.md`; the CLI variant remains
-  isolated on `experiment/qwen-cli`, not selected for normal delivery.
-  Qwen SDK reproduced the metadata failure. CLI trials stopped before inference
-  on missing-model and unresolved-auto configuration errors; its model selection
-  still needs investigation. The separate 33-line native Copilot probe passed
-  exit/nonempty-response checks, without establishing full ranking suitability.
+- 2026-11-16 — Source: approved manual agent-ranking experiments. Qwen CLI
+  connection, tool execution, four-candidate output and independent validation
+  passed in run 43939683674. CLI is now the optional manual agentic route;
+  daily delivery remains Jev. Open: evaluate it on a larger human-labelled real
+  batch before relying on its suitability judgments. The SDK route still fails
+  provider metadata discovery and is not selected. See
+  `reports/agent_connection_experiments_2026-11-16.md` for evidence and limits.
 
 - 2026-11-13 — Source: approved JSearch build. Provider switch, eight-page/50 km
   settings, Secret mapping and offline tests are complete. User reports adding
