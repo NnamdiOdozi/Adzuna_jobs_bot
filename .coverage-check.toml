@@ -1,0 +1,7 @@
+# Local central-tool opt-in. Tests use synthetic credentials and mocked services.
+[check]
+python = ["python3"]
+test_module = "unittest"
+test_args = ["discover", "-s", "tests", "-v"]
+timeout_seconds = 30
+coverage_config = ".coveragerc"

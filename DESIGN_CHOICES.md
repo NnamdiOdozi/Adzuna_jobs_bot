@@ -1,5 +1,51 @@
 # Design choices
 
+## 2026-11-16 — Test on changes and verify before delivery
+
+`code-checks.yml` runs both mocked suites on pushes and pull requests. The push
+filter exempts only the two sent-history files. No allowlist of source folders
+can accidentally miss a new module, configuration file or dependency declaration.
+The existing local coverage check remains independent and is not added to Actions.
+
+The daily workflow uses `jobs_bot.verified_code` before loading application
+credentials or searching. GitHub's latest push check for the default branch must
+have succeeded, its commit must be an ancestor of checkout HEAD, and every other
+tracked file must match that tested commit. History-only commits remain eligible;
+new untested code, pending/failed/skipped checks and GitHub lookup failures block
+delivery. The workflow token gains Actions read permission, not a new user secret.
+Complete checkout history supports comparison. The persist step also skips when
+the actual search step never ran, while still persisting accepted failure notices.
+
+This deliberately trades a dependency on GitHub's checks API for preventing
+untested delivery. A blocked morning run remains visibly failed; the existing
+Cloudflare recovery/watchdog can retry or alert about missing delivery. Branch
+protection is unchanged because it could obstruct the bot's own history pushes.
+An administrator can still alter workflows; this is an operational guard, not
+protection against a malicious repository administrator. It does not verify that
+Cloudflare's deployed script matches its tested repository copy.
+
+Offline verification covers successful, missing, pending, failed and skipped
+checks, invalid metadata, unrelated commits, changed code and git failures. A
+disposable real Git repository confirms that later history changes pass and
+later source changes fail. GitHub-hosted execution is only verified after push.
+
+## 2026-11-15 — Local offline coverage before committing
+
+The shared local Git hook adds coverage after secret scanning and complexity
+checks for opted-in repositories. `.coverage-check.toml` selects the existing
+mocked unit tests; `.coveragerc` measures every `jobs_bot` module and sets the
+measured initial statement-and-branch minimum of 89.66%. No application dependency,
+GitHub workflow, API request, email or production history changes are required.
+The central launcher blocks Python networking and child programs, rejects even
+caught attempts, and terminates checks exceeding the configured 30-second limit.
+
+This is protection against accidental external calls, not a sandbox for hostile
+native code. Coverage shows execution, not assertion quality, live compatibility,
+graduate suitability or email receipt. It does not measure the Cloudflare
+JavaScript. The local check measures working-tree files, so partial staging can
+differ from what was tested. Keep intended source and test changes together.
+Shared setup and policy are in `~/.local/share/code-quality/COVERAGE.md`.
+
 ## 2026-11-13 — Email JSearch failures distinctly
 
 The user clarified that a JSearch failure must itself produce an email, rather

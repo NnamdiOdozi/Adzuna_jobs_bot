@@ -2,6 +2,16 @@
 
 These are conversation checkpoints, not requirements imposed on unattended runs.
 
+- [x] On 2026-11-16, user approved moving suites out of daily delivery provided
+  code changes automatically run them and cannot silently bypass verification.
+- [ ] Confirm the morning check reuses a successful test result for unchanged
+  code; history-only commits are allowed, but pending or failed code checks block.
+
+- [x] On 2026-11-15, user approved a shared local pre-commit coverage check,
+  preserving existing checks and using mocked tests without Adzuna credits.
+- [ ] Confirm that the 89.66% baseline measures execution, not assertion quality,
+  and that other repositories opt in separately to the centrally installed tool.
+
 - [x] On 2026-11-13, user requested a distinct JSearch API failure email.
 - [ ] Confirm that an accepted normal failure notice consumes today's email
   allowance, leaves seen jobs unchanged and still marks the workflow failed.

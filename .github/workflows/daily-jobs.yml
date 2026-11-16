@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: daily-job-shortlist
@@ -25,14 +26,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run tests
-        run: |
-          python -m unittest discover -s tests -v
-          node --test cloudflare/worker.test.mjs
+      - name: Require passing tests for the checked-out code
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: >-
+          python -m jobs_bot.verified_code --workflow code-checks.yml
+          --branch "$DEFAULT_BRANCH" --timeout 15
       - name: Search and optionally send
+        id: search
         env:
           ADZUNA_API_KEY: ${{ secrets.ADZUNA_API_KEY }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
@@ -50,7 +56,7 @@ jobs:
             *) exit 1 ;;
           esac
       - name: Persist history after Gmail accepts the message
-        if: ${{ !cancelled() && inputs.mode == 'send' }}
+        if: ${{ !cancelled() && inputs.mode == 'send' && steps.search.outcome != 'skipped' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

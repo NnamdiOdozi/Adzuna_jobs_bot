@@ -209,11 +209,31 @@ substitute for masked Secrets when a value must stay out of public logs.
 
 ## Checks and limitations
 
+GitHub's **Code checks** workflow runs both the Python and Cloudflare test suites
+on pushes and pull requests. Only pushes changing solely `state/seen.json` and
+`state/delivery.json` are exempt. No API credentials or email secrets are supplied
+to this workflow. The morning workflow does not repeat the suites: it requires
+the latest push check on the default branch to have succeeded and verifies that
+all checked-out files still match that tested commit, except the two history files.
+Failed, pending, skipped or unreadable checks stop the run before searching or
+sending. Open **Actions → Code checks** to diagnose or rerun a failed check.
+After publishing code, wait for this workflow to pass before manually trying a
+shortlist. A successful pull-request check alone does not replace the push check
+for the default branch. Local coverage enforcement remains separate.
+
 Run the offline tests with:
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+On the configured development machine, `check-coverage` also measures Python
+coverage and runs automatically before commits through the shared local Git
+hook. The initial minimum is 89.66%, measured from these mocked tests. Python
+network calls and child programs are blocked during that check. Its repository
+settings are `.coverage-check.toml` and `.coveragerc`; the central installation
+and adoption instructions are in `~/.local/share/code-quality/COVERAGE.md`.
+Cloning this repository alone does not install the central tool or hook.
 
 The tests substitute sample Adzuna results and simulated email submission. They
 check application behaviour without using credentials or sending mail. They do

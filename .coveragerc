@@ -1,0 +1,9 @@
+[run]
+source = jobs_bot
+branch = True
+
+[report]
+precision = 2
+show_missing = True
+# Set from the measured offline baseline; agents must not lower it to pass.
+fail_under = 85
