@@ -20,7 +20,7 @@ new = select_jobs(jobs, set(), config)
 old_ranks = {job['id']: rank for rank, job in enumerate(old, 1)}
 new_ranks = {job['id']: rank for rank, job in enumerate(new, 1)}
 with Path('reports/junior_ranking_title_replay.csv').open('w') as stream:
-    writer = csv.DictWriter(stream, fieldnames=['title', 'company', 'location', 'baseline_rank', 'proposed_rank'])
+    writer = csv.DictWriter(stream, lineterminator='\n', fieldnames=['title', 'company', 'location', 'baseline_rank', 'proposed_rank'])
     writer.writeheader()
     for job in new:
         writer.writerow(dict(title=job['title'], company=job['company']['display_name'],
