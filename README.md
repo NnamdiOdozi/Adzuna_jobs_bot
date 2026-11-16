@@ -11,9 +11,9 @@ application does not separately scrape job boards or promise coverage of any
 particular recruitment website. Adzuna requires a finance category and finance
 title terms. JSearch can use description wording as finance evidence before
 senior exclusions and junior ranking. See [switching providers](docs/JSEARCH.md).
-Finance keywords and
-listing date then order matches. This screens for likely career level, not
-verified experience or eligibility.
+Explicit experience wording, title preferences and listing date then order
+matches for a candidate with a finance master's degree and 0–2 years of experience.
+This screens for likely career level, not verified eligibility.
 
 ```mermaid
 flowchart TB
@@ -95,30 +95,64 @@ term in the title before junior preferences or senior exclusions. This saves
 requests but can reduce coverage compared
 with separate searches; a broad result pool may contain fewer junior roles.
 `results_per_page = 400` and `fallback_results_per_page = 100` control the primary
-and fallback sizes. No additional pages are fetched. Edit these title settings
+and fallback sizes. No additional pages are fetched. Edit these shortlist settings
 in `[search]`:
 
 | Setting | Effect |
 |---|---|
 | `category` | Restrict the request and returned jobs to `accounting-finance-jobs`. Missing or different categories are excluded. |
-| `title_keywords` | Require at least one whole finance word/phrase in the title; count matches when ranking. |
+| `max_experience_years` | Set the experience limit used to assess explicit mandatory applicant requirements. The default is 2 years. Zero and fractional values are supported. |
+| `title_keywords` | Require at least one whole finance word/phrase in the title. |
 | `exclude_title_keywords` | Reject whole words/phrases such as senior, manager, director, VP and controller, plus recruiter titles. |
-| `preferred_title_keywords` | Put graduate, junior, trainee, entry-level and assistant titles first. |
-| `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles. |
+| `preferred_title_keywords` | Prefer graduate, junior, trainee, entry-level and assistant titles within each experience group. |
+| `deprioritise_title_keywords` | Put associate titles below otherwise comparable titles; explicit junior wording remains stronger. |
 
 Matching ignores case and punctuation: `Sr.` and `entry-level` work. Exclusions
 win, so Assistant Manager is rejected while Finance Assistant remains eligible.
-Within the preferred/non-preferred groups, non-associate titles come first,
-then finance-keyword count and recency. Finance Analyst and Credit Analyst remain
-eligible, but a bare Junior Analyst title lacks finance evidence and is excluded.
+Roles with explicit requirements compatible with the experience limit come first,
+then junior title preferences, non-associate titles and recency. Equal ranks retain
+provider order. Finance keyword count does not affect rank. Finance Analyst and
+Credit Analyst remain eligible. A bare Junior Analyst title lacks finance
+evidence and is excluded.
 The bot sends
 fewer than 20 jobs if fewer qualify; it never pads the shortlist with excluded jobs.
 Logs count exclusions for wrong/missing category, missing finance title evidence
-and the first matching senior/recruiter title term.
+and the first matching senior/recruiter title term, plus experience exclusions.
 
-Description-based experience limits remain unimplemented. A retained role may
-still demand more experience, and summer/placement schemes may require current
-student status. Check the full advert; junior title wording does not prove fit.
+Both providers use the same experience checks. These read the title and any
+available description. A recognized mandatory minimum above `max_experience_years`
+causes exclusion, even if the title says junior. Examples include `Requires 3+
+years experience` and `The successful candidate must have 5 years experience`.
+The default limit is two years. Changing this limit does not change the existing
+finance relevance or senior-title filters.
+
+Decimal values are compared as written. With the default limit, `1.5 years
+experience required` remains eligible; `2.5 years experience required` does not.
+Ranges use their lower endpoint. This keeps `1–3 years` and `2+ years` eligible.
+A compatible mandatory requirement improves rank. So does an unconditional
+statement such as `no experience required`.
+
+Preferred experience does not cause exclusion or improve rank. For example,
+`3 years experience preferred` remains uncertain. An unrelated preference cannot
+cancel a separate mandatory minimum: `3 years experience required and Python
+preferred` is still excluded. Bare experience numbers, negated requirements and
+upper bounds such as `up to 5 years` remain uncertain. Missing descriptions and
+experience belonging to a manager or company also remain uncertain.
+
+Sentences containing a recognized alternative or condition are left unknown.
+For example, `Requires 3 years experience or a relevant masters degree` is
+retained without an experience ranking improvement. The same applies to `No
+experience required for graduates; 3 years experience required for non-graduates`.
+The checks do not decide whether a particular degree meets an alternative.
+
+These English wording rules are deliberately bounded. They can miss unusual
+phrasing, HTML markup, abbreviated units, or requirements absent from a truncated
+description. They recognize only a small set of conditions and alternatives.
+They cannot reliably connect exceptions across separate sentences or fields.
+Other complex wording can also be misinterpreted. A retained role may still
+demand more experience. The bot does not verify degree
+requirements, professional qualifications or current student status for placement
+schemes. Check the full advert; junior wording does not prove fit.
 
 Two checks remove duplicates. An Adzuna ID catches the same advert appearing in
 multiple searches or on later days. A second key uses the employer, job title and
