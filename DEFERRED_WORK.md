@@ -39,8 +39,10 @@
   final-answer characters after about 34 seconds. The local direct failure is
   now confirmed as output-budget exhaustion, not connection failure. No retry.
   The user has since chosen Jev, so no further paid Nemotron budget trial is
-  planned. Pending: publish these diagnostic changes; retain the agent-runtime
-  experiment as an optional route with its compatibility limitation disclosed.
+  planned. Diagnostic changes are now published with the Jev integration. Retain
+  the agent-runtime experiment as an optional route with its limitation disclosed.
+  If Qwen is later chosen for normal delivery, adapt the compact fixed-slot format;
+  the legacy Nebius ranker's array/quotation response was not changed to that format.
   Human-reviewed labels, daily artifact capture on a scheduled run and sender
   inbox confirmation for the original experiment also remain unverified.
   Daily ranking stays on rules until separately chosen activation.

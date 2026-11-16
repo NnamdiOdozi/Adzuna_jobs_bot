@@ -8,6 +8,9 @@ Python still owns providers, history, the daily guard and email composition.
 No default activation was made. The linked Qwen Instruct model was evaluated
 separately with short structured outputs; the legacy Nebius/agentic experiment
 was not silently repurposed or claimed compatible with the new receipt format.
+Qwen's first face-off request allowed an unbounded result array and exhausted
+its allowance. The successful trial used named answer slots and temperature 0.7;
+do not attribute the improvement to reasoning mode or just one of those changes.
 
 Jev questions contain one advert each and share only profile/policy context.
 Editable category criteria live in one JSON file. Short per-request identifiers
