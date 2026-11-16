@@ -136,6 +136,19 @@ class ModelRankingTests(unittest.TestCase):
         )
 
     @patch("jobs_bot.model_ranking._infer")
+    def test_runtime_credential_uses_nebius_key_name(self, infer):
+        """Use the shared uppercase credential name without reading real secrets."""
+        job = _job()
+        infer.return_value = ({"assessments": [_assessment(job)]}, {})
+        with patch(
+            "jobs_bot.model_ranking.os.getenv", return_value="synthetic"
+        ) as lookup:
+            selected, _ = rank_jobs([job], set(), self.config)
+        lookup.assert_called_once_with("NEBIUS_KEY")
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(infer.call_args.args[2], "synthetic")
+
+    @patch("jobs_bot.model_ranking._infer")
     def test_tiers_batch_order_and_receipt(self, infer):
         """Preserve model order within each label tier across bounded batches."""
         jobs = [_job("one"), _job("two"), _job("three")]

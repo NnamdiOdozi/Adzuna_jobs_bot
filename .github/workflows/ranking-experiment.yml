@@ -150,7 +150,7 @@ jobs:
           path: artifacts/ranking
       - name: Rank through the configured Nebius model
         env:
-          NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+          NEBIUS_KEY: ${{ secrets.NEBIUS_KEY }}
         run: python -m jobs_bot.experiments rank --snapshot artifacts/ranking/snapshot.json --method nebius_llm --output artifacts/ranking/direct.json
       - uses: actions/upload-artifact@v4
         if: always()
@@ -166,7 +166,7 @@ jobs:
     with:
       source_run_id: ${{ github.run_id }}
     secrets:
-      NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+      NEBIUS_KEY: ${{ secrets.NEBIUS_KEY }}
   compare:
     needs: [prepare, direct, agent]
     if: ${{ always() && needs.prepare.result == 'success' }}

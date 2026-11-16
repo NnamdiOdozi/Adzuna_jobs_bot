@@ -8,7 +8,7 @@ on:
         type: string
         required: true
     secrets:
-      NEBIUS_API_KEY:
+      NEBIUS_KEY:
         required: true
 permissions:
   contents: read
@@ -19,7 +19,7 @@ engine:
   copilot-sdk: true
   env:
     COPILOT_PROVIDER_BASE_URL: ${{ needs.settings.outputs.base_url }}
-    COPILOT_PROVIDER_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+    COPILOT_PROVIDER_API_KEY: ${{ secrets.NEBIUS_KEY }}
     COPILOT_PROVIDER_TYPE: openai
     COPILOT_PROVIDER_WIRE_API: completions
     COPILOT_MODEL: ${{ needs.settings.outputs.model }}

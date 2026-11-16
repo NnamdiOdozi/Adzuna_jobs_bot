@@ -205,6 +205,7 @@ Before activation, add these repository Actions secrets yourself:
 | `ADZUNA_APP_ID` | Adzuna application ID |
 | `JSEARCH_API_KEY` | OpenWeb Ninja key, required only when JSearch is selected |
 | `ADZUNA_API_KEY` | Adzuna API key |
+| `NEBIUS_KEY` | Nebius Token Factory inference key; required for model-ranking experiments or daily `nebius_llm` mode |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
 | `GMAIL_SENDER` | Gmail account login address used to authenticate and send |
 | `EMAIL_USER` | Main recipient address |
@@ -219,6 +220,9 @@ omits email headers and recipient addresses from its preview and routine logs.
 The workflow maps uppercase secret names to local runtime names: `GMAIL_SENDER`
 stays uppercase, `EMAIL_USER` maps to `email_user`, `EMAIL_FRIEND` to `email_friend`,
 and `GMAIL_APP_PASSWORD` to `gmail_app_password`. Adzuna names stay uppercase.
+`NEBIUS_KEY` keeps the same uppercase name locally and on GitHub. The experiment
+workflow passes it to the direct ranker and the agent's isolated provider proxy.
+It is not required while the ordinary daily bot uses rules only.
 The sender must be the Gmail account whose app password you use. Google requires
 two-step verification for app passwords, and some accounts restrict their use.
 

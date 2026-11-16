@@ -273,7 +273,7 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
     config : dict
         Ranking, profile and search shortlist settings.
     api_key : str, optional
-        Explicit credential; otherwise use the approved NEBIUS_API_KEY setting.
+        Explicit credential; otherwise use the approved NEBIUS_KEY setting.
 
     Returns
     -------
@@ -309,7 +309,7 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
         "truncation": [job["id"] for job in candidates if job["description_truncated"]],
     }
     if candidates:
-        api_key = api_key or os.getenv("NEBIUS_API_KEY")
+        api_key = api_key or os.getenv("NEBIUS_KEY")
         if not isinstance(api_key, str) or not api_key.strip():
             raise ValueError("Ranking credential is not configured")
     for offset in range(0, len(candidates), settings["batch_size"]):

@@ -17,7 +17,7 @@ live run. Successful offline tests or workflow compilation do not establish them
 1. Open this repository on GitHub. Select **Settings → Secrets and variables →
    Actions → Secrets**. If your screen combines these tabs, choose repository
    secrets rather than an environment.
-2. Choose **New repository secret**. Set **Name** to `NEBIUS_API_KEY`, paste your
+2. Choose **New repository secret**. Set **Name** to `NEBIUS_KEY`, paste your
    Token Factory inference key into **Secret**, then choose **Add secret**. Do
    not put the key in `config.toml`, an issue, workflow input or prompt.
 3. The existing `GMAIL_SENDER` and `GMAIL_APP_PASSWORD` repository secrets are
