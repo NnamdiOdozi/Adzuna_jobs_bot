@@ -2,11 +2,12 @@
 
 import hashlib
 import json
+import logging
 import math
 import os
 import time
 from pathlib import Path
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from jobs_bot.ranking_validation import _settings, validate_assessments
@@ -210,6 +211,16 @@ class _NoRedirect(HTTPRedirectHandler):
         return None
 
 
+class RankingFailure(RuntimeError):
+    """Carry safe inference diagnostics and completed, validated batch results."""
+
+    def __init__(self, category, **diagnostics):
+        self.diagnostics = {"category": category, **diagnostics}
+        self.receipt = None
+        status = diagnostics.get("http_status")
+        super().__init__(f"Ranking failure: {category} (status {status}); no retry")
+
+
 def _infer(request, settings, api_key, timeout):
     body = {
         name: request[name]
@@ -230,15 +241,20 @@ def _infer(request, settings, api_key, timeout):
         },
         method="POST",
     )
+    diagnostics = {}
     try:
         with build_opener(_NoRedirect()).open(
             http_request, timeout=timeout
         ) as response:
+            diagnostics["http_status"] = 200
             result = json.load(response)
         choice = result["choices"][0]
-        if choice["finish_reason"] != "stop":
-            raise ValueError("Incomplete inference")
-        payload = json.loads(choice["message"]["content"])
+        finish = choice["finish_reason"]
+        diagnostics["finish_reason"] = (
+            finish
+            if finish in ("stop", "length", "content_filter", "tool_calls")
+            else "unknown"
+        )
         usage = result.get("usage", {})
         if not isinstance(usage, dict):
             raise ValueError("Invalid token usage")
@@ -248,17 +264,37 @@ def _infer(request, settings, api_key, timeout):
             if value is not None and (type(value) is not int or value < 0):
                 raise ValueError("Invalid token usage")
             counts[name] = value
+        diagnostics["token_usage"] = counts
+        content = choice["message"]["content"]
+        diagnostics["response_characters"] = (
+            len(content) if isinstance(content, str) else 0
+        )
+        logging.info(
+            "event=ranking_response state=requested->received http_status=200 "
+            "finish_reason=%s completion_tokens=%s response_characters=%d",
+            diagnostics["finish_reason"],
+            counts["completion_tokens"],
+            diagnostics["response_characters"],
+        )
+        if finish != "stop":
+            raise RankingFailure("incomplete_output", **diagnostics)
+        payload = json.loads(content)
         return payload, counts
     except HTTPError as error:
-        raise RuntimeError(
-            f"Ranking provider HTTP failure (status {error.code}); no retry"
-        ) from None
+        status = error.code
+        error.close()
+        raise RankingFailure("http_error", http_status=status) from None
+    except RankingFailure:
+        raise
+    except (TimeoutError, URLError, OSError) as error:
+        timed_out = isinstance(error, TimeoutError) or isinstance(
+            getattr(error, "reason", None), TimeoutError
+        )
+        category = "timeout" if timed_out else "connection_error"
+        raise RankingFailure(category, **diagnostics) from None
     except Exception:
-        # Provider error bodies can contain credentials or untrusted advert text.
-        raise RuntimeError(
-            "Ranking provider returned an invalid response "
-            "or connection failed; no retry"
-        ) from None
+        # Preserve only our numeric/enum metadata, never raw provider error text.
+        raise RankingFailure("invalid_response", **diagnostics) from None
 
 
 def rank_jobs(jobs, seen, config, *, api_key=None):
@@ -296,6 +332,8 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
         "input_hash": full["input_hash"],
         "config_hash": full["config_hash"],
         "calls": 0,
+        "attempted_calls": 0,
+        "completed_batches": 0,
         "token_usage": {
             name: 0
             for name in (
@@ -332,11 +370,42 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
         request["response_format"]["json_schema"]["schema"]["properties"][
             "assessments"
         ]["items"]["properties"]["id"]["enum"] = [job["id"] for job in batch]
-        payload, usage = _infer(
-            request, settings, api_key, min(settings["timeout_seconds"], remaining)
+        receipt["attempted_calls"] += 1
+        batch_number = receipt["attempted_calls"]
+        logging.info(
+            "event=ranking_batch state=ready->requested batch=%d candidates=%d "
+            "max_output_tokens=%d input_hash=%s",
+            batch_number,
+            len(batch),
+            settings["max_output_tokens"],
+            full["input_hash"],
         )
-        receipt["calls"] += 1
-        receipt["assessments"].extend(validate_assessments(payload, batch, config))
+        try:
+            payload, usage = _infer(
+                request, settings, api_key, min(settings["timeout_seconds"], remaining)
+            )
+            receipt["calls"] += 1
+            validated = validate_assessments(payload, batch, config)
+        except Exception as error:
+            failure = (
+                error
+                if isinstance(error, RankingFailure)
+                else RankingFailure("assessment_validation")
+            )
+            failure.diagnostics["batch"] = batch_number
+            receipt["elapsed_seconds"] = time.monotonic() - started
+            failure.receipt = receipt
+            logging.error(
+                "event=ranking_batch state=requested->failed batch=%d category=%s "
+                "http_status=%s finish_reason=%s",
+                batch_number,
+                failure.diagnostics["category"],
+                failure.diagnostics.get("http_status"),
+                failure.diagnostics.get("finish_reason"),
+            )
+            raise failure from None
+        receipt["assessments"].extend(validated)
+        receipt["completed_batches"] += 1
         for name, value in usage.items():
             if value is None or receipt["token_usage"][name] is None:
                 receipt["token_usage"][name] = None

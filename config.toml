@@ -57,11 +57,12 @@ artifact_name = "job-candidates"
 retention_days = 30
 
 [candidate]
-profile = "Finance master's graduate; completed master's in 2025; zero to two years of professional experience; seeking early-career finance work in London and the surrounding area covered by the search. Work authorization, professional qualifications and student eligibility are not supplied."
+profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
 
 [ranking]
-# Daily delivery stays on rules. Experiments explicitly select nebius_llm.
+# Switch: rules disables model ranking; jev or nebius_llm enables that provider.
 method = "rules"
+receipt_directory = "artifacts/ranking"
 base_url = "https://api.tokenfactory.nebius.com/v1"
 model = "nvidia/nemotron-3-super-120b-a12b"
 prompt_path = "prompts/job_suitability.md"
@@ -77,6 +78,13 @@ max_evidence_chars = 2000
 temperature = 0
 allowed_labels = ["strong_fit", "possible_fit", "unlikely_fit", "insufficient_information"]
 selected_labels = ["strong_fit", "possible_fit"]
+
+[jev]
+base_url = "https://api.typesafe.ai/v1/systemone"
+model = "jev-1.14.0"
+policy_path = "prompts/jev_suitability.json"
+batch_size = 20
+timeout_seconds = 60
 
 [experiment]
 directory = "artifacts/ranking"

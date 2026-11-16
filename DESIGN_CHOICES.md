@@ -1,5 +1,53 @@
 # Design choices
 
+## 2026-11-16 — Jev in the existing daily workflow, with an explicit switch
+
+Use the existing `[ranking].method` selector rather than another workflow or
+redundant enable flag: `rules` is off, `jev` enables probability-based assessment.
+Python still owns providers, history, the daily guard and email composition.
+No default activation was made. The linked Qwen Instruct model was evaluated
+separately with short structured outputs; the legacy Nebius/agentic experiment
+was not silently repurposed or claimed compatible with the new receipt format.
+
+Jev questions contain one advert each and share only profile/policy context.
+Editable category criteria live in one JSON file. Short per-request identifiers
+map back to the original adverts locally. Rank acceptable choices by combined
+strong/possible probability across every batch, then break ties with strong-fit
+probability; category probabilities do not measure interview odds. Include
+graduate investment training and relevant complaints work, and never invent
+professional accreditation or applicant experience. Review uncertain cohorts.
+
+The daily selector is the sole writer of ranking receipts. They use a directory
+separate from candidate snapshots so archive replay cannot mistake assessment
+JSON for a vacancy batch. Model errors remain failures, preserve valid completed
+batches and leave delivery history unchanged. Automatic inference retries were
+not added; the existing completion watchdog exposes absent deliveries. Valid JSON
+and complete probability distributions do not prove correct interpretation.
+The evidence and limitations are in `reports/finance_model_faceoff_2026-11-16.md`.
+
+## 2026-11-16 — Preserve safe evidence when model ranking fails
+
+The first local 40-job evaluation failed without enough evidence to distinguish
+an HTTP rejection, output truncation, invalid response or timeout. The generic
+failure artifact also lost earlier validated batches, leaving usage uncertain.
+`RankingFailure` now carries only locally selected categories, numeric status,
+allowlisted completion reasons, token counts and response character counts.
+Raw provider bodies, headers, exception text and credentials are never persisted.
+Experiment failures save this metadata and the partial receipt while remaining
+failed; partially completed assessments are not presented as a successful ranking.
+
+The batch receipt distinguishes attempted calls, responses parsed by the client
+and batches whose assessments passed validation. A failed response's reported
+usage stays in its diagnostic record rather than being silently treated as zero.
+These counters do not establish provider billing, and a timed-out request may
+still have executed remotely. No automatic retry or output-budget increase was
+added. Existing direct API boundaries and the configured endpoint are unchanged.
+
+The ranking module now exceeds the 400-line review signal. Its additions only
+carry failures through the existing request/batch boundary; no new service or
+persistence responsibility was added. Retain its current structure for this
+focused fix rather than combining transport extraction with the live diagnosis.
+
 ## 2026-11-16 — Validate reusable workflow permissions on GitHub
 
 The first manually dispatched comparison failed at startup before any job ran:

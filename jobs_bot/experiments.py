@@ -13,8 +13,10 @@ from uuid import uuid4
 
 from jobs_bot.experiment_reports import _plain_text as _plain_text
 from jobs_bot.experiment_reports import _summary
+from jobs_bot.jev_ranking import rank_jobs as rank_jev
 from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.model_ranking import (
+    RankingFailure,
     prepare_candidates,
     rank_jobs,
     ranking_request,
@@ -89,19 +91,25 @@ def _rank(args, snapshot, config):
         report = _report(snapshot, "rules", selected=_rules(snapshot, config))
     else:
         try:
-            selected, receipt = rank_jobs(
-                snapshot["jobs"], set(snapshot["seen"]), config
-            )
-            report = _report(snapshot, "nebius_llm", selected=selected, receipt=receipt)
+            ranker = rank_jev if args.method == "jev" else rank_jobs
+            selected, receipt = ranker(snapshot["jobs"], set(snapshot["seen"]), config)
+            report = _report(snapshot, args.method, selected=selected, receipt=receipt)
         except Exception as error:
             # Raw provider exceptions can contain credential-bearing response bodies.
+            details = {}
+            if isinstance(error, RankingFailure):
+                details = {
+                    "diagnostics": error.diagnostics,
+                    "partial_receipt": error.receipt,
+                }
             _write(
                 args.output,
                 _report(
                     snapshot,
-                    "nebius_llm",
+                    args.method,
                     "failed",
                     error_type=type(error).__name__,
+                    **details,
                 ),
             )
             raise RuntimeError(
@@ -302,7 +310,7 @@ def _parser():
     prepare.add_argument("--output", required=True)
     rank = commands.add_parser("rank")
     rank.add_argument("--snapshot", required=True)
-    rank.add_argument("--method", choices=("rules", "nebius_llm"), required=True)
+    rank.add_argument("--method", choices=("rules", "nebius_llm", "jev"), required=True)
     rank.add_argument("--output", required=True)
     agent = commands.add_parser("agent-input")
     agent.add_argument("--snapshot", required=True)

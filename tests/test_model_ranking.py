@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 from urllib.error import HTTPError
 
 from jobs_bot.model_ranking import (
+    RankingFailure,
     _NoRedirect,
     prepare_candidates,
     rank_jobs,
@@ -197,6 +198,9 @@ class ModelRankingTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "status 429") as raised:
             rank_jobs([_job()], set(), self.config, api_key="fake")
         self.assertNotIn("SECRET", str(raised.exception))
+        self.assertEqual(raised.exception.diagnostics["http_status"], 429)
+        self.assertEqual(raised.exception.diagnostics["batch"], 1)
+        self.assertEqual(raised.exception.receipt["attempted_calls"], 1)
         self.assertEqual(opener.return_value.open.call_count, 1)
         self.assertIsNone(
             _NoRedirect().redirect_request(
@@ -224,9 +228,42 @@ class ModelRankingTests(unittest.TestCase):
         self.assertIsNone(receipt["token_usage"]["total_tokens"])
         bad = copy.deepcopy(result)
         bad["choices"][0]["finish_reason"] = "length"
+        bad["usage"] = {"completion_tokens": 8192, "total_tokens": 9000}
         response.read.return_value = json.dumps(bad)
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(RankingFailure) as raised:
             rank_jobs([_job()], set(), self.config, api_key="fake")
+        diagnostic = raised.exception.diagnostics
+        self.assertEqual(diagnostic["category"], "incomplete_output")
+        self.assertEqual(diagnostic["finish_reason"], "length")
+        self.assertEqual(diagnostic["token_usage"]["completion_tokens"], 8192)
+        self.assertGreater(diagnostic["response_characters"], 0)
+
+    @patch("jobs_bot.model_ranking._infer")
+    def test_later_failure_retains_completed_assessments_without_retry(self, infer):
+        """Keep paid, validated results when the next batch cannot complete."""
+        jobs = [_job("one"), _job("two")]
+        self.config["ranking"]["batch_size"] = 1
+        infer.side_effect = [
+            ({"assessments": [_assessment(jobs[0])]}, {"total_tokens": 37}),
+            RankingFailure("timeout"),
+        ]
+        with self.assertRaises(RankingFailure) as raised:
+            rank_jobs(jobs, set(), self.config, api_key="fake")
+        receipt = raised.exception.receipt
+        self.assertEqual(receipt["attempted_calls"], 2)
+        self.assertEqual(receipt["completed_batches"], 1)
+        self.assertEqual(receipt["token_usage"]["total_tokens"], 37)
+        self.assertEqual([r["id"] for r in receipt["assessments"]], ["one"])
+        self.assertEqual(infer.call_count, 2)
+
+    @patch("jobs_bot.model_ranking.build_opener")
+    def test_timeout_is_distinct_from_invalid_response(self, opener):
+        """Distinguish a transport timeout without including exception text."""
+        opener.return_value.open.side_effect = TimeoutError("sensitive transport text")
+        with self.assertRaises(RankingFailure) as raised:
+            rank_jobs([_job()], set(), self.config, api_key="fake")
+        self.assertEqual(raised.exception.diagnostics["category"], "timeout")
+        self.assertNotIn("sensitive", str(raised.exception))
 
     def test_configuration_checks_before_inference(self):
         """Reject invalid numeric limits and credential recipient changes."""

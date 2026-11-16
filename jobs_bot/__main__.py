@@ -12,8 +12,9 @@ from urllib.error import HTTPError
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
+from jobs_bot.jev_ranking import rank_jobs as rank_jev
 from jobs_bot.jsearch import fetch_jsearch
-from jobs_bot.model_ranking import rank_jobs
+from jobs_bot.model_ranking import RankingFailure, rank_jobs
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
 from jobs_bot.snapshots import record_snapshot
@@ -24,16 +25,38 @@ def _select(jobs, seen, config, provider):
     method = config.get("ranking", {}).get("method", "rules")
     if method == "rules":
         return select_jobs(jobs, seen, {**config["search"], "provider": provider})
-    if method != "nebius_llm":
-        raise ValueError("Ranking method must be rules or nebius_llm")
-    selected, receipt = rank_jobs(jobs, seen, config)
+    if method not in ("nebius_llm", "jev"):
+        raise ValueError("Ranking method must be rules, nebius_llm or jev")
+    ranker = rank_jev if method == "jev" else rank_jobs
+    try:
+        selected, receipt = ranker(jobs, seen, config)
+    except RankingFailure as error:
+        _record_ranking(
+            {
+                "status": "failed",
+                "diagnostics": error.diagnostics,
+                "partial_receipt": error.receipt,
+            },
+            config,
+        )
+        raise
+    _record_ranking({"status": "success", "method": method, "receipt": receipt}, config)
     logging.info(
         "event=ranking state=candidates->assessed method=%s model=%s calls=%d",
         method,
-        config["ranking"]["model"],
+        receipt.get("model", config["ranking"]["model"]),
         receipt["calls"],
     )
     return selected
+
+
+def _record_ranking(record, config):
+    directory = config["ranking"].get("receipt_directory")
+    if directory:
+        path = Path(directory) / f"ranking-{uuid4().hex}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(record, indent=2) + "\n")
+        logging.info("event=ranking_receipt state=assessed->saved path=%s", path)
 
 
 def _jsearch_result(config):

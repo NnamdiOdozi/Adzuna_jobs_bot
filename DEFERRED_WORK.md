@@ -1,24 +1,65 @@
 # Open work
 
+- 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
+  trial of the forty saved JSearch candidates completed in two twenty-question
+  requests, without retries: 32,257 input tokens, 2,126 output tokens, about
+  $0.00135 estimated API cost. Against provisional Codex labels, its shortlist
+  contained eighteen plausible, zero clearly unsuitable and two uncertain roles.
+  Evidence and limits: `reports/jev_evaluation_2026-11-16.md`. A second authorized
+  trial used the corrected Finance and Accounting profile with explicit legal,
+  mid-level and senior exclusions: thirteen strong, four possible, twenty
+  unlikely and three insufficient-information results. Seventeen shortlisted;
+  investment-banking advert dropped. Local canonical candidate profile corrected.
+  See `reports/jev_accounting_evaluation_2026-11-16.md`. The user's latest
+  clarification permits complaints operations and graduate investment programmes
+  offering training. A fresh Jev/Qwen face-off and 252-record historical title
+  pass are complete: `reports/finance_model_faceoff_2026-11-16.md`.
+  Standard-workflow Jev adapter, editable policy, configuration method switch,
+  repository Secret mapping, assessment artifacts and offline tests are implemented.
+  Pending: user supplies TYPESAFE_API_KEY as a repository Secret, explicit daily
+  activation, and sender-only end-to-end verification. Daily method remains rules.
+  Local evaluation artifacts are not available in a fresh GitHub checkout.
+  Graduation-date and finance-sales preferences remain open. The legacy agentic
+  comparison is separate; Jev does not depend on it.
+
 - 2026-11-16 — Source: approved manual Nebius ranking experiments. Snapshot,
   direct ranker, comparison/test-email CLI and compiled Agentic Workflow are
-  implemented with offline tests. Pending: first explicit live compatibility
-  test using `docs/RANKING_EXPERIMENTS.md`; user supplies NEBIUS_KEY as a
-  repository Secret. Synthetic example mode avoids job-search credits, but a
-  model run still consumes Nebius credits. Daily artifact capture and GitHub
-  hosted compilation need confirmation after publication/next scheduled run.
-  Actual Nemotron structured output/tool calling and sender inbox delivery remain
-  unverified. Daily ranking stays on rules until separately chosen activation.
+  implemented with offline tests. Live run 43874086629 on 2026-11-16 verified
+  direct Nemotron structured output: four synthetic unseen jobs assessed in one
+  call, with the expected decisions. Sender-only test email submission succeeded.
+  GitHub agent execution aborted during provider discovery with no supported
+  SDK wire API; investigate runtime compatibility before another paid trial.
+  Evaluation: `reports/ranking_experiment_43874086629_2026-11-16.md`.
+  A 40-candidate JSearch evaluation now has provisional Codex labels and a rules
+  baseline: `reports/jsearch_ranking_evaluation_2026-11-16.md`. Direct local
+  ranking initially failed with only a generic RuntimeError recorded. Safe
+  diagnostics and preservation of validated batches are now implemented locally
+  and covered by 139 passing offline tests. One authorized ten-job diagnostic
+  trial returned HTTP 200, finish_reason=length, 8192 completion tokens and zero
+  final-answer characters after about 34 seconds. The local direct failure is
+  now confirmed as output-budget exhaustion, not connection failure. No retry.
+  The user has since chosen Jev, so no further paid Nemotron budget trial is
+  planned. Pending: publish these diagnostic changes; retain the agent-runtime
+  experiment as an optional route with its compatibility limitation disclosed.
+  Human-reviewed labels, daily artifact capture on a scheduled run and sender
+  inbox confirmation for the original experiment also remain unverified.
+  Daily ranking stays on rules until separately chosen activation.
 
 - 2026-11-13 — Source: approved JSearch build. Provider switch, eight-page/50 km
   settings, Secret mapping and offline tests are complete. User reports adding
-  GitHub JSEARCH_API_KEY. Pending: a separately authorized live preview using
-  docs/JSEARCH.md. Adzuna remains primary with
+  GitHub JSEARCH_API_KEY. Authorized live eight-page acquisition on 2026-11-16
+  returned 42 jobs with descriptions; 40 remain after history/duplicate checks.
+  Local reusable dataset and limitations are documented in
+  `reports/jsearch_evaluation_batch_2026-11-16.md`. Provisional agent labels and
+  rules evaluation are now saved; a larger Nebius attempt failed. Pending: human
+  label review, successful model evaluation and GitHub replay access for that dataset.
+  Adzuna remains primary with
   automatic JSearch backup after HTTP errors or no unseen matching jobs. If
   both have no matches, send the user-requested informative notice. A JSearch
   failure sends a distinct failure email; accepted notices use the daily limit
-  while Actions still reports search failure. Eight-page latency/radius and quota are not
-  live-verified; only the earlier one-page trial ran. Shared history preserves
+  while Actions still reports search failure. Eight-page retrieval is now live
+  verified; strict radius behaviour and account billing/quota remain unverified.
+  Shared history preserves
   cross-source duplicate checks; exact county boundaries/identity remain limits.
 
 - 2026-11-13 — Source: missed morning email and requested Cloudflare instructions.

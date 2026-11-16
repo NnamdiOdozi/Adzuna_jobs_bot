@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from jobs_bot import experiments
-from jobs_bot.model_ranking import prepare_candidates, ranking_request
+from jobs_bot.model_ranking import RankingFailure, prepare_candidates, ranking_request
 from jobs_bot.snapshots import create_snapshot
 
 
@@ -168,6 +168,33 @@ class ExperimentTests(unittest.TestCase):
         text = self.output.read_text()
         self.assertNotIn("sensitive body", text)
         self.assertEqual(json.loads(text)["status"], "failed")
+
+    def test_jev_replay_uses_saved_pool_without_nebius(self):
+        """Route the explicit replay method to Jev without fetching more adverts."""
+        with (
+            patch(
+                "jobs_bot.experiments.rank_jev", return_value=([self.job], {"calls": 1})
+            ) as jev,
+            patch("jobs_bot.experiments.rank_jobs") as nebius,
+        ):
+            report = self._rank("jev")
+        self.assertEqual(report["method"], "jev")
+        jev.assert_called_once()
+        nebius.assert_not_called()
+
+    def test_model_failure_saves_safe_diagnostics_and_partial_receipt(self):
+        """Persist recovery evidence without presenting partial work as success."""
+        failure = RankingFailure("incomplete_output", finish_reason="length", batch=2)
+        failure.receipt = {"completed_batches": 1, "assessments": []}
+        with (
+            patch("jobs_bot.experiments.rank_jobs", side_effect=failure),
+            self.assertRaises(RuntimeError),
+        ):
+            self._rank("nebius_llm")
+        report = json.loads(self.output.read_text())
+        self.assertEqual(report["status"], "failed")
+        self.assertEqual(report["diagnostics"]["finish_reason"], "length")
+        self.assertEqual(report["partial_receipt"]["completed_batches"], 1)
 
     def test_agent_input_and_optional_absence_are_explicit(self):
         """An absent agent run is never presented as successful inference."""

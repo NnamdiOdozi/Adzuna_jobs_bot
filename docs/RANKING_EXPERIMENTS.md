@@ -145,3 +145,10 @@ The reusable caller permits issue-write for the compiler's conclusion job; the
 inference job itself has only read permissions. Automatic issue publishing is
 disabled. Code checks includes a deliberately skipped reusable call so GitHub
 validates the nested permissions before running tests, without inference.
+
+Direct model failures now save a safe `diagnostics` object identifying the batch,
+error category and available HTTP status, completion reason and token usage.
+A `partial_receipt` retains earlier validated assessments and progress counters.
+The result remains failed: partial output is not a complete comparison and is
+not automatically retried. Missing usage is unknown, not proof of zero charges.
+No provider response body, authentication header or raw exception is saved.

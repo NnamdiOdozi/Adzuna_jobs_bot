@@ -206,6 +206,7 @@ Before activation, add these repository Actions secrets yourself:
 | `JSEARCH_API_KEY` | OpenWeb Ninja key, required only when JSearch is selected |
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `NEBIUS_KEY` | Nebius Token Factory inference key; required for model-ranking experiments or daily `nebius_llm` mode |
+| `TYPESAFE_API_KEY` | Jev suitability ranking; required only when `ranking.method = "jev"` |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
 | `GMAIL_SENDER` | Gmail account login address used to authenticate and send |
 | `EMAIL_USER` | Main recipient address |
@@ -222,6 +223,8 @@ stays uppercase, `EMAIL_USER` maps to `email_user`, `EMAIL_FRIEND` to `email_fri
 and `GMAIL_APP_PASSWORD` to `gmail_app_password`. Adzuna names stay uppercase.
 `NEBIUS_KEY` keeps the same uppercase name locally and on GitHub. The experiment
 workflow passes it to the direct ranker and the agent's isolated provider proxy.
+`TYPESAFE_API_KEY` also keeps its name locally and on GitHub. The normal daily
+workflow maps it directly to the Jev client; no agentic workflow is involved.
 It is not required while the ordinary daily bot uses rules only.
 The sender must be the Gmail account whose app password you use. Google requires
 two-step verification for app passwords, and some accounts restrict their use.
@@ -253,6 +256,12 @@ later ranking comparisons possible without repeating a paid search. The separate
 **Compare finance job rankings** workflow supports replay, synthetic example data,
 direct Nebius assessment and an optional GitHub Agentic Workflow. It offers preview
 or one test email to the sender only. Daily ranking remains rules-based by default.
+To enable Jev in that same daily workflow, set `[ranking] method = "jev"` in
+`config.toml`; `method = "rules"` switches it off. Candidate preferences live in
+`[candidate]`, and Jev's editable categories are in `prompts/jev_suitability.json`.
+Model assessment receipts appear as **job-ranking-receipts** Actions artifacts.
+See [Jev setup and the model comparison](docs/JEV_RANKING.md). Local edits take
+effect on GitHub after publication; Cloudflare's timer does not change.
 See [the GitHub setup and experiment runbook](docs/RANKING_EXPERIMENTS.md) for the
 required Secret, exact Run workflow choices, costs, archive retention and limits.
 
