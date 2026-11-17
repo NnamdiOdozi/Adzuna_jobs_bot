@@ -640,3 +640,25 @@ The successful agent still created a scratch script, so those prompt constraints
 are instructions, not enforced capability restrictions. The validator checks IDs,
 hashes and quotations, not suitability or compliance with every instruction.
 This remains a manual experiment; daily email delivery stays on Jev.
+
+## 2026-11-17: numbered reports and independent permanent archives
+
+Canonical snapshots and model receipts keep their replay formats. A separate
+report writer adds run-local fetched numbers and email positions to derived JSON,
+saves the body without recipient headers, and records prepared, accepted and
+history-saved stages. It cannot prove inbox delivery. Reporting errors never
+repeat email; a later Actions step publishes available evidence or an incomplete
+run notice. Previously completed runs cannot gain a new job summary retroactively.
+
+The archive runs after delivery in a separate workflow, uses default-branch code
+and accepts only approved data filenames from same-repository/default-branch
+sources. Downloads have timeouts and bounded transient-error retries. Immutable
+per-run files and hashes make repeat copies safe; publication retries preserve
+intervening history commits. Failed archiving is a visible separate Action, not
+currently a Cloudflare notification. Artifact expiry and queue limits can still
+leave gaps, so failed copies need recovery while source artifacts remain available.
+
+The morning code gate permits only recognized evidence paths and ordinary docs
+after tested code. Prompts, agent definitions, configuration and executable files
+still require passing tests. Filename checks and hashes establish provenance and
+unchanged bytes, not absence of sensitive free text or semantic correctness.

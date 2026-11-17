@@ -2,11 +2,45 @@ name: Code checks
 
 on:
   push:
-    # Daily history changes do not alter the code that passed these tests.
+    # Ordinary docs/data do not change tested code. Prompt/workflow Markdown does.
     paths-ignore:
+      - README.md
+      - DESIGN_CHOICES.md
+      - DEFERRED_WORK.md
+      - HANDOVER.md
+      - DOUBTS.md
+      - archive/README.md
+      - docs/**.md
+      - reports/**.md
       - state/seen.json
       - state/delivery.json
+      - archive/[0-9]*/manifest.json
+      - archive/[0-9]*/job-candidates/[0-9a-f]*.json
+      - archive/[0-9]*/job-candidates/snapshot.json
+      - archive/[0-9]*/job-ranking-receipts/ranking-[0-9a-f]*.json
+      - archive/[0-9]*/job-run-report/report.json
+      - archive/[0-9]*/job-run-report/candidates.json
+      - archive/[0-9]*/job-run-report/assessments.json
+      - archive/[0-9]*/job-run-report/shortlist.json
+      - archive/[0-9]*/job-run-report/summary.md
+      - archive/[0-9]*/job-run-report/email.txt
+      - archive/[0-9]*/ranking-input/snapshot.json
+      - archive/[0-9]*/ranking-input/rules.json
+      - archive/[0-9]*/ranking-input/agent-input.json
+      - archive/[0-9]*/ranking-direct/direct.json
+      - archive/[0-9]*/ranking-agent/agent-assessments.json
+      - archive/[0-9]*/ranking-comparison/comparison.json
+      - archive/[0-9]*/ranking-comparison/comparison.md
   pull_request:
+    paths-ignore:
+      - README.md
+      - DESIGN_CHOICES.md
+      - DEFERRED_WORK.md
+      - HANDOVER.md
+      - DOUBTS.md
+      - archive/README.md
+      - docs/**.md
+      - reports/**.md
 
 permissions:
   contents: read

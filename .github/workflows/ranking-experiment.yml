@@ -76,6 +76,18 @@ jobs:
           script: |
             let run = process.env.ARCHIVE_RUN_ID.trim();
             if (run && !/^[0-9]+$/.test(run)) throw new Error('Archive run ID must be numeric');
+            const fs = require('fs');
+            if (run) {
+              for (const name of [process.env.ARCHIVE_NAME, 'ranking-input']) {
+                const directory = `archive/${run}/${name}`;
+                if (fs.existsSync(directory)) {
+                  core.setOutput('directory', directory);
+                  core.setOutput('default_filename', name === 'ranking-input' ? 'snapshot.json' : '');
+                  core.setOutput('run_id', run);
+                  return;
+                }
+              }
+            }
             if (!run) {
               const {data} = await github.rest.actions.listArtifactsForRepo({
                 ...context.repo, name: process.env.ARCHIVE_NAME, per_page: 100
@@ -87,7 +99,7 @@ jobs:
             }
             core.setOutput('run_id', run);
       - name: Download archived candidates
-        if: ${{ !inputs.fresh_search && !inputs.example_data }}
+        if: ${{ !inputs.fresh_search && !inputs.example_data && steps.archive.outputs.directory == '' }}
         uses: actions/download-artifact@v4
         with:
           name: ${{ steps.settings.outputs.archive_name }}
@@ -97,9 +109,10 @@ jobs:
       - name: Prepare saved candidates without a job API request
         if: ${{ !inputs.fresh_search && !inputs.example_data }}
         env:
-          SNAPSHOT_FILENAME: ${{ inputs.snapshot_filename }}
+          SNAPSHOT_FILENAME: ${{ inputs.snapshot_filename || steps.archive.outputs.default_filename }}
+          SNAPSHOT_DIRECTORY: ${{ steps.archive.outputs.directory || 'artifacts/input' }}
         run: |
-          snapshot=$(python -m jobs_bot.workflow_inputs choose --directory artifacts/input --filename "$SNAPSHOT_FILENAME")
+          snapshot=$(python -m jobs_bot.workflow_inputs choose --directory "$SNAPSHOT_DIRECTORY" --filename "$SNAPSHOT_FILENAME")
           python -m jobs_bot.experiments prepare --snapshot "$snapshot" --output artifacts/ranking/snapshot.json
       - name: Prepare explicitly selected synthetic example data
         if: ${{ inputs.example_data && !inputs.fresh_search }}

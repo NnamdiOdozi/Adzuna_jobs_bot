@@ -22,6 +22,7 @@ class VerifiedCodeTests(unittest.TestCase):
         statuses=(0, 0),
         repository="owner/repo",
         workflow="code-checks.yml",
+        changed="",
     ):
         """Return mocked git calls after checking a synthetic workflow result."""
         if runs is None:
@@ -31,7 +32,9 @@ class VerifiedCodeTests(unittest.TestCase):
             patch("jobs_bot.verified_code.urlopen", return_value=response) as request,
             patch(
                 "jobs_bot.verified_code.subprocess.run",
-                side_effect=[Namespace(returncode=code) for code in statuses],
+                side_effect=[
+                    Namespace(returncode=code, stdout=changed) for code in statuses
+                ],
             ) as git,
             redirect_stdout(io.StringIO()),
         ):
@@ -39,16 +42,33 @@ class VerifiedCodeTests(unittest.TestCase):
         return request, git
 
     def test_passed_code_and_history_changes_are_accepted(self):
-        """Require ancestry and compare all files except the two delivery records."""
+        """Require ancestry and inspect every path changed since tested code."""
         request, git = self.invoke()
         self.assertEqual(request.call_args.kwargs["timeout"], 15)
         self.assertEqual(git.call_count, 2)
         arguments = git.call_args.args[0]
         self.assertIn(SHA, arguments)
-        self.assertEqual(
-            arguments[-2:],
-            [":(exclude)state/seen.json", ":(exclude)state/delivery.json"],
+        self.assertIn("--name-only", arguments)
+        self.assertIn("--no-renames", arguments)
+        self.assertIn("-z", arguments)
+
+    def test_only_known_archive_data_bypasses_gate(self):
+        """Archived reports can grow, but code or arbitrary configuration blocks."""
+        self.invoke(
+            changed="state/seen.json\0archive/123/manifest.json\0"
+            "archive/123/job-run-report/email.txt\0"
+            "archive/123/ranking-comparison/comparison.md\0"
         )
+        for path in (
+            "archive/123/run.py",
+            "archive/123/config.json",
+            "archive/123/job-run-report/config.json",
+            "archive/123/job-run-report/email.sh",
+            "archive/arbitrary/job-run-report/report.json",
+            "jobs_bot/archive_runs.py",
+        ):
+            with self.subTest(path=path), self.assertRaises(RuntimeError):
+                self.invoke(changed=path + "\0")
 
     def test_missing_pending_or_failed_results_block(self):
         """A skipped, cancelled or unsuccessful suite cannot authorize sending."""
@@ -57,6 +77,18 @@ class VerifiedCodeTests(unittest.TestCase):
                 self.invoke([{"conclusion": conclusion}])
         with self.assertRaises(RuntimeError):
             self.invoke([])
+
+    def test_docs_skip_retesting_but_model_instructions_do_not(self):
+        """Documentation-only pushes cannot block mail or hide live prompt edits."""
+        self.invoke(changed="README.md\0docs/RUN_TRAIL.md\0archive/README.md\0")
+        for path in (
+            "prompts/job_suitability.md",
+            ".github/workflows/agentic-ranking.md",
+            "docs/example.py",
+            "jobs_bot/__main__.py",
+        ):
+            with self.subTest(path=path), self.assertRaises(RuntimeError):
+                self.invoke(changed=path + "\0")
 
     def test_code_difference_and_git_errors_block(self):
         """Reject changed code, unrelated tested commits and git failures."""

@@ -38,6 +38,7 @@ class BotTests(unittest.TestCase):
         self.history = Path(temporary.name) / "seen.json"
         self.delivery = Path(temporary.name) / "delivery.json"
         self.archive = Path(temporary.name) / "candidates"
+        self.report = Path(temporary.name) / "run-report"
         self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
@@ -48,6 +49,7 @@ class BotTests(unittest.TestCase):
         )
         self.config.write_text(
             source.replace('"artifacts/candidates"', json.dumps(str(self.archive)))
+            .replace('"artifacts/run-report"', json.dumps(str(self.report)))
             .replace('"state/seen.json"', json.dumps(str(self.history)))
             .replace('"state/delivery.json"', json.dumps(str(self.delivery)))
         )
@@ -364,6 +366,11 @@ class BotTests(unittest.TestCase):
 
         def _accept(message, config, password):
             self.assertFalse(self.history.exists())
+            prepared = json.loads((self.report / "report.json").read_text())
+            self.assertEqual(prepared["state"], "prepared")
+            self.assertEqual(
+                (self.report / "email.txt").read_text(), message.get_content()
+            )
             self.assertEqual(password, "synthetic-password")
             self.assertIn("user@example.com", str(message["To"]))
             self.assertIn("friend@example.com", str(message["To"]))
@@ -373,6 +380,13 @@ class BotTests(unittest.TestCase):
         self._invoke([job], send=True, failure=_accept)
         self.assertEqual(set(json.loads(self.history.read_text())), job_keys(job))
         self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
+        report = json.loads((self.report / "report.json").read_text())
+        self.assertEqual(report["state"], "accepted_history_saved")
+        selected = json.loads((self.report / "shortlist.json").read_text())
+        self.assertEqual(
+            (selected[0]["email_index"], selected[0]["fetched_index"]), (1, 1)
+        )
+        self.assertNotIn("user@example.com", (self.report / "email.txt").read_text())
 
     def test_failed_send_preserves_previous_history(self):
         """Keep earlier sent records unchanged when delivery raises."""
@@ -382,6 +396,8 @@ class BotTests(unittest.TestCase):
             self._invoke([_job()], send=True, failure=ConnectionError("unavailable"))
         self.assertEqual(json.loads(self.history.read_text()), original)
         self.assertFalse(self.delivery.exists())
+        report = json.loads((self.report / "report.json").read_text())
+        self.assertEqual(report["state"], "submission_failed_or_unknown")
         _, deliver, _ = self._invoke([_job()], send=True)
         deliver.assert_called_once()
 

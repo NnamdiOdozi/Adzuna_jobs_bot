@@ -58,6 +58,11 @@ directory = "artifacts/candidates"
 artifact_name = "job-candidates"
 retention_days = 90
 
+[report]
+enabled = true
+directory = "artifacts/run-report"
+artifact_name = "job-run-report"
+
 [candidate]
 profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
 
@@ -113,3 +118,8 @@ test_subject = "[TEST] Finance jobs ranking comparison"
 model = "Qwen/Qwen3-235B-A22B-Instruct-2507"
 # A chosen request budget, not a claim about the model's maximum context window.
 max_prompt_tokens = 65536
+
+[permanent_archive]
+request_timeout_seconds = 45
+request_attempts = 3
+retry_delays_seconds = [1, 2]

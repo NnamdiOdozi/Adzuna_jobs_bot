@@ -49,6 +49,12 @@ jobs:
               if '\n' in ranking_directory or '\r' in ranking_directory:
                   raise ValueError('Invalid ranking receipt directory')
               print(f'ranking_directory={ranking_directory}', file=stream)
+              for name in ('directory', 'artifact_name'):
+                  value = settings['report'][name]
+                  if not isinstance(value, str) or '\n' in value or '\r' in value:
+                      raise ValueError('Invalid report setting')
+                  print(f'report_{name}={value}', file=stream)
+              print(f"report_enabled={str(settings['report']['enabled']).lower()}", file=stream)
           PY
       - name: Require passing tests for the checked-out code
         env:
@@ -77,6 +83,20 @@ jobs:
             preview) python -m jobs_bot ;;
             *) exit 1 ;;
           esac
+      - name: Publish readable bulletin on this run page
+        if: ${{ always() && steps.archive.outcome == 'success' && steps.archive.outputs.report_enabled == 'true' }}
+        env:
+          RUN_MODE: ${{ inputs.mode }}
+          RUN_OUTCOME: ${{ steps.search.outcome }}
+        run: python -m jobs_bot.run_reports
+      - name: Save numbered jobs and prepared email body
+        if: ${{ always() && steps.archive.outcome == 'success' && steps.archive.outputs.report_enabled == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.archive.outputs.report_artifact_name }}
+          path: ${{ steps.archive.outputs.report_directory }}/
+          retention-days: ${{ steps.archive.outputs.retention_days }}
+          if-no-files-found: error
       - name: Save fetched candidates for offline replay
         if: ${{ always() && steps.archive.outcome == 'success' }}
         continue-on-error: true

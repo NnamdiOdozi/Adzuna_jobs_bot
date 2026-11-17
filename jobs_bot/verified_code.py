@@ -8,9 +8,24 @@ import subprocess
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from jobs_bot.archive_runs import archive_data_path
+
+
+def _documentation_path(path):
+    # Prompts and agent definitions also use Markdown but affect live behaviour;
+    # only these documentation locations are exempt from the code-test gate.
+    return path in {
+        "README.md",
+        "DESIGN_CHOICES.md",
+        "DEFERRED_WORK.md",
+        "HANDOVER.md",
+        "DOUBTS.md",
+        "archive/README.md",
+    } or (path.startswith(("docs/", "reports/")) and path.endswith(".md"))
+
 
 def verify(repository, workflow, branch, token, timeout):
-    """Accept passed code with only subsequent sent-history changes."""
+    """Accept passed code with subsequent delivery records and known evidence."""
     if not re.fullmatch(r"[\w.-]+/[\w.-]+", repository):
         raise ValueError("Invalid repository")
     if not re.fullmatch(r"[\w.-]+\.ya?ml", workflow):
@@ -36,22 +51,30 @@ def verify(repository, workflow, branch, token, timeout):
     )
     if ancestor.returncode:
         raise RuntimeError("Tested commit is not an ancestor of checked-out code")
-    # History grows independently. Every other tracked file must match tested code.
+    # Evidence and delivery records grow independently of application code.
+    # Check filenames explicitly so an executable under archive/ still blocks.
     difference = subprocess.run(
         [
             "git",
             "diff",
-            "--quiet",
+            "--name-only",
+            "--no-renames",
+            "-z",
             sha,
             "HEAD",
             "--",
-            ".",
-            ":(exclude)state/seen.json",
-            ":(exclude)state/delivery.json",
         ],
         check=False,
+        capture_output=True,
+        text=True,
     )
-    if difference.returncode:
+    if difference.returncode or any(
+        path not in {"state/seen.json", "state/delivery.json"}
+        and not archive_data_path(path)
+        and not _documentation_path(path)
+        for path in difference.stdout.split("\0")
+        if path
+    ):
         raise RuntimeError("Checked-out code differs from successfully tested code")
     print(
         f"event=code_check state=unverified->verified "

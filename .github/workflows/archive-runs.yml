@@ -1,0 +1,79 @@
+name: Preserve run evidence
+
+on:
+  workflow_run:
+    workflows: [Daily London job shortlist, Compare finance job rankings]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Completed default-branch daily or comparison run to preserve
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# Archive writers wait for each other. Delivery history may still move main,
+# so the publishing step also rebases and retries a rejected push three times.
+concurrency:
+  group: permanent-run-archive
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  preserve:
+    # Branch experiments retain their temporary Actions artifacts. Automatic
+    # permanent preservation is restricted to trusted default-branch runs.
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch' ||
+          (github.event.workflow_run.head_branch == github.event.repository.default_branch &&
+           github.event.workflow_run.head_repository.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    env:
+      SOURCE_RUN_ID: ${{ inputs.source_run_id || github.event.workflow_run.id }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - name: Read trusted archive code from the default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate source and preserve only approved evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m jobs_bot.archive_runs --repository "$GITHUB_REPOSITORY"
+          --run-id "$SOURCE_RUN_ID" --branch "$DEFAULT_BRANCH"
+      - name: Commit evidence without replacing existing history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "archive/$SOURCE_RUN_ID"
+          if git diff --cached --quiet; then
+            echo 'Identical evidence already preserved.'
+            exit 0
+          fi
+          git commit -m "Preserve evidence for run $SOURCE_RUN_ID"
+          for attempt in 1 2 3; do
+            git pull --rebase origin "$DEFAULT_BRANCH"
+            if git push origin "HEAD:$DEFAULT_BRANCH"; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo 'Archive publication failed after three attempts.'
+          exit 1
+      - name: Show the independent archive result
+        if: always()
+        env:
+          ARCHIVE_STATUS: ${{ job.status }}
+        run: |
+          printf 'Evidence archive for source run %s: %s\n' "$SOURCE_RUN_ID" "$ARCHIVE_STATUS" >> "$GITHUB_STEP_SUMMARY"

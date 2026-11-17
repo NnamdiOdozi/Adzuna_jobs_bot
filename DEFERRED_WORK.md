@@ -1,16 +1,5 @@
 # Open work
 
-- 2026-11-16 — Source: user wants experimental data kept beyond artifact expiry
-  and now prefers a folder in this repository over a separate private archive.
-  Revised proposal: commit allowlisted vacancy/assessment/comparison JSON under
-  `archive/`, grouped by source run, with hashes and no automatic deletion.
-  Use a separate trusted job with repository-write permission; agents keep their
-  read-only token. This avoids another repository and cross-repository token,
-  but the archived data would be public and increase checkout size. Raw runner
-  logs remain expiring Actions artifacts. Folder publication/automation and
-  copying existing uploads are not implemented. Artifact retention is published
-  at the public-repository maximum of 90 days; existing expiry dates are unchanged.
-
 - 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
   trial of the forty saved JSearch candidates completed in two twenty-question
   requests, without retries: 32,257 input tokens, 2,126 output tokens, about
@@ -207,15 +196,3 @@ Valid structured output proves format, not correct interpretation. Display the
 supporting wording so a person can check important judgments. If model confidence
 labels are used, define their meanings and check their usefulness against the
 reviewed examples rather than treating them as calibrated probabilities.
-
-## 5. Inspectable shortlists and send records — deferred 2026-10-24
-
-Log selected job IDs, titles and employers in send mode as well as summary counts.
-Distinguish selection, Gmail acceptance and successful history persistence.
-Consider a saved shortlist or downloadable GitHub artifact so the exact selection
-can be inspected later without rerunning the search. Decide retention and access
-before adding artifacts. Do not log credentials or private applicant information.
-
-Consider a separate email-submission record with run time and selected job IDs.
-The current seen.json is duplicate-suppression history, not an email audit trail
-or proof of inbox delivery. Saving a shortlist must not mark its jobs as sent.

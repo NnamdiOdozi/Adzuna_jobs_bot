@@ -468,7 +468,16 @@ class ExperimentTests(unittest.TestCase):
         rules, direct, _ = self._comparison_inputs()
         original = self._compare(rules, direct)
         path = self.directory / "comparison.json"
-        for corrupt in ("snapshot", "rules", "direct", "failed", "overlaps", "receipt"):
+        for corrupt in (
+            "snapshot",
+            "rules",
+            "direct",
+            "failed",
+            "overlaps",
+            "receipt",
+            "job_index",
+            "fetched_count",
+        ):
             bad = copy.deepcopy(original)
             if corrupt == "snapshot":
                 bad["snapshot_id"] = "invented"
@@ -480,6 +489,8 @@ class ExperimentTests(unittest.TestCase):
                 bad["reports"]["agent"]["selected"] = [self.job]
             elif corrupt == "overlaps":
                 bad["overlap_with_rules"]["rules"] = 999
+            elif corrupt in {"job_index", "fetched_count"}:
+                bad[corrupt] = 999
             else:
                 bad["reports"]["nebius_llm"]["receipt"]["input_hash"] = "different"
             path.write_text(json.dumps(bad))

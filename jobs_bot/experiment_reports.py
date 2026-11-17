@@ -14,6 +14,7 @@ def _summary(report):
         "# Ranking comparison",
         "",
         f"Snapshot: {_plain_text(report['snapshot_hash'])}",
+        f"Fetched vacancies: {report.get('fetched_count', 'not recorded')}",
         "",
         "Agreement and schema validation do not prove suitability or agent execution.",
         "",
@@ -53,7 +54,9 @@ def _summary(report):
         for index, job in enumerate(result.get("selected", []), 1):
             # Render adverts as plain text; never create remote-loading Markdown.
             lines.append(
-                f"{index}. {_plain_text(job['title'])} (ID: {_plain_text(job['id'])})"
+                f"{index}. {_plain_text(job['title'])} "
+                f"(fetched #{report.get('job_index', {}).get(str(job['id']), '?')}; "
+                f"ID: {_plain_text(job['id'])})"
             )
             assessment = assessments.get(str(job["id"]))
             if assessment:

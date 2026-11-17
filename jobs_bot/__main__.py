@@ -32,12 +32,13 @@ from jobs_bot.jev_ranking import rank_jobs as rank_jev
 from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.model_ranking import RankingFailure, rank_jobs
 from jobs_bot.qwen_ranking import rank_jobs as rank_qwen
+from jobs_bot.run_reports import record_run
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
 from jobs_bot.snapshots import record_snapshot
 
 
-def _select(jobs, seen, config, provider):
+def _select(jobs, seen, config, provider, records=None):
     """Select original vacancies through rules or the configured model adapter.
 
     Model adapters return both a shortlist and an assessment record, which this
@@ -56,6 +57,8 @@ def _select(jobs, seen, config, provider):
     try:
         selected, receipt = ranker(jobs, seen, config)
     except RankingFailure as error:
+        if records is not None:
+            records.append({"method": method, "receipt": error.receipt})
         _record_ranking(
             {
                 "status": "failed",
@@ -65,6 +68,8 @@ def _select(jobs, seen, config, provider):
             config,
         )
         raise
+    if records is not None:
+        records.append({"method": method, "receipt": receipt})
     _record_ranking({"status": "success", "method": method, "receipt": receipt}, config)
     logging.info(
         "event=ranking state=candidates->assessed method=%s model=%s calls=%d",
@@ -202,6 +207,7 @@ def _run():
     # Provider fallback belongs here so every successful batch can be archived
     # before ranking, including both sources when JSearch tops up Adzuna.
     jobs = []
+    records = []
     search_error = None
     jsearch_attempted = False
     if provider == "adzuna":
@@ -248,7 +254,11 @@ def _run():
                 provider = "combined"
                 record_snapshot(jobs, provider, config, seen)
     # Rank the merged pool once, retaining each provider's evidence rules.
-    selected = [] if search_error is not None else _select(jobs, seen, config, provider)
+    selected = (
+        []
+        if search_error is not None
+        else _select(jobs, seen, config, provider, records)
+    )
     if (
         not selected
         and provider == "adzuna"
@@ -260,7 +270,7 @@ def _run():
         jobs, search_error = _jsearch_result(config)
         if search_error is None:
             record_snapshot(jobs, provider, config, seen)
-        selected = _select(jobs, seen, config, provider)
+        selected = _select(jobs, seen, config, provider, records)
     config["email"]["source"] = {
         "adzuna": "Adzuna",
         "jsearch": "JSearch",
@@ -278,14 +288,35 @@ def _run():
     message = build_message(selected, config["email"], recipients, today)
     if args.test_send:
         message.replace_header("Subject", f"[TEST] {message['Subject']}")
+
+    def report(state):
+        # Only the public body and vacancy data are recorded, never recipients
+        # or credentials. A reporting error must not trigger another email.
+        record_run(
+            jobs,
+            selected,
+            config,
+            records,
+            date=today,
+            mode="test" if args.test_send else "send" if args.send else "preview",
+            state=state,
+            message=message,
+        )
+
+    report("prepared" if args.send or args.test_send else "preview")
     if not args.send and not args.test_send:
         # Preview only the body so recipient addresses stay out of Actions logs.
         print(message.get_content())
         if search_error is not None:
             raise RuntimeError("JSearch API failed; preview only") from None
         return
-    send_message(message, config["email"], password)
+    try:
+        send_message(message, config["email"], password)
+    except Exception:
+        report("submission_failed_or_unknown")
+        raise
     logging.info("event=email state=pending->accepted recipients=%d", len(recipients))
+    report("accepted")
     if args.test_send:
         logging.info("event=history state=unchanged reason=test_send")
         if search_error is not None:
@@ -307,6 +338,7 @@ def _run():
     history_path.parent.mkdir(parents=True, exist_ok=True)
     history_path.write_text(json.dumps(sorted(seen), indent=2) + "\n")
     logging.info("event=history state=loaded->saved keys=%d", len(seen))
+    report("accepted_history_saved")
 
 
 if __name__ == "__main__":

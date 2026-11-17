@@ -307,3 +307,12 @@ repeat the jobs. Partial recipient refusal can also deliver to one recipient
 while leaving history unchanged. Never assume a failed run means nobody received
 anything. See `DESIGN_CHOICES.md` for the accepted limitations and
 `DEFERRED_WORK.md` for setup still to complete.
+
+Each new daily run now has a readable **Daily job bulletin** on its Actions
+Summary page. Fetched-job numbers and email positions link the source vacancies,
+model assessments and final shortlist. Download **job-run-report** for the JSON
+and prepared email body. The separate **Preserve run evidence** workflow commits
+approved files under `archive/<source-run-id>/` without automatic expiry. See
+[Follow a bulletin from fetched jobs to email](docs/RUN_TRAIL.md) for exact steps.
+Ordinary documentation-only pushes skip Code checks; model prompts and agent
+definitions still trigger tests.

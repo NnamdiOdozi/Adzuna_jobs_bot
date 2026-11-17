@@ -209,8 +209,16 @@ def _compare(args, snapshot, config):
         method: len(rules_ids & {str(job["id"]) for job in result.get("selected", [])})
         for method, result in reports.items()
     }
+    indices = {}
+    for index, job in enumerate(snapshot["jobs"], 1):
+        indices.setdefault(str(job["id"]), index)
     report = _report(
-        snapshot, "comparison", reports=reports, overlap_with_rules=overlaps
+        snapshot,
+        "comparison",
+        reports=reports,
+        overlap_with_rules=overlaps,
+        job_index=indices,
+        fetched_count=len(snapshot["jobs"]),
     )
     _validate_comparison(report, snapshot, config)
     directory = Path(args.output_dir)
@@ -219,6 +227,13 @@ def _compare(args, snapshot, config):
 
 
 def _validate_comparison(report, snapshot, config):
+    indices = {}
+    for index, job in enumerate(snapshot["jobs"], 1):
+        indices.setdefault(str(job["id"]), index)
+    if report.get("job_index", indices) != indices or report.get(
+        "fetched_count", len(snapshot["jobs"])
+    ) != len(snapshot["jobs"]):
+        raise ValueError("Comparison job numbering differs from the source snapshot")
     if (
         report.get("method") != "comparison"
         or report.get("status") != "success"
