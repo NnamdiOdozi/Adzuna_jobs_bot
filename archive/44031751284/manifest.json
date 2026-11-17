@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "repository": "NnamdiOdozi/Adzuna_jobs_bot",
+  "source_run_id": "44031751284",
+  "source_commit": "c4eb488e9268cd5f454b841e94f580248d1a2340",
+  "workflow": ".github/workflows/daily-jobs.yml",
+  "branch": "main",
+  "conclusion": "success",
+  "run_attempt": 1,
+  "artifacts": [
+    {
+      "name": "job-candidates",
+      "id": 14304584089
+    },
+    {
+      "name": "job-ranking-receipts",
+      "id": 14305656687
+    }
+  ],
+  "sha256": {
+    "job-candidates/3376ed3a42eb4b00a4bea1e8f8eae113.json": "73238ec36c6ce5bcf9cefa204558e2310f717985a66115d4f945d259076514eb",
+    "job-ranking-receipts/ranking-72f2931f7a20451baf53189823b02b1c.json": "b53f6a340db1c9add4dc0930c29c1da527c88d1eb0e47de5343692e0541555c7"
+  }
+}
