@@ -57,17 +57,19 @@ def _select(jobs, seen, config, provider, records=None):
     try:
         selected, receipt = ranker(jobs, seen, config)
     except RankingFailure as error:
+        partial = _with_vacancies(error.receipt, jobs)
         if records is not None:
-            records.append({"method": method, "receipt": error.receipt})
+            records.append({"method": method, "receipt": partial})
         _record_ranking(
             {
                 "status": "failed",
                 "diagnostics": error.diagnostics,
-                "partial_receipt": error.receipt,
+                "partial_receipt": partial,
             },
             config,
         )
         raise
+    receipt = _with_vacancies(receipt, jobs)
     if records is not None:
         records.append({"method": method, "receipt": receipt})
     _record_ranking({"status": "success", "method": method, "receipt": receipt}, config)
@@ -78,6 +80,32 @@ def _select(jobs, seen, config, provider, records=None):
         receipt["calls"],
     )
     return selected
+
+
+def _with_vacancies(receipt, jobs):
+    """Attach provider titles and descriptions using the assessment's job ID.
+
+    Copy rows after model validation: this is report context, not extra model
+    output, and must not change the response object or its input fingerprints.
+    """
+    if receipt is None:
+        return None
+    vacancies = {}
+    for job in jobs:
+        vacancies.setdefault(
+            str(job["id"]),
+            {
+                "title": job.get("title", ""),
+                "vacancy": job.get("description", ""),
+            },
+        )
+    return {
+        **receipt,
+        "assessments": [
+            {**row, **vacancies.get(str(row["id"]), {"title": "", "vacancy": ""})}
+            for row in receipt.get("assessments", [])
+        ],
+    }
 
 
 def _record_ranking(record, config):

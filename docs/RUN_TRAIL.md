@@ -25,6 +25,13 @@ The downloaded **job-run-report** artifact contains:
 | `report.json` | Counts, method, model, assessment records and delivery stage |
 | `email.txt` | Exact prepared email body, without sender/recipient headers |
 
+Each saved daily model assessment also has `title` and `vacancy` fields containing
+the title and full description supplied by the provider, matched by job ID.
+This includes the advert
+wording, not just its title, and is not shortened to the model's input limit.
+Some providers supply excerpts rather than complete web-page text. The field is
+added when saving results, so it does not require more model tokens or API calls.
+
 The original **job-candidates** and **job-ranking-receipts** artifacts remain
 available for replay. Their schemas are unchanged. Normalized vacancy snapshots
 preserve the fields the bot uses, rather than the untouched provider response.

@@ -4,10 +4,62 @@ import unittest
 from unittest.mock import patch
 
 from jobs_bot.__main__ import _select
+from jobs_bot.model_ranking import RankingFailure
 
 
 class RankingIntegrationTests(unittest.TestCase):
     """Require explicit method selection and preserve the original candidate pool."""
+
+    def test_saved_assessments_include_full_description_matched_by_id(self):
+        """Keep advert wording beside decisions without changing model responses."""
+        description = (
+            "Billing manager, our client, an elite US law firm in central London. "
+            + "Full duties and requirements. " * 600
+        )
+        jobs = [
+            {"id": "first", "title": "Billing Manager", "description": description},
+            {
+                "id": "second",
+                "title": "Graduate Finance Analyst",
+                "description": "Graduate finance training provided.",
+            },
+        ]
+        receipt = {
+            "calls": 1,
+            "input_hash": "original-input",
+            "assessments": [{"id": "second"}, {"id": "first"}],
+        }
+        config = {"ranking": {"method": "jev", "model": "test-model"}}
+        records = []
+        with (
+            patch("jobs_bot.__main__.rank_jev", return_value=([], receipt)),
+            patch("jobs_bot.__main__._record_ranking") as save,
+        ):
+            _select(jobs, set(), config, "adzuna", records)
+        saved = save.call_args.args[0]["receipt"]
+        self.assertEqual(saved["assessments"][1]["vacancy"], description)
+        self.assertEqual(saved["assessments"][1]["title"], "Billing Manager")
+        self.assertEqual(saved["assessments"][0]["title"], "Graduate Finance Analyst")
+        self.assertEqual(saved["assessments"][0]["vacancy"], jobs[1]["description"])
+        self.assertEqual(records[0]["receipt"], saved)
+        self.assertEqual(saved["input_hash"], "original-input")
+        self.assertNotIn("vacancy", receipt["assessments"][0])
+
+    def test_failed_partial_assessments_keep_their_description(self):
+        """A later failed batch must not discard context from completed decisions."""
+        failure = RankingFailure("jev_request_failed", batch=2)
+        failure.receipt = {"calls": 1, "assessments": [{"id": "first"}]}
+        config = {"ranking": {"method": "jev", "model": "test-model"}}
+        with (
+            patch("jobs_bot.__main__.rank_jev", side_effect=failure),
+            patch("jobs_bot.__main__._record_ranking") as save,
+            self.assertRaises(RankingFailure),
+        ):
+            _select(
+                [{"id": "first", "description": "Full advert"}], set(), config, "adzuna"
+            )
+        partial = save.call_args.args[0]["partial_receipt"]
+        self.assertEqual(partial["assessments"][0]["vacancy"], "Full advert")
 
     @patch("jobs_bot.__main__.rank_jobs")
     @patch("jobs_bot.__main__.select_jobs")
