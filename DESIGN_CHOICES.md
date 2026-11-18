@@ -662,3 +662,12 @@ The morning code gate permits only recognized evidence paths and ordinary docs
 after tested code. Prompts, agent definitions, configuration and executable files
 still require passing tests. Filename checks and hashes establish provenance and
 unchanged bytes, not absence of sensitive free text or semantic correctness.
+
+## 2026-11-18: readable archive folder times
+
+Folder names use the source run's creation time in configured London time,
+with GMT/BST distinguishing winter and summer, rather than the later archive
+job's time. The manifest retains the UTC timestamp and GitHub run ID. Replay
+finds that ID in manifests instead of assuming it is the directory name.
+Existing evidence and old numeric names remain compatible. Same-second runs
+get a run-ID suffix instead of sharing a directory or overwriting data.

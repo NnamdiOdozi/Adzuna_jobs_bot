@@ -120,6 +120,7 @@ model = "Qwen/Qwen3-235B-A22B-Instruct-2507"
 max_prompt_tokens = 65536
 
 [permanent_archive]
+timezone = "Europe/London"
 request_timeout_seconds = 45
 request_attempts = 3
 retry_delays_seconds = [1, 2]

@@ -78,13 +78,21 @@ jobs:
             if (run && !/^[0-9]+$/.test(run)) throw new Error('Archive run ID must be numeric');
             const fs = require('fs');
             if (run) {
-              for (const name of [process.env.ARCHIVE_NAME, 'ranking-input']) {
-                const directory = `archive/${run}/${name}`;
-                if (fs.existsSync(directory)) {
-                  core.setOutput('directory', directory);
-                  core.setOutput('default_filename', name === 'ranking-input' ? 'snapshot.json' : '');
-                  core.setOutput('run_id', run);
-                  return;
+              const roots = fs.existsSync('archive') ? fs.readdirSync('archive', {withFileTypes: true}) : [];
+              for (const entry of roots.filter(e => e.isDirectory())) {
+                const root = `archive/${entry.name}`;
+                const manifestPath = `${root}/manifest.json`;
+                if (!fs.existsSync(manifestPath)) continue;
+                const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+                if (String(manifest.source_run_id) !== run) continue;
+                for (const name of [process.env.ARCHIVE_NAME, 'ranking-input']) {
+                  const directory = `${root}/${name}`;
+                  if (fs.existsSync(directory)) {
+                    core.setOutput('directory', directory);
+                    core.setOutput('default_filename', name === 'ranking-input' ? 'snapshot.json' : '');
+                    core.setOutput('run_id', run);
+                    return;
+                  }
                 }
               }
             }

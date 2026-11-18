@@ -44,12 +44,17 @@ tries to explain incomplete runs from available snapshots and assessment records
 ## Permanent copies in this repository
 
 **Preserve run evidence** runs separately after a completed default-branch daily
-or comparison run. It commits approved files under `archive/<source-run-id>/`,
+or comparison run. It commits approved files under `archive/<London-date-time>/`,
 with a manifest containing source identity and file fingerprints. It never
 executes downloaded files or changes agent permissions. Archive data is public.
 There is no automatic deletion; artifacts still expire after 90 days.
 
-Open **Code → archive → the source run ID** to browse permanent files. For new
+Names such as `2026-11-18_06-30-45_GMT` use the source run's creation time,
+converted to the configured `permanent_archive.timezone` (`Europe/London`). The
+manifest retains the original UTC time and GitHub run ID. Existing numeric
+folders remain readable; a second run in the same second gets an ID suffix.
+
+Open **Code → archive → the dated folder** to browse permanent files. For new
 daily runs, open **job-run-report → summary.md** to read the bulletin directly.
 To preserve an older run before its artifacts expire, open **Actions → Preserve
 run evidence → Run workflow**, enter its numeric **source_run_id**, and run it.
@@ -60,6 +65,8 @@ To compare an archived batch later, use its source ID in **Compare finance job
 rankings**, leaving **fresh_search** off. Explicit IDs use committed snapshots
 before attempting artifact downloads. Ranking comparisons still consume model
 credits when their model jobs are enabled.
+Open `manifest.json` and copy its `source_run_id` for that input; the date-time
+folder name is for browsing, while the ID identifies the original GitHub run.
 
 Archive publication has bounded retries and its own visible failure status, so
 it cannot block the email that already ran. It accepts only default-branch

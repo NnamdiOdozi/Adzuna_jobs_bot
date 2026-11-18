@@ -47,16 +47,19 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate source and preserve only approved evidence
+        id: archive
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
           python -m jobs_bot.archive_runs --repository "$GITHUB_REPOSITORY"
           --run-id "$SOURCE_RUN_ID" --branch "$DEFAULT_BRANCH"
       - name: Commit evidence without replacing existing history
+        env:
+          ARCHIVE_DIRECTORY: ${{ steps.archive.outputs.directory }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- "archive/$SOURCE_RUN_ID"
+          git add -- "$ARCHIVE_DIRECTORY"
           if git diff --cached --quiet; then
             echo 'Identical evidence already preserved.'
             exit 0

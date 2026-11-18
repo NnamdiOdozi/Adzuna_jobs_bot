@@ -40,6 +40,7 @@ class ArchiveTests(unittest.TestCase):
         self.root = Path(self.temporary.name) / "archive"
         self.run = {
             "id": 123,
+            "created_at": "2026-11-18T06:30:45Z",
             "head_repository": {"full_name": "owner/repo"},
             "head_branch": "main",
             "path": ".github/workflows/daily-jobs.yml",
@@ -84,6 +85,73 @@ class ArchiveTests(unittest.TestCase):
         self.assertEqual(
             (target / "job-run-report/report.json").read_text(), '{"status":"failed"}'
         )
+
+    def test_creation_time_uses_london_summer_and_winter_time(self):
+        """Name the source run, rather than the later archive job, in UK time."""
+        for created, expected in (
+            ("2026-11-18T06:30:45Z", "2026-11-18_06-30-45_GMT"),
+            ("2026-07-18T05:30:45Z", "2026-07-18_06-30-45_BST"),
+        ):
+            with self.subTest(created=created):
+                self.run["created_at"] = created
+                self.root = Path(self.temporary.name) / expected
+                target, _ = self.invoke()
+                self.assertEqual(target.name, expected)
+                manifest = json.loads((target / "manifest.json").read_text())
+                self.assertEqual(manifest["source_run_id"], "123")
+                self.assertEqual(manifest["source_created_at"], created)
+                self.assertEqual(manifest["archive_timezone"], "Europe/London")
+
+    def test_same_second_collision_never_merges_distinct_runs(self):
+        """Keep human time first, adding an ID only when two run times collide."""
+        first, _ = self.invoke()
+        self.run["id"] = 999
+        with patch(
+            "jobs_bot.archive_runs._api",
+            side_effect=[self.run, {"artifacts": [self.artifact]}, self.payload],
+        ):
+            second = preserve_run("owner/repo", "999", "main", self.root)
+        self.assertEqual(second.name, first.name + "--999")
+        self.assertTrue(archive_data_path(f"archive/{second.name}/manifest.json"))
+        self.assertFalse(archive_data_path(f"archive/{second.name}/run.py"))
+
+    def test_legacy_manifest_and_folder_remain_usable(self):
+        """Retry old archives without changing their original evidence bytes."""
+        target, _ = self.invoke()
+        manifest_path = target / "manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        for field in ("source_created_at", "source_local_time", "archive_timezone"):
+            manifest.pop(field)
+        manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+        original = manifest_path.read_bytes()
+        target.rename(self.root / "123")
+        retried, _ = self.invoke()
+        self.assertEqual(retried.name, "123")
+        self.assertEqual((retried / "manifest.json").read_bytes(), original)
+
+    def test_cli_passes_the_named_directory_to_the_commit_step(self):
+        """Stage the actual timestamp folder rather than guessing from its run ID."""
+        output = Path(self.temporary.name) / "outputs"
+        target = Path("archive/2026-11-18_06-30-45_GMT")
+        with (
+            patch(
+                "sys.argv",
+                [
+                    "archive",
+                    "--repository",
+                    "o/r",
+                    "--run-id",
+                    "123",
+                    "--branch",
+                    "main",
+                ],
+            ),
+            patch("jobs_bot.archive_runs.preserve_run", return_value=target),
+            patch.dict("os.environ", {"GITHUB_OUTPUT": str(output)}),
+            patch("sys.stdout", new_callable=io.StringIO),
+        ):
+            self.assertEqual(main(), 0)
+        self.assertEqual(output.read_text(), f"directory={target}\n")
 
     def test_source_provenance_and_ids_are_enforced(self):
         """Reject foreign, unfinished, non-default and unrelated workflow runs."""

@@ -1,5 +1,12 @@
 # Open work
 
+- 2026-11-18 — Source: user wants readable date/time archive names. New archives
+  use the source creation time in Europe/London with GMT/BST; the original run ID
+  remains in the manifest and replay still accepts it. Renaming existing folders
+  `44031751284` and `44251874979` to `2026-11-17_06-30-44_GMT` and
+  `2026-11-18_06-30-45_GMT` is awaiting the user's separate confirmation; their
+  evidence is untouched. Update any old folder links if that rename is approved.
+
 - 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
   trial of the forty saved JSearch candidates completed in two twenty-question
   requests, without retries: 32,257 input tokens, 2,126 output tokens, about

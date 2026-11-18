@@ -11,13 +11,16 @@ import argparse
 import hashlib
 import io
 import json
+import os
 import re
 import stat
 import subprocess
 import time
 import tomllib
+from datetime import datetime
 from pathlib import Path, PurePosixPath
 from zipfile import ZipFile
+from zoneinfo import ZoneInfo
 
 ARTIFACT_FILES = {
     "job-candidates": r"(?:[0-9a-f]{32}|snapshot)\.json",
@@ -34,10 +37,16 @@ SOURCE_WORKFLOWS = {
     ".github/workflows/daily-jobs.yml",
     ".github/workflows/ranking-experiment.yml",
 }
+_FOLDER = (
+    r"(?:[1-9][0-9]*|[0-9]{4}-[0-9]{2}-[0-9]{2}_"
+    r"[0-9]{2}-[0-9]{2}-[0-9]{2}_[A-Z0-9+-]{2,8}(?:--[1-9][0-9]*)?)"
+)
 _SAFE_VALIDATION_REASONS = frozenset(
     {
         "Invalid repository",
         "Invalid source run ID",
+        "Source creation time must include a timezone",
+        "Multiple archive folders match the source run",
         "Invalid permanent archive request settings",
         "Source run is not on the default branch; branch experiments are not archived",
         "Source must be a completed trusted default-branch run",
@@ -72,7 +81,7 @@ def archive_data_path(path):
     parts = path.split("/")
     if len(parts) not in (3, 4) or parts[0] != "archive":
         return False
-    if not re.fullmatch(r"[1-9][0-9]*", parts[1]):
+    if not re.fullmatch(_FOLDER, parts[1]):
         return False
     if len(parts) == 3:
         return parts[2] == "manifest.json"
@@ -157,6 +166,40 @@ def _invalid_json():
     raise ValueError("Non-finite JSON value")
 
 
+def _destination(root, run, timezone):
+    """Use the source creation time, retaining existing run folders on retries."""
+    created = datetime.fromisoformat(run["created_at"])
+    if created.tzinfo is None:
+        raise ValueError("Source creation time must include a timezone")
+    local = created.astimezone(ZoneInfo(timezone))
+    if root.is_symlink():
+        raise ValueError("Archive destination contains a symlink")
+    matches = []
+    for folder in root.iterdir() if root.exists() else ():
+        if not re.fullmatch(_FOLDER, folder.name):
+            continue
+        manifest = folder / "manifest.json"
+        if folder.is_symlink() or manifest.is_symlink():
+            raise ValueError("Archive destination contains a symlink")
+        if manifest.is_file():
+            if str(json.loads(manifest.read_text())["source_run_id"]) == str(run["id"]):
+                matches.append(folder)
+    if len(matches) > 1:
+        raise ValueError("Multiple archive folders match the source run")
+    if matches:
+        return matches[0], {}
+    destination = root / local.strftime("%Y-%m-%d_%H-%M-%S_%Z")
+    if destination.exists():
+        # Distinct runs can start within the same second. Never merge their data.
+        destination = root / f"{destination.name}--{run['id']}"
+    timing = {
+        "source_created_at": run["created_at"],
+        "source_local_time": local.isoformat(),
+        "archive_timezone": timezone,
+    }
+    return destination, timing
+
+
 def preserve_run(repository, run_id, branch, root=Path("archive")):
     """Download approved evidence and write an immutable per-run manifest.
 
@@ -191,6 +234,8 @@ def preserve_run(repository, run_id, branch, root=Path("archive")):
         or not re.fullmatch(r"[0-9a-f]{40}", run["head_sha"])
     ):
         raise ValueError("Source must be a completed trusted default-branch run")
+    settings = tomllib.loads(Path("config.toml").read_text())["permanent_archive"]
+    destination, timing = _destination(Path(root), run, settings["timezone"])
     files, artifacts = {}, []
     page = 1
     while True:
@@ -229,8 +274,17 @@ def preserve_run(repository, run_id, branch, root=Path("archive")):
         "artifacts": sorted(artifacts, key=lambda item: item["name"]),
         "sha256": {p: hashlib.sha256(b).hexdigest() for p, b in sorted(files.items())},
     }
+    previous = destination / "manifest.json"
+    if previous.exists():
+        existing = json.loads(previous.read_text())
+        # Preserve old manifest bytes and newly recorded time fields alike.
+        timing = {
+            key: existing[key]
+            for key in ("source_created_at", "source_local_time", "archive_timezone")
+            if key in existing
+        }
+    manifest.update(timing)
     files["manifest.json"] = (json.dumps(manifest, indent=2) + "\n").encode()
-    destination = Path(root) / run_id
     # Validate every target before writing anything. A retry may complete partial
     # identical data, but can never replace conflicting evidence or follow links.
     for relative, data in files.items():
@@ -257,6 +311,9 @@ def main():
     args = parser.parse_args()
     try:
         destination = preserve_run(args.repository, args.run_id, args.branch)
+        if "GITHUB_OUTPUT" in os.environ:
+            with Path(os.environ["GITHUB_OUTPUT"]).open("a") as stream:
+                print(f"directory={destination.as_posix()}", file=stream)
         print(f"event=archive state=downloaded->preserved path={destination}")
     except Exception as error:
         print(f"event=archive state=pending->failed type={type(error).__name__}")

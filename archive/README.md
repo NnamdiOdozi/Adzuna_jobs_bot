@@ -1,11 +1,14 @@
 # Saved job-run evidence
 
 The **Preserve run evidence** workflow stores approved JSON and readable reports
-here after default-branch daily and comparison runs. Each numbered directory is
-the original GitHub run ID, not the archive job's ID. Its `manifest.json` records
-the source commit, original artifact identities and file fingerprints.
+here after default-branch daily and comparison runs. New directories use the
+source run's creation time in London: `2026-11-18_06-30-45_GMT`, for example.
+The year-first order sorts chronologically; `GMT`/`BST` identifies winter/summer
+time. Its `manifest.json` retains the GitHub run ID, original UTC time, source
+commit, artifact identities and file fingerprints. Older numeric folders remain
+supported. A run ID suffix is added only if two timestamps collide.
 
-For new daily bulletins, open `<run-id>/job-run-report/summary.md`. The same folder
+For new daily bulletins, open `<date-time>/job-run-report/summary.md`. The same folder
 contains numbered candidates, assessments, the shortlist and the prepared email
 body. Older runs may contain only their originally captured data.
 
