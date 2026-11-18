@@ -1,0 +1,518 @@
+{
+  "status": "success",
+  "method": "jev",
+  "receipt": {
+    "model": "jev-1.14.0",
+    "calls": 3,
+    "attempted_calls": 3,
+    "assessments": [
+      {
+        "id": "5969923577",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.03,
+          "unlikely_fit": 0.96,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969923504",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969743687",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.03,
+          "unlikely_fit": 0.89,
+          "insufficient_information": 0.08
+        }
+      },
+      {
+        "id": "5969736279",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.99,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969735922",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.17,
+          "possible_fit": 0.63,
+          "unlikely_fit": 0.01,
+          "insufficient_information": 0.19
+        }
+      },
+      {
+        "id": "5969735919",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.04,
+          "unlikely_fit": 0.58,
+          "insufficient_information": 0.37
+        }
+      },
+      {
+        "id": "5969735923",
+        "suitability": "insufficient_information",
+        "probabilities": {
+          "strong_fit": 0.02,
+          "possible_fit": 0.31,
+          "unlikely_fit": 0.23,
+          "insufficient_information": 0.44
+        }
+      },
+      {
+        "id": "5969735912",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.16,
+          "possible_fit": 0.68,
+          "unlikely_fit": 0.0,
+          "insufficient_information": 0.16
+        }
+      },
+      {
+        "id": "5969735819",
+        "suitability": "insufficient_information",
+        "probabilities": {
+          "strong_fit": 0.02,
+          "possible_fit": 0.24,
+          "unlikely_fit": 0.02,
+          "insufficient_information": 0.72
+        }
+      },
+      {
+        "id": "5969735784",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.96,
+          "insufficient_information": 0.03
+        }
+      },
+      {
+        "id": "5969735749",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.94,
+          "insufficient_information": 0.05
+        }
+      },
+      {
+        "id": "5969734465",
+        "suitability": "insufficient_information",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.21,
+          "unlikely_fit": 0.28,
+          "insufficient_information": 0.5
+        }
+      },
+      {
+        "id": "5969732513",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.03,
+          "possible_fit": 0.13,
+          "unlikely_fit": 0.74,
+          "insufficient_information": 0.1
+        }
+      },
+      {
+        "id": "5969694597",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.07,
+          "possible_fit": 0.48,
+          "unlikely_fit": 0.38,
+          "insufficient_information": 0.07
+        }
+      },
+      {
+        "id": "5969694554",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969694475",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969694335",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969694337",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969692647",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969692651",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969692642",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.05,
+          "unlikely_fit": 0.93,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969692658",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969691133",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.08,
+          "unlikely_fit": 0.89,
+          "insufficient_information": 0.02
+        }
+      },
+      {
+        "id": "5969690153",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.08,
+          "possible_fit": 0.71,
+          "unlikely_fit": 0.1,
+          "insufficient_information": 0.11
+        }
+      },
+      {
+        "id": "5969688255",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.96,
+          "insufficient_information": 0.04
+        }
+      },
+      {
+        "id": "5969660806",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969585037",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969571338",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.27,
+          "possible_fit": 0.68,
+          "unlikely_fit": 0.01,
+          "insufficient_information": 0.04
+        }
+      },
+      {
+        "id": "5969570974",
+        "suitability": "insufficient_information",
+        "probabilities": {
+          "strong_fit": 0.03,
+          "possible_fit": 0.29,
+          "unlikely_fit": 0.3,
+          "insufficient_information": 0.38
+        }
+      },
+      {
+        "id": "5969564752",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969549378",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.05,
+          "unlikely_fit": 0.63,
+          "insufficient_information": 0.32
+        }
+      },
+      {
+        "id": "5969548840",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.81,
+          "insufficient_information": 0.19
+        }
+      },
+      {
+        "id": "5969529006",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969528293",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.1,
+          "possible_fit": 0.67,
+          "unlikely_fit": 0.01,
+          "insufficient_information": 0.22
+        }
+      },
+      {
+        "id": "5969528196",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.02,
+          "unlikely_fit": 0.93,
+          "insufficient_information": 0.05
+        }
+      },
+      {
+        "id": "5969528092",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.02,
+          "unlikely_fit": 0.96,
+          "insufficient_information": 0.02
+        }
+      },
+      {
+        "id": "5969528159",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.02,
+          "possible_fit": 0.12,
+          "unlikely_fit": 0.82,
+          "insufficient_information": 0.04
+        }
+      },
+      {
+        "id": "5969528025",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.99,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969528009",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.97,
+          "insufficient_information": 0.02
+        }
+      },
+      {
+        "id": "5969528012",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.07,
+          "possible_fit": 0.56,
+          "unlikely_fit": 0.16,
+          "insufficient_information": 0.21
+        }
+      },
+      {
+        "id": "5969527959",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.02
+        }
+      },
+      {
+        "id": "5969528003",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.02,
+          "possible_fit": 0.12,
+          "unlikely_fit": 0.72,
+          "insufficient_information": 0.14
+        }
+      },
+      {
+        "id": "5969527872",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.94,
+          "insufficient_information": 0.05
+        }
+      },
+      {
+        "id": "5969527585",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.11,
+          "possible_fit": 0.65,
+          "unlikely_fit": 0.08,
+          "insufficient_information": 0.16
+        }
+      },
+      {
+        "id": "5969527142",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        }
+      },
+      {
+        "id": "5969527344",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.55,
+          "possible_fit": 0.43,
+          "unlikely_fit": 0.0,
+          "insufficient_information": 0.02
+        }
+      },
+      {
+        "id": "5969499521",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969499506",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        }
+      },
+      {
+        "id": "5969431349",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.06,
+          "unlikely_fit": 0.84,
+          "insufficient_information": 0.09
+        }
+      },
+      {
+        "id": "5969422985",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.02
+        }
+      }
+    ],
+    "token_usage": {
+      "input_tokens": 26215,
+      "output_tokens": 2641
+    },
+    "input_hash": "697f9f9eae70b09460e83a4983659a477ad9c1efa64cec32d74d8ae04e56c125",
+    "truncation": [],
+    "elapsed_seconds": 0.41043981600000734
+  }
+}
