@@ -23,12 +23,31 @@
   ],
   "sha256": {
     "job-candidates/9f6dac5742a3474fb50c85e228407f94.json": "81d23cf225d7e883f795cfa126cb4cd02204fb044cc37d1f39ceb8d9125999d7",
-    "job-ranking-receipts/ranking-065b50e3486345949a97d23c205c47e8.json": "cb43962c6483a74d95120dfe40415131791885cd231dccfa31b30d8365efa912",
-    "job-run-report/assessments.json": "2bc1da68644800ccd3dd6081d5fb614e74f19f4d26eccfa4f37dfd0e7d593d6a",
+    "job-ranking-receipts/ranking-065b50e3486345949a97d23c205c47e8.json": "3706bebd3711b50b8a6cd9f70eab3c2cb52712f7855bd0043b032d6abc440f34",
+    "job-run-report/assessments.json": "2168b56ad51cdabdb3926c6c2027ac7a1c2b59346ea5ad96c0cd65cbf12d16ab",
     "job-run-report/candidates.json": "d47578e87e41e9b1e0400397399b39544e5bb48e6374f22c63b153dece0f8564",
     "job-run-report/email.txt": "7eb433d63bc47c4fa7df575079df34aba533575265a4ae0a3fd9649aca3917de",
-    "job-run-report/report.json": "593fcb43d6074d767558f2e6dc9c290afaa973b1ad2686f5e8d731033417db11",
+    "job-run-report/report.json": "e6b434bc2ffc6cf9d6589dddc23667e00f5a918c8e0f338dbad994e53496b68c",
     "job-run-report/shortlist.json": "bdba92f00289d6a4109f48ebe70afe8d3c76b46c7a7bd9ff3e3990a9fca17a6d",
     "job-run-report/summary.md": "dfc60ade9efcca917ef957862c4b5208a93bf6c5b5df4f0203a342b6095cf16d"
-  }
+  },
+  "original_sha256": {
+    "job-ranking-receipts/ranking-065b50e3486345949a97d23c205c47e8.json": "cb43962c6483a74d95120dfe40415131791885cd231dccfa31b30d8365efa912",
+    "job-run-report/assessments.json": "2bc1da68644800ccd3dd6081d5fb614e74f19f4d26eccfa4f37dfd0e7d593d6a",
+    "job-run-report/report.json": "593fcb43d6074d767558f2e6dc9c290afaa973b1ad2686f5e8d731033417db11"
+  },
+  "enrichments": [
+    {
+      "at_utc": "2026-11-18T09:42:06+00:00",
+      "operation": "Added title and full provider vacancy description by job ID; no model calls",
+      "files": [
+        "job-ranking-receipts/ranking-065b50e3486345949a97d23c205c47e8.json",
+        "job-run-report/assessments.json",
+        "job-run-report/report.json"
+      ],
+      "source_candidate_files": [
+        "job-candidates/9f6dac5742a3474fb50c85e228407f94.json"
+      ]
+    }
+  ]
 }

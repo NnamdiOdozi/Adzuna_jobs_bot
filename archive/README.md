@@ -15,3 +15,9 @@ body. Older runs may contain only their originally captured data.
 These committed files have no automatic expiry. Everything in this folder is
 public. Do not add credentials, email headers or raw runner logs. See
 [the run-trail guide](../docs/RUN_TRAIL.md) for navigation and backfilling old runs.
+
+The 17 and 18 November assessments were later enriched with titles and vacancy
+text from their saved candidates, without changing decisions or probabilities.
+Their manifests record the additions and retain the original file fingerprints
+alongside the current ones. Repeating an original download will fail rather than
+overwrite these enriched historical versions and silently remove that context.

@@ -19,6 +19,21 @@
   ],
   "sha256": {
     "job-candidates/3376ed3a42eb4b00a4bea1e8f8eae113.json": "73238ec36c6ce5bcf9cefa204558e2310f717985a66115d4f945d259076514eb",
+    "job-ranking-receipts/ranking-72f2931f7a20451baf53189823b02b1c.json": "f48e1ff867d4daa25ed9c48720e9791b163032d3c97d0684bde78cdc80749c71"
+  },
+  "original_sha256": {
     "job-ranking-receipts/ranking-72f2931f7a20451baf53189823b02b1c.json": "b53f6a340db1c9add4dc0930c29c1da527c88d1eb0e47de5343692e0541555c7"
-  }
+  },
+  "enrichments": [
+    {
+      "at_utc": "2026-11-18T09:42:06+00:00",
+      "operation": "Added title and full provider vacancy description by job ID; no model calls",
+      "files": [
+        "job-ranking-receipts/ranking-72f2931f7a20451baf53189823b02b1c.json"
+      ],
+      "source_candidate_files": [
+        "job-candidates/3376ed3a42eb4b00a4bea1e8f8eae113.json"
+      ]
+    }
+  ]
 }
