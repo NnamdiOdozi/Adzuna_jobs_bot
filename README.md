@@ -29,10 +29,23 @@ flowchart TB
     direction RL
     E[Rank with rules, Jev or Qwen] --> F[Preview or send shortlist]
     F --> G[After send: save history]
-    G --> H[On GitHub: commit history]
+    G --> H[On GitHub: commit history and archive evidence]
   end
   D --> E
+  H -. Saved candidates: replay without a new search .-> E
 ```
+
+**Replay** means loading a saved batch of vacancies and assessing it again, for
+example to compare rules, Jev and Qwen on the same jobs without another Adzuna or
+JSearch request. Model assessments can still cost money; replay does not by itself
+send an email or update sent-job history. The manual **Compare finance job rankings**
+workflow provides this experiment separately from the normal morning delivery.
+
+The diagram shows the daily route and its replay branch. GitHub also runs separate
+**Code checks** before delivery is allowed and **Preserve run evidence** afterwards,
+which saves candidates, assessments and available email reports for later inspection.
+Cloudflare schedules the daily route and checks whether delivery was recorded;
+it does not rank jobs.
 
 ## Try it locally
 
@@ -261,6 +274,10 @@ or one test email to the sender only. The daily workflow now selects Jev in conf
 Use `[ranking] method = "jev"` or `"qwen"` to choose the model;
 `method = "rules"` switches model assessment off. Candidate preferences live in
 `[candidate]`, and Jev's editable categories are in `prompts/jev_suitability.json`.
+The profile records spoken English and Vietnamese. The shared Jev/Qwen policy
+treats missing essential eligibility or boilerplate-only adverts as needing more
+information, while preserving plausible junior, temporary and accounting-support
+jobs. Model-ranked emails retain Adzuna's estimated-salary label and pay units.
 Model assessment receipts appear as **job-ranking-receipts** Actions artifacts.
 An Adzuna response of 25 jobs or fewer triggers one JSearch top-up before ranking;
 the threshold is editable under `[search].jsearch_top_up_threshold`.

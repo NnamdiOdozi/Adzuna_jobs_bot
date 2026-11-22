@@ -64,7 +64,7 @@ directory = "artifacts/run-report"
 artifact_name = "job-run-report"
 
 [candidate]
-profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
+profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Spoken languages are English and Vietnamese; other languages and written/business-language proficiency are not established. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
 
 [ranking]
 # Daily switch: rules (no model), jev, or qwen. Agentic experiments are separate.

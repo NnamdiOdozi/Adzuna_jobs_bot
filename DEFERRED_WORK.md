@@ -1,5 +1,21 @@
 # Open work
 
+- 2026-11-22 — Source: requested weekly native Copilot review. Proposed Saturday
+  02:00 Europe/London review of the preceding Monday–Friday's archived vacancies,
+  assessments, emails and run outcomes. Read-only analysis; evidence-linked
+  recommendations or an explicit no-material-findings report. Missing evidence
+  must mean incomplete review. No searches, Jev calls or changes to delivery.
+  Status: design proposed; workflow, Copilot authentication, report publication
+  and failure notification still to be agreed and implemented.
+
+- 2026-11-22 21:29 GMT — Source: authorised four-day Jev replay. Revised policy
+  removes several weak matches but drops an Accounts Payable Assistant and adds
+  other low-evidence roles. Shorter, ordered category rules and a focused replay
+  of the problem cases need agreement before another paid trial. Keep the known
+  languages and salary-provenance fixes separate from this unresolved policy
+  evaluation. See `reports/2026-11-22_21-29_GMT_jev_replay.md`. No publication or
+  further model calls performed in this replay task.
+
 - 2026-11-16 — Source: user chose Jev for semantic job suitability. Live local
   trial of the forty saved JSearch candidates completed in two twenty-question
   requests, without retries: 32,257 input tokens, 2,126 output tokens, about

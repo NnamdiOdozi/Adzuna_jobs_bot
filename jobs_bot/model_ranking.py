@@ -80,6 +80,7 @@ def prepare_candidates(jobs, seen, config):
         if keys & used:
             continue
         used.update(keys)
+        # Keep salary provenance so model-ranked emails still identify estimates.
         candidate = {
             name: job[name]
             for name in (
@@ -92,6 +93,9 @@ def prepare_candidates(jobs, seen, config):
                 "redirect_url",
                 "salary_min",
                 "salary_max",
+                "salary_is_predicted",
+                "salary_currency",
+                "salary_period",
                 "source",
             )
             if name in job

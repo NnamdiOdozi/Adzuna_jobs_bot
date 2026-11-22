@@ -16,6 +16,7 @@ from jobs_bot.model_ranking import (
     ranking_request,
     validate_assessments,
 )
+from jobs_bot.services import build_message
 
 
 def _job(identifier="one", title="Senior finance manager"):
@@ -81,6 +82,29 @@ class ModelRankingTests(unittest.TestCase):
         prepared = prepare_candidates(jobs, {"id:seen"}, self.config)
         self.assertEqual([row["id"] for row in prepared], ["one", "two"])
         self.assertEqual(prepared[0]["title"], "Senior finance manager")
+
+    def test_salary_provenance_survives_preparation_into_email(self):
+        """Label estimates after model preparation without relabelling real pay."""
+        for predicted in ("1", "0"):
+            with self.subTest(predicted=predicted):
+                job = {
+                    **_job(),
+                    "salary_min": 30000,
+                    "salary_max": 40000,
+                    "salary_is_predicted": predicted,
+                    "salary_currency": "EUR",
+                    "salary_period": "YEAR",
+                }
+                prepared = prepare_candidates([job], set(), self.config)
+                message = build_message(
+                    prepared,
+                    {"sender": "sender@example.com", "subject": "Jobs"},
+                    ["recipient@example.com"],
+                    "2026-11-22",
+                )
+                body = message.get_content()
+                self.assertIn("30000 to 40000 EUR (YEAR)", body)
+                self.assertEqual("(Adzuna estimate)" in body, predicted == "1")
 
     def test_explicit_truncation_and_request_hashes(self):
         """Bind request identity to the exact supplied shortened description."""
