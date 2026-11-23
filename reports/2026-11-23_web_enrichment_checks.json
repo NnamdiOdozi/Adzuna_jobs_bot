@@ -1,0 +1,340 @@
+{
+  "date": "2026-11-23",
+  "paid_api_calls": 0,
+  "emails_sent": 0,
+  "saved_batch": {
+    "date": "2026-11-23",
+    "elapsed_seconds": 1.161393964997842,
+    "paid_api_calls": 0,
+    "emails_sent": 0,
+    "outcomes": {
+      "host_not_allowed": 39,
+      "no_longer_description": 1,
+      "no_jobposting": 1,
+      "seen_duplicate_or_salary_excluded": 1
+    },
+    "jobs": [
+      {
+        "fetched_index": 1,
+        "title": "Corporate Finance Analyst ACA (Graduate Scheme)- September 2027 Start",
+        "status": "host_not_allowed",
+        "original_chars": 6564,
+        "result_chars": 6564
+      },
+      {
+        "fetched_index": 2,
+        "title": "Graduate - Risk (m/f/d) - London",
+        "status": "no_longer_description",
+        "original_chars": 4696,
+        "result_chars": 4696
+      },
+      {
+        "fetched_index": 3,
+        "title": "Graduate Commercial Finance Advisor \u2014 Hybrid Career Path",
+        "status": "host_not_allowed",
+        "original_chars": 485,
+        "result_chars": 485
+      },
+      {
+        "fetched_index": 4,
+        "title": "Graduate Finance & Management Reporting \u2014 Energy",
+        "status": "host_not_allowed",
+        "original_chars": 515,
+        "result_chars": 515
+      },
+      {
+        "fetched_index": 5,
+        "title": "Finance Graduate Programme Commercial Finance & FP&A (London)",
+        "status": "host_not_allowed",
+        "original_chars": 3582,
+        "result_chars": 3582
+      },
+      {
+        "fetched_index": 6,
+        "title": "Graduate Recruitment Consultant - Finance and Technology",
+        "status": "host_not_allowed",
+        "original_chars": 1978,
+        "result_chars": 1978
+      },
+      {
+        "fetched_index": 7,
+        "title": "Graduate Finance Accountant - Real Estate Investment Startup",
+        "status": "host_not_allowed",
+        "original_chars": 3362,
+        "result_chars": 3362
+      },
+      {
+        "fetched_index": 8,
+        "title": "Graduate Finance Broker: London Office, Uncapped Commission",
+        "status": "host_not_allowed",
+        "original_chars": 498,
+        "result_chars": 498
+      },
+      {
+        "fetched_index": 9,
+        "title": "Graduate Finance Broker: London with Uncapped Commission",
+        "status": "host_not_allowed",
+        "original_chars": 510,
+        "result_chars": 510
+      },
+      {
+        "fetched_index": 10,
+        "title": "Corporate Graduate - Investment Compliance",
+        "status": "no_jobposting",
+        "original_chars": 6814,
+        "result_chars": 6814
+      },
+      {
+        "fetched_index": 11,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 12,
+        "title": "Graduate Finance Broker Programme  - March 2027",
+        "status": "host_not_allowed",
+        "original_chars": 5120,
+        "result_chars": 5120
+      },
+      {
+        "fetched_index": 13,
+        "title": "Trading Operations Analyst Graduate: 2027 | London SIG \u00b7 London, United Kingdom 9 minutes ago",
+        "status": "host_not_allowed",
+        "original_chars": 5354,
+        "result_chars": 5354
+      },
+      {
+        "fetched_index": 14,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 15,
+        "title": "Graduate Business Finance Advisor",
+        "status": "host_not_allowed",
+        "original_chars": 5678,
+        "result_chars": 5678
+      },
+      {
+        "fetched_index": 16,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 17,
+        "title": "Commercial Finance Graduate: 2-Year Rotational Programme",
+        "status": "host_not_allowed",
+        "original_chars": 497,
+        "result_chars": 497
+      },
+      {
+        "fetched_index": 18,
+        "title": "Graduate Researcher, Financial Services Hybrid & Commission",
+        "status": "host_not_allowed",
+        "original_chars": 463,
+        "result_chars": 463
+      },
+      {
+        "fetched_index": 19,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 20,
+        "title": "Graduate Finance Broker",
+        "status": "host_not_allowed",
+        "original_chars": 2672,
+        "result_chars": 2672
+      },
+      {
+        "fetched_index": 21,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 22,
+        "title": "Business Analyst Graduate Programme",
+        "status": "host_not_allowed",
+        "original_chars": 8925,
+        "result_chars": 8925
+      },
+      {
+        "fetched_index": 23,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 24,
+        "title": "Graduate - Treasury & Trade Solutions",
+        "status": "host_not_allowed",
+        "original_chars": 1321,
+        "result_chars": 1321
+      },
+      {
+        "fetched_index": 25,
+        "title": "Graduate Finance Trainee - Insurance Sector. Job in London Move Collective Jobs",
+        "status": "host_not_allowed",
+        "original_chars": 955,
+        "result_chars": 955
+      },
+      {
+        "fetched_index": 26,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 27,
+        "title": "Graduate Customer Care Specialist \u2014 Hybrid (Finance)",
+        "status": "host_not_allowed",
+        "original_chars": 485,
+        "result_chars": 485
+      },
+      {
+        "fetched_index": 28,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 29,
+        "title": "Graduate Recruiter - Financial Services Exec Search",
+        "status": "host_not_allowed",
+        "original_chars": 2503,
+        "result_chars": 2503
+      },
+      {
+        "fetched_index": 30,
+        "title": "Accounts Junior ACA (Graduate Scheme) - Kent - January 2027 - Maidstone",
+        "status": "host_not_allowed",
+        "original_chars": 824,
+        "result_chars": 824
+      },
+      {
+        "fetched_index": 31,
+        "title": "Graduate Finance & Management Reporting \u2014 Energy",
+        "status": "seen_duplicate_or_salary_excluded",
+        "original_chars": 498,
+        "result_chars": 498
+      },
+      {
+        "fetched_index": 32,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 33,
+        "title": "Indirect Tax Associate - Graduate Scheme - Milton Keynes - Milton Keynes",
+        "status": "host_not_allowed",
+        "original_chars": 3794,
+        "result_chars": 3794
+      },
+      {
+        "fetched_index": 34,
+        "title": "Graduate Business Finance Advisor",
+        "status": "host_not_allowed",
+        "original_chars": 1051,
+        "result_chars": 1051
+      },
+      {
+        "fetched_index": 35,
+        "title": "Finance Graduate Scheme - Rotational Roles & Mentoring",
+        "status": "host_not_allowed",
+        "original_chars": 923,
+        "result_chars": 923
+      },
+      {
+        "fetched_index": 36,
+        "title": "Finance Graduate Programme: Commercial Finance & FP&A (London)",
+        "status": "host_not_allowed",
+        "original_chars": 3396,
+        "result_chars": 3396
+      },
+      {
+        "fetched_index": 37,
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "status": "host_not_allowed",
+        "original_chars": 2144,
+        "result_chars": 2144
+      },
+      {
+        "fetched_index": 38,
+        "title": "Entry-Level Commercial Finance Adviser / Consultant",
+        "status": "host_not_allowed",
+        "original_chars": 5503,
+        "result_chars": 5503
+      },
+      {
+        "fetched_index": 39,
+        "title": "Global Finance Graduate: FP&A Rotation & CIMA",
+        "status": "host_not_allowed",
+        "original_chars": 492,
+        "result_chars": 492
+      },
+      {
+        "fetched_index": 40,
+        "title": "Graduate Financial Planner: Fast-Track to Chartered Status",
+        "status": "host_not_allowed",
+        "original_chars": 416,
+        "result_chars": 416
+      },
+      {
+        "fetched_index": 41,
+        "title": "Graduate KYC Analyst",
+        "status": "host_not_allowed",
+        "original_chars": 2406,
+        "result_chars": 2406
+      },
+      {
+        "fetched_index": 42,
+        "title": "Graduate Data Scientist: Finance & Data Strategy",
+        "status": "host_not_allowed",
+        "original_chars": 483,
+        "result_chars": 483
+      }
+    ]
+  },
+  "known_direct_employer_pages": [
+    {
+      "title": "Paraplanner",
+      "status": "cache_hit",
+      "original_chars": 500,
+      "enriched_chars": 3273,
+      "url": "https://www.fishercareers.com/job/london/paraplanner/38252/100661120768",
+      "requirement_text_present": true
+    },
+    {
+      "title": "French Financial Planning Associate",
+      "status": "cache_hit",
+      "original_chars": 500,
+      "enriched_chars": 3014,
+      "url": "https://www.fishercareers.com/job/london/french-financial-planning-associate/38252/103563536064",
+      "requirement_text_present": true
+    }
+  ],
+  "offline_tests": 213,
+  "coverage_percent": 90.7,
+  "notes": [
+    "Known employer URLs were supplied, not discovered automatically.",
+    "Direct-page descriptions came from structured JobPosting data.",
+    "No GitHub runner deployment or Jev assessment of enriched pages was performed."
+  ],
+  "direct_initial_fetch_seconds": 0.704,
+  "cached_repeat_seconds": 0.001014107998344116
+}

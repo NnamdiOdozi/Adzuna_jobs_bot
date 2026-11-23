@@ -70,6 +70,7 @@ jobs:
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           JSEARCH_API_KEY: ${{ secrets.JSEARCH_API_KEY }}
           NEBIUS_KEY: ${{ secrets.NEBIUS_KEY }}
+          EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
           TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
           gmail_app_password: ${{ secrets.GMAIL_APP_PASSWORD }}
           GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}

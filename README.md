@@ -234,6 +234,7 @@ Before activation, add these repository Actions secrets yourself:
 | `JSEARCH_API_KEY` | OpenWeb Ninja key, required only when JSearch is selected |
 | `ADZUNA_API_KEY` | Adzuna API key |
 | `NEBIUS_KEY` | Nebius Token Factory inference key; required for model-ranking experiments or daily `nebius_llm` mode |
+| `EXA_API_KEY` | Exa advert text retrieval when `[exa] enabled = true` |
 | `TYPESAFE_API_KEY` | Jev suitability ranking; required only when `ranking.method = "jev"` |
 | `GMAIL_APP_PASSWORD` | Gmail app password |
 | `GMAIL_SENDER` | Gmail account login address used to authenticate and send |
@@ -277,6 +278,11 @@ Repository variable values require authorized access to read; they are not a
 substitute for masked Secrets when a value must stay out of public logs.
 
 ## Checks and limitations
+
+Webpage fetching was tested and then withdrawn: it added no longer descriptions
+for the saved JSearch batch. Daily ranking uses provider-supplied descriptions,
+without fetching linked webpages. See [the experiment record](docs/WEB_ENRICHMENT.md).
+
 
 Daily fetched candidates are now retained as **job-candidates** artifacts on each
 Actions run, before suitability filtering. Their available descriptions make
@@ -346,3 +352,20 @@ approved files under dated London-time folders in `archive/`, without automatic 
 [Follow a bulletin from fetched jobs to email](docs/RUN_TRAIL.md) for exact steps.
 Ordinary documentation-only pushes skip Code checks; model prompts and agent
 definitions still trigger tests.
+
+### Longer advert descriptions
+
+The daily run retrieves text from Exa before ranking unseen vacancies. Add
+`EXA_API_KEY` under GitHub → repository Settings → Secrets and variables →
+Actions → Secrets → New repository secret. Local runs use the same key through
+the secrets launcher. `[exa]` in `config.toml` controls `enabled`, `max_pages`
+(currently 80) and `timeout_seconds` (30). Disable it to use API extracts alone.
+
+The provider snapshot stays unchanged. Run-report candidates and ranking receipts
+contain the text actually assessed; candidates also keep `original_description`,
+`exa_status`, and the successful extraction URL and time. Missing, shorter or
+failed extractions retain the original text and are logged. Retrieved text may
+include navigation or related adverts, so a longer description does not prove
+that every requirement was recovered. Text retrieval costs about $0.001 per
+page, excluding subsequent Jev usage. Preview mode also performs retrieval
+when enabled; it sends no email and does not update delivery history.

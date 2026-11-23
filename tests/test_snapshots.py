@@ -183,6 +183,7 @@ class SnapshotIntegrationTests(unittest.TestCase):
         self.config = tomllib.loads(Path("config.toml").read_text())
         # Archive tests isolate capture ordering from optional paid ranking/top-up.
         self.config["ranking"]["method"] = "rules"
+        self.config["exa"]["enabled"] = False
         self.config["search"]["jsearch_top_up_threshold"] = 0
         self.config["search"]["provider"] = "adzuna"
         self.config["search"]["fallback_provider"] = "jsearch"

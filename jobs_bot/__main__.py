@@ -28,6 +28,7 @@ from urllib.error import HTTPError
 from uuid import uuid4
 from zoneinfo import ZoneInfo
 
+from jobs_bot.exa_contents import enrich_jobs
 from jobs_bot.jev_ranking import rank_jobs as rank_jev
 from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.model_ranking import RankingFailure, rank_jobs
@@ -283,6 +284,8 @@ def _run():
                 jobs = [*jobs, *extra]
                 provider = "combined"
                 record_snapshot(jobs, provider, config, seen)
+    if search_error is None:
+        jobs = enrich_jobs(jobs, seen, config)
     # Rank the merged pool once, retaining each provider's evidence rules.
     selected = (
         []
@@ -300,6 +303,7 @@ def _run():
         jobs, search_error = _jsearch_result(config)
         if search_error is None:
             record_snapshot(jobs, provider, config, seen)
+        jobs = enrich_jobs(jobs, seen, config)
         selected = _select(jobs, seen, config, provider, records)
     config["email"]["source"] = {
         "adzuna": "Adzuna",

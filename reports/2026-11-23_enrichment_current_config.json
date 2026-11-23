@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-23",
+  "allowed_hosts": [],
+  "max_jobs": 20,
+  "max_workers": 5,
+  "total_budget_seconds": 60,
+  "elapsed_seconds": 9.001020206997055,
+  "paid_api_calls": 0,
+  "emails_sent": 0,
+  "outcomes": {
+    "no_jobposting": 2,
+    "no_longer_description": 3,
+    "http_403": 10,
+    "identity_mismatch": 2,
+    "TimeoutError": 2,
+    "robots_http_403": 1,
+    "job_budget_exhausted": 21,
+    "seen_duplicate_or_salary_excluded": 1
+  },
+  "enriched_jobs": []
+}

@@ -128,3 +128,9 @@ timezone = "Europe/London"
 request_timeout_seconds = 45
 request_attempts = 3
 retry_delays_seconds = [1, 2]
+
+# Retrieve longer advert text before ranking. Disable to use provider text alone.
+[exa]
+enabled = true
+max_pages = 80
+timeout_seconds = 30

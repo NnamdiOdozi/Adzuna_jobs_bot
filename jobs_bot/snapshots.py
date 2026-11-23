@@ -33,7 +33,8 @@ _JSEARCH_FIELDS = frozenset(
 )
 _JOB_TEXT = frozenset(
     "id title description created redirect_url source "
-    "salary_currency salary_period".split()
+    "salary_currency salary_period original_description "
+    "exa_status exa_url exa_fetched_at".split()
 )
 _JOB_SALARY = frozenset("salary_min salary_max salary_is_predicted".split())
 _JOB_NESTED = {

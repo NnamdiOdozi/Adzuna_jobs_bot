@@ -97,6 +97,10 @@ def prepare_candidates(jobs, seen, config):
                 "salary_currency",
                 "salary_period",
                 "source",
+                "original_description",
+                "exa_status",
+                "exa_url",
+                "exa_fetched_at",
             )
             if name in job
         }

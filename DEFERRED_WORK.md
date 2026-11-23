@@ -1,14 +1,5 @@
 # Open work
 
-- 2026-11-23 — Source: user explicitly deferred fuller vacancy webpage retrieval.
-  Explore retrieving the original employer advert before final Jev selection
-  when API descriptions omit experience or eligibility requirements. Status:
-  deferred, not implemented. Two Fisher employer pages were readable; tested
-  Adzuna advert links returned 403. Check permitted access, matching the correct
-  vacancy, bounded requests, caching and visible handling of unavailable pages.
-  Never bypass access blocks or treat a failed fetch as verified eligibility.
-  See `reports/2026-11-23_description_options.md`.
-
 - 2026-11-23 — Source: authorised JSearch-only trial. Local source switch,
   structured annual GBP £50,000 cap, clarified languages/insurance experience
   and shorter specialist-eligibility policy are implemented and tested. Live
@@ -17,8 +8,9 @@
   41 jobs excluded the up-to-£65k role. See `reports/2026-11-23_jev_salary_trial.md`.
   Extracted salary figures and provenance are now in shortlisted JSON and the
   shared email builder. Open: assess reposts/finance-sales preferences and how
-  to handle unknown pay (18 of the latest 20 selections). Webpage retrieval is
-  tracked separately.
+  to handle unknown pay (18 of the latest 20 selections). Direct webpage fetching was
+  tested and withdrawn; Exa text retrieval now enriches the daily selection.
+  Findings and limitations are recorded in `docs/WEB_ENRICHMENT.md`.
   No additional paid trial scheduled.
 
 - 2026-11-22 — Source: requested weekly native Copilot review. Proposed Saturday

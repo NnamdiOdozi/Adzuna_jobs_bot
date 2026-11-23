@@ -37,6 +37,7 @@ def _vacancy(job):
 
 
 def _candidates(jobs, config):
+    enriched = {str(j["id"]): j for j in jobs if "exa_status" in j}
     run_id = os.environ.get("GITHUB_RUN_ID")
     if run_id:
         snapshots = [
@@ -52,6 +53,7 @@ def _candidates(jobs, config):
         parts = [s for s in snapshots if s["provider"] != "combined"]
         if parts:
             jobs = [job for snapshot in parts for job in snapshot["jobs"]]
+    jobs = [{**j, **enriched.get(str(j["id"]), {})} for j in jobs]
     cleaned = create_snapshot(jobs, "combined", config, ())["jobs"]
     return [{**job, "fetched_index": i} for i, job in enumerate(cleaned, 1)]
 

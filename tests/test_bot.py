@@ -41,7 +41,11 @@ class BotTests(unittest.TestCase):
         self.report = Path(temporary.name) / "run-report"
         self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
-        source = Path("config.toml").read_text()
+        source = (
+            Path("config.toml")
+            .read_text()
+            .replace("[exa]\nenabled = true", "[exa]\nenabled = false")
+        )
         source = source.replace('provider = "jsearch"', 'provider = "adzuna"', 1)
         source = source.replace(
             'fallback_provider = ""', 'fallback_provider = "jsearch"', 1

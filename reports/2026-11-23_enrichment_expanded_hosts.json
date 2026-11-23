@@ -1,0 +1,369 @@
+{
+  "date": "2026-11-23",
+  "temporary_allowed_hosts": [
+    "bebee.com",
+    "careers.mha.co.uk",
+    "jobs.janushenderson.com",
+    "jobs.movecollective.uk",
+    "talents.studysmarter.co.uk",
+    "targetjobs.co.uk",
+    "uk.jobrapido.com",
+    "uk.jooble.org",
+    "www.jobleads.com",
+    "www.mha.co.uk",
+    "www.recruit.net",
+    "www.totaljobs.com"
+  ],
+  "elapsed_seconds": 5.6765112839930225,
+  "paid_api_calls": 0,
+  "emails_sent": 0,
+  "production_config_changed": false,
+  "outcomes": {
+    "no_jobposting": 2,
+    "no_longer_description": 3,
+    "http_403": 10,
+    "identity_mismatch": 2,
+    "TimeoutError": 2,
+    "robots_http_403": 1,
+    "job_budget_exhausted": 21,
+    "seen_duplicate_or_salary_excluded": 1
+  },
+  "jobs": [
+    {
+      "fetched_index": 1,
+      "title": "Corporate Finance Analyst ACA (Graduate Scheme)- September 2027 Start",
+      "host": "careers.mha.co.uk",
+      "status": "no_jobposting",
+      "original_chars": 6564,
+      "result_chars": 6564
+    },
+    {
+      "fetched_index": 2,
+      "title": "Graduate - Risk (m/f/d) - London",
+      "host": "targetjobs.co.uk",
+      "status": "no_longer_description",
+      "original_chars": 4696,
+      "result_chars": 4696
+    },
+    {
+      "fetched_index": 3,
+      "title": "Graduate Commercial Finance Advisor \u2014 Hybrid Career Path",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 485,
+      "result_chars": 485
+    },
+    {
+      "fetched_index": 4,
+      "title": "Graduate Finance & Management Reporting \u2014 Energy",
+      "host": "uk.jobrapido.com",
+      "status": "identity_mismatch",
+      "original_chars": 515,
+      "result_chars": 515
+    },
+    {
+      "fetched_index": 5,
+      "title": "Finance Graduate Programme Commercial Finance & FP&A (London)",
+      "host": "www.totaljobs.com",
+      "status": "TimeoutError",
+      "original_chars": 3582,
+      "result_chars": 3582
+    },
+    {
+      "fetched_index": 6,
+      "title": "Graduate Recruitment Consultant - Finance and Technology",
+      "host": "www.totaljobs.com",
+      "status": "TimeoutError",
+      "original_chars": 1978,
+      "result_chars": 1978
+    },
+    {
+      "fetched_index": 7,
+      "title": "Graduate Finance Accountant - Real Estate Investment Startup",
+      "host": "bebee.com",
+      "status": "no_longer_description",
+      "original_chars": 3362,
+      "result_chars": 3362
+    },
+    {
+      "fetched_index": 8,
+      "title": "Graduate Finance Broker: London Office, Uncapped Commission",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 498,
+      "result_chars": 498
+    },
+    {
+      "fetched_index": 9,
+      "title": "Graduate Finance Broker: London with Uncapped Commission",
+      "host": "www.recruit.net",
+      "status": "robots_http_403",
+      "original_chars": 510,
+      "result_chars": 510
+    },
+    {
+      "fetched_index": 10,
+      "title": "Corporate Graduate - Investment Compliance",
+      "host": "jobs.janushenderson.com",
+      "status": "no_jobposting",
+      "original_chars": 6814,
+      "result_chars": 6814
+    },
+    {
+      "fetched_index": 11,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "http_403",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 12,
+      "title": "Graduate Finance Broker Programme  - March 2027",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 5120,
+      "result_chars": 5120
+    },
+    {
+      "fetched_index": 13,
+      "title": "Trading Operations Analyst Graduate: 2027 | London SIG \u00b7 London, United Kingdom 9 minutes ago",
+      "host": "uk.jobrapido.com",
+      "status": "identity_mismatch",
+      "original_chars": 5354,
+      "result_chars": 5354
+    },
+    {
+      "fetched_index": 14,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "http_403",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 15,
+      "title": "Graduate Business Finance Advisor",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 5678,
+      "result_chars": 5678
+    },
+    {
+      "fetched_index": 16,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "http_403",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 17,
+      "title": "Commercial Finance Graduate: 2-Year Rotational Programme",
+      "host": "talents.studysmarter.co.uk",
+      "status": "no_longer_description",
+      "original_chars": 497,
+      "result_chars": 497
+    },
+    {
+      "fetched_index": 18,
+      "title": "Graduate Researcher, Financial Services Hybrid & Commission",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 463,
+      "result_chars": 463
+    },
+    {
+      "fetched_index": 19,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "http_403",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 20,
+      "title": "Graduate Finance Broker",
+      "host": "www.jobleads.com",
+      "status": "http_403",
+      "original_chars": 2672,
+      "result_chars": 2672
+    },
+    {
+      "fetched_index": 21,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 22,
+      "title": "Business Analyst Graduate Programme",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 8925,
+      "result_chars": 8925
+    },
+    {
+      "fetched_index": 23,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 24,
+      "title": "Graduate - Treasury & Trade Solutions",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 1321,
+      "result_chars": 1321
+    },
+    {
+      "fetched_index": 25,
+      "title": "Graduate Finance Trainee - Insurance Sector. Job in London Move Collective Jobs",
+      "host": "jobs.movecollective.uk",
+      "status": "job_budget_exhausted",
+      "original_chars": 955,
+      "result_chars": 955
+    },
+    {
+      "fetched_index": 26,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 27,
+      "title": "Graduate Customer Care Specialist \u2014 Hybrid (Finance)",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 485,
+      "result_chars": 485
+    },
+    {
+      "fetched_index": 28,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 29,
+      "title": "Graduate Recruiter - Financial Services Exec Search",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 2503,
+      "result_chars": 2503
+    },
+    {
+      "fetched_index": 30,
+      "title": "Accounts Junior ACA (Graduate Scheme) - Kent - January 2027 - Maidstone",
+      "host": "www.mha.co.uk",
+      "status": "job_budget_exhausted",
+      "original_chars": 824,
+      "result_chars": 824
+    },
+    {
+      "fetched_index": 31,
+      "title": "Graduate Finance & Management Reporting \u2014 Energy",
+      "host": "www.jobleads.com",
+      "status": "seen_duplicate_or_salary_excluded",
+      "original_chars": 498,
+      "result_chars": 498
+    },
+    {
+      "fetched_index": 32,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 33,
+      "title": "Indirect Tax Associate - Graduate Scheme - Milton Keynes - Milton Keynes",
+      "host": "www.mha.co.uk",
+      "status": "job_budget_exhausted",
+      "original_chars": 3794,
+      "result_chars": 3794
+    },
+    {
+      "fetched_index": 34,
+      "title": "Graduate Business Finance Advisor",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 1051,
+      "result_chars": 1051
+    },
+    {
+      "fetched_index": 35,
+      "title": "Finance Graduate Scheme - Rotational Roles & Mentoring",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 923,
+      "result_chars": 923
+    },
+    {
+      "fetched_index": 36,
+      "title": "Finance Graduate Programme: Commercial Finance & FP&A (London)",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 3396,
+      "result_chars": 3396
+    },
+    {
+      "fetched_index": 37,
+      "title": "Trainee Accountant (Graduate Finance) Full Time",
+      "host": "uk.jooble.org",
+      "status": "job_budget_exhausted",
+      "original_chars": 2144,
+      "result_chars": 2144
+    },
+    {
+      "fetched_index": 38,
+      "title": "Entry-Level Commercial Finance Adviser / Consultant",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 5503,
+      "result_chars": 5503
+    },
+    {
+      "fetched_index": 39,
+      "title": "Global Finance Graduate: FP&A Rotation & CIMA",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 492,
+      "result_chars": 492
+    },
+    {
+      "fetched_index": 40,
+      "title": "Graduate Financial Planner: Fast-Track to Chartered Status",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 416,
+      "result_chars": 416
+    },
+    {
+      "fetched_index": 41,
+      "title": "Graduate KYC Analyst",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 2406,
+      "result_chars": 2406
+    },
+    {
+      "fetched_index": 42,
+      "title": "Graduate Data Scientist: Finance & Data Strategy",
+      "host": "www.jobleads.com",
+      "status": "job_budget_exhausted",
+      "original_chars": 483,
+      "result_chars": 483
+    }
+  ]
+}
