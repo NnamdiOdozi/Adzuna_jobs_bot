@@ -1,0 +1,1970 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "9d0f21105f99400080dc1db9362ea527",
+  "captured_at": "2026-11-23T06:30:55.488436+00:00",
+  "provider": "adzuna",
+  "jobs": [
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975767292?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=A26ABCF6FC5EFDB62AAA6A0E371F26076A2CAF04",
+      "title": "French Financial Planning Associate",
+      "description": "The Opportunity: The Fisher Investments Europe (FIE) Wealth Solutions team provides specialised financial planning advice for clients who may benefit from Assurance Vie and Contract de Capitalisation insurance policies. We are looking for a Wealth Engineer Associate to support our Wealth Solutions team. The Day-to-Day: Help evaluate the current financial situation for private clients Cash flow strategies using cash-flow analyses Inheritance tax and Estate Planning Optimise investments – reviewi…",
+      "salary_max": 46284.32,
+      "created": "2026-11-23T04:46:55Z",
+      "id": "5975767292",
+      "salary_min": 46284.32,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975767157?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=C585487FB601ADF32414453AB165CFC31094CAAC",
+      "title": "Paraplanner",
+      "description": "The Opportunity: The Paraplanner under Fisher Investments Europe's UK New Business team analyses prospective client portfolios to provide regulated advice on areas such as pension transfers, bond surrenders, investment taxation and structure suitability. Reporting to your Team Leader, in this role you will be expected to formulate asset allocation recommendations, and write suitability reports. The Day-to-Day: Evaluate prospective client objectives, portfolio holdings, time-horizon, cash flow n…",
+      "salary_max": 48042.05,
+      "created": "2026-11-23T04:46:34Z",
+      "id": "5975767157",
+      "salary_min": 48042.05,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975767156?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=EC66570D94FD9D1E3A60D2FC770F22BC162EF7C8",
+      "title": "Financial Planner",
+      "description": "The Opportunity: The Private Client Advice group provides regulated financial advice to more than 15,000 existing UK clients. Reporting to a Private Client Advice Team Leader, you will typically work with pensions, ISAs, General Investment Accounts, investment bonds and trusts. There will be opportunities for personal development in the role and the opportunity to become certified within our global asset management firm. The Day-to-Day: Provide ongoing financial advice to existing, as well as p…",
+      "salary_max": 57508.34,
+      "created": "2026-11-23T04:46:34Z",
+      "id": "5975767156",
+      "salary_min": 57508.34,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975767112?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=F22E63FD991EBDE045DB2D85299B3C4797E37F31",
+      "title": "Spanish Client Service Associate",
+      "description": "The Opportunity: As a Spanish Client Service Associate, you will be a part of an energetic environment managing daily tasks at one of the world's preeminent private money managers. You are encouraged to ask questions, improve processes, and propose fresh solutions. We base your evaluation performance on meritocracy and invest in employee development to help progression and growth within the firm. The more value you can add, the quicker you will be on your way to earning more advanced opportunit…",
+      "salary_max": 36798.6,
+      "created": "2026-11-23T04:46:23Z",
+      "id": "5975767112",
+      "salary_min": 36798.6,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975760645?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=36B19475E814B2C10648889D343BAF9BEADF3C1E",
+      "title": "Dutch Client Service Associate",
+      "description": "The Opportunity: As a Dutch Client Service Associate, you will be a part of an energetic environment managing daily tasks at one of the world's preeminent private money managers. You are encouraged to ask questions, improve processes, and propose fresh solutions. We base your evaluation performance on meritocracy and invest in employee development to help progression and growth within the firm. The more value you can add, the quicker you will be on your way to earning more advanced opportunitie…",
+      "salary_max": 45761.23,
+      "created": "2026-11-23T04:35:29Z",
+      "id": "5975760645",
+      "salary_min": 45761.23,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "Fenchurch St, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Fenchurch St"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975760648?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=E8D91F5D387FE7D47DB547B870F8CDE7656C6A5B",
+      "title": "Paraplanner",
+      "description": "The Opportunity: The Paraplanner under Fisher Investments Europe's UK New Business team analyses prospective client portfolios to provide regulated advice on areas such as pension transfers, bond surrenders, investment taxation and structure suitability. Reporting to your Team Leader, in this role you will be expected to formulate asset allocation recommendations, and write suitability reports. The Day-to-Day: Evaluate prospective client objectives, portfolio holdings, time-horizon, cash flow n…",
+      "salary_max": 51759.56,
+      "created": "2026-11-23T04:35:29Z",
+      "id": "5975760648",
+      "salary_min": 51759.56,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Fisher Investments"
+      },
+      "location": {
+        "display_name": "Fenchurch St, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Fenchurch St"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733685?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Vice President, Lead Financial Crimes Officer",
+      "description": "About this role: Wells Fargo is looking for a Lead Financial Crimes Officer, Vice President, to join their EMEA AML team in London. The EMEA AML team supports the management and oversight of money laundering and terrorist financing risk in the UK, while working with EMEA Country MLROs and Enterprise Financial Crimes Risk Management to coordinate and facilitate AML matters impacting multiple EMEA jurisdictions and legal entities. As a Lead Financial Crimes Officer, you will provide oversight and…",
+      "salary_max": 105758.8,
+      "created": "2026-11-23T03:58:43Z",
+      "id": "5975733685",
+      "salary_min": 105758.8,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Wells Fargo"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733687?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Vice President, Technology, Media, Telecoms - Capital Markets and Advisory",
+      "description": "Vice President, Technology, Media, Telecoms - Capital Markets and Advisory Location: London, GB, E14 5HQ Brand: HSBC Area of Interest: Closing Date: Hybrid Worker Date: 21 Nov 2026 Job description If you're looking for a career that will help you stand out, join HSBC, and fulfil your potential - whether you want a career that could take you to the top, or an exciting new direction, we offer opportunities, support and rewards that will take you further. We're one of the largest banking and finan…",
+      "salary_max": 57585.67,
+      "created": "2026-11-23T03:58:43Z",
+      "id": "5975733687",
+      "salary_min": 57585.67,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "HSBC"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733686?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Senior Treasury Accountant",
+      "description": "Cargill is committed to providing food and agricultural solutions to nourish the world in a safe, responsible, and sustainable way. Sitting at the heart of the supply chain, we partner with farmers and customers to source, make and deliver products that are vital for living. Our 155,000 team members innovate with purpose, providing customers with life's essentials so businesses can grow, communities prosper, and consumers live well. With over 160 years of experience as a family company, we look…",
+      "salary_max": 56107.04,
+      "created": "2026-11-23T03:58:43Z",
+      "id": "5975733686",
+      "salary_min": 56107.04,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Cargill"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733684?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Senior Assistant Vice President, Senior Financial Crimes Specialist",
+      "description": "About this role: Wells Fargo is seeking a Senior Financial Crimes Specialist to join the EMEA Anti-Money Laundering (AML) team in London. The EMEA AML team supports the management and oversight of money laundering and terrorist financing risk in the UK, while working with EMEA Country MLROs and Enterprise Financial Crimes Risk Management to coordinate and facilitate AML matters impacting multiple EMEA jurisdictions and legal entities. The role will support delivery of the UK AML programme, prov…",
+      "salary_max": 93053.55,
+      "created": "2026-11-23T03:58:42Z",
+      "id": "5975733684",
+      "salary_min": 93053.55,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Wells Fargo"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733654?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Data Management Director",
+      "description": "Data Management Director NY, United States and 2 more Job Information  Job Identification 210811038  Job Category Data Management  Business Unit Asset & Wealth Management  Posting Date 11/21/2026, 02:08 AM  Locations 390 Madison Ave, New York, NY, 10017, US60 Victoria Embankment, London, Greater London, EC4Y 0JP, GB  Job Schedule Full time Job Description Set the direction for data governance across the organization. This role operates at the highest level of influence, shaping how data is stru…",
+      "salary_max": 82544.33,
+      "created": "2026-11-23T03:58:17Z",
+      "id": "5975733654",
+      "salary_min": 82544.33,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "JPMorgan Chase"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733250?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Equity Swaps Trade Support (Assistant Vice President)",
+      "description": "Role Overview We are seeking a highly motivated and experienced individual to join our Markets Operations team as an Equity Swaps Middle Office Specialist. This role sits within our Delta One Business and is an integral part of the wider Prime Finance Middle Office unit. The primary focus is to provide exceptional operational client support for our Prime Swap clients, serving as their main point of contact for all operational queries. You will interact extensively with both external clients and…",
+      "salary_max": 53856.6,
+      "created": "2026-11-23T03:57:49Z",
+      "id": "5975733250",
+      "salary_min": 53856.6,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Citigroup"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975733251?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Business Execution Specialist, Commodities, Vice President",
+      "description": "As a Commodities Business Execution specialist, you will partner directly with Trading and Sales leadership, primarily on the EMEA Power & Gas desk, to drive strategic growth, strengthen operational controls, and keep trading running smoothly in a fast-moving global market. Sitting at the center of the Commodities franchise, you will connect front office strategy with risk governance and day-to-day execution, working closely with Risk, Compliance, Operations, Technology, Finance, and Legal team…",
+      "salary_max": 76930.3,
+      "created": "2026-11-23T03:57:49Z",
+      "id": "5975733251",
+      "salary_min": 76930.3,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Citigroup"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975710059?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Senior Assistant Financial Planner , Wealth Manager , CII Diploma",
+      "description": "The Role: An exciting opportunity has arisen for an experienced Senior Assistant Financial Planner to join an established, specialist wealth management business. The Senior Assistant Financial Planner will be an experienced wealth management professional. The Senior Assistant Financial Planner will be confident managing a broad range of client-related responsibilities. The position will report and support the Senior Financial Planning Director of the Wealth Management team, joining client meeti…",
+      "salary_max": 75000,
+      "created": "2026-11-23T03:29:22Z",
+      "id": "5975710059",
+      "salary_min": 75000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "JJ Search Ltd"
+      },
+      "location": {
+        "display_name": "South West London, London",
+        "area": [
+          "UK",
+          "London",
+          "South West London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975660207?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Manager, Business Analysis",
+      "description": "245 Hammersmith (95989), United Kingdom, London, Manager, Business Analysis Title: Manager, Business Analysis - Deal Economics & Analytics (Global Deals) Location: London, United Kingdom (Hybrid) Working Pattern: 3 days in-office (Tuesday-Thursday) and 2 days remote. Our Mission: We’re on a mission to be a force for good in lending. Throughout our almost 30-year history, we’ve consistently been recognised as a great place to work; in 2026, Capital One was officially ranked 9th in the UK’s Best …",
+      "salary_max": 73893.39,
+      "created": "2026-11-23T02:18:46Z",
+      "id": "5975660207",
+      "salary_min": 73893.39,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Capital One UK"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975660235?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=DAEAED52C4190E2656324B0877FA0A8E500CE925",
+      "title": "Manager, Strategy and Analytics",
+      "description": "White Collar Factory (95009), United Kingdom, London, London Manager, Strategy and Analytics Manager, Business Analysis Location: London or Nottingham, United Kingdom (Hybrid) Working Pattern: 3 days in-office (Tuesday-Thursday) and 2 days remote. Our Mission: We’re on a mission to be a force for good in lending. Throughout our almost 30-year history, we’ve consistently been recognised as a great place to work; in 2026, Capital One was officially ranked 9th in the UK’s Best Workplaces™ list. He…",
+      "salary_max": 77315.86,
+      "created": "2026-11-23T02:18:46Z",
+      "id": "5975660235",
+      "salary_min": 77315.86,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Capital One UK"
+      },
+      "location": {
+        "display_name": "Fenchurch St, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Fenchurch St"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975660196?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=ACD23876461827347C127773621438679E6A1592",
+      "title": "Senior Manager, Business Analysis",
+      "description": "245 Hammersmith (95989), United Kingdom, London, Senior Manager, Business Analysis Job Title: Senior Manager, Business Analysis Location: London - Hybrid Working Pattern: 3 days in-office (Tuesday-Thursday) and 2 days remote. About the Role As a Senior Manager, Business Analysis at Capital One, you will apply your strategic and analytical skills to major company challenges. You will work with a team of world-class professionals to develop and test strategies that ultimately impact the bottom li…",
+      "salary_max": 79905.42,
+      "created": "2026-11-23T02:18:46Z",
+      "id": "5975660196",
+      "salary_min": 79905.42,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Capital One UK"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975660182?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=5C289F0A9C4693515DD63118902C5F7F3D1A33CC",
+      "title": "Senior Manager, Strategy and Analytics",
+      "description": "White Collar Factory (95009), United Kingdom, London, London Senior Manager, Strategy and Analytics Senior Manager, Business Analysis Location: London or Nottingham, United Kingdom (Hybrid) Working Pattern: 3 days in-office (Tuesday-Thursday) and 2 days remote. Our Mission: We’re on a mission to be a force for good in lending. Throughout our almost 30-year history, we’ve consistently been recognised as a great place to work; in 2026, Capital One was officially ranked 9th in the UK’s Best Workpl…",
+      "salary_max": 80955.73,
+      "created": "2026-11-23T02:18:46Z",
+      "id": "5975660182",
+      "salary_min": 80955.73,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Capital One UK"
+      },
+      "location": {
+        "display_name": "Fenchurch St, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Fenchurch St"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975644935?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=93A0C000185B09E3E27240EA06B649150D629527",
+      "title": "Senior Assistant Financial Planner , Wealth Manager , CII Diploma - JJ Search",
+      "description": "The Role: An exciting opportunity has arisen for an experienced Senior Assistant Financial Planner to join an established, specialist wealth management business. The Senior Assistant Financial Planner will be an experienced wealth management professional. The Senior Assistant Financial Planner will be confident managing a broad range of client-related responsibilities. The position will report and support the Senior Financial Planning Director of the Wealth Management team, joining client meeti…",
+      "salary_max": 53988.6,
+      "created": "2026-11-23T00:56:36Z",
+      "id": "5975644935",
+      "salary_min": 53988.6,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "JJ Search"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975621997?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Customer Experience Manager",
+      "description": "We are looking for a Customer Experience Manager to lead our clients customer service function and make sure every customer is treated fairly, clearly and promptly. The role is primarily customer facing and people-focused, with a defined set of finance responsibilities covering aged debt, arrears chasing, premium finance providers and the accuracy of insurer premiums. You will be someone who can coach a contact centre team and work through a debtor report, keeping our customers happy while maki…",
+      "salary_max": 42000,
+      "created": "2026-11-22T23:40:52Z",
+      "id": "5975621997",
+      "salary_min": 42000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "KeystoneStaffing Limited"
+      },
+      "location": {
+        "display_name": "Twickenham, London",
+        "area": [
+          "UK",
+          "London",
+          "Twickenham"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975621843?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Finance Manager",
+      "description": "Benefits include: Excellent pension plan (up to 6% double contribution), 28 days Annual Leave rising to 31 days with length of service  Bank Holidays, Westfield Health Cash Plan, non-contributory life assurance, up to 21 hours volunteering paid days, lifestyle benefits, Employee Assistance Programme and many more  Early applications are encouraged as we reserve the right to close the advertisement and interview earlier than stated. Join our Financial Strategy, Planning & Performance Team at L&Q…",
+      "salary_max": 41972.45,
+      "created": "2026-11-22T23:39:46Z",
+      "id": "5975621843",
+      "salary_min": 41972.45,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "London and Quadrant Housing Trust"
+      },
+      "location": {
+        "display_name": "Farringdon, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Farringdon"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975621844?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Legal Credit Controller - Urgent Temp Booking!",
+      "description": "Calling all Credit Controllers looking for a booking to tide them through the festive period Our client is seeking a capable and confident finance professional with ARCS Credit Control system knowledge and previous law firm experience to start immediately for an assignment up to 3 months Get in touch asap to arrange an interview!",
+      "salary_max": 40000,
+      "created": "2026-11-22T23:39:46Z",
+      "id": "5975621844",
+      "salary_min": 40000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "CHARALLE LEGAL RECRUITMENT LIMITED"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975589417?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=DF3760F6BBB48EC4E37A204F1700F58796E822E1",
+      "title": "Underwriting Operations Analyst",
+      "description": "An exciting opportunity has arisen to join a growing, established specialty insurance business operating within the Lloyd’s and London insurance markets. Our client is looking for an analytical and detail-oriented individual to join its Underwriting Management team, playing an important role in strengthening underwriting governance, controls and operational performance. Working closely with underwriting teams and key stakeholders, you will gain broad exposure to underwriting operations, regulat…",
+      "salary_max": 65000,
+      "created": "2026-11-22T22:39:17Z",
+      "id": "5975589417",
+      "salary_min": 55000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "James Joseph Associates"
+      },
+      "location": {
+        "display_name": "The City, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "The City"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975377707?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Economist Manager",
+      "description": "Group Corporate Services (GCS) is the home for all internal support services that support the combined firm. Working with our Capability-led matrix and throughout the whole firm, GCS executes on our Group's strategic goals by enabling growth, protecting the firm and running operations effectively and efficiently, resulting in improved profitability. We do this using a ‘We are Group’ mindset. Our goal is to support the firm's strategic ambitions, building distinctive brand appeal that earns trus…",
+      "salary_max": 57831.57,
+      "created": "2026-11-22T21:30:52Z",
+      "id": "5975377707",
+      "salary_min": 57831.57,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "KPMG"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975374223?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=0D94B7FE80146E5CE39C4A2C0FE90A17D03460BB",
+      "title": "Interim Reinsurance Consultant",
+      "description": "Leading Insurance Firm | Minimum 3-Month Contract | Outside IR35 We are working with a leading insurance firm who are looking to appoint an experienced Interim Reinsurance Accountant / Consultant to support their finance team on an initial contract of at least 3 months. This is an excellent opportunity for someone with a strong understanding of reinsurance and insurance finance, who can hit the ground running and support key financial reporting and control activities. Key responsibilities: Revi…",
+      "salary_max": 97773.78,
+      "created": "2026-11-22T20:54:35Z",
+      "id": "5975374223",
+      "salary_min": 97773.78,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Oliver James"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373882?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=4271B9639A13F07E63C893FE8BDF48F5B91C5F21",
+      "title": "Risk Analyst",
+      "description": "We are working closely with an established business in the London Insurance Market who are currently hiring for a Risk Analyst. This is a great opportunity to join a warm and collaborative team, offering a supportive environment where you can further develop your skills and progress your career. The Role: Contribute to the preparation and delivery of ORSA reports Undertake Root Cause Analysis and identify areas for improvement Support Risk and Control Self-Assessments (RCSAs) Assist with Stress…",
+      "salary_max": 51393.21,
+      "created": "2026-11-22T20:54:30Z",
+      "id": "5975373882",
+      "salary_min": 51393.21,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Oliver James"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373694?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=AF1BF1297E87BFDEAAC1BC5C916C59A000035330",
+      "title": "Residual Value Manager",
+      "description": "Residual Value Manager Location : Fully on site in Chiswick, West London Salary : up to £65,000 plus bonus About the Opportunity An exciting opportunity has arisen for an experienced Residual Value Manager to join a growing automotive organisation and play a key role in shaping vehicle lifecycle profitability across the UK market. This position will be responsible for developing and executing residual value strategies, analysing market trends and supporting commercial decision-making across pri…",
+      "salary_max": 65000,
+      "created": "2026-11-22T20:54:27Z",
+      "id": "5975373694",
+      "salary_min": 45000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Reed"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373502?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=4206358A70A889E891590DD483C65102BD52582A",
+      "title": "Credit Controller",
+      "description": "Amazing opportunity available for a Credit Controller to join a Tour Operator in South London. As the Credit Controller you will be responsible for executing a rigorous credit control process that has the main objective of handling collections and cash applications for the in-house Tour Operator across both B2C and B2B channels. This is a key role within a very closely knit Finance team supporting a fantastic brand. The Job: * Adopt and administer the Company's credit control policies across ou…",
+      "salary_max": 28000,
+      "created": "2026-11-22T20:54:25Z",
+      "id": "5975373502",
+      "salary_min": 28000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Travel Trade Recruitment"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373329?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=860DE26BF509683091E7D229833A0E01590EADEC",
+      "title": "Political Violence & Terrorism Account Handler",
+      "description": "An established, dynamic and independent Lloyd's Broker, with a strong presence in the London Market, are now seeking an Account Handler / Broker Technician within their International Political Violence & Terrorism Division. This exciting opportunity includes all-round account handling and technical duties, with plenty of client and market involvement, within a fast-paced, entrepreneurial and forward-thinking environment. Role Responsibilities:- Prepare and issue MRC Slips, Endorsements, Cover n…",
+      "salary_max": 68199.45,
+      "created": "2026-11-22T20:54:23Z",
+      "id": "5975373329",
+      "salary_min": 68199.45,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Nashrock Recruitment"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373245?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=FEC385B434452A772888F6377073D07B1B206100",
+      "title": "Risk Manager",
+      "description": "Risk Manager Support the implementation and maintenance of the bank's Enterprise Risk Management Framework (ERMF). Ensure risk management activities align with the bank's Risk Appetite Statement. Monitor adherence to internal risk policies and procedures. Facilitate risk identification, assessment, and mitigation activities across business functions. Promote a strong risk culture and awareness throughout the organisation. Risk Manager Conduct Risk and Control Self-Assessments (RCSAs). Monitor K…",
+      "salary_max": 66117.7,
+      "created": "2026-11-22T20:54:22Z",
+      "id": "5975373245",
+      "salary_min": 66117.7,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "No1 Legal and Professional"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373192?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=710FB8876D379AD78DBD398F1CF0D5C8F011FACE",
+      "title": "Trainee Account Manager",
+      "description": "Trainee Account Manager Our client brings businesses together with communications tech in new and unexpected ways, making their clients more accessible, more productive and more profitable. Working primarily with mid to large-sized UK enterprises, they're recognised leaders within their space. In the last year they've experienced an exciting period of growth and have doubled in size, creating lots of opportunities! You'll join a team where there is a great scope for progression, from Trainee to…",
+      "salary_max": 32000,
+      "created": "2026-11-22T20:54:21Z",
+      "id": "5975373192",
+      "salary_min": 32000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Pareto"
+      },
+      "location": {
+        "display_name": "Heathrow, Hounslow",
+        "area": [
+          "UK",
+          "London",
+          "Hounslow",
+          "Heathrow"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975373136?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=0FF6D2E7084B14B5E49E4E709F1CDDA6D65CDDCB",
+      "title": "Compliance Manager",
+      "description": "Compliance Manager Ensure ongoing compliance with FCA, PRA, and other relevant regulatory requirements. Monitor regulatory developments and assess their impact on the bank. Develop and maintain compliance policies, procedures, and controls. Support the implementation of new regulatory initiatives and change programmes. Advise business units on regulatory obligations and compliance requirements. Compliance Manager Develop and execute the Compliance Monitoring Programme (CMP). Conduct compliance …",
+      "salary_max": 82935.86,
+      "created": "2026-11-22T20:54:20Z",
+      "id": "5975373136",
+      "salary_min": 82935.86,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "No1 Legal and Professional"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975372773?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=6011443BCCBED623E25DACA716E4EE1CAB9870EB",
+      "title": "Commercial Analyst",
+      "description": "A public sector organisation is seeking a Commercial Analyst to join their award-winning Commercial Services team. This is an exciting opportunity to build a career in commercial management while supporting some of the most important programmes and contracts within the sector. As part of the ongoing transformation, they're investing in people, processes and capabilities to build a world-class commercial function. You'll gain hands-on experience across the commercial lifecycle while contributing…",
+      "salary_max": 68900,
+      "created": "2026-11-22T20:54:14Z",
+      "id": "5975372773",
+      "salary_min": 68900,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Reed"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5975363389?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Private Banker",
+      "description": "We are working with a highly regarded private bank looking to appoint an experienced, investment-led Private Banker to its London team. This is a senior role for someone who enjoys developing long-term relationships with affluent and high-net-worth clients, with investments sitting at the heart of those relationships. The bank also has strong lending, deposit and wider banking capabilities, giving bankers the ability to provide a genuinely broad service rather than being restricted to a single …",
+      "salary_max": 180000,
+      "created": "2026-11-22T20:08:14Z",
+      "id": "5975363389",
+      "salary_min": 0,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Fram Search"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975166059?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=7B751ECC69A9507103893081095865FC9BB61F90",
+      "title": "Strategy / Business Analyst (Insurance)",
+      "description": "A unique opportunity for a driven individual to join a leading global (re)insurance organisation in London. Our client is seeking someone with experience of working in a strategic, analytical, or project management role within the Insurance / Reinsurance sector. You will support the design, coordination and implementation of operational priorities that shape the strategic direction of the Portfolio Management function, working closely with senior leadership and cross-functional teams to drive a…",
+      "salary_max": 75000,
+      "created": "2026-11-22T14:52:52Z",
+      "id": "5975166059",
+      "salary_min": 65000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Insight Recruitment Solutions Limited"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975165324?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=00EC41778BBEAAD9F3B4AB405E88C8D21862B926",
+      "title": "Mandarin speaking Treasury dealer",
+      "description": "To see more Chinese jobs please follow us on WeChat: teamchinapf AND pfteamchina Ref 23613 Job Title : Mandarin speaking Treasury dealer The Skills You'll Need: Mandarin, banking treasury, professional trading applications, FX, ALM Your New Salary: Depending on experience Office based Perm Start: ASAP Mandarin speaking Treasury Dealer - What You'll be Doing: Manage cash flow and money market transactions, including regular liquidity scenario analysis, monitoring liquid asset buffers, analysis a…",
+      "salary_max": 63428.69,
+      "created": "2026-11-22T14:52:46Z",
+      "id": "5975165324",
+      "salary_min": 63428.69,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "People First"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975165229?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=C77886E7B33081A42F4368BBE79209A31D65F791",
+      "title": "Billing & Collection Officer (local authority)",
+      "description": "Billing & Collections Officer Location: Wembley, London (Hybrid Working) Pay Rate: £19.26 per hour PAYE / £25.36 per hour Umbrella Contract: Ongoing Temporary Assignment Start Date: Immediate Start Available A leading London Local Authority is seeking an experienced Billing & Collections Officer to join their Revenues team on an ongoing temporary basis. This is an excellent opportunity for a candidate with proven experience in Council Tax billing, collection and recovery within a Local Authorit…",
+      "salary_max": 40060,
+      "created": "2026-11-22T14:52:45Z",
+      "id": "5975165229",
+      "salary_min": 40060,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Reed"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975165223?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=2939636A92C94CD8788BD19BBB6F0A8FFFFE7BED",
+      "title": "Finance Business Analyst/Project Manager",
+      "description": "Finance Business Analyst/Project Manager London/Hybrid 6 months contract Day rate from £600 via Umbrella Company, dependant on experience Our commitment is to provide equal opportunity regardless of, for example, your gender, age, ethnicity, disability, sexual orientation or beliefs. We also engage with employers to develop programmes and pathways that embrace diverse talent and promote more inclusive employment worldwide through partnerships and other initiatives. We recognise and celebrate th…",
+      "salary_max": 61111.09,
+      "created": "2026-11-22T14:52:45Z",
+      "id": "5975165223",
+      "salary_min": 61111.09,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Adecco"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975164436?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=4C11C9C89E70891D6FD5816E01CDE1DAFE042EAE",
+      "title": "Head of Financial Planning & Analysis",
+      "description": "Help shape the Future of a Charity That Changes Lives Royal Star & Garter has been providing loving, compassionate care to veterans and their partners living with disability or dementia for over a century. As the charity continues to evolve and invest in its future, an exciting opportunity has arisen for an exceptional finance leader to join the organisation as Head of Financial Planning & Analysis. This is a pivotal leadership role, offering the opportunity to work closely with the Director of…",
+      "salary_max": 78000,
+      "created": "2026-11-22T14:52:39Z",
+      "id": "5975164436",
+      "salary_min": 75000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Hays Specialist Recruitment Limited"
+      },
+      "location": {
+        "display_name": "Twickenham, London",
+        "area": [
+          "UK",
+          "London",
+          "Twickenham"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5975164346?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=110A2077FB087E269D68ADE0A8916D23D29C54C8",
+      "title": "Senior Credit Risk Analyst",
+      "description": "Senior Credit Risk Analyst London (Hybrid) | £45,000 - £65,000  Benefits An exciting opportunity to join a leading data and analytics business, delivering credit risk and analytical solutions to major financial services clients. This role offers strong career development, exposure to a variety of projects, and the chance to work with cutting-edge data and analytics tools. The Company They are a market-leading analytics organisation that helps businesses make smarter risk and commercial decision…",
+      "salary_max": 65000,
+      "created": "2026-11-22T14:52:38Z",
+      "id": "5975164346",
+      "salary_min": 45000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Harnham - Data & Analytics Recruitment"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974929527?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=E2F2EA2314FB0A850E6519CF482B279979DBE40D",
+      "title": "Credit Customer Success Manager",
+      "description": "About the Role: Grade Level (for internal use): 10 The Team The Customer Success Management (CSM) team sits at the heart of S&P Global Market Intelligence's client relationships, directly supporting Risk & Valuation Services (R&VS) and Desktop & Research (D&R) clients with deep expertise in credit, risk, and financial data. We act as trusted advisors across our most strategic accounts, bringing credible, diagnostic conversations to every client engagement and driving meaningful adoption of S&P …",
+      "salary_max": 53564.73,
+      "created": "2026-11-22T10:51:42Z",
+      "id": "5974929527",
+      "salary_min": 53564.73,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "S&P Global"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974929523?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=623E70913C9FD2D7425876FF3BE76A6CF225AF47",
+      "title": "Investment Analyst or Associate - M&G plc.",
+      "description": "At M&G, our purpose is to give everyone real confidence to put their money to work. With a heritage dating back more than 175 years, we have a long history of innovation in savings and investments, combining asset management and insurance expertise to offer a wide range of solutions. Our two distinct operating segments, Asset Management and Life, work together to provide access to balanced, long-term investment and savings solutions. Through telling it like it is, owning it now and moving it fo…",
+      "salary_max": 59441.29,
+      "created": "2026-11-22T10:51:41Z",
+      "id": "5974929523",
+      "salary_min": 59441.29,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "M&G plc."
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974929511?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=95B11BCBFAF8EBE18158E7FC74A20F2D35EB0809",
+      "title": "Quant Platform Engineer - PGIM",
+      "description": "Quant Platform Engineer | PGIM Credit Technology London based, Hybrid A GLOBAL LEADING ASSET MANAGER WITH A DIVERSE & INCLUSIVE CULTURE As the Global Asset Management business of Prudential, we're always looking for ways to improve financial services. We're passionate about making a meaningful impact - touching the lives of millions and solving financial challenges in an ever-changing world. We also believe talent is key to achieving our vision and are intentional about building a culture on re…",
+      "salary_max": 48139.83,
+      "created": "2026-11-22T10:51:37Z",
+      "id": "5974929511",
+      "salary_min": 48139.83,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "PGIM"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974929510?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=BAB50590F2FCB092DFC84A1B7A395FB5B1C0BB8F",
+      "title": "Legal Counsel - Investment Funds - PGIM",
+      "description": "PGIM Global Wealth Legal Counsel - Investment Funds London or Dublin A GLOBAL LEADING ASSET MANAGER WITH A DIVERSE & INCLUSIVE CULTURE As the Global Asset Management business of Prudential Financial, Inc, we're always looking for ways to improve financial services. We're passionate about making a meaningful impact - touching the lives of millions and solving financial challenges in an ever-changing world. We also believe talent is key to achieving our vision and are intentional about building a…",
+      "salary_max": 63889.29,
+      "created": "2026-11-22T10:51:36Z",
+      "id": "5974929510",
+      "salary_min": 63889.29,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "PGIM"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974929508?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=242B17AF9354411BC826179CFFA3E4C60556569A",
+      "title": "Credit | Portfolio Manager - European & Australian Securitized Products, Executive Director - PGIM",
+      "description": "Portfolio Manager - European & Australian Securitized Products (PGIM Credit - Securitized Products, London) A GLOBAL LEADING ASSET MANAGER WITH A DIVERSE & INCLUSIVE CULTURE As the Global Asset Management business of Prudential, we're always looking for ways to improve financial services. We're passionate about making a meaningful impact - touching the lives of millions and solving financial challenges in an ever-changing world. We also believe talent is key to achieving our vision and are inte…",
+      "salary_max": 72707.13,
+      "created": "2026-11-22T10:51:36Z",
+      "id": "5974929508",
+      "salary_min": 72707.13,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "PGIM"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5974917127?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Principal Auditor",
+      "description": "Description We’re looking for a talented Principal Auditor to join our evolving Internal Audit team at an exciting time of development. In this role, you’ll deliver high-impact audit work across a diverse range of business areas, including Risk, People, Economic Crime and Finance, helping to ensure Nationwide continues to operate safely, sustainably, and in the best interests of our customers. As a Principal Auditor, your work will help understand whether risks are well understood, decisions ar…",
+      "salary_max": 55107.91,
+      "created": "2026-11-22T10:11:12Z",
+      "id": "5974917127",
+      "salary_min": 55107.91,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Nationwide"
+      },
+      "location": {
+        "display_name": "Liverpool Street, Central London",
+        "area": [
+          "UK",
+          "London",
+          "Central London",
+          "Liverpool Street"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/details/5974917038?utm_medium=api&utm_source=a1f9d6ed",
+      "title": "Business Development Structured Finance - Director (London)",
+      "description": "Position Title: Business Development Structured Finance - Director (London) Entity: Kroll Bond Rating Agency UK Limited Employment Type: Full-time Location: London, England Summary/Overview: KBRA is seeking a Director level candidate to join its Business Development team, focusing on European Structured Finance Issuers and Bank Arrangers. The team is responsible for building and maintaining a sales pipeline of European ABS, RMBS, CLOs and CMBS transaction ratings. The position will be based in …",
+      "salary_max": 84517.36,
+      "created": "2026-11-22T10:11:05Z",
+      "id": "5974917038",
+      "salary_min": 84517.36,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "KBRA"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974916735?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=978BCB13C9A749AD68BA6B824FE5A538B024D587",
+      "title": "Senior Product Manager - Payments",
+      "description": "£58,000 - £63,000 plus benefits Reports to: Lead Product Manager Directorate: COO Contract: Permanent Hours: 35 hours per week Location: Stratford, London. Office-based with high flexibility (1-2 days per week in the office) or home based. Closing date: 29 November Visa sponsorship: You must be eligible to work in the UK to apply for this vacancy. Cancer Research UK is not able to offer visa sponsorship. Recruitment Process: Two-stage competency-based interview process with a task forming part …",
+      "salary_max": 63000,
+      "created": "2026-11-22T10:10:36Z",
+      "id": "5974916735",
+      "salary_min": 58000,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "Cancer Research UK"
+      },
+      "location": {
+        "display_name": "Stratford, East London",
+        "area": [
+          "UK",
+          "London",
+          "East London",
+          "Stratford"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974916564?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=21B06571B5871DD57BEA16B7D5B2C2EDB59EFF4E",
+      "title": "Finance Systems Administrator (Internal Applicants Only)",
+      "description": "We are pioneers in girls’ education, united by a shared purpose: to help girls learn without limits. As our Finance Systems Administrator, you will play an important role in ensuring the financial systems that support our schools and Trust Office operate effectively, helping colleagues access reliable systems, accurate information and responsive support. Joining us at an exciting time of change, you will also have the opportunity to contribute to the design and implementation of a new finance s…",
+      "salary_max": 6240,
+      "created": "2026-11-22T10:10:21Z",
+      "id": "5974916564",
+      "salary_min": 6240,
+      "salary_is_predicted": "0",
+      "company": {
+        "display_name": "GDST"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    },
+    {
+      "redirect_url": "https://www.adzuna.co.uk/jobs/land/ad/5974916165?se=Oj0tbwfn8RGnWcba1hTGKQ&utm_medium=api&utm_source=a1f9d6ed&v=4817D9849EC4B0C0F745E7ABD756AC22D204B7F8",
+      "title": "Global Banking & Markets Public, One Delta Product Strats, Vice President, London",
+      "description": "Description Global Banking and Markets - One Delta Product Strats - Associate / Vice President - London One Delta Product Strats is an interdisciplinary team responsible for the requirements gathering, design and performance evaluation of products across the one delta equities business. The team carries out a large variety of functions, but at our core we: Perform market structure research to understand how execution venues function & their participants trade. Work with clients to understand th…",
+      "salary_max": 84139.06,
+      "created": "2026-11-22T10:09:40Z",
+      "id": "5974916165",
+      "salary_min": 84139.06,
+      "salary_is_predicted": "1",
+      "company": {
+        "display_name": "Goldman Sachs"
+      },
+      "location": {
+        "display_name": "London, UK",
+        "area": [
+          "UK",
+          "London"
+        ]
+      },
+      "category": {
+        "tag": "accounting-finance-jobs",
+        "label": "Accounting & Finance Jobs"
+      }
+    }
+  ],
+  "seen": [
+    "id:5931856722",
+    "id:5931902830",
+    "id:5931904149",
+    "id:5933117728",
+    "id:5933126897",
+    "id:5934053552",
+    "id:5934057176",
+    "id:5934293185",
+    "id:5934498756",
+    "id:5935453745",
+    "id:5935504833",
+    "id:5935987587",
+    "id:5935988448",
+    "id:5936471181",
+    "id:5937992681",
+    "id:5939262943",
+    "id:5939343840",
+    "id:5939688983",
+    "id:5940038041",
+    "id:5940072536",
+    "id:5940234780",
+    "id:5940253788",
+    "id:5940259465",
+    "id:5940261283",
+    "id:5940264241",
+    "id:5940269625",
+    "id:5940273040",
+    "id:5940273913",
+    "id:5940274531",
+    "id:5940274621",
+    "id:5940275204",
+    "id:5940276792",
+    "id:5940277038",
+    "id:5940277132",
+    "id:5940285542",
+    "id:5940285567",
+    "id:5940285571",
+    "id:5940484201",
+    "id:5940484259",
+    "id:5940538634",
+    "id:5940543412",
+    "id:5940553834",
+    "id:5940689595",
+    "id:5940690652",
+    "id:5940696465",
+    "id:5940696466",
+    "id:5940696684",
+    "id:5940696702",
+    "id:5940778752",
+    "id:5940855722",
+    "id:5940948505",
+    "id:5941235613",
+    "id:5941242409",
+    "id:5941246637",
+    "id:5941251158",
+    "id:5941746540",
+    "id:5941749129",
+    "id:5941823580",
+    "id:5941997324",
+    "id:5941997325",
+    "id:5941999928",
+    "id:5942012127",
+    "id:5942012147",
+    "id:5942024159",
+    "id:5942025820",
+    "id:5942252275",
+    "id:5942324741",
+    "id:5942382750",
+    "id:5942418813",
+    "id:5942720140",
+    "id:5942767955",
+    "id:5942775011",
+    "id:5942957453",
+    "id:5942957470",
+    "id:5943082030",
+    "id:5943143549",
+    "id:5943143550",
+    "id:5943143551",
+    "id:5943144039",
+    "id:5943144474",
+    "id:5943238565",
+    "id:5943243736",
+    "id:5943468318",
+    "id:5943541568",
+    "id:5943783422",
+    "id:5943783443",
+    "id:5943783506",
+    "id:5943796499",
+    "id:5943796569",
+    "id:5943901989",
+    "id:5943902867",
+    "id:5943902940",
+    "id:5943905725",
+    "id:5943995653",
+    "id:5943995735",
+    "id:5943995740",
+    "id:5944078029",
+    "id:5944119579",
+    "id:5944135601",
+    "id:5944135603",
+    "id:5944135865",
+    "id:5944316372",
+    "id:5944589595",
+    "id:5944660112",
+    "id:5944914744",
+    "id:5944923836",
+    "id:5945045847",
+    "id:5945046515",
+    "id:5945164858",
+    "id:5945171822",
+    "id:5945171869",
+    "id:5945171897",
+    "id:5945174748",
+    "id:5945174756",
+    "id:5945174777",
+    "id:5945188556",
+    "id:5945250492",
+    "id:5945253762",
+    "id:5945323581",
+    "id:5945323787",
+    "id:5945325936",
+    "id:5945326075",
+    "id:5945422144",
+    "id:5945448180",
+    "id:5945450477",
+    "id:5945450753",
+    "id:5945460516",
+    "id:5945721194",
+    "id:5945993362",
+    "id:5946065351",
+    "id:5946119746",
+    "id:5946151415",
+    "id:5946151425",
+    "id:5946265079",
+    "id:5946273041",
+    "id:5946282177",
+    "id:5946321162",
+    "id:5946324324",
+    "id:5946532400",
+    "id:5946605792",
+    "id:5946615824",
+    "id:5946616005",
+    "id:5946674362",
+    "id:5946677158",
+    "id:5946677478",
+    "id:5946683730",
+    "id:5946684108",
+    "id:5946684856",
+    "id:5947046971",
+    "id:5947165775",
+    "id:5947181354",
+    "id:5947237489",
+    "id:5947311496",
+    "id:5947409158",
+    "id:5947409161",
+    "id:5947467506",
+    "id:5947504949",
+    "id:5947505239",
+    "id:5947688730",
+    "id:5947688743",
+    "id:5947688745",
+    "id:5947688755",
+    "id:5947727290",
+    "id:5947742412",
+    "id:5947793270",
+    "id:5947809981",
+    "id:5948119875",
+    "id:5948309155",
+    "id:5948333728",
+    "id:5948412469",
+    "id:5948412485",
+    "id:5948566928",
+    "id:5948634794",
+    "id:5948863465",
+    "id:5948863868",
+    "id:5948865753",
+    "id:5948866180",
+    "id:5948868030",
+    "id:5948869922",
+    "id:5948913307",
+    "id:5948913383",
+    "id:5949009114",
+    "id:5949101736",
+    "id:5949105182",
+    "id:5949405048",
+    "id:5949410449",
+    "id:5949917538",
+    "id:5949998405",
+    "id:5949998572",
+    "id:5950407924",
+    "id:5950491106",
+    "id:5950610175",
+    "id:5950612984",
+    "id:5950647279",
+    "id:5950647287",
+    "id:5950647450",
+    "id:5950679804",
+    "id:5950934948",
+    "id:5951307498",
+    "id:5951319818",
+    "id:5951319849",
+    "id:5951360348",
+    "id:5951444876",
+    "id:5951526728",
+    "id:5952084390",
+    "id:5952086220",
+    "id:5952303246",
+    "id:5952303460",
+    "id:5952303463",
+    "id:5952303470",
+    "id:5952303483",
+    "id:5952303486",
+    "id:5952303487",
+    "id:5952303489",
+    "id:5952303524",
+    "id:5952303545",
+    "id:5952304803",
+    "id:5952304822",
+    "id:5952315641",
+    "id:5952334048",
+    "id:5952374786",
+    "id:5952374810",
+    "id:5952449649",
+    "id:5952511298",
+    "id:5952947419",
+    "id:5953114156",
+    "id:5953502377",
+    "id:5953621458",
+    "id:5954324010",
+    "id:5954595078",
+    "id:5954656035",
+    "id:5959821370",
+    "id:5959821659",
+    "id:5959821666",
+    "id:5959823596",
+    "id:5959823602",
+    "id:5959823885",
+    "id:5959824923",
+    "id:5959824965",
+    "id:5959888918",
+    "id:5959889069",
+    "id:5959889148",
+    "id:5959889269",
+    "id:5959890287",
+    "id:5959890738",
+    "id:5959890849",
+    "id:5959906377",
+    "id:5959906444",
+    "id:5959906445",
+    "id:5959906448",
+    "id:5959906562",
+    "id:5960759962",
+    "id:5960760019",
+    "id:5960760074",
+    "id:5960760190",
+    "id:5960849523",
+    "id:5960855121",
+    "id:5960918618",
+    "id:5960926599",
+    "id:5960983041",
+    "id:5960984383",
+    "id:5960984384",
+    "id:5962344836",
+    "id:5962344955",
+    "id:5962347546",
+    "id:5962405238",
+    "id:5962405268",
+    "id:5962405281",
+    "id:5962405295",
+    "id:5962423993",
+    "id:5962458777",
+    "id:5962469403",
+    "id:5962469410",
+    "id:5963786839",
+    "id:5963802155",
+    "id:5963881113",
+    "id:5963956033",
+    "id:5963994636",
+    "id:5963995671",
+    "id:5963995784",
+    "id:5963996021",
+    "id:5964083074",
+    "id:5964209065",
+    "id:5964252848",
+    "id:5966911680",
+    "id:5966975585",
+    "id:5967124720",
+    "id:5967124788",
+    "id:5967125566",
+    "id:5967205257",
+    "id:5967246211",
+    "id:5967346509",
+    "id:5968162255",
+    "id:5968244244",
+    "id:5968301836",
+    "id:5968403290",
+    "id:5968408331",
+    "id:5968610645",
+    "id:5968620160",
+    "id:5968621515",
+    "id:5969527344",
+    "id:5969527585",
+    "id:5969528012",
+    "id:5969528293",
+    "id:5969571338",
+    "id:5969690153",
+    "id:5969694597",
+    "id:5969735912",
+    "id:5969735922",
+    "id:5970804249",
+    "id:5970804253",
+    "id:5970903532",
+    "id:5971005405",
+    "id:5971030296",
+    "id:5971040066",
+    "id:5971094913",
+    "id:5971094915",
+    "id:5972131711",
+    "id:5972215685",
+    "id:5972217527",
+    "id:5972232001",
+    "id:5972269610",
+    "id:5972280669",
+    "id:5972308270",
+    "id:5972341615",
+    "id:5972341728",
+    "id:5972365618",
+    "role:23616 performance finance reporting analyst|ministry of justice|london uk",
+    "role:4281 investment manager climate nature fund|manpower|london uk",
+    "role:acca accounts trainee|austin rose associates limited|bloomsbury central london",
+    "role:accountant hybrid|sheridan maine|london uk",
+    "role:accounting expert cpa required|mercor|london uk",
+    "role:accounting specialist fully remote|mercor|london uk",
+    "role:accounts administrator|gripvan|upper clapton east london",
+    "role:accounts assistant design led retail brand london hybrid|harmonic group ltd|london uk",
+    "role:accounts assistant|michael page|uxbridge london",
+    "role:accounts operative|doubletree by hilton london angel kings cross|barnsbury north london",
+    "role:accounts payable assistant|delice de france limited|southall west london",
+    "role:accounts payable assistant|gibson dunn|london uk",
+    "role:accounts payable assistant|montcalm collection|london uk",
+    "role:administrator|bupa|london uk",
+    "role:analyst associate investment banking infrastructure london|moelis company|london uk",
+    "role:analyst banking london gb|european bank for reconstruction development|london uk",
+    "role:analyst climate adaptation nature finance london gb|european bank for reconstruction development|london uk",
+    "role:analyst infrastructure investments london|psp investments|london uk",
+    "role:analyst investment banking m a|equiteq|london uk",
+    "role:analyst investment capital|first quantum minerals|london uk",
+    "role:analyst private debt investments|stepstone group|london uk",
+    "role:analyst trading credit corporate banking|canadian imperial bank of commerce|london uk",
+    "role:asbestos surveyor analyst duel role|litt recruitment|london uk",
+    "role:asset finance lawyer|eximius law|london uk",
+    "role:asset wealth management investment risk analyst london|goldman sachs|london uk",
+    "role:assistant finance manager|l q|farringdon central london",
+    "role:assistant financial controller|the kensington|south kensington south west london",
+    "role:assistant investment analyst|royal london group|london uk",
+    "role:assistant management accountant|insight recruitment solutions ltd|the city central london",
+    "role:assistant management accountant|robert half|the city central london",
+    "role:associate banker london gb|european bank for reconstruction development|london uk",
+    "role:associate credit derivatives trader|wells fargo|london uk",
+    "role:associate credit derivatives trader|wells fargo|the city central london",
+    "role:associate director director of corporate finance special situations|frp group|london uk",
+    "role:associate financial restructuring|houlihan lokey|london uk",
+    "role:associate green finance climate policy london gb|european bank for reconstruction development|london uk",
+    "role:associate private credit|invesco|london uk",
+    "role:audit accounts senior manager|sheridan maine|london uk",
+    "role:audit accounts senior|sheridan maine|london uk",
+    "role:audit and accounts assistant manager manager|tpf recruitment|beddington croydon",
+    "role:audit manager ii|td bank|london uk",
+    "role:audit semi senior|sheridan maine|london uk",
+    "role:audit senior|sheridan maine|london uk",
+    "role:balance sheet management analyst 9 months ftc|close brothers group|broadgate central london",
+    "role:bank barista|bupa|south west london london",
+    "role:banking analyst|the big table group|oxford circus central london",
+    "role:banking business architect|huxley associates|london uk",
+    "role:banking corporate banking summer analyst london united kingdom 2027 citi|citi|london uk",
+    "role:banking corporate banking summer analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking finance associate 1 4pqe magic circle firm|lewis hunt|london uk",
+    "role:banking financing equity capital markets placement analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking financing summer analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking investment banking cee greece cyprus summer analyst london united kingdom 2027 citi|citi|london uk",
+    "role:banking investment banking cee greece cyprus summer analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking investment banking financial institution group fig summer analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking investment banking full time analyst london united kingdom 2027 applicable for 2026 citi summer interns only citi|citi|london uk",
+    "role:banking investment banking full time analyst london united kingdom 2027 applicable for 2026 citi summer interns only|citigroup|london uk",
+    "role:banking investment banking healthcare placement analyst london united kingdom 2027 citi|citi|london uk",
+    "role:banking investment banking healthcare placement analyst london united kingdom 2027|citigroup|london uk",
+    "role:banking investment banking real estate summer analyst london united kingdom 2027|citigroup|london uk",
+    "role:barista supervisor|bupa|south west london london",
+    "role:beauty artist selfridges london 22 5 hours over 3 days|morphe|west end west london",
+    "role:broker trader institutional financial markets|the opportunity hub uk|london uk",
+    "role:broker|wtw|london uk",
+    "role:business analyst 1st line risk controls global markets teksystems|teksystems|london uk",
+    "role:business analyst 1st line risk controls global markets|teksystems|south east london london",
+    "role:business analyst finance treasury internship|hsbc|london uk",
+    "role:business operations specialist|ntt global data centers emea uk ltd|london uk",
+    "role:capital investment manager wcc625328|shared services partnership|westminster south west london",
+    "role:chef de partie|aviserv limited|london uk",
+    "role:client account coordinator fisher investments|fisher investments|london uk",
+    "role:client accountant funds private equity|iq eq|london uk",
+    "role:client onboarding analyst citi|citi|london uk",
+    "role:client services specialist defined contribution sei investments europe ltd|sei investments ltd|london uk",
+    "role:client success consultant|sterling williams limited|central london london",
+    "role:commercial finance analyst|martin baker|uxbridge london",
+    "role:commercial finance analyst|pan macmillan|farringdon central london",
+    "role:commercial finance manager technology 6m ftc immediate start|sainsbury s|farringdon central london",
+    "role:commercial finance manager technology 6m ftc immediate start|sainsbury s|london uk",
+    "role:commercial risk financial crime avp|crown agents bank|london uk",
+    "role:complaints employee|i3 resourcing limited|the city central london",
+    "role:compliance officer|foresters financial|shortlands bromley",
+    "role:compliance remediation assurance officer 12 month ftc|close brothers group|broadgate central london",
+    "role:content producer 121 mining investment the assay|hyve group ltd|london uk",
+    "role:contract support administrator|jones lang lasalle limited|london uk",
+    "role:corporate banking associate metals mining uk industrials|citigroup|london uk",
+    "role:corporate banking credit analyst mandarin speaking cer financial|cer financial|london uk",
+    "role:corporate banking credit analyst mandarin speaking|cer financial ltd|london uk",
+    "role:corporate finance analyst|cedar recruitment|the city central london",
+    "role:corporate finance expert analyst|mercor|london uk",
+    "role:corporate finance manager|youlend|holborn central london",
+    "role:counterparty credit risk consultant|teksystems|london uk",
+    "role:credit analyst data reporting cer financial|cer financial|london uk",
+    "role:credit analyst european financials|man group|london uk",
+    "role:credit analyst project finance|prime personnel|bishopsgate central london",
+    "role:credit analyst project finance|prime personnel|london uk",
+    "role:credit analyst|rothschild co|london uk",
+    "role:credit controller london uk 9 month ftc|flight centre|london uk",
+    "role:credit controller|advanced access platforms|sutton london",
+    "role:credit controller|budget energy|london uk",
+    "role:credit officer|citigroup|london uk",
+    "role:credit risk analyst|lorien resourcing limited|fenchurch st central london",
+    "role:credit risk senior analyst principal investments macquarie group|macquarie group|london uk",
+    "role:data analyst investment business aum performance model portfolios 12 month ftc jj search|jj search|london uk",
+    "role:data analyst investment business performance aum data reporting|jj search ltd|the city central london",
+    "role:data support officer ecorisk|environmental investigation agency|london uk",
+    "role:demand planner|pilgrim s europe|uxbridge london",
+    "role:depot finance administrator|dpd group uk|london uk",
+    "role:director of engineering risk and compliance|checkout com|london uk",
+    "role:director sr vp warehouse finance abl securitisation|hsbc|london uk",
+    "role:dynamics 365 finance business analyst insurance accounting|william alexander|london uk",
+    "role:emea payroll specialist 12 month fixed term contract|wells fargo|london uk",
+    "role:emea payroll specialist 12 month fixed term contract|wells fargo|the city central london",
+    "role:enterprise risk consultant|teksystems|london uk",
+    "role:entry level executive search consultant|placed talent limited|the city central london",
+    "role:executive search consultant alternative investment|rule recruitment|central london london",
+    "role:executive search consultant alternative investment|rule recruitment|london uk",
+    "role:finance analyst maternity cover ftc|hermes|london uk",
+    "role:finance analyst|axis clc|stratford east london",
+    "role:finance analyst|cca recruitment group|camden north west london",
+    "role:finance analyst|harper may|the city central london",
+    "role:finance analyst|monzo|london uk",
+    "role:finance analyst|nbc universal|london uk",
+    "role:finance analyst|the ivy|fitzrovia west london",
+    "role:finance and administration manager|elior|hendon north west london",
+    "role:finance and operations analyst|desmond motors ltd|london uk",
+    "role:finance assistant community focused secondary school bromley|marchant recruitment|bromley south east london",
+    "role:finance assistant entry level|randstad finance|vauxhall south west london",
+    "role:finance assistant|premier league|london uk",
+    "role:finance assistant|searcys|london uk",
+    "role:finance assistant|the clancy group|uxbridge london",
+    "role:finance associate|astrid miyu|kennington south east london",
+    "role:finance business analyst|energy saving trust|london uk",
+    "role:finance business analyst|exl|london uk",
+    "role:finance business analyst|marlin selection|london uk",
+    "role:finance business analyst|norton blake|london uk",
+    "role:finance business partner foodbuy group|compass group uk ireland ltd|london uk",
+    "role:finance business partner|a2dominion group|ealing west london",
+    "role:finance business partner|hays specialist recruitment limited|rotherhithe south east london",
+    "role:finance business partner|sovereign network group|wembley north west london",
+    "role:finance control analyst|focus search and selection|london uk",
+    "role:finance director|allen lane interim permanent recruitment|charing cross central london",
+    "role:finance expert technical accounting|mercor|london uk",
+    "role:finance lawyer 1 3 pqe perm|eximius law|london uk",
+    "role:finance management analyst|nomad foods europe birds eye|hammersmith west london",
+    "role:finance manager|prospectus|london uk",
+    "role:finance officer croydon asap start|marchant recruitment|croydon london",
+    "role:finance officer primary school|marchant recruitment|southwark south east london",
+    "role:finance officer secondary school in havering|marchant recruitment|london uk",
+    "role:finance officer|hays|mitcham london",
+    "role:finance process onboarding analyst|bdo recruitment|london uk",
+    "role:finance systems analyst|handle recruitment|london uk",
+    "role:finance transformation lead|oliver james associates|london uk",
+    "role:financial accountant music|handle recruitment|london uk",
+    "role:financial accountant|unibail rodamco westfield|london uk",
+    "role:financial advisor|wild berry associates|farringdon central london",
+    "role:financial analyst fully remote|mercor|london uk",
+    "role:financial analyst london|arcade food hall|london uk",
+    "role:financial analyst|education first|london uk",
+    "role:financial credit risk senior analyst|canopius|london uk",
+    "role:financial crime analyst|aptia group|london uk",
+    "role:financial crime analyst|oliver james associates|the city central london",
+    "role:financial crime compliance senior analyst|crown agents bank|london uk",
+    "role:financial planner|fisher investments|fenchurch st central london",
+    "role:financial planner|fisher investments|london uk",
+    "role:financial planning analysis manager|canonical|london uk",
+    "role:financial risk analyst|quantum group|the city central london",
+    "role:financial services psl 12 month ftc|hays specialist recruitment limited|london uk",
+    "role:financial services regulatory top us firm 2 4pqe|noble legal limited|the city central london",
+    "role:financial solutions market specialist leveraged finance private credit|bloomberg|london uk",
+    "role:financial transformation fs senior manager middle east corridor|kpmg|london uk",
+    "role:fractional financial controller vc backed hardware tech|harmonic group ltd|london uk",
+    "role:funding analyst|royal london group|london uk",
+    "role:genai investment embedded ai portfolio specialist|octavius finance|london uk",
+    "role:global retirement risk manager global retirement and investments team grit|amazon uk services ltd|london uk",
+    "role:graduate risk analyst|broadstone|london uk",
+    "role:group financial controller|career moves group|london uk",
+    "role:group head of third party risk management frameworks engagement|bupa|central london london",
+    "role:group reporting accountant|altum consulting|london uk",
+    "role:head baker|rnd recruitment|london uk",
+    "role:head of financial planning and reporting|robert half|paddington west london",
+    "role:head of internal audit anti fraud risk|tower hamlets london borough council|london uk",
+    "role:hotel kitchen team leader|whitbread|chessington south west london",
+    "role:ig credit analyst generalist global asset manager london|octavius finance|london uk",
+    "role:in business risk and trading development analyst|citigroup|london uk",
+    "role:in house aviation finance banking 3 pqe|lipson lloyd jones|london uk",
+    "role:insights decisions analyst banking|corpay|london uk",
+    "role:insurance officer|civic recruitment limited|bethnal green east london",
+    "role:interim finance manager|altum consulting|london uk",
+    "role:interim financial controller|altum consulting|london uk",
+    "role:interim head of finance|altum consulting|london uk",
+    "role:interim revenue assurance analyst|iss uk|london uk",
+    "role:investment analyst macdonald company|macdonald company|london uk",
+    "role:investment banking analyst associate greece cyprus coverage|bank of america|london uk",
+    "role:investment banking analyst consumer retail|citigroup|london uk",
+    "role:investment banking analyst tech services|baird|london uk",
+    "role:investment banking central eastern europe coverage analyst london|jpmorganchase|london uk",
+    "role:investment banking emea real estate analyst associate london|jpmorganchase|london uk",
+    "role:investment banking france benelux corp dcm analyst london|jpmorganchase|london uk",
+    "role:investment banking investor relations analyst london|jpmorganchase|london uk",
+    "role:investment banking security resilience initiative associate analyst london|jpmorganchase|london uk",
+    "role:investment banking senior analyst communications|citigroup|london uk",
+    "role:investment banking senior analyst uk banking|citigroup|london uk",
+    "role:investment banking specialist m a|mercor|london uk",
+    "role:investment counsellor|hsbc|london uk",
+    "role:investment executive mid market tech and services focused pe fund london uk per private equity recruitment|per private equity recruitment|london uk",
+    "role:investment management analyst m f d|patrizia|london uk",
+    "role:investment operations business analyst|sanderson|london uk",
+    "role:junior assistant loan administration|bank of china|london uk",
+    "role:junior broker delegated authority and binders|wtw|london uk",
+    "role:junior business analyst bank|huxley associates|charing cross central london",
+    "role:junior business analyst bank|huxley associates|london uk",
+    "role:junior business analyst bank|huxley associates|the city central london",
+    "role:junior rcsa process mapping consultants|michael page finance|london uk",
+    "role:lcm partners investment analyst quantitative solutions|link financial outsourcing limited|victoria south west london",
+    "role:lead products quantitative risk modeler|exxonmobil|london uk",
+    "role:legal cashier|service care solutions|london uk",
+    "role:legal entity control financial accountant 12 month fixed term contract|wells fargo|london uk",
+    "role:legal entity control financial accountant 12 month fixed term contract|wells fargo|the city central london",
+    "role:leveraged finance research associate director m g plc|m g plc|london uk",
+    "role:magic circle asset finance 1 4|eximius law|london uk",
+    "role:management accountant 6 month fixed term contract|rhaelm|broadgate central london",
+    "role:management accountant|retirement villages group|london uk",
+    "role:management accountant|the dune group|white city west london",
+    "role:managing director head of uk europe and middle east africa mea digital technology communications commercial banking|citigroup|london uk",
+    "role:mandarin speaking assistant fx trader banking|people first|london uk",
+    "role:mandarin speaking audit associate|language business|farringdon central london",
+    "role:mandarin speaking finance analyst financial reporting accounting|people first ltd|farringdon central london",
+    "role:mandarin spkg corporate banking relationship manager credit analyst|people first|london uk",
+    "role:market risk reporting consultant|teksystems|london uk",
+    "role:market risk supervisor eame crude freight|exxonmobil|london uk",
+    "role:mechanical maintenance engineer|cbw staffing solutions ltd|london uk",
+    "role:multi skilled engineer electrical or mechanical|jll|the city central london",
+    "role:night auditor|moxy london excel|london uk",
+    "role:night auditor|the hoxton|london uk",
+    "role:onestream finance business analyst contract role|wood group|fleet street central london",
+    "role:operational treasury analyst|lumon|farringdon central london",
+    "role:operations consultant sanctions screening center of excellence|bank of america|bromley south east london",
+    "role:origination analyst specialty finance|triple point|london uk",
+    "role:osint analyst|get staffed online recruitment|london uk",
+    "role:our clients are searching carpenters for the service garden furniture in northolt|ernesto|northolt west london",
+    "role:pa team assistant international investment bank|lancaster associates limited|london uk",
+    "role:paraplanner|evelyn partners|london uk",
+    "role:part time finance support|gordon yates ltd|highbury north london",
+    "role:payroll analyst uk|bloomberg|london uk",
+    "role:pgim credit senior analyst sustainable investment reporting strategy|prudential financial|london uk",
+    "role:pharmacy support worker bank|bupa|south west london london",
+    "role:portfolio guidelines analyst efinancialcareers|efinancialcareers|london uk",
+    "role:practice accountant|tpf recruitment|beddington croydon",
+    "role:prime finance services trader assistant analyst|jpmorganchase|london uk",
+    "role:prime financial services client services analyst|jpmorganchase|london uk",
+    "role:project accountant|arlington resource management|harrow london",
+    "role:project finance commercial assistant|colliers international emea|london uk",
+    "role:quant risk analyst actuarial|high finance limited t a hfg|london uk",
+    "role:quantitative finance expert derivatives|mercor|london uk",
+    "role:regulatory reporting analyst 12 month ftc|close brothers group|broadgate central london",
+    "role:remote head of financial planning and analysis|michael page|farringdon central london",
+    "role:rent and service charge accountant|phoenix community housing|bellingham south east london",
+    "role:responsible investment analyst|schroders|london uk",
+    "role:revenue finance business partner|handle recruitment|london uk",
+    "role:risk management surveyor|hsb engineering insurance|south east london london",
+    "role:risk project support manager|teksystems|london uk",
+    "role:risk regulatory change consultant|teksystems|london uk",
+    "role:royalties financial analyst sports media entertainment|handle recruitment limited|london uk",
+    "role:royalties financial analyst sports media entertainment|handle recruitment|london uk",
+    "role:semi senior accountant|sheridan maine|london uk",
+    "role:send finance officer north london|pertemps|wembley north west london",
+    "role:senior accountant accountancy practice|sheridan maine|london uk",
+    "role:senior accountant accounts and tax bromley hybrid|grass holm|bromley south east london",
+    "role:senior administrator|carter jonas|south west london london",
+    "role:senior analyst loan capital markets emea investment banking|citigroup|london uk",
+    "role:senior audit manager|td bank|london uk",
+    "role:senior commercial financial analyst eu ads amazon ads eu sales finance|amazon|london uk",
+    "role:senior commercial manager financial services|s p global|london uk",
+    "role:senior development underwriter financial institutions|travelers insurance company|london uk",
+    "role:senior finance analyst group fp a|asos|london uk",
+    "role:senior finance analyst|sysco international|farringdon central london",
+    "role:senior finance analyst|sysco|central london london",
+    "role:senior finance analyst|sysco|strand central london",
+    "role:senior finance business partner|a2dominion group|ealing west london",
+    "role:senior finance business partner|clearbank|london uk",
+    "role:senior finance business partner|data careers|south east london london",
+    "role:senior finance business partner|data careers|the city central london",
+    "role:senior finance functional analyst|alexander edward james consulting limited|the city central london",
+    "role:senior financial analyst 6 month ftc|evelyn partners|london uk",
+    "role:senior financial analyst amazon ads eu sales finance|amazon|london uk",
+    "role:senior financial analyst aum 6 month ftc|evelyn partners|london uk",
+    "role:senior financial analyst prime video accounting|amazon|london uk",
+    "role:senior financial analyst|galderma|london uk",
+    "role:senior financial crime analyst|arch capital group|london uk",
+    "role:senior financial regulatory analyst|fisher careers|london uk",
+    "role:senior financial regulatory analyst|fisher investments|fenchurch st central london",
+    "role:senior financial regulatory analyst|fisher investments|london uk",
+    "role:senior financial reporting analyst|monzo|london uk",
+    "role:senior group finance analyst|vistry group plc|london uk",
+    "role:senior group finance analyst|vistry group|the city central london",
+    "role:senior investment analyst|encore capital group|london uk",
+    "role:senior manager uk chief risk officer financial risk management|american express|victoria south west london",
+    "role:senior solutions architect uki financial services|amazon|london uk",
+    "role:senior strategic financial analyst|google|london uk",
+    "role:senior technical systems analyst financial crime surveillance|deerfoot recruitment solutions limited|the city central london",
+    "role:senior technical systems analyst financial crime surveillance|deerfoot recruitment solutions|the city central london",
+    "role:spanish client service associate fisher investments|fisher investments|london uk",
+    "role:spv accountant|finlight|oxford circus central london",
+    "role:sr accountant uk based|daysmart software|london uk",
+    "role:srt risk and controls specialist|deloitte recruitment|farringdon central london",
+    "role:staff accountant|equinox|london uk",
+    "role:static maintenance engineer|bupa|central london london",
+    "role:structured finance analyst 12 month fixed term contract|u s bank|london uk",
+    "role:technical accountant|validis|blackfriars central london",
+    "role:technical accounting manager|altum consulting|the city central london",
+    "role:trade finance analyst junior arm to rm mandarin preferred|harvey nash|london uk",
+    "role:trade finance analyst junior arm to rm mandarin preferred|harvey nash|south east london london",
+    "role:trade finance risk collateral analyst g mass consulting|g mass consulting|london uk",
+    "role:trade finance risk collateral analyst|g mass|london uk",
+    "role:trading credit senior advisor|exxonmobil|london uk",
+    "role:trading market risk advisor eame freight|exxonmobil|london uk",
+    "role:trainee account executive hf1309413|apprentify|london uk",
+    "role:trainee accounts assistant aat|aether financial|central london london",
+    "role:trainee financial advisor|graduate recruitment bureau|friern barnet north london",
+    "role:trainee wealth adviser|apollo private wealth|monument central london",
+    "role:treasury operations|ipoe consulting|london uk",
+    "role:treasury settlements analyst g mass consulting|g mass consulting|london uk",
+    "role:veterinary surgeon internal medicine focus east london up to 72 000|global vet recruitment agency|london uk",
+    "role:work from home as an accounting specialist tutor remote flexible independent 20 40 hr|findtutors|waterloo south east london",
+    "role:workday adaptive planning finance analyst|data careers|south east london london",
+    "role:workday adaptive planning finance analyst|data careers|the city central london"
+  ],
+  "config": {
+    "search": {
+      "days_old": 7,
+      "provider": "adzuna",
+      "preferred_title_keywords": [
+        "graduate",
+        "junior",
+        "trainee",
+        "entry level",
+        "assistant"
+      ],
+      "shortlist_size": 20,
+      "location": "London",
+      "max_experience_years": 2,
+      "fallback_provider": "jsearch",
+      "distance_miles": 10,
+      "category": "accounting-finance-jobs",
+      "query_terms": [
+        "finance",
+        "financial",
+        "accountant",
+        "accounting",
+        "investment",
+        "treasury",
+        "audit",
+        "credit",
+        "risk",
+        "banking"
+      ],
+      "timeout_seconds": 30,
+      "results_per_page": 400,
+      "deprioritise_title_keywords": [
+        "associate"
+      ],
+      "jsearch_top_up_threshold": 25,
+      "title_keywords": [
+        "finance",
+        "financial",
+        "accountant",
+        "accounting",
+        "accounts",
+        "investment",
+        "treasury",
+        "audit",
+        "auditor",
+        "credit",
+        "risk",
+        "banking",
+        "payroll",
+        "bookkeeper",
+        "bookkeeping",
+        "actuarial"
+      ],
+      "exclude_title_keywords": [
+        "recruiter",
+        "recruitment consultant",
+        "senior",
+        "sr",
+        "manager",
+        "director",
+        "head of",
+        "vice president",
+        "vp",
+        "chief",
+        "principal",
+        "lead",
+        "controller"
+      ],
+      "fallback_results_per_page": 100
+    },
+    "jsearch": {
+      "query": "graduate finance jobs in London, UK",
+      "date_posted": "week",
+      "radius": 50,
+      "country": "gb",
+      "language": "en",
+      "num_pages": 8,
+      "timeout_seconds": 60
+    }
+  },
+  "metadata": {
+    "run_id": "45124587299",
+    "commit": "baa0f0823938e95ac99c1b5b7a8b8f9b14fa8883"
+  },
+  "content_hash": "20e23c7f69753b160725e4f93c626f2348ef4073b7f9742df2aa763c2e50af82"
+}
