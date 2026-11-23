@@ -26,7 +26,7 @@ _SEARCH_FIELDS = frozenset(
     "results_per_page fallback_results_per_page shortlist_size max_experience_years "
     "timeout_seconds jsearch_top_up_threshold title_keywords exclude_title_keywords "
     "preferred_title_keywords "
-    "deprioritise_title_keywords".split()
+    "deprioritise_title_keywords max_salary_gbp".split()
 )
 _JSEARCH_FIELDS = frozenset(
     "query country language num_pages date_posted radius timeout_seconds".split()

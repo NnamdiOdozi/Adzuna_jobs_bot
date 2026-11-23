@@ -3,7 +3,9 @@
 The daily coordinator uses this adapter when ``ranking.method`` is ``jev``.
 Shared preparation removes seen and duplicate adverts, then each bounded batch
 is assessed against the candidate profile and editable suitability policy.
-Validated class probabilities determine acceptance and ordering.
+Validated class probabilities determine acceptance and ordering. A separate
+salary question reads pay wording; Python excludes above-cap ranges and keeps
+unknown salaries explicit instead of inventing amounts.
 
 The returned shortlist contains original provider records, preserving the data
 used by the email builder. The accompanying assessment record contains decisions,
@@ -28,6 +30,24 @@ from jobs_bot.model_ranking import (
     _NoRedirect,
     prepare_candidates,
 )
+from jobs_bot.screening import salary_details
+
+
+def _choice(answer, labels):
+    """Validate each suitability or salary decision before using it."""
+    probabilities = answer["probabilities"]
+    if (
+        answer["type"] != "choice"
+        or answer["choice"] not in labels
+        or set(probabilities) != labels
+        or any(
+            type(p) not in (float, int) or not math.isfinite(p) or not 0 <= p <= 1
+            for p in probabilities.values()
+        )
+        or abs(sum(probabilities.values()) - 1) > 0.001
+    ):
+        raise ValueError("Invalid classification probabilities")
+    return answer["choice"], probabilities
 
 
 def rank_jobs(jobs, seen, config, *, api_key=None):
@@ -42,6 +62,18 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
     labels = set(config["ranking"]["allowed_labels"])
     if set(policy["criteria"]) != labels:
         raise ValueError("Jev policy must define every suitability category")
+    salary_policy = None
+    cap = config["search"].get("max_salary_gbp")
+    if settings.get("salary_policy_path") and cap is not None:
+        if type(cap) not in (int, float) or not math.isfinite(cap) or cap <= 0:
+            raise ValueError("Salary cap must be positive and finite")
+        salary_policy = json.loads(
+            Path(settings["salary_policy_path"])
+            .read_text()
+            .replace("{cap_gbp}", str(cap))
+        )
+        if not set(salary_policy["excluded_labels"]) <= set(salary_policy["criteria"]):
+            raise ValueError("Salary exclusions must be defined categories")
     candidates = prepare_candidates(jobs, seen, config)
     if (
         math.ceil(len(candidates) / settings["batch_size"])
@@ -62,7 +94,12 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
         "assessments": [],
         "token_usage": {"input_tokens": 0, "output_tokens": 0},
         "input_hash": _hash(
-            {"candidates": candidates, "state": state, "policy": policy}
+            {
+                "candidates": candidates,
+                "state": state,
+                "policy": policy,
+                "salary_policy": salary_policy,
+            }
         ),
         "truncation": [job["id"] for job in candidates if job["description_truncated"]],
     }
@@ -86,6 +123,15 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
                     "advert": advert,
                 },
             }
+            if salary_policy:
+                questions[f"salary_{i}"] = {
+                    "type": "choice",
+                    "criteria": salary_policy["criteria"],
+                    "instructions": {
+                        "question": salary_policy["question"],
+                        "advert": advert,
+                    },
+                }
         payload = {"model": settings["model"], "state": state, "questions": questions}
         receipt["attempted_calls"] += 1
         batch_number = receipt["attempted_calls"]
@@ -100,7 +146,7 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
             "event=jev_request state=ready->requested batch=%d "
             "questions=%d input_hash=%s",
             batch_number,
-            len(batch),
+            len(questions),
             receipt["input_hash"],
         )
         try:
@@ -125,25 +171,22 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
             assessed = []
             for i, job in enumerate(batch):
                 answer = result["answers"][f"job_{i}"]
-                probabilities = answer["probabilities"]
-                if (
-                    answer["type"] != "choice"
-                    or answer["choice"] not in labels
-                    or set(probabilities) != labels
-                    or any(
-                        type(p) not in (float, int)
-                        or not math.isfinite(p)
-                        or not 0 <= p <= 1
-                        for p in probabilities.values()
+                category, probabilities = _choice(answer, labels)
+                salary = {}
+                if salary_policy:
+                    salary_category, salary_probabilities = _choice(
+                        result["answers"][f"salary_{i}"], set(salary_policy["criteria"])
                     )
-                    or abs(sum(probabilities.values()) - 1) > 0.001
-                ):
-                    raise ValueError("Invalid suitability probabilities")
+                    salary = {
+                        "salary_category": salary_category,
+                        "salary_probabilities": salary_probabilities,
+                    }
                 assessed.append(
                     {
                         "id": job["id"],
-                        "suitability": answer["choice"],
+                        "suitability": category,
                         "probabilities": probabilities,
+                        **salary,
                     }
                 )
             for name in receipt["token_usage"]:
@@ -166,10 +209,20 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
             failure.receipt = receipt
             raise failure from None
     by_id = {job["id"]: job for job in candidates}
+    if salary_policy:
+        for row in receipt["assessments"]:
+            row["salary_assessment"] = salary_details(by_id[row["id"]], row)
+    excluded_salary = set(salary_policy["excluded_labels"]) if salary_policy else set()
+    receipt["salary_exclusions"] = [
+        row["id"]
+        for row in receipt["assessments"]
+        if row.get("salary_category") in excluded_salary
+    ]
     acceptable = [
         row
         for row in receipt["assessments"]
         if row["suitability"] in config["ranking"]["selected_labels"]
+        and row.get("salary_category") not in excluded_salary
     ]
     acceptable.sort(
         key=lambda row: (
@@ -183,5 +236,11 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
     )
     receipt["elapsed_seconds"] = time.monotonic() - started
     return [
-        by_id[row["id"]] for row in acceptable[: config["search"]["shortlist_size"]]
+        {
+            **by_id[row["id"]],
+            **(
+                {"salary_assessment": row["salary_assessment"]} if salary_policy else {}
+            ),
+        }
+        for row in acceptable[: config["search"]["shortlist_size"]]
     ], receipt

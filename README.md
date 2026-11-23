@@ -5,7 +5,18 @@ have already been emailed, and sends a daily shortlist through Gmail. It can
 run locally or on GitHub Actions, triggered each morning by Cloudflare. Python
 owns fetching, history and email delivery; suitability can use rules, Jev or Qwen.
 
-Adzuna is the primary source, with JSearch as backup after an HTTP error or no
+JSearch is currently selected, with Adzuna fallback disabled. Its eight-page
+search is followed by Jev ranking. A £50,000 cap excludes known annual GBP salary
+figures above that amount, including estimates; missing pay or unknown units
+remain eligible, so this cannot guarantee that every selected job pays below the cap.
+In Jev mode a separate salary question also reads pay wording in the description.
+It excludes above-cap base pay and crossing ranges, while treating commission-only
+figures, fees and unstated base salaries as unknown. Decisions are saved in receipts;
+missing provider salary figures are not replaced with invented amounts.
+When a clear salary range is extracted from the description, emails label it
+“extracted from advert”; unknown pay is labelled explicitly. See the
+[saved example email](reports/2026-11-23_jev_salary_trial/email-example.md).
+When configured as the primary source, Adzuna can use JSearch as backup after an HTTP error or no
 unseen matching jobs, or as a top-up when Adzuna returns 25 jobs or fewer. This
 application does not separately scrape job boards or promise coverage of any
 particular recruitment website. Adzuna requires a finance category and finance
@@ -53,8 +64,8 @@ Run commands from the project root with Python 3.12 or later. The bot uses only
 Python's built-in libraries, so there are no application dependencies to install
 and no virtual environment is required.
 
-Your credential setup must supply `ADZUNA_APP_ID` and `ADZUNA_API_KEY` for Adzuna,
-and `JSEARCH_API_KEY` when JSearch is selected or the enabled backup is needed. Names
+Your credential setup must supply `JSEARCH_API_KEY` for the current JSearch source.
+`ADZUNA_APP_ID` and `ADZUNA_API_KEY` are needed only if you select Adzuna again. Names
 are case-sensitive. Sending also needs `gmail_app_password`. Keep their values
 in your user-managed secret configuration, never in this repository or a command.
 The Gmail app label is only a label; it is not the sender address or password.
@@ -67,7 +78,9 @@ On this machine, the existing credential launcher supplies those settings:
 
 This command searches the selected provider and prints the proposed email body. It does not send
 email or change the sent-job history. With the default configuration, a run makes
-one combined Adzuna search, requesting 400 listings on the first page. HTTP 400
+one eight-page JSearch search. Each page uses provider credits, even though the
+pages are requested in one HTTP call. If switched back to Adzuna, it makes
+one combined search, requesting 400 listings on the first page. HTTP 400
 triggers one retry requesting 100. That means one API request normally, two if
 the fallback is used. Smaller successful responses are accepted without more
 requests. If Adzuna still returns an HTTP error or leaves no unseen matching jobs,

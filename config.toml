@@ -1,7 +1,7 @@
 [search]
 # Backup follows HTTP errors or no unseen matching jobs; empty disables it.
-provider = "adzuna"
-fallback_provider = "jsearch"
+provider = "jsearch"
+fallback_provider = ""
 # At or below this raw Adzuna count, merge one JSearch batch before ranking; 0 disables.
 jsearch_top_up_threshold = 25
 base_url = "https://api.adzuna.com/v1/api/jobs/gb/search"
@@ -16,6 +16,8 @@ fallback_results_per_page = 100
 shortlist_size = 20
 # Maximum applicant experience to target when checking mandatory requirements.
 max_experience_years = 2
+# Exclude known annual GBP salaries above this upper bound, including estimates.
+max_salary_gbp = 50000
 timeout_seconds = 30
 # Required finance evidence in the title, using whole words/phrases.
 title_keywords = ["finance", "financial", "accountant", "accounting", "accounts", "investment", "treasury", "audit", "auditor", "credit", "risk", "banking", "payroll", "bookkeeper", "bookkeeping", "actuarial"]
@@ -64,7 +66,7 @@ directory = "artifacts/run-report"
 artifact_name = "job-run-report"
 
 [candidate]
-profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Spoken languages are English and Vietnamese; other languages and written/business-language proficiency are not established. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
+profile = "Recent master's graduate in Finance and Accounting, completed in 2025; zero to two years of professional experience; seeking graduate or junior accounting and general finance roles in London and the Home Counties. Relevant financial-services complaints/operations and graduate investment banking schemes offering training are eligible. Exclude legal occupations and mid-level/senior roles. Do not require prior derivatives or investment expertise where a graduate programme teaches it. Spoken languages are English and Vietnamese; she does not speak other languages, including French. Written/business-language proficiency is not established. She has no prior insurance, underwriting or Lloyd's-market experience. Professional accreditation, work authorization, current student status and exact graduation month are unknown."
 
 [ranking]
 # Daily switch: rules (no model), jev, or qwen. Agentic experiments are separate.
@@ -91,6 +93,8 @@ selected_labels = ["strong_fit", "possible_fit"]
 base_url = "https://api.typesafe.ai/v1/systemone"
 model = "jev-1.14.0"
 policy_path = "prompts/jev_suitability.json"
+# Separate salary question reads pay wording when provider fields are empty.
+salary_policy_path = "prompts/jev_salary.json"
 batch_size = 20
 timeout_seconds = 60
 

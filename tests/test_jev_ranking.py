@@ -39,9 +39,12 @@ class JevRankingTests(unittest.TestCase):
         answers = {
             name: {
                 "type": "choice",
-                "choice": "strong_fit",
+                "choice": "unknown" if name.startswith("salary_") else "strong_fit",
                 "probabilities": {
-                    label: float(label == "strong_fit")
+                    label: float(
+                        label
+                        == ("unknown" if name.startswith("salary_") else "strong_fit")
+                    )
                     for label in question["criteria"]
                 },
             }
@@ -145,6 +148,52 @@ class JevRankingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             rank_jobs(self.jobs, set(), self.config, api_key="fake")
         opener.assert_not_called()
+
+    @patch("jobs_bot.jev_ranking.build_opener")
+    def test_salary_questions_remove_high_pay_and_preserve_unknown(self, opener):
+        """Salary decisions filter selection separately from suitability."""
+        self.jobs = [
+            {**self.jobs[0], "id": str(i), "company": {"display_name": str(i)}}
+            for i in range(4)
+        ]
+        statuses = ["above_cap", "within_cap", "crosses_cap", "unknown"]
+
+        def salary_response(request, **kwargs):
+            payload = json.loads(request.data)
+            self.assertEqual(len(payload["questions"]), 8)
+            self.assertIn(
+                "50000", payload["questions"]["salary_0"]["instructions"]["question"]
+            )
+            result = json.load(self.response(request))
+            for i, status in enumerate(statuses):
+                result["answers"][f"salary_{i}"]["choice"] = status
+                result["answers"][f"salary_{i}"]["probabilities"] = {
+                    label: float(label == status)
+                    for label in payload["questions"][f"salary_{i}"]["criteria"]
+                }
+            return io.StringIO(json.dumps(result))
+
+        opener.return_value.open.side_effect = salary_response
+        selected, receipt = rank_jobs(self.jobs, set(), self.config, api_key="fake")
+        self.assertEqual({j["id"] for j in selected}, {"1", "3"})
+        self.assertEqual(receipt["salary_exclusions"], ["0", "2"])
+        self.assertEqual(
+            [a["salary_category"] for a in receipt["assessments"]], statuses
+        )
+        self.assertEqual(opener.return_value.open.call_count, 1)
+
+    @patch("jobs_bot.jev_ranking.build_opener")
+    def test_missing_salary_answer_fails_instead_of_bypassing_cap(self, opener):
+        """A partial paid response must not silently disable salary screening."""
+
+        def incomplete(request, **kwargs):
+            result = json.load(self.response(request))
+            result["answers"].pop("salary_0")
+            return io.StringIO(json.dumps(result))
+
+        opener.return_value.open.side_effect = incomplete
+        with self.assertRaises(RankingFailure):
+            rank_jobs(self.jobs, set(), self.config, api_key="fake")
 
     @patch("jobs_bot.__main__.rank_jev")
     def test_config_switch_uses_jev_and_saves_receipt_without_email(self, model):

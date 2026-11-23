@@ -106,6 +106,34 @@ class ModelRankingTests(unittest.TestCase):
                 self.assertIn("30000 to 40000 EUR (YEAR)", body)
                 self.assertEqual("(Adzuna estimate)" in body, predicted == "1")
 
+    def test_email_shows_extracted_salary_and_marks_unknown_pay(self):
+        """Show copied salary evidence without presenting missing pay as zero."""
+        jobs = [
+            {
+                **_job(),
+                "salary_assessment": {
+                    "min": 36000,
+                    "max": 50000,
+                    "currency": "GBP",
+                    "period": "YEAR",
+                },
+            },
+            _job("unknown"),
+        ]
+        message = build_message(
+            jobs,
+            {"sender": "sender@example.com", "subject": "Jobs"},
+            ["recipient@example.com"],
+            "2026-11-23",
+        )
+        self.assertIn(
+            "36,000 to 50,000 GBP (per year; extracted from advert)",
+            message.get_content(),
+        )
+        self.assertIn(
+            "Salary: not established from supplied data", message.get_content()
+        )
+
     def test_explicit_truncation_and_request_hashes(self):
         """Bind request identity to the exact supplied shortened description."""
         self.config["ranking"]["max_description_chars"] = 5

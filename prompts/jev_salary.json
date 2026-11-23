@@ -1,0 +1,13 @@
+{
+  "question": "Does this advert explicitly state a current annual GBP BASE salary above {cap_gbp}? Use the advert text only. Do not infer pay from job title, seniority or industry. Do not treat commission, OTE, bonuses, later earnings after training, company turnover or benefits as current base salary. Do not annualise hourly/daily pay or convert currencies. If current annual GBP base pay is not stated clearly, answer unknown.",
+  "criteria": {
+    "above_cap": "An explicit current annual GBP base salary, or the lower end of its range, is strictly above {cap_gbp}.",
+    "within_cap": "An explicit current annual GBP base salary or entire base salary range is at most {cap_gbp}; an explicit upper bound at most the cap also qualifies.",
+    "crosses_cap": "An explicit current annual GBP base salary range starts at or below {cap_gbp} and ends above it. An explicit base-salary upper bound above {cap_gbp}, such as up to \u00a365k, also belongs here even if the lower bound is omitted.",
+    "unknown": "No unambiguous current annual GBP base salary can be determined. Only commission, OTE, future earnings, hourly/daily pay, foreign currency or unrelated amounts are given, or the wording is ambiguous."
+  },
+  "excluded_labels": [
+    "above_cap",
+    "crosses_cap"
+  ]
+}

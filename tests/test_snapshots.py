@@ -184,6 +184,8 @@ class SnapshotIntegrationTests(unittest.TestCase):
         # Archive tests isolate capture ordering from optional paid ranking/top-up.
         self.config["ranking"]["method"] = "rules"
         self.config["search"]["jsearch_top_up_threshold"] = 0
+        self.config["search"]["provider"] = "adzuna"
+        self.config["search"]["fallback_provider"] = "jsearch"
         self.config["history"] = {
             "path": str(self.directory / "seen.json"),
             "delivery_path": str(self.directory / "delivery.json"),

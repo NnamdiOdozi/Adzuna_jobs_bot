@@ -1,0 +1,7 @@
+{
+  "date": "2026-11-23",
+  "operation": "Copy explicit salary figures and source wording into shortlist and assessments",
+  "additional_api_calls": 0,
+  "preserves_original_salary_fields": true,
+  "source": "existing Jev salary receipt and original JSearch descriptions"
+}

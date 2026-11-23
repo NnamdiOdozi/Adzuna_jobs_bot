@@ -42,6 +42,10 @@ class BotTests(unittest.TestCase):
         self.now = datetime(2026, 10, 26, 7, 32)
         self.config = Path(temporary.name) / "config.toml"
         source = Path("config.toml").read_text()
+        source = source.replace('provider = "jsearch"', 'provider = "adzuna"', 1)
+        source = source.replace(
+            'fallback_provider = ""', 'fallback_provider = "jsearch"', 1
+        )
         # Isolate delivery tests from the user's selected paid-model mode/top-up.
         source = re.sub(r'(?m)^method\s*=\s*"[^"]*"', 'method = "rules"', source)
         source = source.replace(

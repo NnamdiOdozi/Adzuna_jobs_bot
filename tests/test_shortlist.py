@@ -25,6 +25,7 @@ class ShortlistTests(unittest.TestCase):
         """Use the same editable search preferences as normal bot runs."""
         with Path("config.toml").open("rb") as stream:
             self.config = tomllib.load(stream)["search"]
+        self.config["provider"] = "adzuna"
 
     def test_clearly_senior_titles_from_november_shortlist_are_excluded(self):
         """Reject all seven clear senior titles from the reported email."""

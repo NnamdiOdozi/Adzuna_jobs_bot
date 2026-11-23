@@ -33,6 +33,7 @@ from jobs_bot.jsearch import fetch_jsearch
 from jobs_bot.model_ranking import RankingFailure, rank_jobs
 from jobs_bot.qwen_ranking import rank_jobs as rank_qwen
 from jobs_bot.run_reports import record_run
+from jobs_bot.screening import screen_jobs
 from jobs_bot.services import build_message, fetch_jobs, send_message
 from jobs_bot.shortlist import job_keys, select_jobs
 from jobs_bot.snapshots import record_snapshot
@@ -45,6 +46,7 @@ def _select(jobs, seen, config, provider, records=None):
     function saves for later inspection. Email formatting and sent-job history
     remain the caller's responsibility, whichever ranking method is selected.
     """
+    jobs = screen_jobs(jobs, config.get("search", {}), provider)
     method = config.get("ranking", {}).get("method", "rules")
     if method == "rules":
         return select_jobs(jobs, seen, {**config["search"], "provider": provider})

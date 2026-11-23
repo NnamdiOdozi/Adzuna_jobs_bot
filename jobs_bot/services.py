@@ -102,6 +102,31 @@ def fetch_jobs(config, app_id, app_key):
     return rows
 
 
+def _salary_line(job):
+    """Prefer supplied salary fields, then clearly labelled advert extraction."""
+    known = any(
+        type(job.get(key)) in (int, float) for key in ("salary_min", "salary_max")
+    )
+    detail = job.get("salary_assessment", {})
+    if not known:
+        high, low = detail.get("max"), detail.get("min")
+        if high is None:
+            return "Salary: not established from supplied data"
+        amount = f"{low:,g} to {high:,g}" if low is not None else f"up to {high:,g}"
+        period = (
+            "per year" if detail.get("period") == "YEAR" else "pay period not stated"
+        )
+        return (
+            f"Salary: {amount} {detail['currency']} ({period}; extracted from advert)"
+        )
+    return (
+        f"Salary: {job.get('salary_min', 'not supplied')} to "
+        f"{job.get('salary_max', 'not supplied')} {job.get('salary_currency', 'GBP')}"
+        + (f" ({job['salary_period']})" if job.get("salary_period") else "")
+        + (" (Adzuna estimate)" if str(job.get("salary_is_predicted")) == "1" else "")
+    )
+
+
 def build_message(jobs, config, recipients, date):
     """Build a readable shortlist with both recipients visible.
 
@@ -147,21 +172,13 @@ def build_message(jobs, config, recipients, date):
                 f"{job['company'].get('display_name', 'Employer unspecified')} | "
                 f"{job['location'].get('display_name', 'Location unspecified')}",
                 f"Listed: {job['created'] or 'not supplied'}",
-                f"Salary: {job.get('salary_min', 'not supplied')} to "
-                f"{job.get('salary_max', 'not supplied')} "
-                f"{job.get('salary_currency', 'GBP')}"
-                + (f" ({job['salary_period']})" if job.get("salary_period") else "")
-                + (
-                    " (Adzuna estimate)"
-                    if str(job.get("salary_is_predicted")) == "1"
-                    else ""
-                ),
+                _salary_line(job),
                 job["redirect_url"],
                 "",
             ]
         )
     lines.append(
-        "Requires finance wording; excludes senior titles and favours junior roles. "
+        "Selected for graduate/junior finance and accounting suitability. "
         "Check experience, location and eligibility "
         "in each full advert."
     )
