@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "repository": "NnamdiOdozi/Adzuna_jobs_bot",
+  "source_run_id": "45340997637",
+  "source_commit": "bf7aa1f5ac06d2f5ad8a653e6d4ad2b8270c5712",
+  "workflow": ".github/workflows/daily-jobs.yml",
+  "branch": "main",
+  "conclusion": "success",
+  "run_attempt": 1,
+  "artifacts": [
+    {
+      "name": "job-candidates",
+      "id": 14894889428
+    },
+    {
+      "name": "job-ranking-receipts",
+      "id": 14895159362
+    },
+    {
+      "name": "job-run-report",
+      "id": 14894799779
+    }
+  ],
+  "sha256": {
+    "job-candidates/689aef14e45a45c3b155585c98e17df2.json": "d1deef914175fdf62441739e6bf855792b204946243e5f83cb3b949e16e29d55",
+    "job-ranking-receipts/ranking-81573baef7034caab230b76eb8bb0814.json": "0cc03fa1500002816e8b82074850b1bf86b4405bc5ec49f15d97a7dc562d1187",
+    "job-run-report/assessments.json": "3d593396de4d463f5fae3ae63e0b1c27ae551da05c85189e34bb411ba4ec7332",
+    "job-run-report/candidates.json": "f84d6dcdc2d388454a6c94b0e0e46b97d9fc9d3f2f414d67805a561dfaa59e2b",
+    "job-run-report/email.txt": "7599e9c928d9472df142acae47df224049ee7b00eb04f51d6f092c154e4c2416",
+    "job-run-report/report.json": "27c6b393b0fd7a6c8c9196f6151eaa841f8d291208dced537115f25bd33ef6c7",
+    "job-run-report/shortlist.json": "1a8b20aec8b9f37efb23129851429b818f00d7ed4406bc14b4dc15f85d59ab2d",
+    "job-run-report/summary.md": "cf9f49bcaf105b4592af1d6ccce3b116b19ab8d949035a078a656a2300554467"
+  },
+  "source_created_at": "2026-11-24T06:30:44Z",
+  "source_local_time": "2026-11-24T06:30:44+00:00",
+  "archive_timezone": "Europe/London"
+}
