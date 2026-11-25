@@ -1,0 +1,905 @@
+{
+  "status": "success",
+  "method": "jev",
+  "receipt": {
+    "model": "jev-1.14.0",
+    "calls": 2,
+    "attempted_calls": 2,
+    "assessments": [
+      {
+        "id": "jsearch:bTBOeXJyOTFJUGp5QWRpUUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbEkxTVRod1EySk9iWFI0UzNwQk1tUlljR2hxYkVOclRuWlRiVVpCYlZSYU1uWk9TRE5IVlUxcWRYaGpTek5IWTFJdGNFNHhRblE1TVUxUFIzZHRiVkJ3ZW1SS01WQndORlV4WDFjMmJrSnNOR1JvY3pKV05GOUtja2hVUkhCSmVVZHlhRU4zZGtWWFduUlhlVFZaTmxBM1pDMHdlbVphUTI1MmRrZFhUVkZDTmtwRlFqZ1NGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkRlF6SkJhSEExTFVOVmN6RnRjREl0VlZKUFZWcEtPVlZ3YmtoMzphODAwMmFkNw",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.07,
+          "possible_fit": 0.07,
+          "unlikely_fit": 0.6,
+          "insufficient_information": 0.26
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate - Treasury & Trade Solutions",
+        "vacancy": "Graduate - Treasury & Trade Solutions job with HSBC | 14282689\n\n# Graduate - Treasury & Trade Solutions\n\nEmployer\n: HSBC \nLocation\n: London, United Kingdom\nSalary\n: Competitive salary\nPosted\n: 19 Nov 2026\nCloses\n: 19 Dec 2026\nReference\n: 66908\n\n Apply (This will open in a new window from which you will be automatically redirected to an external site after 5 seconds)\n\n## Job Details\n\nWho is HSBC Innovation Banking? We're the power behind the UK's forward-thinkers, future-makers and leap-takers, helping them ignite the bold ideas that reshape our world. We offer flexible banking solutions for start-ups, scale-ups, growth businesses, investors and those working towards IPO. Whether it's comprehensive corporate banking, managing cashflow, plans for buyouts or funds banking, we power ideas at every stage of their journey. From the first-time founders to the funds that back them and everything in between. Here's to never standing still. We're proud to accelerate growth for tech and life science businesses, create meaningful connections and open a world of global opportunity for entrepreneurs and investors alike. The programme The 18-month graduate programme is designed to build the core skills you need for a successful career in corporate banking. You'll be challenged, supported and given opportunities to broaden your capabilities while working alongside colleagues with deep expertise and a shared commitment to supporting our clients. You'll also have a dedicated mentor and buddy to support you throughout the programme. You'll work within the HSBC Innovation Banking Chief Commercial Office, partnering with experts in the Treasury & Trade Solutions product sales team. The London-based team is responsible for the positioning of commercial banking solutions to the innovation economy. The suite of products includes Cards, Digital Channels, Liquidity, Payments, Trade Finance and Integration solutions. The Treasury & Trade Solutions pathway provides a significant amount of hands-on activity with the client base and product inventory that you are supporting, potentially working with clients across a range of different sectors and life stages. You will work with and support senior sales specialists and relationship teams to position Cards, Cash Management, Payments, Liquidity, Digital Channels, Trade Finance and Integration solutions for clients in the innovation economy. You can expect meaningful, hands-on experience with the clients you support. Alongside this, you'll take part in training designed to build the knowledge and practical skills you need to succeed. Topics include:\n\n- Client positioning, negotiation and portfolio management\n- Innovation Banking product suite and sales strategies\n- The innovation ecosystem and venture capital funding cycles\n- Data analysis and senior stakeholder management.\n\nSkills and requirements This could be the right programme for you if:\n\n- You have a genuine interest in innovation, particularly technology and life sciences.\n- You enjoy solving problems, welcome a challenge and are willing to explore new approaches. When you don't know the answer, you take the initiative to find it.\n- You're motivated, organised and able to manage competing priorities effectively. You take ownership and follow through on commitments.\n- You're curious, eager to learn and quick to apply new knowledge.\n- You work well as part of a team and are also comfortable working independently. You remain calm and dependable under pressure.\n- You communicate clearly and confidently, both in writing and verbally, and can explain complex information in an accessible way.\n- You have, or expect to obtain, a bachelor's degree or equivalent qualification. Previous work experience is welcome but not required.\n\nProgramme details Duration: 18 months Eligibility: Applicants must have graduated in 2026 or be due to graduate in 2027. Start date: Monday 6 September 2027 Location: London (hybrid) Being open to different points of view is important for our business and the communities we serve. At HSBC, we're dedicated to creating diverse and inclusive workplaces - no matter their gender, ethnicity, disability, religion, sexual orientation, socio-economic background or age. We are committed to removing barriers and ensuring careers at HSBC are inclusive and accessible for everyone to be at their best. We take pride in being a Disability Confident Leader and will offer an interview to people with disabilities, long term conditions or neurodivergent candidates who meet the minimum criteria for the role. If you have a need that requires accommodations or changes during the recruitment process, please get in touch with our Recruitment Helpdesk via hsbc.recruitment@hsbc.com.\n\n Apply (This will open in a new window from which you will be automatically redirected to an external site after 5 seconds)"
+      },
+      {
+        "id": "jsearch:NHdnbXZXclFBOUl6d2t2ckFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZVjk2T0VSeU1VZzRTblYwYjE5WFRXUlJWbFV0UlZaTE1GUTJUVlI1TjBsdlVGZFRiRU0zVkZCWVEwWjBMVFV3VkhOMVNqUjZSV1pqUTIxa1RURnpka0kyZWpWQ2VtMUhOMmROTXpJdE1qbEtTMUk0VjNKamFUTjJORjlGZUVscFN5MHpjRUppTW5GdWFIQjNUak5CV201d2NsVTJNVEZSVkZScGMzTnpiazlJU1hwZlFtd1NGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkRlF6TldMVmhEVDB4MFpWbHRSSEpQTTB4U1dYbHVhamRIZFVwbjpmNGZjYmQzNQ",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 1.0,
+          "crosses_cap": 0.0,
+          "unknown": 0.0
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 1.0,
+            "crosses_cap": 0.0,
+            "unknown": 0.0
+          },
+          "min": 36000.0,
+          "max": 36000.0,
+          "currency": "GBP",
+          "period": "YEAR",
+          "source": "advert_description",
+          "evidence": "Salary: \u00a336,000"
+        },
+        "title": "Danish speaking Finance Graduate Client Associate",
+        "vacancy": "Danish speaking Finance Graduate Client Associate - uklanguagejobs.co.uk\n\n# Danish speaking Finance Graduate Client Associate\n\n Recruiter: Language Matters Job posted: 19/11/26 Reference: 3222092746 Type: Permanent Salary: \u00a336,000 Annual Fluent language: English, Danish Job location: London \n\nSalary: \u00a336000 + \u00a37000 bonus\n\nA Danish speaker is urgently needed for a financial services company to support their growing multilingual Sales Team. You will be based in a stunning office in Canary Wharf, London providing your expertise in delivering an excellent level of customer and administrative support. As a Client Service Associate will be in the front line of maintaining and developing the Danish clienteles by advising the company's products in order to meet the clients demands. Due to the level of training involved, you will have the opportunity to progress your career within the company and learn new skills.\n\nYour responsibilities will include: \n\n- Collecting all relevant information from clients to set up new accounts\n- Build relationships with clients within the banking sector and assist with administrative duties\n- Collaborate with the Denmark's Sales team and the investment advisor to manage the daily workload\n- Ensuring all clients' reports are accurate and are being dealt with effectively and in a timely manner\n\nAbout you: The successful candidate must be detail-oriented and possess strong analytical, communication, and organisational skills, be productive and driven to provide the highest level of client services. This is a junior role which will give you the opportunity to build your career path within the financial service and engaging in a positive and encouraging work environment where hard work will be rewarded. You will be working from the office in Canary Wharf, East London, Monday-Friday, 9am-6pm. A generous benefits package is offered! They do offer visa sponsorship and a relocation package.\n\nProfile: \n\n- Required to be fluent in Danish and English, both written and spoken\n- Experience as a Client Service, Customer Service Advisor, Client Support, Client Service Associate within the financial or banking sector is desirable\n- Degree within finance, banking or economics is desirable\n- Demonstrable problem-solving skills and a strong customer focus\n- Excellent communicator, comfortable dealing with high level executives with the ability to always maintain a high level of professionalism\n\n To apply, please send your CV in English and in Word format to Marie-Anne. languagematters is acting as an employment agency in relation to this vacancy."
+      },
+      {
+        "id": "jsearch:ajNDdlJtWFJIdzNiMDhDMUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXa053YWsxYVJHWkJURTF0UXpsd1NqaGtkMHRzWDBjemNqVkJXSFppWm01aFNFVjZVRXhOZURWcVpETm5PRkZPTUROa1ZWaE5ObEpyUTJWTWJrTXhhelZwWTJkcmRGTmZXVzlUUm1sMGRqUjNkRTFrT0VReGJuaFFkVFp2VEhOMWFIWk9PRGxQUWtaU1NTMVhTVXhRVERGeVRXZEVlbUp6UW5FeExWRndkMWhFVUMxblgyWVNGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkSU9HeDBRWGhZTmpka2NqVTNkVll5T1RsYU9VSlJVbFpKU21wQjo2OTQwODZjZQ",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.06,
+          "possible_fit": 0.12,
+          "unlikely_fit": 0.78,
+          "insufficient_information": 0.04
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Recruitment Consultant - Finance and Technology",
+        "vacancy": "We're looking for an ambitious, switched-on graduate to join a growing specialist recruitment consultancy working across the finance and technology sectors.\nWorking with leading hedge funds, investment firms and innovative technology businesses, you'll have the opportunity to build a rewarding career in a fast-paced, commercially driven industry.\nNo recruitment experience is necessary. We provide full training and ongoing development.\nThe RoleYou'll be involved in the full recruitment process, including:\n\u2022 Building relationships with clients and candidates.\n\n\u2022 Developing new business opportunities.\n\n\u2022 Identifying and attracting top talent.\n\n\u2022 Managing interviews, offers and negotiations.\n\n\u2022 Building your own client portfolio.\n\n\u2022 Working towards individual and team targets.\n\nWho We're Looking ForWe're looking for someone who is confident but grounded, naturally personable and comfortable holding their own without needing to be the loudest person in the room.\nIdeally, you'll be:\n\u2022 Hardworking, reliable and motivated.\n\n\u2022 Proactive, switched on and able to use your initiative.\n\n\u2022 Confident communicating and building relationships.\n\n\u2022 Comfortable working independently without constant supervision.\n\n\u2022 Resilient, competitive and keen to succeed.\n\n\u2022 Someone with previous work experience, even a part-time or weekend job, who understands the value of hard work.\n\nWhat's On Offer?\u2022 Competitive basic salary.\n\n\u2022 Uncapped commission and excellent earning potential.\n\n\u2022 Full training and one-to-one mentoring.\n\n\u2022 Clear career progression opportunities.\n\n\u2022 Exposure to specialist finance and technology markets.\n\n\u2022 Regular team socials and performance incentives.\n\n\u2022 International incentive trips to destinations including Dubai, Barcelona and the South of France.\n\nReady to Get Started?If you're ambitious, confident, down-to-earth and prepared to work hard, this is an excellent opportunity to build a successful career in specialist recruitment contact Libby from SW6."
+      },
+      {
+        "id": "jsearch:OUN4ZDNueWpubDVKdlFMQkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbmRUZHpOcVdrdENWbkpKWDA5eWVHbFpOVzFHTWxwbU5YQm9lVGxWWnpaT2RWbzJNV0Z4TTFRd2RFOUdTRTF2VmxrMUxUQnhOMWxwVWpWVExVYzVOUzE0UkRoeE4zbG5WUzFRU1dwUVozRnBVazVXTW1SeWExZEliak5yT0dob1ZHWlFOVEowY200d2FVNURXRFJGVjJrd1ZHWm5lVzlrWDNGa2R6QTFWbTl4ZVRaamRXNFNGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkR2RWWlZWM0ZsZHpWRU5reHhhMFZqWVdSdVVIa3dZekZtUzB0Qjo0NGRjYWFiYw",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.7,
+          "possible_fit": 0.25,
+          "unlikely_fit": 0.0,
+          "insufficient_information": 0.05
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 1.0,
+          "crosses_cap": 0.0,
+          "unknown": 0.0
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 1.0,
+            "crosses_cap": 0.0,
+            "unknown": 0.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Finance & Management Reporting \u2014 Energy Insights",
+        "vacancy": "Save this job. Every save sharpens your matches.\n\nI\u2019m interested\n\n# Graduate Finance & Management Reporting \u2014 Energy Insights\n\n## targetjobs UK\n\n## Greater London\n\n## On-site\n\n## GBP 28,000 - 34,000\n\n## Full time\n\n2 days ago\n\nBe an early applicant\n\nA complete application in a minute\n\nTailored resume and cover letter, ready to send.\n\nGet past ATS filters\n\nGenerate application\n\n### Benefits offered by this job\n\nBonus earning potential\n\nNon-contributory pension with 10% HRW\n\n25 days holiday plus bank holidays and\n\nBuy / sell holidays\n\nLife assurance\n\nMedical and dental insurance (family)\n\nRange of optional flexible benefits\n\n### Job summary\n\nSEFE is offering a Finance & Management Reporting Graduate opportunity in the UK. You will support analysis, reporting and forecasting to help leaders understand performance and identify opportunities across Finance, Commercial and Technology teams.\n\nYoull gain exposure to management reporting, financial modelling, scenario analysis and trading performance evaluation while developing technical finance expertise and commercial awareness in a global energy business. Deadline 16 December 2026.\n\n### Qualifications\n\n- Degree in Finance, Economics, Accounting, Data Analytics, Mathematics, Business or related field required or expected\n\n### Responsibilities\n\n- Produce financial analysis and management reporting for decision-making across the business.\n- Assist in monthly and quarterly reporting packs, dashboards and KPIs for senior stakeholders.\n- Analyse variances, trends and key commercial drivers to inform actions.\n- Support development of financial models including WACC and valuation analyses.\n- Contribute to scenario planning by modelling financial impact of market/regulatory changes.\n- Analyse trading performance data to provide insights into margins and results.\n- Work with SAP S/4HANA and SAP Analytics Cloud to extract and validate data.\n- Collaborate with Finance, Tech and BI teams to improve reporting processes and data quality.\n- Take ownership of your professional development and build technical, analytical and commercial skills.\n\n### Skills\n\nFinancial analysis\n\nManagement reporting\n\nData analytics\n\nExcel\n\n### Education\n\nFinance/Accounting degree\n\n### Tools\n\nSAP S/4HANA\n\nSAP Analytics Cloud\n\n## Job description\n\nSEFE is offering a Finance & Management Reporting Graduate opportunity in the UK. You will support analysis, reporting and forecasting to help leaders understand performance and identify opportunities across Finance, Commercial and Technology teams.\n\nYoull gain exposure to management reporting, financial modelling, scenario analysis and trading performance evaluation while developing technical finance expertise and commercial awareness in a global energy business. Deadline 16 December 2026.\n\nShow more\n\nGet your free, confidential resume review.\n\nSelect file\n\nor drag and drop your file here.\n\n Rated \u201cExcellent\u201d based on 24,529 reviews\n\nKG\n\nKelly G.GB \u00b7 May 22, 2026\n\n Trustpilot\n\n\u201cThe feedback regarding my CV was very detailed, insightful and constructive. I am impressed with the advice given and will take it on board to better improve my CV going forward.\u201d\n\nUZ\n\nUyapo Z.BW \u00b7 May 4, 2026\n\n Trustpilot\n\n\u201cThe resume review gave me useful insight and pointers to improve my resume to stand a significant chance in the job market competition.\u201d\n\nDM\n\nDaniel M.AU \u00b7 May 7, 2026\n\n Trustpilot\n\n\u201cPractical and constructive feedback to help improve my resume.\u201d\n\nF\n\nFabioCA \u00b7 May 5, 2026\n\n Trustpilot\n\n\u201cGot a quick review of my CV and good advice on some changes that I need to make to improve my CV\u201d\n\nSB\n\nSamantha B.US \u00b7 May 19, 2026\n\n Trustpilot\n\n\u201cVery thorough very detailed and very informative I would recommend anyone to use this for their resume.\u201d\n\n## Similar jobs worth comparing\n\nGraduate Finance & Management Reporting \u2014 Energy\n\nGraduate Finance & Management Reporting \u2014 Energy\n\nSave this job. Every save sharpens your matches.\n\nSEFE Securing Energy for Europe GmbH \u2022 Greater London\n\nOn-site\n\nGBP 28,000 - 36,000\n\nbonus earning potential\n\nnon-contributory pension with 10%\"\n\n25 days holiday plus bank holidays and\n\n+4\n\n6 days ago\n\nBe an early applicant\n\nGraduate - Management Reporting (m/f/d)\n\nGraduate - Management Reporting (m/f/d)\n\nSave this job. Every save sharpens your matches.\n\ntargetjobs UK \u2022 Greater London\n\nOn-site\n\nGBP 28,000 - 34,000\n\nBonus earning potential\n\nNon-contributory pension with 10% HRW\n\n25 days holiday plus bank holidays and\n\n+4\n\n2 days ago\n\nBe an early applicant\n\nGraduate Risk Analyst \u2013 Energy Trading & Analytics\n\nGraduate Risk Analyst \u2013 Energy Trading & Analytics\n\nSave this job. Every save sharpens your matches.\n\ntargetjobs UK \u2022 Manchester\n\nOn-site\n\nGBP 28,000 - 32,000\n\nbonus earning potential\n\nnon-contributory pension with 10% from\n\n25 days holiday plus bank holidays and\n\n+4\n\n38 hours ago\n\nBe an early applicant\n\nGraduate - Risk (m/f/d)\n\nGraduate - Risk (m/f/d)\n\nSave this job. Every save sharpens your matches.\n\nSEFE Marketing & Trading Ltd \u2022 Manchester\n\nOn-site\n\nGBP 28,000 - 36,000\n\nBonus potential\n\nPension 10% employer contribution\n\n25 days holiday\n\n+4\n\n7 days ago\n\nBe an early applicant\n\nGraduate Risk Analyst \u2014 Energy Markets & Analytics\n\nGraduate Risk Analyst \u2014 Energy Markets & Analytics\n\nSave this job. Every save sharpens your matches.\n\nSEFE Securing Energy for Europe GmbH \u2022 Manchester\n\nOn-site\n\nGBP 25,000 - 32,000\n\nBonus earning potential\n\nNon-contributory pension with 10%\n\n25 days holiday plus bank holidays and\n\n+3\n\n6 days ago\n\nBe an early applicant\n\nGraduate - Management Reporting (m/f/d)\n\nGraduate - Management Reporting (m/f/d)\n\nSave this job. Every save sharpens your matches.\n\nSEFE Securing Energy for Europe GmbH \u2022 Greater London\n\nOn-site\n\nGBP 28,000 - 36,000\n\nbonus earning potential\n\nnon-contributory pension with 10%\"\n\n25 days holiday plus bank holidays and\n\n+4\n\n6 days ago\n\nBe an early applicant\n\nEnergy Finance Graduate | Rotational Analyst\n\nEnergy Finance Graduate | Rotational Analyst\n\nSave this job. Every save sharpens your matches.\n\nSEFE Securing Energy for Europe GmbH \u2022 Greater London\n\nOn-site\n\nGBP 26,000 - 34,000\n\nBonus earning potential\n\nNon-contributory pension\n\n25 days holiday plus bank holidays and\n\n+3\n\n6 days ago\n\nBe an early applicant\n\nGraduate Risk Analyst \u2013 Energy Trading\n\nGraduate Risk Analyst \u2013 Energy Trading\n\nSave this job. Every save sharpens your matches.\n\nSEFE Marketing & Trading Ltd \u2022 Manchester\n\nOn-site\n\nGBP 28,000 - 36,000\n\nBonus potential\n\nPension 10% employer contribution\n\n25 days holiday\n\n+4\n\n7 days ago\n\nBe an early applicant\n\nGraduate - Risk (m/f/d)\n\nGraduate - Risk (m/f/d)\n\nSave this job. Every save sharpens your matches.\n\nSEFE Securing Energy for Europe GmbH \u2022 Manchester\n\nOn-site\n\nGBP 25,000 - 32,000\n\nBonus earning potential\n\nNon-contributory pension with 10%\n\n25 days holiday plus bank holidays and\n\n+3\n\n6 days ago\n\nBe an early applicant\n\nStructured Quant Graduate \u2014 Energy Markets & Pricing\n\nStructured Quant Graduate \u2014 Energy Markets & Pricing\n\nSave this job. Every save sharpens your matches.\n\nSEFE Energy UK \u2022 Manchester\n\nHybrid\n\nGBP 32,000 - 45,000\n\nBonus earning potential\n\nNon-contributory pension with 10% 1er\n\n25 days holiday plus bank holidays and\n\n+4\n\n6 days ago\n\nBe an early applicant\n\nShow more\n\nTop locations\n\nJobs in Dumfries Jobs in Crawley Jobs in Swansea Jobs in Neath Jobs in Wakefield Jobs in Runcorn Jobs in Dunfermline Jobs in Derby Jobs in South Benfleet Jobs in Stevenage\n\n```json\n{\"@context\":\"https://schema.org/\",\"@type\":\"JobPosting\",\"title\":\"Graduate Finance & Management Reporting \u2014 Energy Insights\",\"description\":\"\\u003Cp>SEFE is offering a Finance & Management Reporting Graduate opportunity in the UK. You will support analysis, reporting and forecasting to help leaders understand performance and identify opportunities across Finance, Commercial and Technology teams.\\u003C/p>\\u003Cp>Youll gain exposure to management reporting, financial modelling, scenario analysis and trading performance evaluation while developing technical finance expertise and commercial awareness in a global energy business. Deadline 16 December 2026.\\u003C/p>\",\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"targetjobs UK\",\"value\":\"e7247110ba2f53fc7ff758dc59cf226dc\"},\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"targetjobs UK\"},\"employmentType\":\"FULL_TIME\",\"datePosted\":\"2026-11-22\",\"validThrough\":\"2027-05-21\",\"jobLocation\":{\"@type\":\"Place\",\"address\":{\"@type\":\"PostalAddress\",\"postalCode\":\"CR4 1HD\",\"addressLocality\":\"Greater London\",\"addressCountry\":\"GB\",\"addressRegion\":\"England\"}},\"salaryCurrency\":\"GBP\",\"baseSalary\":{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":28000,\"maxValue\":34000,\"unitText\":\"YEAR\"}}}\n\n```"
+      },
+      {
+        "id": "jsearch:ek8zRlhiN3FvQnV6Z3hheUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZa1pTU0V4UE9EWjRhek55TXpOdldUZDJWVVF6TnpWcVZGaGpkVTVqUm1OcU5GSTJibEpJUTNoTVltSkhjbXcyTFVSVGRtSlBNMFZXVW1OeFRYUm5ZMVUzWWxRdFJWUnlZbEoxT0ZWNmJVd3dOWFpvY3pkb1kyeEtUbnAxUVUxa1lrRnZkMkZWZW5wa2MyRktZM1pGUm5CZlVqUlhkVTB4UTFFelNGUnFiMkpxZW1SNFdEUVNGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkRllVUnNSM2hvTWsxV1prTmlRamxhZGt3Mk1XTndkVEpIWVdWQjplMmJlMGE2NA",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.51,
+          "possible_fit": 0.38,
+          "unlikely_fit": 0.02,
+          "insufficient_information": 0.09
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Compliance Monitoring Associate",
+        "vacancy": "Our mission is to enable everyone to build wealth\n\nWe reinvent how trading and investing work by creating exceptional products people love.\n\nFostering a culture of excellence and high velocity is the key to our success.\n\n?oday, we serve over 5 million clients, with more than \u20ac30 billion in assets under management - a testament to the scale and trust we\u2019ve built in just a few years.\nThe role\n\nAs a Graduate Compliance Monitoring Associate at Trading 212 UK, you'll start your career in a second line of defence team at one of the UK's fastest-growing investment platforms. You'll help deliver the annual risk-based Compliance Monitoring Plan (CCMP): carrying out monitoring tests under supervision, recording findings clearly and helping track remediation through to completion.\nThis is an entry-level role with structured training. You'll build a solid understanding of FCA rules and how controls work in practice, with a clear path to Compliance Monitoring Associate as your experience grows.\nWhat you\u2019ll do\n\n\u2022\nCarry out assigned monitoring tests under the Compliance Monitoring Plan, following documented procedures and completing them on time.\n\n\u2022\nExtract and check data, select samples and keep clear, complete evidence for each test.\n\n\u2022\nDraft findings, recommended actions and management responses for review by a senior colleague.\n\n\u2022\nHelp track open remediation actions, follow up with owners and record evidence of closure.\n\n\u2022\nLog breaches and issues accurately and escalate anything unusual to your manager promptly.\n\n\u2022\nHelp prepare monthly monitoring MI, including completion statistics and KRIs.\n\n\u2022\nHelp keep monitoring procedures and test templates up to date.\n\n\u2022\nSupport the wider Compliance team, including Advisory, with ad hoc tasks as required.\n\n\u2022\nComplete your training plan and build your knowledge of FCA rules, Trading 212's products and the firm's controls.\n\nWhat you need to have\n\n\u2022\nEducated to degree level (2:1 or above, or equivalent) in Law, Finance, Economics or a related field.\n\n\u2022\nA genuine interest in financial services regulation and compliance; an internship or work experience in financial services is an advantage.\n\n\u2022\nStrong attention to detail and accuracy, with a methodical approach to checking information.\n\n\u2022\nClear written communication, including the ability to summarise findings concisely.\n\n\u2022\nGood IT skills, particularly Excel or Google Sheets.\n\n\u2022\nA self-starter attitude, with the willingness to ask questions and learn quickly.\n\n\u2022\nAbility to work under pressure and be adaptable.\n\nWhat We offer\n\n\u2022\nWorking with a highly motivated and successful team of high performers - with real ownership and room to grow\n\n\u2022\nA culture that values talent, ideas, and execution\n\n\u2022\nReal impact - your work will help shape growth for a product used by millions of investors\n\n\u2022\nChallenges that will help you grow fast and unlock your potential\n\nBring your ambition to Europe\u2019s fastest-growing mobile broker!\n\nWe thank all applicants, but only candidates selected for interview will be contacted. All personal data of applicants is protected by law and treated with strict confidentiality."
+      },
+      {
+        "id": "jsearch:N2hIZXc2RlE3WnV2X0I3MEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXVEZIYXpoeU5HTjZSSGRKUzAxMllsQndPVlp2ZVRaaE5tdEpibEoyVjBsM1oxWlRRamRxY1ZsTU4weGpTVXRUVlhVMVYwMTJNREZzY1ZaTFNrbGxVRjlsUVVGYVQwbFZhV0V4WXpBd1VWODFYM0JxZWpCQlMzb3hkVlp4WkhOM2VUaE9TMlpOTVVsS1YxTk1PRXRWYW05UWFUWXpRM2hZTkVWMkxXTTJSMlpyV0VGdVpWTVNGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkSWRqTkpNak16TWxCbmNrMWFZV3QxYlRkTFV6QjJTMWR6ZURCQjoyNjE3YWNjYg",
+        "suitability": "insufficient_information",
+        "probabilities": {
+          "strong_fit": 0.07,
+          "possible_fit": 0.03,
+          "unlikely_fit": 0.26,
+          "insufficient_information": 0.64
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Mergers & Acquisitions Corporate & Investment Banking Graduate Programme 2027",
+        "vacancy": "Mergers & Acquisitions Corporate & Investment Banking Graduate Programme 2027 | JobTeaser\n\n# Mergers & Acquisitions Corporate & Investment Banking Graduate Programme 2027\n\nGraduate Programme / Job Rotation Programme 24 months\n\nLondon, UK (United Kingdom)\n\n## Standard Chartered\n\nLarge company\n\nPublished on 18 November 2026\n\n- ### Contract\n\nGraduate Programme / Job Rotation Programme 24 months\n- ### Location\n\nLondon, UK (United Kingdom)\n- ### Start date\n\nJuly 2027\n- ### Salary\n\nInformation not provided\n- ### Remote working\n\nNot specified\n\nMergers & Acquisitions Corporate & Investment Banking Graduate Programme 2027 Standard Chartered M&A Advisory Group is a global team with offices across the world and provides comprehensive advisory services to its clients on a wide range of M&A transactions and capital-raising activities, including mergers, acquisitions, divestitures and financial restructurings. Our M&A teams work closely with our coverage partners, and other product groups. As a graduate, you'll gain exposure to live deals, work alongside experienced bankers, and develop the analytical, commercial and communication skills that underpin successful transactions. From researching industries and analysing companies to supporting client presentations and deal execution, you'll contribute to work that helps clients navigate complex decisions and unlock growth opportunities. This is an opportunity to learn in a fast-paced, high-performance environment where your ideas and contributions matter from day one. About the Graduate Programme - how you'll learn and grow Join a skills-first organisation where your potential matters more than your background. Over our two-year graduate programme, you'll gain hands-on experience, build lasting relationships and grow your understanding of clients, markets and the wider business. From day one, you'll contribute to meaningful work and be supported to build a successful long-term career. You'll benefit from: \n\n- Real impact: Take ownership of meaningful work that contributes to business outcomes.\n- Future-ready capabilities: Build the technical, commercial and professional skills needed to succeed. \n- Global collaboration: Work with colleagues and clients across markets, products and functions. \n- Continuous growth: Learn from structured development, mentoring and practical experience.\n\nBring the skills - we'll help you build your career We welcome students from all degree disciplines and backgrounds, recognising that diverse perspectives drive innovation. We're looking for people who can: \n\n- Take ownership and demonstrate initiative. \n\n- Think critically and solve problems in a structured way. \n\n- Learn quickly and adapt to new challenges, seeking opportunities to grow and develop \n\n- Build strong relationships and collaborate effectively with others \n\n- Communicate confidently and collaborate across different cultures and backgrounds. \n\n- Demonstrate commercial curiosity and an interest in global markets, industries and clients. \n\n- Thrive in a dynamic, fast-paced and International environment. \n\nFor technical roles, we particularly value backgrounds in Finance & Banking, Economics, Accounting, Mathematics and Statistics. Eligibility To be eligible for this graduate programme, you need to be in your final year of study and graduating by July 2027. You must also have the permanent legal right to work in the country you're applying to. You can only submit one application within a six-month period, so take time to review our opportunities and apply for the role that best fits your interests, skills and career goals. Key Dates \n\n- Assessment Centres: October 2026 onwards \n\n- Start Date: July 2027 \n\n About Corporate & Investment Banking (CIB) We are a super-connector for many of the world's largest companies across more than 50 markets, playing a central role in global trade, capital flows and economic growth. We work with governments, financial institutions, and some of the world's most ambitious corporates to help them expand, invest, and navigate uncertainty across increasingly complex and fast-changing markets. What makes us distinctive is our combination of deep local expertise with an extensive and unique global network. We support clients across risk management, financing, transaction services, advisory, and sustainable finance, helping move capital to where it's needed most and supporting the real economy across our footprint. About Standard Chartered We're an international bank, nimble enough to act, big enough for impact. For more than 170 years, we've worked to make a positive difference for our clients, communities, and each other. We question the status quo, love a challenge and enjoy finding new opportunities to grow and do better than before. If you're looking for a career with purpose and you want to work for a bank making a difference, we want to hear from you. You can count on us to celebrate your unique talents and we can't wait to see the talents you can bring us. Our purpose, to drive commerce and prosperity through our unique diversity, together with our brand promise, to be here for good are achieved by how we each live our valued behaviours. When you work with us, you'll see how we value difference and advocate inclusion. Together we: \n\n- Do the right thing and are assertive, challenge one another, and live with integrity, while putting the client at the heart of what we do\n- Never settle, continuously striving to improve and innovate, keeping things simple and learning from doing well, and not so well\n- Are better together, we can be ourselves, be inclusive, see more good in others, and work collectively to build for the long term\n\n What we offer In line with our Fair Pay Charter, we offer a competitive salary and benefits to support your mental, physical, financial and social wellbeing. \n\n- Core bank funding for retirement savings, medical and life insurance, with flexible and voluntary benefits available in some locations.\n- Time-off including annual leave, parental/maternity (20 weeks), sabbatical (12 months maximum) and volunteering leave (3 days), along with minimum global standards for annual and public holiday, which is combined to 30 days minimum.\n- Flexible working options based around home and office locations, with flexible working patterns.\n- Proactive wellbeing support through Unmind, a market-leading digital wellbeing platform, development courses for resilience and other human skills, global Employee Assistance Programme, sick leave, mental health first-aiders and all sorts of self-help toolkits\n- A continuous learning culture to support your growth, with opportunities to reskill and upskill and access to physical, virtual and digital learning.\n- Being part of an inclusive and values driven organisation, one that embraces and celebrates our unique diversity, across our teams, business functions and geographies - everyone feels respected and can realise their full potential.\n\n## Application deadline\n\nAs long as the job is online\n\n## Study level\n\nBachelor level or equivalent; Master level or equivalent\n\n## Job Category\n\nFinancial Services \u00b7 Management, Consulting & Strategy"
+      },
+      {
+        "id": "jsearch:Qzl6dGNDMUgtZFVqZkMySEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbW96VFROWFJYcGhaRnBKTm5WRGFuVmhTbXhxVXpoSk9XbExNbTB0T1ZkRlgyMDVkMlk0ZWxSV2NrNTBaV3B0TjNSbVptSmlZVEowTUVwelIwOVVaMDlKWTBGVGRteEhjbWxMUm1kVk1uUmtNV1U0ZEhGdmVIWnZVamRrU1RsdGREVmhUbU15WDBSTmQyTnRiWE5xWmxSNFNtaFlUVlJHWVdFdGFqaDNVazE0VEhsWVgyd1NGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkRlFuWm1lSEpoWWpCQ1IxTkhiRGx5VTJjME5IbHpZWFI0UVhWbjo4MzE2Y2NmYw",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.58,
+          "possible_fit": 0.24,
+          "unlikely_fit": 0.11,
+          "insufficient_information": 0.07
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate - Digital Trading (m/f/d)",
+        "vacancy": "Graduate - Digital Trading (m/f/d)\n\n# Graduate - Digital Trading (m/f/d)\n\n24 days to apply Apply by: 16/12/2026 Start date: 01/09/2027\n\n## What's Your Possible?\n\nTake on a role where your ideas, analytical thinking and ambition can make a real difference, helping shape a secure and evolving energy future.\n\nAs a Digital Trading Graduate, you'll rotate across teams involved in systematic and algorithmic trading, gaining hands-on experience of how technology, data and operational controls support trading activity across fast-moving energy markets. You'll develop an understanding of trading processes, data quality, technology platforms and regulatory controls while contributing to initiatives that improve performance and efficiency.\n\nThis is an excellent opportunity for graduates who enjoy working with technology, analysing data and solving complex problems. You'll gain broad exposure to both commercial and technical aspects of energy trading while developing specialist knowledge that can lead to future careers in Digital Trading, Trading Technology or related disciplines.\n\n## What Will You Do?\n\n- Rotate across Trading, Development and IT teams to understand how technology, data and operational processes combine to support successful trading activities.\n- Perform quality assurance activities on data, processes and controls, identifying exceptions and ensuring issues are escalated appropriately.\n- Analyse datasets and operational information to identify trends, inconsistencies and opportunities for process improvement.\n- Maintain accurate documentation, audit trails and records relating to analysis, controls, process changes and operational activities.\n- Investigate and help resolve issues relating to digital and algorithmic trading systems and tools.\n- Contribute to projects that improve the efficiency, reliability and effectiveness of Digital Trading processes and controls.\n- Collaborate with colleagues across Trading, Quantitative Research, Technology, Risk and Compliance teams to better understand business requirements and market operations.\n- Gain exposure to regulatory controls and governance requirements that support responsible trading activities.\n- Take ownership of your learning and development, applying new skills and knowledge throughout the graduate programme.\n\n## What Will You Bring?\n\nWe're looking for curious, analytical and technically-minded graduates who enjoy understanding how technology can be used to solve business challenges. You'll have a natural interest in data, systems and financial or energy markets, alongside a willingness to learn and develop in a fast-moving commercial environment.\n\nYou'll ideally have:\n\n- A Bachelor's or Master's degree, completed or due to be completed before the programme starts, in Economics, Mathematics, Computer Science or another quantitative discipline.\n- Strong analytical and problem-solving skills, with the ability to investigate issues, interpret data and draw logical conclusions.\n- Excellent attention to detail and the ability to follow defined processes while maintaining accurate records and documentation.\n- Strong IT skills, including Microsoft Excel and other tools used to analyse, manipulate and present data.\n- An interest in developing technical skills in areas such as SQL, Python, software development, data engineering or data visualisation. Previous coding experience would be beneficial but is not essential.\n- Strong communication skills, with the confidence to explain findings, issues and recommendations clearly to different audiences.\n- Good judgement and a responsible approach to controls, governance and risk management.\n- The ability to collaborate effectively with colleagues across Trading, Technology, Risk, Compliance and Data teams.\n- Strong organisational skills and the ability to manage multiple priorities while delivering high-quality work.\n- A genuine interest in energy markets, digital innovation and the role of technology in improving trading performance and decision-making.\n- Curiosity, adaptability and a strong desire to continuously learn and develop new skills throughout your career.\n\nApplications are open until 16 December 2026. After the application deadline, no further submissions will be accepted.\n\n## About Us\n\nSEFE is an international energy company anchored in Europe, delivering energy solutions that ensure reliable and affordable supply. Our activities span the entire energy value chain \u2013 from origination and trading to sales, transport and storage. With decades of trading expertise and a growing LNG portfolio, SEFE is one of Europe\u2019s leading suppliers to industrial customers, providing more than 200 TWh of gas and power each year. We supply over 50,000 clients, from small businesses to municipalities and multinational organisations. By investing in clean energies, we support our customers on their decarbonisation journey and contribute to the energy transition. SEFE employs over 2,000 people worldwide and is owned by the Federal Government of Germany.\n\nSecuring energy \u2013 now and for the future.\n\n## Our Benefits\n\nIn return we offer a competitive salary supported by a comprehensive range of financial, lifestyle and wellness benefits with the flexibility to follow a hybrid working model.\n\n- Bonus earning potential\n- Non-contributory pension with 10% employer contribution\n- 25 days holiday plus bank holidays and volunteering days\n- Buy / sell holidays\n- Life assurance\n- Medical and dental insurance (family cover)\n- Range of optional flexible benefits\n\nWe are committed to supporting your career growth with opportunities to develop both your knowledge and experience through a blended approach to learning.\n\nJoin SEFE and help us secure energy supply across Europe and shape a better, more sustainable tomorrow.\n\n## Sectors\n\nTechnology\n\n## Locations\n\nLondon\n\nEmployer info Share Report job (customersuccessuk@groupgti.com)\n\nSEFE\n\nRetail, business & commercial services +2\n\n## About us\n\nSEFE Securing Energy for Europe GmbH (SEFE)\n\n## What's Your Possible?\n\nTake on a role where your ideas, analytical thinking and ambition can make a real difference, helping shape a secure and evolving energy future.\n\nAs a Digital Trading Graduate, you'll rotate across teams involved in systematic and algorithmic trading, gaining hands-on experience of how technology, data and operational controls support trading activity across fast-moving energy markets. You'll develop an understanding of trading processes, data quality, technology platforms and regulatory controls while contributing to initiatives that improve performance and efficiency.\n\nThis is an excellent opportunity for graduates who enjoy working with technology, analysing data and solving complex problems. You'll gain broad exposure to both commercial and technical aspects of energy trading while developing specialist knowledge that can lead to future careers in Digital Trading, Trading Technology or related disciplines.\n\n## What Will You Do?\n\n- Rotate across Trading, Development and IT teams to understand how technology, data and operational processes combine to support successful trading activities.\n- Perform quality assurance activities on data, processes and controls, identifying exceptions and ensuring issues are escalated appropriately.\n- Analyse datasets and operational information to identify trends, inconsistencies and opportunities for process improvement.\n- Maintain accurate documentation, audit trails and records relating to analysis, controls, process changes and operational activities.\n- Investigate and help resolve issues relating to digital and algorithmic trading systems and tools.\n- Contribute to projects that improve the efficiency, reliability and effectiveness of Digital Trading processes and controls.\n- Collaborate with colleagues across Trading, Quantitative Research, Technology, Risk and Compliance teams to better understand business requirements and market operations.\n- Gain exposure to regulatory controls and governance requirements that support responsible trading activities.\n- Take ownership of your learning and development, applying new skills and knowledge throughout the graduate programme.\n\n## What Will You Bring?\n\nWe're looking for curious, analytical and technically-minded graduates who enjoy understanding how technology can be used to solve business challenges. You'll have a natural interest in data, systems and financial or energy markets, alongside a willingness to learn and develop in a fast-moving commercial environment.\n\nYou'll ideally have:\n\n- A Bachelor's or Master's degree, completed or due to be completed before the programme starts, in Economics, Mathematics, Computer Science or another quantitative discipline.\n- Strong analytical and problem-solving skills, with the ability to investigate issues, interpret data and draw logical conclusions.\n- Excellent attention to detail and the ability to follow defined processes while maintaining accurate records and documentation.\n- Strong IT skills, including Microsoft Excel and other tools used to analyse, manipulate and present data.\n- An interest in developing technical skills in areas such as SQL, Python, software development, data engineering or data visualisation. Previous coding experience would be beneficial but is not essential.\n- Strong communication skills, with the confidence to explain findings, issues and recommendations clearly to different audiences.\n- Good judgement and a responsible approach to controls, governance and risk management.\n- The ability to collaborate effectively with colleagues across Trading, Technology, Risk, Compliance and Data teams.\n- Strong organisational skills and the ability to manage multiple priorities while delivering high-quality work.\n- A genuine interest in energy markets, digital innovation and the role of technology in improving trading performance and decision-making.\n- Curiosity, adaptability and a strong desire to continuously learn and develop new skills throughout your career.\n\nApplications are open until 16 December 2026. After the application deadline, no further submissions will be accepted.\n\n## About Us\n\nSEFE is an international energy company anchored in Europe, delivering energy solutions that ensure reliable and affordable supply. Our activities span the entire energy value chain \u2013 from origination and trading to sales, transport and storage. With decades of trading expertise and a growing LNG portfolio, SEFE is one of Europe\u2019s leading suppliers to industrial customers, providing more than 200 TWh of gas and power each year. We supply over 50,000 clients, from small businesses to municipalities and multinational organisations. By investing in clean energies, we support our customers on their decarbonisation journey and contribute to the energy transition. SEFE employs over 2,000 people worldwide and is owned by the Federal Government of Germany.\n\nSecuring energy \u2013 now and for the future.\n\n## Our Benefits\n\nIn return we offer a competitive salary supported by a comprehensive range of financial, lifestyle and wellness benefits with the flexibility to follow a hybrid working model.\n\n- Bonus earning potential\n- Non-contributory pension with 10% employer contribution\n- 25 days holiday plus bank holidays and volunteering days\n- Buy / sell holidays\n- Life assurance\n- Medical and dental insurance (family cover)\n- Range of optional flexible benefits\n\nWe are committed to supporting your career growth with opportunities to develop both your knowledge and experience through a blended approach to learning.\n\nJoin SEFE and help us secure energy supply across Europe and shape a better, more sustainable tomorrow.\n\n## About us\n\nSEFE Securing Energy for Europe GmbH (SEFE)"
+      },
+      {
+        "id": "jsearch:RDF5NlVYZ25seVRjRzV2c0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZa2gwVTJFelYybHNXbFY1Tlhvd2NtSnJTRFJGYldOUFVFbzVTMWxEZDJweVgxSnBZMUZRTUc5dU5VZDZPV1V5WjB0dFNGZFliM1Z3TFVndGFISnliazR3Um5ob1pqSXRiVGt4TVZZeVh5MHRZV1UxTVhRdFlWRTBZbFptY25JM1ozRnNWRk5XYTB0b1VVSjNNbEZOUkUxVVJGbFJjeTFQU0VGRFpEbDNiVlExZW5aWFExWVNGMjQwUVVkaE9HWlVSSEJoZGpRdFJWQnpVSEo2YTFFMEdpSkJTRTR3UlRkR1kxcEpSREJZWTJJeU1qYzBUa3BDVkVoVU5FNTNUVzVXWWpGMzo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.99,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.02,
+          "crosses_cap": 0.01,
+          "unknown": 0.97
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.02,
+            "crosses_cap": 0.01,
+            "unknown": 0.97
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Barnet \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a313 - \u00a315.2 per hour Estimated\n\nFull-time\n\nBarnet, Greater London\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 1 day ago"
+      },
+      {
+        "id": "jsearch:bVRHT3RXNHlTUHpiaWdtYUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXVW94VHpGcFVrcGpNRGd6UlRCMmVHdHlUVWRRWWs5U1FWOW5VbVpyTkVWa05IWklZamhNTWxScVMzVkthemxaUjB3MWVUWlBNbWd3V2pOeVgwMW1ZVzU0YVVjeFdWQndWRTFKVjI1aGJIWjFSRU5IWHpkMGJFbFhiR2RRVGxwMVVFZFNhblZ6UTNJMFZGVjJVWGxyZFdrMldtODRhRkpGY0dKUlNuSk5aVnB5VERSamEyUVNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkR1dITjJSR0p3VG5vMFRtaHNWekpxWVRKcE5ERkRSMXBMV0RWbjo4ZDk2Zjk2Mw",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.56,
+          "possible_fit": 0.14,
+          "unlikely_fit": 0.11,
+          "insufficient_information": 0.19
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Human Capital Advisory Tax Associate ATT/CTA (Graduate Scheme) - London - January 2027 - London",
+        "vacancy": "MHA | Human Capital Advisory Tax Associate ATT/CTA (Graduate Scheme)\u2026\n\n# Human Capital Advisory Tax Associate ATT/CTA (Graduate Scheme) - London - January 2027 - London\n\n London Posted: 14 Sept 2026 ref: 2946 \n\n### Job description\n\nLocation: London \n\nApplication deadline: 12 October 2026 (Applications will only be reviewed once the deadline has passed) \n\nEntry requirements: Achieved at least 2:1 degree or above and at least 112 UCAS points from your top three subjects (or equivalent) \n\nWe're looking for talented individuals who bring initiative, creativity, and curiosity to the table. In return, you'll gain valuable hands-on experience, receive mentorship from some of the industry's best and earn recognised professional qualification. \n\nBy the end of your Graduate Programme, you\u2019ll be a well-rounded, commercially minded professional, ready to take on interesting and challenging responsibilities. You won\u2019t just be fully qualified - you\u2019ll be fully prepared to drive your own career forward. \n\nWhat Sets Us Apart \n\nAt MHA, people come first, our colleagues, our clients, and the communities we support. In 2026, we ranked as number 11 in the UK\u2019s top accountancy firms and a proud member of Baker Tilly International, the world\u2019s 8th largest network, we combine global insight with a strong local commitment. \n\nWe are proud to hold the Investors in People Gold award, recognising our commitment to supporting, developing, and valuing every individual. \n\nHere, You\u2019ll Go Beyond Numbers \n\nWe are looking for a Tax Associate to join us who is comfortable in an evolving environment and enjoys solving a variety of challenges that contribute to meaningful outcomes. \n\nAt MHA, you will be surrounded by passionate professionals who are committed to making a difference. Your work in Tax will go beyond the numbers, we believe in hands-on learning. You\u2019ll be doing real work on real projects, not just shadowing. While you\u2019ll receive mentorship and guidance, we prefer you to learn through extensive and practical on-the-job training. \n\nWhat does a career in Human Capital Tax Advisory actually involve? \n\nHuman Capital Tax Advisory is about helping businesses understand and manage the tax implications of their people, reward and employment strategies, while gaining insight into how organisations attract, retain and reward their workforce. You\u2019ll work with a variety of organisations, from growing businesses and innovative start-ups to larger companies and international groups, building relationships with clients and developing an understanding of their people-related challenges and objectives. From an early stage, you\u2019ll support work such as gathering and analysing employee and payroll information, researching tax and employment guidance, helping prepare advice and reports, and supporting clients with areas such as remuneration, employee incentives, share schemes and international mobility. As your experience develops, you\u2019ll gain exposure to more complex projects and advisory work, helping clients understand the tax implications of different approaches to rewarding and managing their people. It\u2019s a career that combines technical knowledge with commercial awareness, analytical thinking, problem solving and working with people. If you\u2019re interested in how businesses manage and reward their workforce, how employee incentives can support business objectives, and how tax can shape people strategies, Human Capital Tax Advisory could be a great fit for you. \n\nAs a Human Capital Tax Associate, you\u2019ll experience the power of collaboration as you work with diverse teams on real projects. Start by learning the fundamentals, including: \n\n- Employer compliance and interactions with HMRC \n\n- PAYE and payroll health check reviews \n\n- Whether somebody working for the client is genuinely self-employed or an employee for tax purpose \n\n- We also help clients design and implement share schemes to incentivize their employees. \n\n- Studying towards your professional qualification ATT Level 5 and CTA level 7, \n\nMany of our clients also send employees on international assignments or secondments, and our team advises on the Global Mobility tax implications of these moves, as well as supporting the compliance processes that arise from them. \n\nAs your technical knowledge, commercial acumen and confidence grow, you'll have the opportunity to begin advising clients on their tax affairs and deliver outstanding levels of client care. That's why your ability to build great business relationships is just as important as your ability with numbers. \n\nRewards That Resonate \n\nYou\u2019re more than a number to us; you\u2019re someone with unique skills and aspirations. Our benefits are designed to support your wellbeing, foster your professional growth, and recognise the contribution you make. \n\n- Agile working: Our flexible working policy gives you greater choice over how you structure your day. With core hours of 10am\u20132pm, you can start earlier or finish later to suit your needs, alongside the option to work from home up to two days a week. For trainees, we ask for full office attendance during the first six months to ensure you receive the training, support and experience needed for a strong start, with greater flexibility available after that. \n\n- 30 days\u2019 holiday, including bank holidays, plus the opportunity to buy or sell up to 5 days (28 days on a training contract, with the opportunity to buy 5 days). \n\n- Full study support package: including exams, tuition, study leave days and materials. \n\n- Employee recognition awards: Performance Award bonus and other recognition initiatives. \n\n- Employee Assistance Programme: A free, confidential 24\u2011 hour support service, including unlimited counselling sessions and access to virtual doctors for you and your family. \n\n- And lots more! \n\nAre You Ready to Elevate Your Career? \n\nApply now and be part of a team that celebrates diversity, champions innovation, and prioritises your success. \n\nAt MHA, we know that diversity, inclusion, and belonging lead to better decisions, stronger performance, and a workplace where everyone can feel included and thrive. That\u2019s why we welcome applications from people of all backgrounds and experiences. \n\nDisability Confident \n\nWe are a Disability Confident employer. If you have a disability and meet the essential criteria for the role, we will progress you to the next stage of the process. \n\n If you require any reasonable adjustments during the recruitment process to help you perform at your best, please let us know and we will be happy to help. \n\nYou can email us at webenquiries@mha.co.uk\n\n## Thank you for your enquiry\n\n We aim to respond within 48 hours. Enquiries submitted after 5:30pm on Friday will be answered by close of business on Monday. \n\n Our dedicated team will be in touch with you shortly. \n\nWe aim to respond within 48 hours. Enquiries submitted after 5:30pm on Friday will be answered by close of business on Monday."
+      },
+      {
+        "id": "jsearch:RVdkVWdLYXpjNDZSX1pKU0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXV0p1VEdOaVdXNXRUSGxTZWtGbExVUk1kSGR6YkU0MlduWktVRGh4V1dNMmRURkRlVEZKYWxWNFdERlhlakZPT1U1Sk1sZDZRa1YyY0RaVE5EVkhZWEI1T0VabWVXSTFPVU56VUZkRk1qTnJZMVZVUkdadVEwaG9NM3BOZUdGYWMyWjFkVFppUlVkaWJrSnFPVEpSUlRWTWRHY3dXa0YzV1VVeFVUUllPR0V4VVdsUmNXRVNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkSE0zaFFTbGhKTm5sNmNIQlVjbkUwTkRab2JqZFJPWG8xYjBsQjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.01,
+          "crosses_cap": 0.01,
+          "unknown": 0.98
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.01,
+            "crosses_cap": 0.01,
+            "unknown": 0.98
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Bromley \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a313 - \u00a315.2 per hour Estimated\n\nFull-time\n\nCareer Change\n\nBromley, Greater London\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 5 days ago"
+      },
+      {
+        "id": "jsearch:Q1paR0VuaV9jWm5WUmFpY0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZVUpsTkVkQ2VXOTZYMWQyVFhkYVlWRkJOVU5TYjBrM1IzaFZNV1pFUW5sVWJXNVNSa3R2T0VGRWRsVjZVRUphYmxWcWExTndUbWxuZG13MGF5MUtjakU1UzNoSk1HaGtWM1p5WHkxaU4zbHFiRUZ6YTBoNFZsOUxUak42Vkd4SlkwNDBiMTlzTm01ak5rNTRSbEpVV0ZOQmFVRkVTemsyVlVOdFlVRkthemhtV1ZKUGExY1NGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkR2NEazBlVnBzVWtsWFVrNXVYMnRaZG1kNFNuTjVOVEpFYWkxMzphOTBmYTNiNw",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.42,
+          "possible_fit": 0.55,
+          "unlikely_fit": 0.0,
+          "insufficient_information": 0.03
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.99,
+          "crosses_cap": 0.01,
+          "unknown": 0.0
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.99,
+            "crosses_cap": 0.01,
+            "unknown": 0.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Trading Platform Client Services Associate",
+        "vacancy": "Save this job. Every save sharpens your matches.\n\nI\u2019m interested\n\n# Graduate Trading Platform Client Services Associate\n\n## CityGrad\n\n## Greater London\n\n## On-site\n\n## GBP 26,000 - 36,000\n\n## Full time\n\n4 days ago\n\nBe an early applicant\n\nA complete application in a minute\n\nTailored resume and cover letter, ready to send.\n\nGet past ATS filters\n\nGenerate application\n\n### Job summary\n\nCityGrad is seeking ambitious, personable graduates to join a leading global brokerage and financial technology company serving the financial markets. You will be the first point of contact for clients, handling inquiries, platform support and data tasks under supervision.\n\nThis entry-level role blends client relationship support, technical assistance and data administration. You\u2019ll learn the trade lifecycle from order entry to settlement in a fast-paced, SLA-driven environment, develop strong\n\n### Qualifications\n\n- Eager to learn and develop within Financial Markets.\n- Interest in financial markets and trading.\n- Strong client service and communication skills.\n- Proactive, organised and detail oriented.\n- Analytical with a problem-solving mindset.\n- Team player who thrives in a fast-paced environment.\n- Willingness to learn new systems and technologies.\n\n### Responsibilities\n\n- Act as a first point of contact for trading platform users, delivering courteous, professional and timely client service by phone, email, MS Teams, Bloomberg or in person.\n- Support clients and assist with platform adoption, increasing client awareness of added functionality, features, and available services.\n- Provide support, resolving issues and escalating where required, ensuring full audit trails are maintained in the service desk tool.\n- Perform daily system and application health checks, monitoring platform status and trade flows throughout the day.\n- Develop a strong understanding of pre- and post-trade workflows, including market data publishing, order entry and trade execution.\n- Set up and maintain internal and external user access to Front Office trading applications across all asset classes, in line with compliance and regulatory processes.\n- Support client onboarding, customer-side mappings, instrument setups, and time-sensitive data requests, liaising with all stakeholders internal (e.g. brokers) and external (e.g. vendors).\n- Be alert to Conduct Risk issues, specifically the risk of harm to client interests, market integrity and/or competition in financial markets.\n- Keep up to date with current regulations relevant to the platforms and the client base.\n\n## Job description\n\nCityGrad is seeking ambitious, personable graduates to join a leading global brokerage and financial technology company serving the financial markets. You will be the first point of contact for clients, handling inquiries, platform support and data tasks under supervision.\n\nThis entry-level role blends client relationship support, technical assistance and data administration. You\u2019ll learn the trade lifecycle from order entry to settlement in a fast-paced, SLA-driven environment, develop strong\n\nShow more\n\nGet your free, confidential resume review.\n\nSelect file\n\nor drag and drop your file here.\n\n Rated \u201cExcellent\u201d based on 24,529 reviews\n\nKG\n\nKelly G.GB \u00b7 May 22, 2026\n\n Trustpilot\n\n\u201cThe feedback regarding my CV was very detailed, insightful and constructive. I am impressed with the advice given and will take it on board to better improve my CV going forward.\u201d\n\nUZ\n\nUyapo Z.BW \u00b7 May 4, 2026\n\n Trustpilot\n\n\u201cThe resume review gave me useful insight and pointers to improve my resume to stand a significant chance in the job market competition.\u201d\n\nDM\n\nDaniel M.AU \u00b7 May 7, 2026\n\n Trustpilot\n\n\u201cPractical and constructive feedback to help improve my resume.\u201d\n\nF\n\nFabioCA \u00b7 May 5, 2026\n\n Trustpilot\n\n\u201cGot a quick review of my CV and good advice on some changes that I need to make to improve my CV\u201d\n\nSB\n\nSamantha B.US \u00b7 May 19, 2026\n\n Trustpilot\n\n\u201cVery thorough very detailed and very informative I would recommend anyone to use this for their resume.\u201d\n\n## Similar jobs worth comparing\n\nJunior Trading Platform Support Specialist\n\nJunior Trading Platform Support Specialist\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 City Of London\n\nOn-site\n\nGBP 22,000 - 28,000\n\n4 days ago\n\nBe an early applicant\n\nGraduate Client Service Associate\n\nGraduate Client Service Associate\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 City Of London\n\nOn-site\n\nGBP 22,000 - 28,000\n\n4 days ago\n\nBe an early applicant\n\nGraduate Client Service Associate\n\nGraduate Client Service Associate\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 Greater London\n\nOn-site\n\nGBP 26,000 - 36,000\n\n4 days ago\n\nBe an early applicant\n\nGraduate Investment Operations & Trade Analyst\n\nGraduate Investment Operations & Trade Analyst\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 Greater London\n\nOn-site\n\nGBP 25,000 - 35,000\n\n3 days ago\n\nBe an early applicant\n\nGraduate Stockbroker - London\n\nGraduate Stockbroker - London\n\nSave this job. Every save sharpens your matches.\n\nGraduate Financial Recruitment \u2022 Greater London\n\nOn-site\n\nGBP 30,000 - 52,000\n\nCompetitive salary with performance-based commissions\n\nComprehensive benefits package\n\nAccess to cutting-edge technology\n\n+1\n\n14 days+\n\nGraduate Trading Apps Specialist - Fast-Paced FinTech\n\nGraduate Trading Apps Specialist - Fast-Paced FinTech\n\nSave this job. Every save sharpens your matches.\n\nTradermath \u2022 Greater London\n\nHybrid\n\nGBP 68,000 - 91,000\n\n14 days+\n\nGraduate Trading Support - Market Insight & Client Enablement\n\nGraduate Trading Support - Market Insight & Client Enablement\n\nSave this job. Every save sharpens your matches.\n\nOptima Recruitment \u2022 Leatherhead\n\nOn-site\n\nGBP 29,000 - 30,000\n\nFree parking\n\n35 days holiday\n\n14 days+\n\nGraduate Trading Operations Innovator\n\nGraduate Trading Operations Innovator\n\nSave this job. Every save sharpens your matches.\n\nBestForexBonus.com \u2022 Greater London\n\nOn-site\n\nGBP 30,000 - 40,000\n\n14 days+\n\nGraduate Investment Analyst\n\nGraduate Investment Analyst\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 England\n\nOn-site\n\nGBP 25,000 - 35,000\n\n14 days+\n\nGraduate Client Success Executive\n\nGraduate Client Success Executive\n\nSave this job. Every save sharpens your matches.\n\nCityGrad \u2022 Greater London\n\nOn-site\n\nUSD 40,311 - 67,186\n\n14 days+\n\nShow more\n\nTop locations\n\nJobs in Fulham Jobs in Sale Jobs in Hemel Hempstead Jobs in Blackburn Jobs in Gosport Jobs in Uxbridge Jobs in Grays Jobs in Cardiff Jobs in Crewe Jobs in York\n\n```json\n{\"@context\":\"https://schema.org/\",\"@type\":\"JobPosting\",\"title\":\"Graduate Trading Platform Client Services Associate\",\"description\":\"\\u003Cp>CityGrad is seeking ambitious, personable graduates to join a leading global brokerage and financial technology company serving the financial markets. You will be the first point of contact for clients, handling inquiries, platform support and data tasks under supervision.\\u003C/p>\\u003Cp>This entry-level role blends client relationship support, technical assistance and data administration. You\u2019ll learn the trade lifecycle from order entry to settlement in a fast-paced, SLA-driven environment, develop strong\\u003C/p>\\u003Cp>Qualifications\\u003C/p>\\u003Cul>\\u003Cli>Eager to learn and develop within Financial Markets.\\u003C/li>\\u003Cli>Interest in financial markets and trading.\\u003C/li>\\u003Cli>Strong client service and communication skills.\\u003C/li>\\u003Cli>Proactive, organised and detail oriented.\\u003C/li>\\u003Cli>Analytical with a problem-solving mindset.\\u003C/li>\\u003Cli>Team player who thrives in a fast-paced environment.\\u003C/li>\\u003Cli>Willingness to learn new systems and technologies.\\u003C/li>\\u003C/ul>\\u003Cp>Responsibilities\\u003C/p>\\u003Cul>\\u003Cli>Act as a first point of contact for trading platform users, delivering courteous, professional and timely client service by phone, email, MS Teams, Bloomberg or in person.\\u003C/li>\\u003Cli>Support clients and assist with platform adoption, increasing client awareness of added functionality, features, and available services.\\u003C/li>\\u003Cli>Provide support, resolving issues and escalating where required, ensuring full audit trails are maintained in the service desk tool.\\u003C/li>\\u003Cli>Perform daily system and application health checks, monitoring platform status and trade flows throughout the day.\\u003C/li>\\u003Cli>Develop a strong understanding of pre- and post-trade workflows, including market data publishing, order entry and trade execution.\\u003C/li>\\u003Cli>Set up and maintain internal and external user access to Front Office trading applications across all asset classes, in line with compliance and regulatory processes.\\u003C/li>\\u003Cli>Support client onboarding, customer-side mappings, instrument setups, and time-sensitive data requests, liaising with all stakeholders internal (e.g. brokers) and external (e.g. vendors).\\u003C/li>\\u003Cli>Be alert to Conduct Risk issues, specifically the risk of harm to client interests, market integrity and/or competition in financial markets.\\u003C/li>\\u003Cli>Keep up to date with current regulations relevant to the platforms and the client base.\\u003C/li>\\u003C/ul>\",\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"CityGrad\",\"value\":\"ec2e3221ced580cac632762ff76911b8a\"},\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"CityGrad\"},\"employmentType\":\"FULL_TIME\",\"datePosted\":\"2026-11-20\",\"validThrough\":\"2027-05-22\",\"jobLocation\":{\"@type\":\"Place\",\"address\":{\"@type\":\"PostalAddress\",\"postalCode\":\"CR4 1HD\",\"addressLocality\":\"Greater London\",\"addressCountry\":\"GB\",\"addressRegion\":\"England\"}},\"salaryCurrency\":\"GBP\",\"baseSalary\":{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":26000,\"maxValue\":36000,\"unitText\":\"YEAR\"}}}\n\n```"
+      },
+      {
+        "id": "jsearch:ZkpfcHBjajktMzVramhPQkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbFF5U0dKa05XSnJjM2xHY25SbFdtdHhRVXRPV0U5ek5sOVhVa1kzYUhJeVVGVTBXRGt0UzJRd1pqVm1ibVJxV0hSVVVGUlpkakZ4WTB0QmRsUkZUSE5TVHpGNlRVUTNablI0TjFOT1FWZ3RUWEJwVDBST2MwbFdSWEJrYWpKWmNWSTVVek5IUTB4WE1EbHNlVWhDWkhGTWExZHZjVlIyTmxGM2RIUjZka0k1WlRSNGJsOFNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkRlEzaFRjMXAwVjFWMFlVeExkVVoyWlhkdFNUZG1ORUZTUzBGMzoyMTllZGUzNw",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.43,
+          "possible_fit": 0.09,
+          "unlikely_fit": 0.34,
+          "insufficient_information": 0.14
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.01,
+          "within_cap": 0.7,
+          "crosses_cap": 0.02,
+          "unknown": 0.27
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.01,
+            "within_cap": 0.7,
+            "crosses_cap": 0.02,
+            "unknown": 0.27
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Private Bank and Wealth Management Graduate Programme 2027 Jersey",
+        "vacancy": "Private Bank and Wealth Management Graduate Programme 2027 Jersey Job in London\n\n# Private Bank and Wealth Management Graduate Programme 2027 Jersey\n\nJobleads-UK London\n\n- Salary: 10.000 - 40.000\n- Hours: Full Time\n- Type: Permanent\n- Closes 27 Dec 2026\n\n## Job description\n\n### Graduate Programme Overview\n\nIf you're a recent graduate or soon-to-be graduate join us and unlock a world of carefully curated experiences, knowledge, and connections to shape your career. Along the way, you can expect all the training and support you need to make your mark on the world. Put simply, we\u2019ll empower you to help determine how we do things and where we go next. Our graduates are a vital part of our success, and we welcome applications from people from all walks of life. Whoever you are and wherever you want to join us, if you\u2019re curious, creative and ambitious, this is a world in which you can truly belong.\n\n### Why the Private Bank & Wealth Management Graduate Programme?\n\nOur two-year Explorer programme develops your understanding and expertise through a deep exploration of three vital areas: Product, Strategy/Business Management and Relationship Management. You\u2019ll gain international exposure to our business and build a close relationship with the Corporate and Investment Bank, as you help our clients build on their achievements and fulfil their potential.\n\n### Private Bank & Wealth Management at Barclays\n\nBarclays Private Bank works closely with high-net-worth clients and their advisors who have complex banking and investment needs, both in the UK and across the world. We are here to understand their situation and their aspirations, so we can help them to reach their goals. We harness a global network of knowledge, expertise and professional partners to meet our clients\u2019 unique requirements. Whatever they want to achieve, our Private Bankers and specialists create the personalised solutions that will help them achieve it.\n\n### Who we're looking for\n\nTo be considered for this programme, you must be motivated and curious with a degree or expected degree, in any area.\n\nIdeally, you'll be interested in finance and business, proactive and a good communicator. We value resourcefulness, teamwork, enthusiasm and an entrepreneurial spirit, all of which might be showcased through your involvement in extracurricular activities.\n\nBarclays will accept applications from candidates who require immigration sponsorship to work in Jersey and, where appropriate, will support successful applicants with the necessary work permit and immigration application, subject to eligibility requirements under Jersey immigration legislation and policy. Successful applicants who are not eligible for employer-sponsored immigration permission, and for whom such permission cannot be obtained, will be required to have their own legal right to work in Jersey on a full-time basis from August 2027 to August 2029.\n\nBarclays is required to confirm your legal Right to Work in Jersey prior to commencing employment. Please note that you do not require a Jersey work permit if any of the following applies:\n\n- You are a British or Irish citizen or a British subject with the right of abode\n- You are an EU or EEA passport holder who has been granted settled or pre-settled status\n- You are a non-EU or non-EEA passport holder who has been granted settled or pre-settled statue by virtue of a relationship to an EU or EEA passport holder\n- You are a Commonwealth citizen admitted on the grounds of UK ancestry\n- You are a Commonwealth citizen with a certificate of entitlement to the right of abode\n- You are a participant in the Youth Mobility Scheme\n- You are a minister of religion\n- You are a business visitor\n- You are a non-EU or EEA passport holder who has no restrictions attached to your stay\n\nPlease refer to the Government of Jersey website for further information regarding work permits. From an Immigration Perspective, Barclays is required to confirm your legal Right to Remain in Jersey under the Jersey Immigration Rules.\n\nPlease note that, in addition to any immigration requirements set out above, employment in Jersey is also subject to local residential and employment status requirements under the Control of Housing and Work (Jersey) Law 2012.\n\nYou will be required to provide Barclays with details of your status under the Control of Housing and Work (Jersey) Law 2012, prior to commencing employment.\n\n### Working in Jersey\n\nWorking in Jersey offers a unique opportunity to start your career in a thriving and dynamic financial services industry. For the first time, we're excited to offer graduate opportunities in Jersey, giving you the chance to build your career while experiencing island life in a vibrant and supportive community.\n\nOur scheme\u2019s provide exposure to a growing financial sector, where you'll work alongside experienced professionals, develop valuable skills, and gain insight into a wide range of banking and wealth management services. Beyond the workplace, Jersey offers an exceptional quality of life, combining a successful business environment with beautiful coastlines, outdoor activities, and a strong sense of community.\n\nWhether you're learning, networking, collaborating, or developing your career, Jersey provides the perfect environment to grow both professionally and personally.\n\n### Purpose of the role\n\nTo participate in the day-to-day activities of the private bank and wealth management division providing insights and expertise that help senior colleagues make informed decisions, develop new products and services, and identify new market opportunities.\n\n### Accountabilities\n\n- Execution of small research projects, research to support strategic decision making, preparation of presentations and reports to communicate research findings, collaboration with senior management to implement research findings for private bank and wealth management, working closely with high-net-worth clients and their advisors who have complex banking and investment needs.\n- Collaboration with cross-functional teams to support business initiatives.\n- Participation in training and development programs to enhance skills and knowledge.\n- Identification of opportunities, development of business cases, management of the deployment and launch of new products and services for private bank and wealth management.\n- Management of client relationships and provision of customer service support to clients and customers, under steadily decreasing supervision, responding to questions about products and services, processing of transactions.\n- Management of the development and implementation of financial models and strategies that support in decision making in private bank and wealth management.\n- Training and mentoring of junior colleagues.\n\n### Analyst Expectations\n\n- To perform prescribed activities in a timely manner and to a high standard consistently driving continuous improvement.\n- Requires in-depth technical knowledge and experience in their assigned area of expertise.\n- Thorough understanding of the underlying principles and concepts within the area of expertise.\n- They lead and supervise a team, guiding and supporting professional development, allocating work requirements and coordinating team resources.\n- If the position has leadership responsibilities, People Leaders are expected to demonstrate a clear set of leadership behaviours to create an environment for colleagues to thrive and deliver to a consistently excellent standard. The four LEAD behaviours are: L \u2013 Listen and be authentic, E \u2013 Energise and inspire, A \u2013 Align across the enterprise, D \u2013 Develop others.\n- OR for an individual contributor, they develop technical expertise in work area, acting as an advisor where appropriate.\n- Will have an impact on the work of related teams within the area.\n- Partner with other functions and business areas.\n- Takes responsibility for end results of a team\u2019s operational processing and activities.\n- Escalate breaches of policies / procedure appropriately.\n- Take responsibility for embedding new policies/ procedures adopted due to risk mitigation.\n- Advise and influence decision making within own area of expertise.\n- Take ownership for managing risk and strengthening controls in relation to the work you own or contribute to. Deliver your workand areas of responsibility in line with relevant rules, regulation and codes of conduct.\n- Maintain and continually build an understanding of how own sub-function integrates with function, alongside knowledge of the organisation\u2019s products, services and processes within the function.\n- Demonstrate understanding of how areas coordinate and contribute to the achievement of the objectives of the organisation sub-function.\n- Make evaluative judgements based on the analysis of factual information, paying attention to detail.\n- Resolve problems by identifying and selecting solutions through the application of acquired technical experience and will be guided by precedents.\n- Guide and persuade team members and communicate complex / sensitive information.\n- Act as contact point for stakeholders outside of the immediate function, while building a network of contacts outside team and external to the organisation.\n\nAll colleagues will be expected to demonstrate the Barclays Values of Respect, Integrity, Service, Excellence and Stewardship \u2013 our moral compass, helping us do what we believe is right. They will also be expected to demonstrate the Barclays Mindset \u2013 to Empower, Challenge and Drive \u2013 the operating manual for how we behave."
+      },
+      {
+        "id": "jsearch:TkN2VnYtZXBIbElvS2ZzbkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZUzFaY3pSWlpEZHZOSGhaY0dGa2VrTldjVWxqVTNCSWIzSjJjazVQV2xsa2VXZFFhMjg1Y1UxNldrMXBSRlV3WDE5SWFuRm5hbDl3TnpWcUxYWXphakJtWWtwaWFHWlBXbUZZYTJZeE9UQjBVMlk0VFVOU1ltVnplVEZwWjBKc2EyeENXalozUWtWM05tRklWVGRTVW1sRVYxUnlOa0pHWHpoaGVsaEZlRTAzVTBwM2JqZ1NGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkRlYyWjJjREZEUkhwblVpMDRibHBDV2xST1FsbDNRbEo0U2pObjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.97,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.01,
+          "crosses_cap": 0.01,
+          "unknown": 0.98
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.01,
+            "crosses_cap": 0.01,
+            "unknown": 0.98
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Reading \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a315 per hour Estimated\n\nFull-time\n\nReading, Berkshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 4 days ago"
+      },
+      {
+        "id": "jsearch:emFxbWFDMnRLMUdXc2pwRkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbTlWWkZRelptbFRhMjlMTFUweWVXb3pOMTl2WWs1c1YwcFNkVGRXVkhsUVpGRm9XVVpuZEhwbFkxRjZSV0pHYjIxTVVrRkdUbTB5UTNSalYzUk1NM2xuVG1KSWMwbEpiVmN6UXpaaFoyMUJTRkUwWlRWTlYySXpRa0Z3TVV0V1lpMDVZME5sYUhSUE5IRTBNVU5vUzNWQ2VXVnVTVk5GY2s1clNXZ3hOMEpTVWxCaU16QVNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkRldGQnhaWE52UkVSYWJsUlRjMkpSUjJ0aVRrUnhiemRHZWpsQjo2YzkzYTlkMw",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.7,
+          "possible_fit": 0.23,
+          "unlikely_fit": 0.04,
+          "insufficient_information": 0.03
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.01,
+          "within_cap": 0.96,
+          "crosses_cap": 0.02,
+          "unknown": 0.01
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.01,
+            "within_cap": 0.96,
+            "crosses_cap": 0.02,
+            "unknown": 0.01
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Finance Trainee",
+        "vacancy": "Save this job. Every save sharpens your matches.\n\nI\u2019m interested\n\n# Graduate Finance Trainee\n\n## Insight Recruitment Solutions Limited\n\n## Greater London\n\n## On-site\n\n## GBP 26,000 - 36,000\n\n## Full time\n\n14 days+\n\nGet a reply from this employer\n\nYour resume and cover letter, tailored to exactly what they\u2019re hiring for.\n\nGet past ATS filters\n\nGenerate application\n\n### Job summary\n\nInsight Recruitment Solutions Limited is seeking a recent graduate to join a growing finance team in the London insurance market. You will gain broad exposure to how an insurance finance function operates and develop technical knowledge quickly.\n\nThe ideal candidate holds a recent degree (accounting, finance, economics or a numerate discipline) and has strong Excel skills, an analytical mindset and attention to detail.\n\n### Qualifications\n\n- Recent degree in accounting, finance, economics or a numerate discipline.\n- Strong Excel skills and an analytical mindset are essential.\n- Attention to detail and willingness to learn are required.\n- Interest in ACA, ACCA or CIMA with study support is welcomed.\n\n### Skills\n\nExcel\n\nAnalytical mindset\n\nAttention to detail\n\nWillingness to learn\n\n### Education\n\nAccounting/Finance/Economics degree\n\nNumerate discipline\n\n## Job description\n\nOur client, a well-established business operating in the London insurance market, is looking for a recent graduate to join their growing team. This is an excellent opportunity for someone who has already had some exposure to insurance, whether through an internship, placement or first role, and now wants to build a long-term career in finance within the sector. You will gain broad exposure to how an insurance finance function operates, with the chance to develop your technical knowledge quickly. The ideal candidate will hold a recent degree, ideally in accounting, finance, economics or a numerate discipline. Strong Excel skills, an analytical mindset, attention to detail and a willingness to learn are essential. An interest in pursuing a professional qualification such as ACA, ACCA or CIMA would be welcomed, and study support is available.\n\nOur client is committed to diversity in all of its forms and operates an inclusive recruitment process\n\nShow more\n\nGet your free, confidential resume review.\n\nSelect file\n\nor drag and drop your file here.\n\n Rated \u201cExcellent\u201d based on 24,529 reviews\n\nKG\n\nKelly G.GB \u00b7 May 22, 2026\n\n Trustpilot\n\n\u201cThe feedback regarding my CV was very detailed, insightful and constructive. I am impressed with the advice given and will take it on board to better improve my CV going forward.\u201d\n\nUZ\n\nUyapo Z.BW \u00b7 May 4, 2026\n\n Trustpilot\n\n\u201cThe resume review gave me useful insight and pointers to improve my resume to stand a significant chance in the job market competition.\u201d\n\nDM\n\nDaniel M.AU \u00b7 May 7, 2026\n\n Trustpilot\n\n\u201cPractical and constructive feedback to help improve my resume.\u201d\n\nF\n\nFabioCA \u00b7 May 5, 2026\n\n Trustpilot\n\n\u201cGot a quick review of my CV and good advice on some changes that I need to make to improve my CV\u201d\n\nSB\n\nSamantha B.US \u00b7 May 19, 2026\n\n Trustpilot\n\n\u201cVery thorough very detailed and very informative I would recommend anyone to use this for their resume.\u201d\n\n## Similar jobs worth comparing\n\nGraduate Finance Trainee\n\nGraduate Finance Trainee\n\nSave this job. Every save sharpens your matches.\n\nInsight Recruitment Solutions Limited \u2022 City Of London\n\nOn-site\n\nGBP 26,000 - 36,000\n\n14 days+\n\nGraduate Finance Trainee - Insurance, Study Support\n\nGraduate Finance Trainee - Insurance, Study Support\n\nSave this job. Every save sharpens your matches.\n\nInsight Recruitment Solutions Limited \u2022 City Of London\n\nOn-site\n\nGBP 26,000 - 36,000\n\n14 days+\n\nInsurance Finance Analyst - Graduate Trainee\n\nInsurance Finance Analyst - Graduate Trainee\n\nSave this job. Every save sharpens your matches.\n\nInsight Recruitment Solutions Limited \u2022 Greater London\n\nOn-site\n\nGBP 26,000 - 36,000\n\n14 days+\n\nGraduate Insurance Technician\n\nGraduate Insurance Technician\n\nSave this job. Every save sharpens your matches.\n\nRE Recruitment \u2022 Cheltenham\n\nHybrid\n\nGBP 15,000 - 25,000\n\nHybrid work\n\nCompany pension\n\nPrivate healthcare\n\n+3\n\n13 days ago\n\nGraduate Capital Analyst \u2013 Insurance\n\nGraduate Capital Analyst \u2013 Insurance\n\nSave this job. Every save sharpens your matches.\n\nHigh Finance (UK) Limited T/A HFG \u2022 City Of London\n\nOn-site\n\nGBP 25,000 - 32,000\n\n4 days ago\n\nBe an early applicant\n\nInsurance Finance Analyst\n\nInsurance Finance Analyst\n\nSave this job. Every save sharpens your matches.\n\nInsight Recruitment Solutions Limited \u2022 City Of London\n\nOn-site\n\nGBP 50,000 - 70,000\n\n14 days+\n\nGraduate Trainee\n\nGraduate Trainee\n\nSave this job. Every save sharpens your matches.\n\nRouse Partners LLP \u2022 High Wycombe\n\nOn-site\n\nGBP 24,000 - 30,000\n\n6 days ago\n\nBe an early applicant\n\nGraduate Trainee\n\nGraduate Trainee\n\nSave this job. Every save sharpens your matches.\n\nICAEW \u2022 Beaconsfield\n\nOn-site\n\nGBP 22,000 - 28,000\n\n6 days ago\n\nBe an early applicant\n\nGraduate Financial Consultant\n\nGraduate Financial Consultant\n\nSave this job. Every save sharpens your matches.\n\nWestminster Commercial Finance \u2022 Greater London\n\nHybrid\n\nGBP 40,000 - 45,000\n\nPerformance-related bonuses\n\nStructured graduate training\n\nMentoring from experienced finance\n\n+1\n\n14 days+\n\nFinancial Accountant\n\nFinancial Accountant\n\nSave this job. Every save sharpens your matches.\n\nHFG \u2022 City Of London\n\nOn-site\n\nGBP 45,000 - 65,000\n\n14 days+\n\nShow more\n\nTop locations\n\nJobs in Inverness Jobs in Slough Jobs in Swindon Jobs in Ashford Jobs in Stroud Jobs in Worthing Jobs in Long Eaton Jobs in Eltham Jobs in Islington Jobs in Dunstable\n\n```json\n{\"@context\":\"https://schema.org/\",\"@type\":\"JobPosting\",\"title\":\"Graduate Finance Trainee\",\"description\":\"\\u003Cp>Our client, a well-established business operating in the London insurance market, is looking for a recent graduate to join their growing team. This is an excellent opportunity for someone who has already had some exposure to insurance, whether through an internship, placement or first role, and now wants to build a long-term career in finance within the sector. You will gain broad exposure to how an insurance finance function operates, with the chance to develop your technical knowledge quickly. The ideal candidate will hold a recent degree, ideally in accounting, finance, economics or a numerate discipline. Strong Excel skills, an analytical mindset, attention to detail and a willingness to learn are essential. An interest in pursuing a professional qualification such as ACA, ACCA or CIMA would be welcomed, and study support is available.\\u003C/p>\\u003Cp>Our client is committed to diversity in all of its forms and operates an inclusive recruitment process\\u003C/p>\",\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"Insight Recruitment Solutions Limited\",\"value\":\"e817f72d93a16ebb5e04f52bf9a7e42a8\"},\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Insight Recruitment Solutions Limited\"},\"employmentType\":\"FULL_TIME\",\"datePosted\":\"2026-11-24\",\"validThrough\":\"2027-04-28\",\"jobLocation\":{\"@type\":\"Place\",\"address\":{\"@type\":\"PostalAddress\",\"postalCode\":\"CR4 1HD\",\"addressLocality\":\"Greater London\",\"addressCountry\":\"GB\",\"addressRegion\":\"England\"}},\"salaryCurrency\":\"GBP\",\"baseSalary\":{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":26000,\"maxValue\":36000,\"unitText\":\"YEAR\"}}}\n\n```"
+      },
+      {
+        "id": "jsearch:VXVsS3NRdTBhQmFlQlZUUUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbmRPYlVaRVFVVjVMVzVOVVhSQ2NFRk9aR1pEUVhWQmFEVTROMmhwUTBSNlowNVdlVnBhV1U1bU5GSjFaVkZYU0ZkQlpqbHlXVWRPYlZOWlYwcG5OWHA0VUhKU1dYWkRWMDV6V0dGWGQwRkxNRGN0ZVdkVVIxTTJORWw0VkVsT05WZ3RXVE5rYmtSRVlrRXdVbE4yY0hGTVRVTnJVMU5EZVVsSWNqQjJhMWhFYUdoTFYxa1NGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkSVZHcHZaRFpNY0ZkWU1tWllZbFpFT0RkdmFrNUtVbFZqTm14Mzo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.02,
+          "crosses_cap": 0.01,
+          "unknown": 0.97
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.02,
+            "crosses_cap": 0.01,
+            "unknown": 0.97
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Hemel Hempstead \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.9 - \u00a315.1 per hour Estimated\n\nFull-time\n\nCareer Change\n\nHemel Hempstead, Hertfordshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 5 days ago"
+      },
+      {
+        "id": "jsearch:WkduR2Zld0FnYVcwSjBxd0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbWxGVkV4SFRuZGljWE16U0VkbGFESnJaMHBUYVZSUWRHaFRkekEyWTNCeWNEbHVRa1JhWmtrNWNHcFNWR1p6TTFGMlkwNVVaRlJYUjBkNE1sTmlZelpJU2sxT1EwMWFNMmhxZFVJNFNqWlFXVEZLV0dwSVYweHhaVEYxVGpsc00weE9jbVZLVG5oWGRUTXpkbVV5T1RWWk1qUjBXREowV0VGbE1tTnVUSFoxYW01UE5FOFNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkSVdqbHlURVZ5YlVaNVJucEhObkJ2WWxSWGRuQkhSbmR5UmpaMzo0OGI0MTgyZg",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.64,
+          "possible_fit": 0.16,
+          "unlikely_fit": 0.09,
+          "insufficient_information": 0.11
+        },
+        "salary_category": "crosses_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.99,
+          "unknown": 0.01
+        },
+        "salary_assessment": {
+          "category": "crosses_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.99,
+            "unknown": 0.01
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Wealth Transformation Graduate - Project & Analysis Start",
+        "vacancy": "Save this job. Every save sharpens your matches.\n\nI\u2019m interested\n\n# Wealth Transformation Graduate - Project & Analysis Start\n\n## Schroders\n\n## Greater London\n\n## On-site\n\n## GBP 32,000 - 52,000\n\n## Full time\n\n2 days ago\n\nBe an early applicant\n\nGet a reply from this employer\n\nYour resume and cover letter, tailored to exactly what they\u2019re hiring for.\n\nGet past ATS filters\n\nGenerate application\n\n### Benefits offered by this job\n\nIAD Diploma\n\nTraining sessions\n\nCoffee Hours with senior leaders\n\nBuddy support program\n\nPrivate GP service\n\nOn-site gym\n\n### Job summary\n\nSchroders invites applications for its 2027 Wealth Transformation Graduate Programme in London. The two-year rotation-based track offers hands-on experience across Business Architecture, Strategic Design, Business Analysis and Project Management within Wealth Transformation and Wealth Management.\n\nYou will rotate through Client teams, Investment and Operations, gaining exposure to strategic design opportunities and essential change initiatives.\n\n### Qualifications\n\n- An honours degree or equivalent \u2013 we are open to all degree subjects and predicted grades\n- You will be in your final year of study or have already graduated\n- No prior Change or Wealth Management experience is needed\n\n### Responsibilities\n\n- Project Management: Collaborate with project teams and business stakeholders to drive the successful delivery of change initiatives on time and within budget.\n- Business Analysis: Act as a bridge between business needs and solutions, understanding requirements and supporting design and realisation of change.\n- Business Architect: Contributing to strategic design and operating model to support transformation projects and create value for the organisation\n\n### Skills\n\nTransformation interest\n\nCommunication skills\n\nCollaboration\n\nAnalytical thinking\n\n### Education\n\nHonours degree or equivalent\n\n## Job description\n\nSchroders invites applications for its 2027 Wealth Transformation Graduate Programme in London. The two-year rotation-based track offers hands-on experience across Business Architecture, Strategic Design, Business Analysis and Project Management within Wealth Transformation and Wealth Management.\n\nYou will rotate through Client teams, Investment and Operations, gaining exposure to strategic design opportunities and essential change initiatives.\n\nShow more\n\nGet your free, confidential resume review.\n\nSelect file\n\nor drag and drop your file here.\n\n Rated \u201cExcellent\u201d based on 24,471 reviews\n\nKG\n\nKelly G.GB \u00b7 May 22, 2026\n\n Trustpilot\n\n\u201cThe feedback regarding my CV was very detailed, insightful and constructive. I am impressed with the advice given and will take it on board to better improve my CV going forward.\u201d\n\nUZ\n\nUyapo Z.BW \u00b7 May 4, 2026\n\n Trustpilot\n\n\u201cThe resume review gave me useful insight and pointers to improve my resume to stand a significant chance in the job market competition.\u201d\n\nDM\n\nDaniel M.AU \u00b7 May 7, 2026\n\n Trustpilot\n\n\u201cPractical and constructive feedback to help improve my resume.\u201d\n\nF\n\nFabioCA \u00b7 May 5, 2026\n\n Trustpilot\n\n\u201cGot a quick review of my CV and good advice on some changes that I need to make to improve my CV\u201d\n\nSB\n\nSamantha B.US \u00b7 May 19, 2026\n\n Trustpilot\n\n\u201cVery thorough very detailed and very informative I would recommend anyone to use this for their resume.\u201d\n\n## Similar jobs worth comparing\n\nWealth Transformation Graduate \u2014 Rotations & IAD Path\n\nWealth Transformation Graduate \u2014 Rotations & IAD Path\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 City Of London\n\nOn-site\n\nGBP 30,000 - 40,000\n\nIAD diploma\n\nFurther qualifications\n\nTraining sessions\n\n+6\n\n16 hours ago\n\nBe an early applicant\n\nWealth Transformation Project Lead\n\nWealth Transformation Project Lead\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Greater London\n\nHybrid\n\nGBP 80,000 - 110,000\n\n14 days+\n\nWealth Transformation Project Leader\n\nWealth Transformation Project Leader\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Greater London\n\nOn-site\n\nGBP 85,000 - 110,000\n\n14 days+\n\n2027 Wealth Management (Transformation) Graduate Programme\n\n2027 Wealth Management (Transformation) Graduate Programme\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Greater London\n\nOn-site\n\nGBP 32,000 - 52,000\n\nIAD Diploma\n\nTraining sessions\n\nCoffee Hours with senior leaders\n\n+3\n\n2 days ago\n\nBe an early applicant\n\n2027 Wealth Management (Transformation) Graduate Programme\n\n2027 Wealth Management (Transformation) Graduate Programme\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 City Of London\n\nOn-site\n\nGBP 30,000 - 40,000\n\nIAD diploma\n\nFurther qualifications\n\nTraining sessions\n\n+6\n\n16 hours ago\n\nBe an early applicant\n\nWealth Transformation BA: Drive Change & Growth\n\nWealth Transformation BA: Drive Change & Growth\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Manor Park\n\nOn-site\n\nGBP 45,000 - 65,000\n\n5 days ago\n\nBe an early applicant\n\nWealth Transformation Business Analyst - Flexible Work\n\nWealth Transformation Business Analyst - Flexible Work\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Manor Park\n\nHybrid\n\nGBP 65,000 - 90,000\n\n5 days ago\n\nBe an early applicant\n\nWealth Transformation Analyst: Drive Change & Strategy\n\nWealth Transformation Analyst: Drive Change & Strategy\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Manor Park\n\nHybrid\n\nGBP 45,000 - 65,000\n\n5 days ago\n\nBe an early applicant\n\nWealth Transformation Analyst\n\nWealth Transformation Analyst\n\nSave this job. Every save sharpens your matches.\n\nSchroders \u2022 Manor Park\n\nOn-site\n\nGBP 65,000 - 90,000\n\n5 days ago\n\nBe an early applicant\n\nWealth Management Trainee: Launch Your Finance Career\n\nWealth Management Trainee: Launch Your Finance Career\n\nSave this job. Every save sharpens your matches.\n\nInvestment2020 \u2022 Cambridge\n\nRemote\n\nGBP 25,000 - 35,000\n\nIAD Diploma \u2013 Investment Advice\n\nCISI Level 7 \u2013 Chartered Wealth Mgr\n\nImmersive industry training\n\n+4\n\n14 days+\n\nShow more\n\nTop locations\n\nJobs in Woking Jobs in Stourbridge Jobs in Cheltenham Jobs in Hemel Hempstead Jobs in Walthamstow Jobs in Southampton Jobs in Beckenham Jobs in Tottenham Jobs in Brighton Jobs in Guildford\n\n```json\n{\"@context\":\"https://schema.org/\",\"@type\":\"JobPosting\",\"title\":\"Wealth Transformation Graduate - Project & Analysis Start\",\"description\":\"\\u003Cp>Schroders invites applications for its 2027 Wealth Transformation Graduate Programme in London. The two-year rotation-based track offers hands-on experience across Business Architecture, Strategic Design, Business Analysis and Project Management within Wealth Transformation and Wealth Management.\\u003C/p>\\u003Cp>You will rotate through Client teams, Investment and Operations, gaining exposure to strategic design opportunities and essential change initiatives.\\u003C/p>\",\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"Schroders\",\"value\":\"e34d6158d6d1648fbc9562991b291f2dd\"},\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Schroders\"},\"employmentType\":\"FULL_TIME\",\"datePosted\":\"2026-11-21\",\"validThrough\":\"2027-05-21\",\"jobLocation\":{\"@type\":\"Place\",\"address\":{\"@type\":\"PostalAddress\",\"postalCode\":\"CR4 1HD\",\"addressLocality\":\"Greater London\",\"addressCountry\":\"GB\",\"addressRegion\":\"England\"}},\"salaryCurrency\":\"GBP\",\"baseSalary\":{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":32000,\"maxValue\":52000,\"unitText\":\"YEAR\"}}}\n\n```"
+      },
+      {
+        "id": "jsearch:SExlbU9OSGd4R19qUEgxUEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXa2xhVEhOamRtUm9hbTlTUkVWWVJVRnVTM0l3TFVwdGNuVnZjVmR4YVhKQ2NsTklaUzFzZUU1MmRXdHpjVjlQWnpkdVJscEVVMmxyZVRaTWVYcE5RblUxWVhoT1ducEVhV05MTVhwcFExbDJNRWczVEZKQ2MwZG1WVjh6VjBkR1kySnJYM1paVlZGdVNWQlpVM1ZsYzFZMGJua3pka05DTkUxRWVGWkJUR05VY2w5TFFtb1NGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkSWJURTFlV2cxY0c1eGJIZ3dPRkp3YW5oMFRVeEJVRVEzTmxobjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.0,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.02,
+          "crosses_cap": 0.01,
+          "unknown": 0.97
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.02,
+            "crosses_cap": 0.01,
+            "unknown": 0.97
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Slough \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a315 per hour Estimated\n\nFull-time\n\nSlough, Berkshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 4 days ago"
+      },
+      {
+        "id": "jsearch:ZmxlTFF4QjRsZGZ0bTZ4VUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZV05CZEVWelZEQlFZVXhETkRkUUxYcERRMmxPUkd3d1JHOVBaamxrVjB0Qk1tRktYMGs1WkVwVVRrbE1lQzFaZEhsVVRGcHhablpXZUdjd1NsRlBVMnRTWlRSNk4yUnZPRTFKU0V0QmExRXlSVGxIYlZkV05XY3pibWhaUzBscE9URXdRMFpXWTA5VVJETjNOVlJ5VEZwMFJHOXZMV050YjNCWFJUZGZkRzF4ZGxoV0xXZ1NGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkSU9WWjFWRXRJU1VkZlNYWkZRWFJSUldRdFRUQmpNV3BYZUVKbjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.97,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.03,
+          "crosses_cap": 0.01,
+          "unknown": 0.96
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.03,
+            "crosses_cap": 0.01,
+            "unknown": 0.96
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 High Wycombe \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a314.9 per hour Estimated\n\nFull-time\n\nHigh Wycombe, Buckinghamshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 4 days ago"
+      },
+      {
+        "id": "jsearch:RFJkYUlwY0dyYml6MzhmbkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZVzR3U0ZCSVNTMTZObVpyWVRkS05XMWlkRVl6UXpaMFRIcERVVEoxY25kWExVbEJUR3czWkdOeFRYWTFXVmhMY2xSMmFtVllhMmxWWW0xalYxSmtPRGxuUjBsVlNWSnBNbFJJWjBGWGVsTkJjREpKZWtNNVYwVkxTbUZpUTNWalNFMWxkRWRQYTBWb2RqaHVPRkJTYW1obWFISkZYMVZLVmxWcVZuSkhNSHBZYW1oT1ZVc1NGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkR1h6QndUa1kzYnpRMldGcExVMHMwTnpOeWVIWjRYelZuVG5sUjo3Mzc3NmUyZA",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.6,
+          "possible_fit": 0.09,
+          "unlikely_fit": 0.02,
+          "insufficient_information": 0.29
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Valuations Analyst (Graduate Scheme) ACA - Thames Valley - September 2027 - Thames Valley",
+        "vacancy": "MHA | Valuations Analyst (Graduate Scheme) ACA - Thames Valley -\u2026\n\n# Valuations Analyst (Graduate Scheme) ACA - Thames Valley - September 2027 - Thames Valley\n\n Thames Valley Corporate Finance Posted: 15 Oct 2026 ref: 3017 \n\n### Job description\n\nLocation: Thames Valley/Maidenhead\n\nApplication deadline: 11 th of January 2027 (Applications will only be reviewed once the deadline has passed) \n\nEntry requirements: Achieved or predicted 2:1 degree or above and at least 112 UCAS points from your top three subjects (or equivalent) \n\nWe're looking for talented individuals who bring initiative, creativity, and curiosity to the table. In return, you'll gain valuable hands-on experience, receive mentorship from some of the industry's best and earn recognised professional qualification. \n\nBy the end of your Graduate Programme, you\u2019ll be a well-rounded, commercially minded professional, ready to take on interesting and challenging responsibilities. You won\u2019t just be fully qualified - you\u2019ll be fully prepared to drive your own career forward. \n\nWhat Sets Us Apart \n\nAt MHA, people come first, our colleagues, our clients, and the communities we support. In 2026, we ranked as number 11 in the UK\u2019s top accountancy firms and a proud member of Baker Tilly International, the world\u2019s 8th largest network, we combine global insight with a strong local commitment. \n\nOur people\u2011 centred approach is what truly makes us different. You will be welcomed as a valued member of a collaborative, purpose\u2011 led team. We are committed to continuous learning, growth, and creating an environment where everyone can thrive and be themselves. \n\nWe are proud to hold the Investors in People Gold award, recognising our commitment to supporting, developing, and valuing every individual. \n\nHere, You\u2019ll Go Beyond Numbers \n\nOur Corporate Finance team provides a full range of M&A lead-advisory, transaction support services and valuations engaging in the delivery a range of projects associated with company disposals, buyouts, equity and debt fundraises, and acquisitions across an array of industries and sectors. The Corporate Finance team focuses on providing quality, technically proficient transactional advice, delivered with integrity, passion, and commercial zeal. \n\nMHA is offering the rare opportunity of a direct-entry graduate role as an Analyst with the Corporate Finance Valuation team. You will receive extensive on the job training and practical experience in a friendly and supportive team, whilst simultaneously being afforded the opportunity to pursue the ACA qualification. \n\nFrom the day you join the team, you will be working in a dynamic and commercial environment. You'll have immediate exposure to clients and decision makers early on, and the ability to have a personal impact on successful project delivery. You will work alongside experienced and technically adept colleagues - whilst the learning curve is steep, the friendly team will offer you extensive support and training helping you to evolve professionally and personally, and to build a firm foundation for your career. \n\nAs an Valuation Analyst, you\u2019ll experience the power of collaboration as you work with diverse teams on real projects, build lasting connections with colleagues and start off by learning the fundamentals, including: \n\n- Analysing financial information; \n\n- Conducting detailed sector and market research and analysis; \n\n- Understanding and applying business valuation methodologies; \n\n- Assisting with the development and drafting of reports; and \n\n- Attending client meetings and developing relationships; \n\n Rewards That Resonate \n\nYou\u2019re more than a number to us; you\u2019re someone with unique skills and aspirations. Our benefits are designed to support your wellbeing, foster your professional growth, and recognise the contribution you make. \n\n- Agile working: Our flexible working policy gives you greater choice over how you structure your day. With core hours of 10am\u20132pm, you can start earlier or finish later to suit your needs, alongside the option to work from home up to two days a week. For trainees, we ask for full office attendance during the first six months to ensure you receive the training, support and experience needed for a strong start, with greater flexibility available after that. \n\n- 30 days\u2019 holiday, including bank holidays, plus the opportunity to buy or sell up to 5 days (28 days on a training contract, with the opportunity to buy 5 days). \n\n- Full study support package: including exams, tuition, study leave days and materials. \n\n- Employee recognition awards: Performance Award bonus and other recognition initiatives. \n\n- Employee Assistance Programme: A free, confidential 24\u2011 hour support service, including unlimited counselling sessions and access to virtual doctors for you and your family. \n\n- And lots more! \n\nAre You Ready to Elevate Your Career? \n\nApply now and be part of a team that celebrates diversity, champions innovation, and prioritises your success. \n\nAt MHA, we know that diversity, inclusion, and belonging lead to better decisions, stronger performance, and a workplace where everyone can feel included and thrive. That\u2019s why we welcome applications from people of all backgrounds and experiences. \n\nDisability Confident \n\nWe are a Disability Confident employer. If you have a disability and meet the essential criteria for the role, we will progress you to the next stage of the process. \n\nIf you require any reasonable adjustments during the recruitment process to help you perform at your best, please let us know and we will be happy to help. \n\nYou can email us at webenquiries@mha.co.uk\n\n## Thank you for your enquiry\n\n We aim to respond within 48 hours. Enquiries submitted after 5:30pm on Friday will be answered by close of business on Monday. \n\nWe aim to respond within 48 hours. Enquiries submitted after 5:30pm on Friday will be answered by close of business on Monday."
+      },
+      {
+        "id": "jsearch:Ry1BbkpjQ19KZWxkR3RzZkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZa0o0TjI5YVRuSTNhWEozUzB4VFlraFhRbTl0Y2xsSE1uRXlXV2RUV1RWVk5GVlpiVzV4WDFaZlREbFdhbk5vTm1JNVltMXliekpmT1VSNVFWZE1kbkppTUZoR1YwWk9VMVpIU2tSblUxRmFhVkZ4VTBoeVZ6aDBSalpoTjNwNWNuRnpXbk0wVDJaT1ptWkxaM05LU0RZNFgxQkVaazFITWkxR1ZtWmhkVmRwUjBWelZXd1NGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkSVRWQlRjVms1YkZoZmRUQllVRXhIV0d0UmFVOVpNMDVQU0ZCMzo0YTZjZGE0NA",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.28,
+          "possible_fit": 0.53,
+          "unlikely_fit": 0.03,
+          "insufficient_information": 0.16
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 1.0,
+          "crosses_cap": 0.0,
+          "unknown": 0.0
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 1.0,
+            "crosses_cap": 0.0,
+            "unknown": 0.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Business Administrator",
+        "vacancy": "Graduate Business Administrator - Rosemount Financial Solutions Ltd\n\n# Graduate Business Administrator\n\nRosemount Financial Solutions Ltd\n\nBasingstoke, United Kingdom\u00a327,500 - \u00a334,375 /year 5 days ago\n\nFull time On-site\n\n### Job description\n\n#### About Us\n\n Rosemount Financial Solutions (IFA) Ltd is a multi-award-winning, FCA-regulated financial services company specialising in investments, pensions, mortgages, protection and general insurance. Based in Basingstoke, we support a nationwide network of Financial Advisers. \n\nAs we continue to grow, we are looking for an ambitious and motivated Graduate Business Administrator to join our team. This is an excellent opportunity to start your career in financial services, gaining hands-on experience across different areas of a growing business.\n\nWorking alongside experienced professionals, you will develop valuable business and administration skills, with opportunities to pursue specialist financial qualifications, including CeMAP and DipFA, to support your future career progression.\n\n#### About You\n\n You will be a graduate with an interest in business administration and operations. You should be proactive, organised and analytical, with good Microsoft Office skills, strong communication abilities and the confidence to manage priorities and take initiative. Previous financial services experience is beneficial but not essential; attitude and willingness to learn are equally important. \n\n#### Key Responsibilities\n\n- Provide administrative and operational support across various departments.\n- Support our nationwide network of Financial Advisers with day-to-day administration.\n- Maintain accurate records, databases and business documentation.\n- Prepare and update spreadsheets, reports, presentations and other business documents.\n- Manage telephone calls, emails and general business correspondence.\n- Coordinate administrative processes, monitor workflows and track outstanding tasks.\n- Support the smooth running of business operations and help improve internal processes.\n- Work with colleagues across different departments to support business projects and activities.\n- Handle confidential information responsibly and in line with company policies and procedures.\n\nEssential\n\n- Undergraduate degree.\n- Strong organisational and time management skills.\n- Excellent written and verbal communication.\n- Good working knowledge of Microsoft Word, Excel, and Outlook.\n- Strong attention to detail and problem-solving skills.\n- Proactive approach with the ability to take initiative.\n- Ability to manage priorities, meet deadlines and work as part of a team.\n- Ability to reliably commute to our Basingstoke head office for the required working hours.\n\nDesirable\n\n- Degree in Business, Finance, Economics or a related discipline (2:1 or above preferred).\n- Previous administrative or business support experience.\n- Familiarity with business systems, databases or CRM platforms.\n- Interest in business operations and process improvement.\n\nJob Type: Full-time, Permanent Hours: Monday to Friday, 8:30 AM \u2013 5:00 PM \n\nLocation: Basingstoke, RG21 7PU\n\nPay: \u00a327,500.00 per year\n\n#### Benefits\n\n- Company events\n- Company pension\n- Health & wellbeing programme\n- On-site parking\n- Private medical insurance\n\n Ability to commute/relocate: \n\n- Basingstoke RG21: reliably commute or plan to relocate before starting work (required)\n\n Education: \n\n- Bachelor's (required)\n\n Work authorisation: \n\n- United Kingdom (required)\n\n Work Location: In person\n\nKeywords"
+      },
+      {
+        "id": "jsearch:aG5zQjduYUhuOVVXWDdVREFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZWGxMY0c1dVVYZGZWalJTV25WMGVESXlXbTEwUmpaS1NqSnZOamxEVDE5eVZFcHNiblJLWmt4WU1VUmlTV0pvU20xTWJqWkNNbmxmWkc5dWEyVjJjRGg0WWs5bGFVNU1lR3BzVTJwMVNUTkJXWG8xYkRsSFVFTk9lVTQ0TjFONlEzcDFRbVUwV2s1TVFteFNheTF1TjAxM056Tk9NbDkwUVVoeWVFaGhWV1ZTZGtadGJrTVNGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkRlJrNXpWM0Y0TjFvMFFsUm1Na3hPVTBoWmREQk5SRFpqWm5OMzo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.98,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.01,
+          "crosses_cap": 0.0,
+          "unknown": 0.99
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.01,
+            "crosses_cap": 0.0,
+            "unknown": 0.99
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Stevenage \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a315 per hour Estimated\n\nFull-time\n\nCareer Change\n\nStevenage, Hertfordshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 5 days ago"
+      },
+      {
+        "id": "jsearch:bUIzMl9mcU1xbEpGYUF4UkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXV3BYYldKVFNrRnhXa1Z0VWxWWmNFeG5aVVpmYlY4MVRYTlpaMVV6TUZSSFYxRlZaWEZPWHpWNU4yWnJTWEJRYzNGc00wVjFhMUZ1YUdoeVUzZE1jMTl3V25Wb2JURXhTM1Z4VVRCaWJIWllVSEJWYm5OM1kxZEJNV0ZQUjNSeVZtTlVTQzFRV20xNVoyaHVOVWt6WDJsNlVsWlZWVGhuTFZsV1pVOW9WMnh5YkVoelVqRVNGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkR1VXZEROVkJzTkRkbU5tdDVZVFIxUWsxRVVVeFBRMXB0YkhKUjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.0,
+          "possible_fit": 0.0,
+          "unlikely_fit": 1.0,
+          "insufficient_information": 0.0
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.02,
+          "crosses_cap": 0.01,
+          "unknown": 0.97
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.02,
+            "crosses_cap": 0.01,
+            "unknown": 0.97
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Basingstoke \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a314.9 per hour Estimated\n\nFull-time\n\nCareer Change\n\nBasingstoke, Hampshire\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 4 days ago"
+      },
+      {
+        "id": "jsearch:QW9VNExmSmd4aFFZejRTcUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbmxKYW1Ga2NIWTVYelJvVUUxWGFsUlZlSHBrVVZWT1dIUXlhVE5MZURoaGVtTnJabVZrTWtwU0xXMXVXVmw1TUd0UFJHSjBiamt5V0VKTk1rRmlUVFpwY1RCdk9HVmhTVVU1UjIxcE5VMTJkbEpWWW5acVdIZGZjMm81Wm1sdE0zQXdYMVJVUW1vNGFXUmZTV05NVVdKVlFUQnFWRk15Vm1kaVJuZDNSMU13V25wMWJsY1NGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkSGRESTFabk5JYjJoSWJHZFZaVXcxTmtsMFprWlhhbTlxVUhkUjo3MDE5MzBjMA",
+        "suitability": "unlikely_fit",
+        "probabilities": {
+          "strong_fit": 0.01,
+          "possible_fit": 0.01,
+          "unlikely_fit": 0.97,
+          "insufficient_information": 0.01
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.03,
+          "crosses_cap": 0.01,
+          "unknown": 0.96
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.03,
+            "crosses_cap": 0.01,
+            "unknown": 0.96
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Trainee Accountant (Graduate Finance) Full Time",
+        "vacancy": "Trainee Accountant (Graduate Finance) Full Time at Career Change \u2013 Southend-on-Sea \u2013 Apply Now! \u2013 Jooble\n\n# Trainee Accountant (Graduate Finance) Full Time\n\n\u00a312.8 - \u00a314.9 per hour Estimated\n\nFull-time\n\nCareer Change\n\nSouthend-on-Sea, Essex\n\nThis position requires local presence. Please view similar jobs below.\n\nAccounting & Finance Placement Programme - No Experience Required\n\nOur training will help you kick-start a new career in Accounting & Finance.\n\nWe are recruiting for companies who are looking to employ our Accounting Traineeship graduates to support their continued growth. The best part is, you will not need any previous experience as full training will be provided. You will also have the reassurance of a job guarantee upon completion of the training programme.\n\nWhether you are working full time, part time or currently unemployed, this package has the flexibility to be completed at a pace that suits you.\n\nThe traineeship is broken down into 3 simple steps and can be completed in as little as 3-6 months.\n\nStep 1 - Online Training\n\nThe first step is completing the AAT level 2 & 3 courses. You will study core bookkeeping and accounting principles through multimedia-rich video tutorials, presentations and quizzes via an online portal that can be accessed from home.\n\nThe course includes training towards recognised AAT qualifications, helping you build the knowledge employers are actively looking for within the accounting industry.\n\nStep 2 - Practical Training\n\nYou will complete practical bookkeeping and accounting exercises designed around real-world business scenarios.\n\nAt the final stage, we will prepare you to sit your official AAT exams. Exams can be taken online or at one of the approved exam centres across the UK.\n\nOnce you have completed the Accounting Traineeship, our recruitment support team will help place you into an entry-level accounting role within your local area.\n\nAccounts Assistant\n\n- Finance Administrator\n- Payroll Assistant\n- Purchase Ledger Clerk\n\n Through our employer network across the UK, we guarantee you will be offered a role upon completion of the programme or we will refund 100% of your course fees.\n\nAt a one-off cost of \u00a3999, or 13 interest-free monthly instalments of \u00a392, this represents a fantastic opportunity to start a rewarding new career in Accounting & Finance with real long-term progression opportunities.\n\nPlease note that this is a training course and fees apply \n\nVacancy posted 4 days ago"
+      },
+      {
+        "id": "jsearch:UFU4SDVhN1dPOFpmTER2NEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbFZmU1hOR2FsQXdka2xoTlRsT1JsQjZTbTl3ZFVSUWVHSXRSWG90WDNkQ04xVnZjR042TjJ0MWJtVlBNMWhTVnpKYVRWQXpNVVF3WjJ0V2NUbEJYMU5sYzBOUU16QmlSRVJrVVZFMGNVOTVlSE5RT1V4SmVVVjFlQzFuUzFwbVJEUmliMWhwWjFWTVQxTTNiVmx3T1ZKcllVODFSWEJCWjFZMGNWOTNhV05JUlROTGRsTVNGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkSVRpMUtPV0ZUV1Mwd1JUWkJORFZYZFdjeFYyaENWbFo2UkZkbjo3NjY0MzVlOQ",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.72,
+          "possible_fit": 0.21,
+          "unlikely_fit": 0.01,
+          "insufficient_information": 0.06
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Commercial Finance Broker: Fast-Track to \u00a3100k OTE",
+        "vacancy": "Funderer in Brentwood, UK, is seeking ambitious graduates to join the Graduate Commercial Finance Broker Programme. You will work office-based, Monday to Friday, directly with business owners to arrange funding and build lasting client relationships.\n\nYou will receive mentorship from the founder and CEO, plus structured training in commercial finance, negotiation, and relationship management. Expect rapid progression and uncapped commissions as you grow your career."
+      },
+      {
+        "id": "jsearch:RmdndXBpaGtsZEkxZHViVEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbTl5UTFOM2NqWTBibnB6YXpaQlZVVkhhVTQwWlVndFVUVXhibEUxVGw5QmVFcGZlbGhOVWpGM05IRnhZME5MUlVaMVdXdFhMWGRVYjJGMUxVUXRWa1J3Vm5GcmQxQnhaekJ2TlZaR1JqQm5UR2h3WVhaNFgwdDVOa2xJVjBaak9EUTNRVVJHYkdGa1JISTBjMEpOVlZWalN6UXlWa2RzYmxFM1QwZDZWV0owTjA0eFRGQVNGM0ZKUVVkaE5XWldTMGt5Um0xTVVWQm5YM1UzYjBGVkdpSkJTRTR3UlRkRmFXeDFjbTlVZUdaaGJFUk1ZMWRyYm1aR1kzRklia2xEYkRaMzoxNjQyNDljOA",
+        "suitability": "strong_fit",
+        "probabilities": {
+          "strong_fit": 0.8,
+          "possible_fit": 0.09,
+          "unlikely_fit": 0.03,
+          "insufficient_information": 0.08
+        },
+        "salary_category": "within_cap",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 1.0,
+          "crosses_cap": 0.0,
+          "unknown": 0.0
+        },
+        "salary_assessment": {
+          "category": "within_cap",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 1.0,
+            "crosses_cap": 0.0,
+            "unknown": 0.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate Financial Planner: Build Client Wealth & Insight",
+        "vacancy": "Save this job. Every save sharpens your matches.\n\nI\u2019m interested\n\n# Graduate Financial Planner: Build Client Wealth & Insight\n\n## Forvis Mazars in the UK\n\n## Milton Keynes\n\n## On-site\n\n## GBP 24,000 - 30,000\n\n## Full time\n\n14 days+\n\nGet a reply from this employer\n\nYour resume and cover letter, tailored to exactly what they\u2019re hiring for.\n\nGet past ATS filters\n\nGenerate application\n\n### Benefits offered by this job\n\nFunded CII study\n\nBuddy system\n\nStructured training\n\n### Job summary\n\nForvis Mazars in the UK invites applications for a Financial Planning Trainee as part of its Graduate Programme. This role focuses on building client relationships, understanding personal finances and applying analytical thinking to tailor financial advice.\n\nYou\u2019ll grow through practical client work, funded professional study with CII, a buddy system and regular mentoring, gaining experience across retirement planning, wealth growth and protection strategies.\n\n### Qualifications\n\n- GCSE Maths and English Language at Grade 4/C (or equivalent qualifications).\n- Achieved a minimum of 112 UCAS tariff points from top three A Levels, BTECs, Scottish Highers/Advanced Highers, or other recognised Level 3 qualifications.\n- Achieved or predicted a 2:1 degree classification (or equivalent).\n\n### Responsibilities\n\n- Meeting with clients and supporting conversations that help shape their financial future.\n- Building trusted, long-term relationships with individuals and families, supporting them through different stages of life.\n- Helping clients achieve goals such as buying a home, planning for retirement, growing wealth and protecting their future.\n- Researching investment and financial planning solutions and supporting recommendations tailored to each client's needs.\n- Using technology, data and digital tools to analyse information and help clients make informed financial decisions.\n- Collaborating with financial planners, tax specialists and wealth experts to deliver a seamless client experience.\n- Developing a strong understanding of financial markets, personal finance and the factors that influence client decisions.\n\n### Skills\n\nRelationship building\n\nProblem-solving\n\nAnalytical thinking\n\nCommunication\n\n### Education\n\nGCSE Maths & English 4/C\n\n112 UCAS tariff points\n\n2:1 degree\n\n## Job description\n\nForvis Mazars in the UK invites applications for a Financial Planning Trainee as part of its Graduate Programme. This role focuses on building client relationships, understanding personal finances and applying analytical thinking to tailor financial advice.\n\nYou\u2019ll grow through practical client work, funded professional study with CII, a buddy system and regular mentoring, gaining experience across retirement planning, wealth growth and protection strategies.\n\nShow more\n\nGet your free, confidential resume review.\n\nSelect file\n\nor drag and drop your file here.\n\n Rated \u201cExcellent\u201d based on 24,529 reviews\n\nKG\n\nKelly G.GB \u00b7 May 22, 2026\n\n Trustpilot\n\n\u201cThe feedback regarding my CV was very detailed, insightful and constructive. I am impressed with the advice given and will take it on board to better improve my CV going forward.\u201d\n\nUZ\n\nUyapo Z.BW \u00b7 May 4, 2026\n\n Trustpilot\n\n\u201cThe resume review gave me useful insight and pointers to improve my resume to stand a significant chance in the job market competition.\u201d\n\nDM\n\nDaniel M.AU \u00b7 May 7, 2026\n\n Trustpilot\n\n\u201cPractical and constructive feedback to help improve my resume.\u201d\n\nF\n\nFabioCA \u00b7 May 5, 2026\n\n Trustpilot\n\n\u201cGot a quick review of my CV and good advice on some changes that I need to make to improve my CV\u201d\n\nSB\n\nSamantha B.US \u00b7 May 19, 2026\n\n Trustpilot\n\n\u201cVery thorough very detailed and very informative I would recommend anyone to use this for their resume.\u201d\n\n## Similar jobs worth comparing\n\nGraduate Financial Planning Trainee | Build Client Wealth\n\nGraduate Financial Planning Trainee | Build Client Wealth\n\nSave this job. Every save sharpens your matches.\n\ntargetjobs UK \u2022 Leeds\n\nOn-site\n\nGBP 24,000 - 30,000\n\nFunded CII study\n\nBuddy & mentor support\n\nStructured training & study leave\n\n21 hours ago\n\nBe an early applicant\n\nAspiring Financial Planner Trainee\n\nAspiring Financial Planner Trainee\n\nSave this job. Every save sharpens your matches.\n\nCooper & Hall Limited \u2022 United Kingdom\n\nOn-site\n\nGBP 25,000 - 30,000\n\nBuddy system\n\nMentor support\n\nStructured training\n\n+1\n\n7 days ago\n\nBe an early applicant\n\nAspiring Financial Planner Graduate Trainee\n\nAspiring Financial Planner Graduate Trainee\n\nSave this job. Every save sharpens your matches.\n\nForvis Mazars Financial Planning Limited \u2022 Leeds\n\nOn-site\n\nGBP 25,000 - 35,000\n\nFunded professional study (CII)\n\nBuddy and mentoring support\n\nStructured graduate training\n\n+1\n\n14 days+\n\nFinancial Planning Trainee: Build Wealth & Futures\n\nFinancial Planning Trainee: Build Wealth & Futures\n\nSave this job. Every save sharpens your matches.\n\nForvis Mazars in the UK \u2022 Leeds\n\nOn-site\n\nGBP 22,000 - 28,000\n\nFunded CII study\n\nStudy leave\n\nBuddy system\n\n14 days+\n\nFinancial Planning Trainee: Launch Your Advisory Career\n\nFinancial Planning Trainee: Launch Your Advisory Career\n\nSave this job. Every save sharpens your matches.\n\nCooper & Hall Limited \u2022 Leeds\n\nHybrid\n\nGBP 26,000 - 32,000\n\nFunded professional study\n\nBuddy and mentor support\n\nStructured training & study leave\n\n14 days+\n\nGraduate Financial Planner - Funded Study & Client Impact\n\nGraduate Financial Planner - Funded Study & Client Impact\n\nSave this job. Every save sharpens your matches.\n\nForvis Mazars Financial Planning Limited \u2022 Milton Keynes\n\nOn-site\n\nGBP 24,000 - 30,000\n\nFunded CII study\n\nBuddy system\n\nMentor guidance\n\n+1\n\n14 days+\n\nTrainee Financial Planner: Client-Focused Advisory Career\n\nTrainee Financial Planner: Client-Focused Advisory Career\n\nSave this job. Every save sharpens your matches.\n\nForvis Mazars Financial Planning Limited \u2022 Nottingham\n\nOn-site\n\nGBP 21,000 - 25,000\n\n14 days+\n\nFinancial Planning Graduate Trainee - September 2027\n\nFinancial Planning Graduate Trainee - September 2027\n\nSave this job. Every save sharpens your matches.\n\nCooper & Hall Limited \u2022 United Kingdom\n\nOn-site\n\nGBP 25,000 - 30,000\n\nBuddy system\n\nMentor support\n\nStructured training\n\n+1\n\n7 days ago\n\nBe an early applicant\n\nFinancial Planning Graduate Trainee - Milton Keynes - September 2027\n\nFinancial Planning Graduate Trainee - Milton Keynes - September 2027\n\nSave this job. Every save sharpens your matches.\n\nForvis Mazars in the UK \u2022 Milton Keynes\n\nOn-site\n\nGBP 24,000 - 30,000\n\nFunded CII study\n\nBuddy system\n\nStructured training\n\n14 days+\n\nFinancial Planning Graduate Trainee - Leeds - September 2027\n\nFinancial Planning Graduate Trainee - Leeds - September 2027\n\nSave this job. Every save sharpens your matches.\n\ntargetjobs UK \u2022 Leeds\n\nOn-site\n\nGBP 24,000 - 30,000\n\nFunded CII study\n\nBuddy & mentor support\n\nStructured training & study leave\n\n21 hours ago\n\nBe an early applicant\n\nShow more\n\nTop locations\n\nJobs in Leeds Jobs in Bracknell Jobs in Gloucester Jobs in Chatham Jobs in Cheltenham Jobs in Ayr Jobs in Maidenhead Jobs in Stourbridge Jobs in Castleford Jobs in Aylesbury\n\n```json\n{\"@context\":\"https://schema.org/\",\"@type\":\"JobPosting\",\"title\":\"Graduate Financial Planner: Build Client Wealth & Insight\",\"description\":\"\\u003Cp>Forvis Mazars in the UK invites applications for a Financial Planning Trainee as part of its Graduate Programme. This role focuses on building client relationships, understanding personal finances and applying analytical thinking to tailor financial advice.\\u003C/p>\\u003Cp>You\u2019ll grow through practical client work, funded professional study with CII, a buddy system and regular mentoring, gaining experience across retirement planning, wealth growth and protection strategies.\\u003C/p>\",\"identifier\":{\"@type\":\"PropertyValue\",\"name\":\"Forvis Mazars in the UK\",\"value\":\"e7404dc53b3653ba3272c92ce60c8fec7\"},\"hiringOrganization\":{\"@type\":\"Organization\",\"name\":\"Forvis Mazars in the UK\"},\"employmentType\":\"FULL_TIME\",\"datePosted\":\"2026-11-19\",\"validThrough\":\"2027-04-13\",\"jobLocation\":{\"@type\":\"Place\",\"address\":{\"@type\":\"PostalAddress\",\"postalCode\":\"MK15 0DT\",\"addressLocality\":\"Milton Keynes\",\"addressCountry\":\"GB\",\"addressRegion\":\"England\"}},\"salaryCurrency\":\"GBP\",\"baseSalary\":{\"@type\":\"MonetaryAmount\",\"currency\":\"GBP\",\"value\":{\"@type\":\"QuantitativeValue\",\"minValue\":24000,\"maxValue\":30000,\"unitText\":\"YEAR\"}}}\n\n```"
+      },
+      {
+        "id": "jsearch:SVJTd1JVQ3ppY1Niam91MUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXbkoyYUdOWVMwdG1UMDlDVTBkS1kzQkdlbEZtZFhaVU1FSm1SWE4zYzFvelNscFFhMmhRY3pReU0yazRTVXRNWmkxMFpWUjNTVWxHVW5GVWFtWXhPV0p1U1ZJeVNrVmpaM0V4UzFKeGMyWnpWRkZpY1ZKQ1VEWm9NemRMWTJkWFpEZFRia05NUlVaa2JGTlFOR3RvUW5wMFpUTlhaM3BMYldSc2FGOUhWa3RRTkVoQmNVMFNGM0ZaUVVkaE9HMVlTRTV5U0hKMVJWQnJjMTlXWjBFd0dpSkJTRTR3UlRkR1lXVTFTamx4UkhKNVVEQkpMVEIzUlhWM2FrOVlWMDFUVlV0bjoyYjQ1MzE2YQ",
+        "suitability": "possible_fit",
+        "probabilities": {
+          "strong_fit": 0.33,
+          "possible_fit": 0.62,
+          "unlikely_fit": 0.0,
+          "insufficient_information": 0.05
+        },
+        "salary_category": "unknown",
+        "salary_probabilities": {
+          "above_cap": 0.0,
+          "within_cap": 0.0,
+          "crosses_cap": 0.0,
+          "unknown": 1.0
+        },
+        "salary_assessment": {
+          "category": "unknown",
+          "probabilities": {
+            "above_cap": 0.0,
+            "within_cap": 0.0,
+            "crosses_cap": 0.0,
+            "unknown": 1.0
+          },
+          "min": null,
+          "max": null,
+          "currency": null,
+          "period": null,
+          "source": "not_established",
+          "evidence": null
+        },
+        "title": "Graduate KYC Analyst",
+        "vacancy": "Alpha Bank London Limited is seeking a Graduate KYC Analyst to join the Bank\u2019s KYC Operations team. With guidance and training, you will support Customer Due Diligence (CDD), periodic reviews and screening activities for both individual and corporate client relationships.\n\nThis 3-month Fixed-Term Contract (FTC) offers an opportunity for recent graduates or early-career candidates to develop in KYC, AML, and Financial Crime Operations within a supportive banking environment.\n\nQualifications\n\u2022 Recent degree or equivalent qualification; applications are welcomed from candidates without previous KYC experience.\n\u2022 Interest in KYC, AML, financial crime prevention, banking or financial services, with a willingness to learn.\n\u2022 Basic awareness of AML, CDD, sanctions, PEP or adverse media screening would be helpful, but full training will be provided.\n\u2022 Confidence learning new systems and following defined procedures accurately.\n\u2022 Good analytical, research and problem-solving skills, with strong attention to detail.\n\u2022 Working knowledge of Microsoft Office applications, particularly Word and Excel.\n\u2022 A proactive and organised approach, with the ability to manage priorities, meet deadlines and ask for support when needed.\n\u2022 Strong written and verbal communication skills in English; Greek language skills would be advantageous but are not essential.\n\nResponsibilities\n\u2022 Support periodic KYC and CDD reviews for individual and corporate clients, under the guidance of experienced team members.\n\u2022 Review client documents and information for completeness and accuracy, escalating gaps or inconsistencies where required.\n\u2022 Carry out sanctions, PEP, adverse media and financial crime screening checks using the Bank\u2019s systems and procedures.\n\u2022 Assist with assessing client risk profiles and identifying potential AML, sanctions and financial crime concerns for escalation.\n\u2022 Maintain accurate client records and help complete review activities within agreed timescales.\n\u2022 Work collaboratively with Relationship Managers, Compliance and other colleagues to obtain information and resolve queries.\n\u2022 Support basic management information reporting, record keeping and data quality checks.\n\u2022 Contribute ideas to improve team processes and operational efficiency as knowledge and experience develop.\n\u2022 Support wider Bank projects and team activities as required, while prioritising core KYC responsibilities."
+      }
+    ],
+    "token_usage": {
+      "input_tokens": 77480,
+      "output_tokens": 2665
+    },
+    "input_hash": "f438282694646f6faed726413e240ec22ed7c985e35d66a8d719619cdfff0519",
+    "truncation": [],
+    "salary_exclusions": [
+      "jsearch:WkduR2Zld0FnYVcwSjBxd0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZbWxGVkV4SFRuZGljWE16U0VkbGFESnJaMHBUYVZSUWRHaFRkekEyWTNCeWNEbHVRa1JhWmtrNWNHcFNWR1p6TTFGMlkwNVVaRlJYUjBkNE1sTmlZelpJU2sxT1EwMWFNMmhxZFVJNFNqWlFXVEZLV0dwSVYweHhaVEYxVGpsc00weE9jbVZLVG5oWGRUTXpkbVV5T1RWWk1qUjBXREowV0VGbE1tTnVUSFoxYW01UE5FOFNGMjlKUVVkaE4zcEtUVGt0TkcxTVVWQjJOV0pMZFZGbkdpSkJTRTR3UlRkSVdqbHlURVZ5YlVaNVJucEhObkJ2WWxSWGRuQkhSbmR5UmpaMzo0OGI0MTgyZg"
+    ],
+    "elapsed_seconds": 0.4482028700000029
+  }
+}
