@@ -71,9 +71,17 @@ class BotTests(unittest.TestCase):
         }
 
     def _invoke(
-        self, jobs, send=False, failure=None, test_send=False, search_failure=None
+        self,
+        jobs,
+        send=False,
+        failure=None,
+        test_send=False,
+        search_failure=None,
+        force_send=False,
     ):
         argv = ["jobs_bot", "--config", str(self.config)]
+        if force_send:
+            argv.append("--force-send")
         if send:
             argv.append("--send")
         if test_send:
@@ -201,7 +209,7 @@ class BotTests(unittest.TestCase):
                 self._invoke([_job()], send=True)
         backup.assert_called_once()
         self.assertFalse(self.history.exists())
-        self.assertTrue(self.delivery.exists())
+        self.assertFalse(self.delivery.exists())
 
     def test_adzuna_http_error_uses_jsearch_filtering_and_delivery(self):
         """Record the backup's jobs after delivery, without logging HTTP details."""
@@ -297,12 +305,12 @@ class BotTests(unittest.TestCase):
             self.assertIn("JSearch API failed", message["Subject"])
             self.assertNotIn("No matching jobs found today", message.get_content())
             self.assertNotIn("private", message.get_content())
-        self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
+        self.assertFalse(self.delivery.exists())
         self.assertEqual(json.loads(self.history.read_text()), original)
-        self.credentials.clear()
-        primary, deliver, _ = self._invoke([], send=True)
-        primary.assert_not_called()
-        deliver.assert_not_called()
+        primary, deliver, _ = self._invoke([_job()], send=True)
+        primary.assert_called_once()
+        deliver.assert_called_once()
+        self.assertEqual(json.loads(self.delivery.read_text()), ["2026-10-26"])
 
     def test_failure_notice_rejected_by_gmail_does_not_record_delivery(self):
         """A notification is not complete until Gmail accepts it."""
@@ -531,6 +539,18 @@ class BotTests(unittest.TestCase):
         self.assertNotIn("Executive Search", body)
         self.assertNotIn("Barista", body)
         self.assertEqual(set(json.loads(self.history.read_text())), job_keys(junior))
+
+    def test_explicit_send_again_preserves_duplicate_filter(self):
+        """Allow a second bulletin without resending already delivered vacancies."""
+        self.delivery.write_text(json.dumps(["2026-10-26"]))
+        old = _job("old")
+        self.history.write_text(json.dumps(sorted(job_keys(old))))
+        fresh = _job("fresh", title="Graduate Accountant")
+        fetch, deliver, _ = self._invoke([old, fresh], send=True, force_send=True)
+        fetch.assert_called_once()
+        message = deliver.call_args.args[0]
+        self.assertIn("Graduate Accountant", message.get_content())
+        self.assertNotIn("Finance Analyst", message.get_content())
 
 
 if __name__ == "__main__":

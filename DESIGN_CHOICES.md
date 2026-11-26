@@ -671,3 +671,15 @@ job's time. The manifest retains the UTC timestamp and GitHub run ID. Replay
 finds that ID in manifests instead of assuming it is the directory name.
 Existing evidence and old numeric names remain compatible. Same-second runs
 get a run-ID suffix instead of sharing a directory or overwriting data.
+
+## 2026-11-26: search failures must not prevent recovery
+
+An accepted failure-notice email previously marked the date delivered, causing
+later manual recovery to skip with a green workflow. Failure notices now leave
+successful-delivery state unchanged. Explicit send-again mode bypasses only the
+date guard, preserving vacancy deduplication. JSearch retries transport/server
+failures twice after two-minute waits, not subscription or schema failures.
+Offline regression tests verify retry bounds and recovery; they cannot prove
+provider availability or billing treatment. A malformed individual vacancy
+still rejects the batch with a safe reason code; handling such rows separately
+remains a potential follow-up rather than silently discarding jobs.

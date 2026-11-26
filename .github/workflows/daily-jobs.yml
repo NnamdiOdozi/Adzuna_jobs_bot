@@ -7,7 +7,7 @@ on:
       mode:
         description: Preview, email only the sender, or send normally
         type: choice
-        options: [preview, test, send]
+        options: [preview, test, send, send-again-today]
         default: preview
 
 permissions:
@@ -79,6 +79,7 @@ jobs:
           RUN_MODE: ${{ inputs.mode }}
         run: |
           case "$RUN_MODE" in
+            send-again-today) python -m jobs_bot --send --force-send ;;
             send) python -m jobs_bot --send ;;
             test) python -m jobs_bot --test-send ;;
             preview) python -m jobs_bot ;;
@@ -117,7 +118,7 @@ jobs:
           retention-days: ${{ steps.archive.outputs.retention_days }}
           if-no-files-found: ignore
       - name: Persist history after Gmail accepts the message
-        if: ${{ !cancelled() && inputs.mode == 'send' && steps.search.outcome != 'skipped' }}
+        if: ${{ !cancelled() && (inputs.mode == 'send' || inputs.mode == 'send-again-today') && steps.search.outcome != 'skipped' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

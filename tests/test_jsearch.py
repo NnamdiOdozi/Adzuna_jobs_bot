@@ -108,3 +108,47 @@ class JSearchTests(unittest.TestCase):
             with self.assertRaises(HTTPError):
                 fetch_jsearch(self.config, "synthetic-key")
             request.assert_called_once()
+
+    def test_transient_failures_retry_twice_with_configured_spacing(self):
+        """Recover on attempt three without real waiting or paid requests."""
+        self.config["retry_delays_seconds"] = [120, 120]
+        with (
+            patch("jobs_bot.jsearch.build_opener") as opener,
+            patch("jobs_bot.jsearch.time.sleep") as sleep,
+        ):
+            opener.return_value.open.side_effect = [
+                HTTPError("https://example.com", 503, "unavailable", {}, None),
+                TimeoutError(),
+                io.StringIO(json.dumps({"data": {"jobs": []}})),
+            ]
+            self.assertEqual(fetch_jsearch(self.config, "synthetic"), [])
+        self.assertEqual(opener.return_value.open.call_count, 3)
+        self.assertEqual([c.args[0] for c in sleep.call_args_list], [120, 120])
+
+    def test_authentication_failure_does_not_retry(self):
+        """Avoid repeating requests which need credential or subscription changes."""
+        self.config["retry_delays_seconds"] = [120, 120]
+        with (
+            patch("jobs_bot.jsearch.build_opener") as opener,
+            patch("jobs_bot.jsearch.time.sleep") as sleep,
+        ):
+            opener.return_value.open.side_effect = HTTPError(
+                "https://example.com", 403, "forbidden", {}, None
+            )
+            with self.assertRaises(HTTPError):
+                fetch_jsearch(self.config, "synthetic")
+        self.assertEqual(opener.return_value.open.call_count, 1)
+        sleep.assert_not_called()
+
+    def test_retries_are_exhausted_without_a_fourth_request(self):
+        """Bound downtime to the configured attempts."""
+        self.config["retry_delays_seconds"] = [120, 120]
+        with (
+            patch("jobs_bot.jsearch.build_opener") as opener,
+            patch("jobs_bot.jsearch.time.sleep") as sleep,
+        ):
+            opener.return_value.open.side_effect = TimeoutError()
+            with self.assertRaises(TimeoutError):
+                fetch_jsearch(self.config, "synthetic")
+        self.assertEqual(opener.return_value.open.call_count, 3)
+        self.assertEqual(sleep.call_count, 2)

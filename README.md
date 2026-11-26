@@ -369,3 +369,20 @@ include navigation or related adverts, so a longer description does not prove
 that every requirement was recovered. Text retrieval costs about $0.001 per
 page, excluding subsequent Jev usage. Preview mode also performs retrieval
 when enabled; it sends no email and does not update delivery history.
+
+### Recovering a failed morning search
+
+JSearch retries temporary server errors, network failures and unreadable JSON
+at most twice, waiting 120 seconds before each retry. `[jsearch]
+retry_delays_seconds = [120, 120]` controls these waits. Authentication, quota
+and valid-JSON schema errors stop without retrying. Failed attempts may still
+consume provider allowance. A failed search sends a notice and leaves the
+workflow red, but no longer marks the day as successfully delivered.
+
+To retry from GitHub, open Actions → Daily London job shortlist → Run workflow,
+choose `send`, then Run workflow. After a successful bulletin, choose
+`send-again-today` instead if another bulletin is intentional. That option
+bypasses today's send limit but still excludes vacancies already delivered.
+Cloudflare continues using `send`; its setup does not need changing. Existing
+failure dates saved by older code are not cleared automatically: use
+`send-again-today` to recover on those dates.

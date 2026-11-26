@@ -126,9 +126,19 @@ def _jsearch_result(config):
     try:
         return fetch_jsearch(config["jsearch"], os.environ["JSEARCH_API_KEY"]), None
     except Exception as error:
+        # Only our fixed validation messages are safe to retain; provider bodies
+        # and arbitrary exception text must never reach public workflow logs.
+        reasons = {
+            "JSearch returned an invalid response": "invalid_response_shape",
+            "JSearch jobs must be a list": "invalid_jobs_list",
+            "JSearch returned an incomplete vacancy": "incomplete_vacancy",
+            "JSearch returned an invalid vacancy link": "invalid_vacancy_link",
+            "JSearch returned invalid vacancy text": "invalid_vacancy_text",
+        }
         logging.error(
-            "event=search state=jsearch->failed type=%s details=redacted",
+            "event=search state=jsearch->failed type=%s reason=%s details=redacted",
             type(error).__name__,
+            reasons.get(str(error), "service_or_configuration"),
         )
         return [], error
 
@@ -149,6 +159,11 @@ def _run():
         "--test-send",
         action="store_true",
         help="Email only the sender; preserve history",
+    )
+    parser.add_argument(
+        "--force-send",
+        action="store_true",
+        help="Bypass today’s delivery limit; still exclude sent jobs",
     )
     parser.add_argument("--config", default="config.toml")
     args = parser.parse_args()
@@ -182,6 +197,7 @@ def _run():
     ):
         raise ValueError("Delivery history must contain ISO calendar dates")
     # Check before credentials or API calls; previews never consume a send date.
+    force_send = force_send or args.force_send
     if args.send and today in sent_dates and not force_send:
         logging.info(
             "event=email state=requested->skipped reason=already_sent "
@@ -356,6 +372,10 @@ def _run():
         if search_error is not None:
             raise RuntimeError("JSearch API failed; test notice accepted") from None
         return
+    if search_error is not None:
+        # A failure notice is not a successful bulletin and must allow recovery.
+        logging.warning("event=delivery state=unchanged reason=search_failure_notice")
+        raise RuntimeError("JSearch API failed; failure notice accepted") from None
     # Save the accepted send first, even if saving the vacancy keys later fails.
     delivery_path.parent.mkdir(parents=True, exist_ok=True)
     pending_path = delivery_path.with_suffix(".tmp")
@@ -364,9 +384,6 @@ def _run():
     )
     pending_path.replace(delivery_path)
     logging.info("event=delivery state=unsent->saved date=%s", today)
-    if search_error is not None:
-        # Preserve the accepted notice without claiming a successful vacancy search.
-        raise RuntimeError("JSearch API failed; failure notice accepted") from None
     for job in selected:
         seen.update(job_keys(job))
     history_path.parent.mkdir(parents=True, exist_ok=True)

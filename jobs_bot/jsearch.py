@@ -2,7 +2,8 @@
 
 The daily coordinator calls this provider when JSearch is selected directly,
 when Adzuna needs backup, or when a small Adzuna batch needs supplementation.
-One request asks for the configured pages; page count still affects API credits.
+One successful request asks for the configured pages. Temporary failures can
+retry after configured delays; every attempt may affect provider credits.
 
 Provider fields are normalized here so snapshots, ranking methods and the email
 builder can reuse the same records. This module does not select suitable jobs,
@@ -11,7 +12,8 @@ save snapshots, send email or change duplicate-suppression history.
 
 import json
 import logging
-from urllib.error import HTTPError
+import time
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
@@ -23,7 +25,7 @@ class _NoRedirect(HTTPRedirectHandler):
 
 
 def fetch_jsearch(config, key):
-    """Fetch configured pages once, without retries or following the cursor.
+    """Fetch pages with bounded retries for temporary transport/server failures.
 
     Parameters
     ----------
@@ -56,20 +58,45 @@ def fetch_jsearch(config, key):
         f"{config['base_url']}?{urlencode(params)}",
         headers={"x-api-key": key, "Accept": "application/json"},
     )
-    logging.info(
-        "event=jsearch_request state=ready->requested pages=%d", config["num_pages"]
-    )
-    try:
-        with build_opener(_NoRedirect()).open(
-            request, timeout=config["timeout_seconds"]
-        ) as response:
-            payload = json.load(response)
-    except HTTPError as error:
-        logging.error(
-            "event=jsearch_request state=requested->failed http_status=%d", error.code
+    delays = config.get("retry_delays_seconds", [])
+    if (
+        not isinstance(delays, list)
+        or any(type(delay) is not int or delay < 60 for delay in delays)
+        or len(delays) > 2
+    ):
+        raise ValueError("JSearch allows at most two retry delays, each >=60 seconds")
+    for attempt in range(len(delays) + 1):
+        logging.info(
+            "event=jsearch_request state=ready->requested attempt=%d pages=%d",
+            attempt + 1,
+            config["num_pages"],
         )
-        error.close()
-        raise
+        try:
+            with build_opener(_NoRedirect()).open(
+                request, timeout=config["timeout_seconds"]
+            ) as response:
+                payload = json.load(response)
+            break
+        except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as error:
+            status = error.code if isinstance(error, HTTPError) else None
+            retryable = status is None or 500 <= status <= 599
+            if isinstance(error, HTTPError):
+                error.close()
+            logging.warning(
+                "event=jsearch_request state=requested->failed attempt=%d "
+                "http_status=%s error_type=%s retryable=%s",
+                attempt + 1,
+                status,
+                type(error).__name__,
+                retryable,
+            )
+            if not retryable or attempt == len(delays):
+                raise
+            logging.info(
+                "event=jsearch_request state=failed->waiting delay_seconds=%d",
+                delays[attempt],
+            )
+            time.sleep(delays[attempt])
     if not isinstance(payload, dict) or not isinstance(payload.get("data"), dict):
         raise ValueError("JSearch returned an invalid response")
     rows = payload["data"].get("jobs")

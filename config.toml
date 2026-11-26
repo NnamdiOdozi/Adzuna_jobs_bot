@@ -35,8 +35,9 @@ num_pages = 8
 date_posted = "week"
 # Kilometres: includes a broad catchment around London, not county boundaries.
 radius = 50
-# Give a multi-page batch time to finish; no automatic retry spends extra credits.
+# One initial attempt plus two retries, two minutes apart.
 timeout_seconds = 60
+retry_delays_seconds = [120, 120]
 
 [email]
 # Gmail app-password label: Adzuna_jobs_bot (informational only).
