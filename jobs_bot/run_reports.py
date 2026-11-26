@@ -280,6 +280,17 @@ def main():
             raise RuntimeError("Readable run report could not be saved")
     with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as stream:
         stream.write((directory / "summary.md").read_text(encoding="utf-8"))
+        # Receipts contain safe diagnostics, so a failed model call is readable
+        # on the run page without opening a downloaded JSON artifact.
+        for path in Path(config["ranking"]["receipt_directory"]).glob("ranking-*.json"):
+            record = json.loads(path.read_text())
+            details = record.get("diagnostics", {})
+            if record.get("status") == "failed":
+                stream.write("\n### Ranking failure\n\n")
+                stream.write(_text(details.get("message", "Ranking failed")) + "\n\n")
+                for key in ("reason", "http_status", "batch", "request_bytes"):
+                    if key in details:
+                        stream.write(f"- {key}: {_text(details[key])}\n")
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 
 from jobs_bot.__main__ import _select
-from jobs_bot.jev_ranking import rank_jobs
+from jobs_bot.jev_ranking import _failure_details, rank_jobs
 from jobs_bot.model_ranking import RankingFailure
 
 
@@ -32,6 +32,48 @@ class JevRankingTests(unittest.TestCase):
             }
             for name in ("one", "two", "three")
         ]
+
+    @patch("jobs_bot.jev_ranking.build_opener")
+    def test_context_rejection_is_readable_without_echoing_provider_body(self, opener):
+        """Expose the documented context error, never arbitrary response contents."""
+        opener.return_value.open.side_effect = HTTPError(
+            "https://example.com",
+            400,
+            "PRIVATE",
+            {},
+            io.BytesIO(b'{"error":"max_tokens_exceeded","message":"PRIVATE"}'),
+        )
+        with self.assertLogs(level="ERROR") as logs:
+            with self.assertRaises(RankingFailure) as raised:
+                rank_jobs(self.jobs, set(), self.config, api_key="fake")
+        details = raised.exception.diagnostics
+        self.assertEqual(details["reason"], "max_tokens_exceeded")
+        self.assertIn("context token limit", details["message"])
+        self.assertGreater(details["request_bytes"], 0)
+        self.assertIn("max_tokens_exceeded", " ".join(logs.output))
+        self.assertNotIn("PRIVATE", " ".join(logs.output))
+        self.assertNotIn("PRIVATE", json.dumps(details))
+        self.assertEqual(raised.exception.receipt["batches"][0]["vacancies"], 3)
+
+    def test_other_400_is_not_misreported_as_context_overflow(self):
+        """An HTTP 400 by itself does not establish a token-limit failure."""
+        error = HTTPError(
+            "https://example.com",
+            400,
+            "PRIVATE",
+            {},
+            io.BytesIO(b'{"message":"PRIVATE"}'),
+        )
+        details = _failure_details(error)
+        self.assertEqual(details["reason"], "invalid_request")
+        self.assertNotIn("PRIVATE", json.dumps(details))
+
+    def test_unreadable_error_body_still_preserves_status(self):
+        """Diagnostics must not hide the original HTTP failure if reading fails."""
+        error = HTTPError("https://example.com", 429, "PRIVATE", {}, None)
+        details = _failure_details(error)
+        self.assertEqual(details["http_status"], 429)
+        self.assertNotIn("PRIVATE", json.dumps(details))
 
     def response(self, request, **kwargs):
         """Return probabilities for precisely the questions in a mocked request."""

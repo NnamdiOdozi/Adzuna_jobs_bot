@@ -234,7 +234,18 @@ class RunReportTests(unittest.TestCase):
         self._snapshot([self.jobs[2]], "adzuna", "123", 1)
         receipts = Path(self.config["ranking"]["receipt_directory"])
         receipts.mkdir()
-        (receipts / "ranking-test.json").write_text(json.dumps(self.records[0]))
+        failure_record = {
+            **self.records[0],
+            "status": "failed",
+            "diagnostics": {
+                "reason": "max_tokens_exceeded",
+                "http_status": 400,
+                "batch": 1,
+                "request_bytes": 250000,
+                "message": "Jev context token limit exceeded.",
+            },
+        }
+        (receipts / "ranking-test.json").write_text(json.dumps(failure_record))
         config_path = self.root / "config.toml"
         config_path.write_text("")
         summary_path = self.root / "actions-summary.md"
@@ -256,8 +267,13 @@ class RunReportTests(unittest.TestCase):
         self.assertEqual(self._read("report")["mode"], "live")
         self.assertEqual(self._read("report")["fetched"], 1)
         self.assertEqual(self._read("assessments")[0]["fetched_index"], 1)
-        self.assertEqual(
-            summary_path.read_text(), (self.directory / "summary.md").read_text()
+        self.assertTrue(
+            summary_path.read_text().startswith(
+                (self.directory / "summary.md").read_text()
+            )
         )
+        self.assertIn("Jev context token limit exceeded", summary_path.read_text())
+        self.assertIn("max\\_tokens\\_exceeded", summary_path.read_text())
+        self.assertIn("250000", summary_path.read_text())
         self.assertIn("Run failed", summary_path.read_text())
         self.assertFalse((self.directory / "email.txt").exists())

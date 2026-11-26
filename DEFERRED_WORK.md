@@ -1,5 +1,10 @@
 # Open work
 
+- 2026-11-26 — Source: failed enriched Jev replay. Preserve enriched vacancy
+  evidence before ranking can fail; the failed GitHub run retained only original
+  JSearch text. Local realistic replay now saves enrichment first and succeeded.
+  Runtime persistence before ranking remains open.
+
 - 2026-11-23 — Source: authorised JSearch-only trial. Local source switch,
   structured annual GBP £50,000 cap, clarified languages/insurance experience
   and shorter specialist-eligibility policy are implemented and tested. Live

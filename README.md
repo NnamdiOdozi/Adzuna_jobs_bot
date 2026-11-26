@@ -386,3 +386,10 @@ bypasses today's send limit but still excludes vacancies already delivered.
 Cloudflare continues using `send`; its setup does not need changing. Existing
 failure dates saved by older code are not cleared automatically: use
 `send-again-today` to recover on those dates.
+
+Jev failures appear in both the search-step logs and the run-page Summary.
+A provider `max_tokens_exceeded` response is explicitly labelled as a context
+token-limit failure. Each batch records vacancy/question counts, description
+characters and request bytes. These sizes are not token measurements; actual
+token usage is available only after successful calls. Arbitrary provider error
+bodies are excluded from public logs and receipts to protect private data.

@@ -17,6 +17,7 @@ import json
 import logging
 import math
 import os
+import re
 import time
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +32,38 @@ from jobs_bot.model_ranking import (
     prepare_candidates,
 )
 from jobs_bot.screening import salary_details
+
+
+def _failure_details(error):
+    """Recognize documented provider codes without retaining private error text."""
+    status = error.code if isinstance(error, HTTPError) else None
+    reason = "request_or_response_failed"
+    if isinstance(error, HTTPError):
+        try:
+            body = error.read(16384).decode("utf-8", errors="replace")
+            # Emit only a fixed documented code, never arbitrary provider wording.
+            if re.search(r"\bmax_tokens_exceeded\b", body):
+                reason = "max_tokens_exceeded"
+            else:
+                reason = {
+                    400: "invalid_request",
+                    401: "authentication_failed",
+                    413: "request_body_too_large",
+                    422: "request_validation_failed",
+                    429: "rate_limited",
+                    529: "provider_overloaded",
+                }.get(status, "provider_http_error")
+        except Exception:
+            reason = "provider_http_error_details_unavailable"
+        finally:
+            error.close()
+    message = (
+        "Jev rejected the batch because its context token limit was exceeded. "
+        "Reduce the vacancy batch size or description length."
+        if reason == "max_tokens_exceeded"
+        else "Jev ranking failed; inspect the HTTP status and safe reason code."
+    )
+    return {"http_status": status, "reason": reason, "message": message}
 
 
 def _choice(answer, labels):
@@ -133,6 +166,16 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
                     },
                 }
         payload = {"model": settings["model"], "state": state, "questions": questions}
+        request_bytes = len(json.dumps(payload).encode())
+        description_chars = sum(len(job["description"]) for job in batch)
+        receipt.setdefault("batches", []).append(
+            {
+                "vacancies": len(batch),
+                "questions": len(questions),
+                "request_bytes": request_bytes,
+                "description_characters": description_chars,
+            }
+        )
         receipt["attempted_calls"] += 1
         batch_number = receipt["attempted_calls"]
         remaining = config["ranking"]["max_elapsed_seconds"] - (
@@ -144,9 +187,11 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
             raise failure
         logging.info(
             "event=jev_request state=ready->requested batch=%d "
-            "questions=%d input_hash=%s",
+            "questions=%d request_bytes=%d description_characters=%d input_hash=%s",
             batch_number,
             len(questions),
+            request_bytes,
+            description_chars,
             receipt["input_hash"],
         )
         try:
@@ -198,14 +243,22 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
                 receipt["token_usage"][name] += result["usage"][name]
             receipt["calls"] += 1
         except Exception as error:
-            # Never persist provider bodies, headers or arbitrary exception text.
+            details = _failure_details(error)
+            logging.error(
+                "event=jev_request state=requested->failed batch=%d "
+                "http_status=%s reason=%s request_bytes=%d message=%s",
+                batch_number,
+                details["http_status"],
+                details["reason"],
+                request_bytes,
+                details["message"],
+            )
             failure = RankingFailure(
                 "jev_request_failed",
                 batch=batch_number,
-                http_status=error.code if isinstance(error, HTTPError) else None,
+                request_bytes=request_bytes,
+                **details,
             )
-            if isinstance(error, HTTPError):
-                error.close()
             failure.receipt = receipt
             raise failure from None
     by_id = {job["id"]: job for job in candidates}

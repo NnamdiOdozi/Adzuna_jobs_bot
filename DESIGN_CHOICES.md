@@ -683,3 +683,16 @@ Offline regression tests verify retry bounds and recovery; they cannot prove
 provider availability or billing treatment. A malformed individual vacancy
 still rejects the batch with a safe reason code; handling such rows separately
 remains a potential follow-up rather than silently discarding jobs.
+
+## 2026-11-26: make Jev context rejections visible
+
+Exa enrichment increased input size, but the original adapter persisted only
+HTTP 400 and hid the provider's context code. The adapter now recognizes the
+documented `max_tokens_exceeded` code, logs a plain-language explanation and
+keeps safe batch sizes in receipts. The existing Actions summary publisher
+includes those diagnostics. Other HTTP 400 responses are not labelled as
+context errors. Provider bodies are never persisted or echoed. Offline tests
+verify code recognition, redaction and run-page publication; they do not prove
+that any future batch fits the context window. Ten-vacancy batching reduces
+size but is not a token-budget guarantee, so unusually long batches can still
+fail visibly.
