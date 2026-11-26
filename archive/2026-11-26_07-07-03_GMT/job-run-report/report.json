@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-26",
+  "mode": "send",
+  "state": "no_new_report",
+  "run_id": "45772942900",
+  "commit": "d1338d1be22a3cff4ebb21922005ec7e3a6d5c19",
+  "method": "jev",
+  "provider": "See candidate records",
+  "model": "None / unavailable",
+  "model_calls": 0,
+  "fetched": 0,
+  "assessed": 0,
+  "selected": 0,
+  "subject": null,
+  "ranking_records": []
+}
