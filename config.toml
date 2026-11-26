@@ -96,7 +96,8 @@ model = "jev-1.14.0"
 policy_path = "prompts/jev_suitability.json"
 # Separate salary question reads pay wording when provider fields are empty.
 salary_policy_path = "prompts/jev_salary.json"
-batch_size = 20
+# Ten vacancies produce twenty questions: suitability and salary for each.
+batch_size = 10
 timeout_seconds = 60
 
 [qwen]
