@@ -1,0 +1,23 @@
+{
+  "status": "failed",
+  "diagnostics": {
+    "category": "jev_request_failed",
+    "batch": 1,
+    "http_status": 400
+  },
+  "partial_receipt": {
+    "model": "jev-1.14.0",
+    "calls": 0,
+    "attempted_calls": 1,
+    "assessments": [],
+    "token_usage": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "input_hash": "2094710e73e0270fa23374a0857e979cb1a6be9806f6873ca7629909ebc418a9",
+    "truncation": [
+      "jsearch:UWl3X3QtUExuSEZCb3JrVkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXVE5xYTJaRU4xTkJVa3RvV2xKSGRGVmZTSEI2ZFVaMmVtMHRkVE0yYVVwelVUZEdha3RtWkVKSE9UVTVSbDk1VjA5cFRFaENlRWw2VEVwcFZsbG5VVXBUZEhNd1VYVTBTWE5rWVY5eVZXRnFVVE5YZURJeE1TMVFiakJLZUZOVlZrRkNVSEJTYVRSMlQyMTNlbVp5ZHpOTVlVMXhkbVJaVWsxU2JXaHFlbTlVYm5WT1IyVVNGMHAwTUVoaE9HMXRUMlF5Y0doaVNWQnBUR0pWZFVGakdpSkJTRTR3UlRkSGFYRlVSRFZSWDNnek9UaEljVmd3YzFOTGJFcFVVVGxWUTBkUjo1MTFkZWJhOQ",
+      "jsearch:UkhEOXBZWEFZcnNaaWJ3QkFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZV1J2YUZGRVluUlpkSE51UVRBdFlsWlNYMVYxZURGQlpXbFVTakJFUlVaVFZEWnJkRTFYVFhWME5WcG9abkowTWw5Q2VFaG9XRTFvZFhRMmNEZHNXbUo0YkVkbmVYSTJOVUpZV1ZBdGMzZE1VVEF3TVZwamJFMW1UM1pPUW5aaFRVMDFMVzlyVUZsMlVFTTBTa1YxTFdnNU16VnBUSEl6VWpGaFJYTnNkRFpMUlROMU1VRVNGMHRPTUVoaE9USmhTamxMTjNGMGMxQXdaSEpuYjBGVkdpSkJTRTR3UlRkR1dFRTJNRkZOZVRKMFVtRkNZVkJ5VkZWSFV6QmZjRTF3V1daUjo3MDkwNGEyMQ"
+    ]
+  }
+}
