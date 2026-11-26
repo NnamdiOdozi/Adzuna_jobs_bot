@@ -132,6 +132,7 @@ def _jsearch_result(config):
             "JSearch returned an invalid response": "invalid_response_shape",
             "JSearch jobs must be a list": "invalid_jobs_list",
             "JSearch returned an incomplete vacancy": "incomplete_vacancy",
+            "JSearch returned no usable vacancies": "no_usable_vacancies",
             "JSearch returned an invalid vacancy link": "invalid_vacancy_link",
             "JSearch returned invalid vacancy text": "invalid_vacancy_text",
         }

@@ -36,7 +36,11 @@ def enrich_jobs(jobs, seen, config):
             continue
         used.update(keys)
         url = job.get("redirect_url", "")
-        parsed = urlsplit(url)
+        try:
+            parsed = urlsplit(url)
+        except (ValueError, TypeError):
+            logging.warning("event=exa state=target->skipped reason=invalid_url")
+            continue
         if parsed.scheme != "https" or not parsed.hostname or parsed.username:
             continue
         if url not in targets and len(targets) >= min(

@@ -696,3 +696,31 @@ verify code recognition, redaction and run-page publication; they do not prove
 that any future batch fits the context window. Ten-vacancy batching reduces
 size but is not a token-budget guarantee, so unusually long batches can still
 fail visibly.
+
+## 2026-11-26: isolate malformed JSearch vacancies
+
+Run 45776261953 failed with `incomplete_vacancy`: one missing required field
+caused the parser to reject the entire search response before Exa or Jev ran.
+The response body was not retained, so neither the offending field nor the
+number of otherwise valid records can be reconstructed. The parser now logs
+the row index, fixed field names and reason, skips that row, and retains other
+complete records. Returned/accepted/rejected totals are logged. An entirely
+invalid nonempty batch remains a visible failure, while an empty valid jobs
+list remains a successful search with no results. Invalid rows do not trigger
+paid retries. Offline mixed-response tests protect this boundary. This does
+not establish that the earlier 06:30 failure had the same cause.
+
+## 2026-11-26: bounded review of provider-boundary brittleness
+
+An independent read-only review reproduced invalid optional salary currency or
+period types crashing the salary screen, and malformed URLs escaping Exa's
+fallback before the request. These now become unknown optional metadata or a
+skipped enrichment target, respectively. No missing pay or location is inferred.
+
+Jev now halves a batch only for the provider's documented context-limit code.
+Every attempt still counts against `ranking.max_calls` and the existing elapsed
+limit; individual-vacancy overflow or exhausted budgets remain visible failures.
+Unknown model failures do not silently fall back to rules or send partial results.
+The workflow timeout is twenty minutes to accommodate configured JSearch waits
+and the existing ranking time limit. Offline tests prove recovery and budget
+bounds; they do not guarantee remote-service availability or correct suitability.

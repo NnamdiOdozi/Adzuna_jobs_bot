@@ -28,6 +28,13 @@ class ExaTests(unittest.TestCase):
         """Verify the documented extraction boundary offline."""
         self.config = {"exa": {"enabled": True, "max_pages": 1, "timeout_seconds": 10}}
 
+    def test_malformed_url_cannot_prevent_fallback(self):
+        """An unparsable advert link must not stop ranking the original vacancy."""
+        job = vacancy(url="https://[broken")
+        with patch("jobs_bot.exa_contents.urlopen") as request:
+            self.assertEqual(enrich_jobs([job], (), self.config), [job])
+        request.assert_not_called()
+
     def test_disabled_and_seen_do_not_request(self):
         """Verify the documented extraction boundary offline."""
         job = vacancy()

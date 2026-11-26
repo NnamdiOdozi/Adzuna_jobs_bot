@@ -45,7 +45,7 @@ class JevRankingTests(unittest.TestCase):
         )
         with self.assertLogs(level="ERROR") as logs:
             with self.assertRaises(RankingFailure) as raised:
-                rank_jobs(self.jobs, set(), self.config, api_key="fake")
+                rank_jobs(self.jobs[:1], set(), self.config, api_key="fake")
         details = raised.exception.diagnostics
         self.assertEqual(details["reason"], "max_tokens_exceeded")
         self.assertIn("context token limit", details["message"])
@@ -53,7 +53,7 @@ class JevRankingTests(unittest.TestCase):
         self.assertIn("max_tokens_exceeded", " ".join(logs.output))
         self.assertNotIn("PRIVATE", " ".join(logs.output))
         self.assertNotIn("PRIVATE", json.dumps(details))
-        self.assertEqual(raised.exception.receipt["batches"][0]["vacancies"], 3)
+        self.assertEqual(raised.exception.receipt["batches"][0]["vacancies"], 1)
 
     def test_other_400_is_not_misreported_as_context_overflow(self):
         """An HTTP 400 by itself does not establish a token-limit failure."""
@@ -74,6 +74,48 @@ class JevRankingTests(unittest.TestCase):
         details = _failure_details(error)
         self.assertEqual(details["http_status"], 429)
         self.assertNotIn("PRIVATE", json.dumps(details))
+
+    @patch("jobs_bot.jev_ranking.build_opener")
+    def test_context_failure_splits_batch_and_assesses_every_vacancy(self, opener):
+        """Recover from a larger payload without dropping or repeating decisions."""
+        attempts = []
+
+        def respond(request, **kwargs):
+            attempts.append(len(json.loads(request.data)["questions"]))
+            if len(attempts) == 1:
+                raise HTTPError(
+                    "https://example.com",
+                    400,
+                    "bad",
+                    {},
+                    io.BytesIO(b'{"error":"max_tokens_exceeded"}'),
+                )
+            return self.response(request)
+
+        opener.return_value.open.side_effect = respond
+        selected, receipt = rank_jobs(self.jobs, set(), self.config, api_key="fake")
+        self.assertEqual(attempts, [6, 2, 4])
+        self.assertEqual(len(selected), 3)
+        self.assertEqual(len(receipt["assessments"]), 3)
+        self.assertEqual(receipt["attempted_calls"], 3)
+
+    @patch("jobs_bot.jev_ranking.build_opener")
+    def test_context_splitting_cannot_exceed_call_budget(self, opener):
+        """Repeated size rejections must stop at the configured paid-call bound."""
+        self.config["ranking"]["max_calls"] = 1
+        opener.return_value.open.side_effect = HTTPError(
+            "https://example.com",
+            400,
+            "bad",
+            {},
+            io.BytesIO(b'{"error":"max_tokens_exceeded"}'),
+        )
+        with self.assertRaises(RankingFailure) as raised:
+            rank_jobs(self.jobs, set(), self.config, api_key="fake")
+        self.assertEqual(
+            raised.exception.diagnostics["category"], "request_budget_exceeded"
+        )
+        self.assertEqual(opener.return_value.open.call_count, 1)
 
     def response(self, request, **kwargs):
         """Return probabilities for precisely the questions in a mocked request."""

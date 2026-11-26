@@ -7,7 +7,8 @@ retry after configured delays; every attempt may affect provider credits.
 
 Provider fields are normalized here so snapshots, ranking methods and the email
 builder can reuse the same records. This module does not select suitable jobs,
-save snapshots, send email or change duplicate-suppression history.
+save snapshots, send email or change duplicate-suppression history. Malformed
+individual vacancies are logged and excluded; an entirely unusable batch fails.
 """
 
 import json
@@ -103,7 +104,8 @@ def fetch_jsearch(config, key):
     if not isinstance(rows, list):
         raise ValueError("JSearch jobs must be a list")
     jobs = []
-    for row in rows:
+    rejected = 0
+    for index, row in enumerate(rows, 1):
         required = (
             "job_id",
             "job_title",
@@ -111,19 +113,50 @@ def fetch_jsearch(config, key):
             "job_location",
             "job_apply_link",
         )
-        if not isinstance(row, dict) or any(
-            not isinstance(row.get(name), str) or not row[name].strip()
+        missing = [
+            name
             for name in required
-        ):
-            raise ValueError("JSearch returned an incomplete vacancy")
-        link = urlsplit(row["job_apply_link"])
-        if link.scheme not in {"http", "https"} or not link.hostname:
-            raise ValueError("JSearch returned an invalid vacancy link")
-        if any(
-            row.get(name) is not None and not isinstance(row[name], str)
-            for name in ("job_posted_at_datetime_utc", "job_description")
-        ):
-            raise ValueError("JSearch returned invalid vacancy text")
+            if not isinstance(row, dict)
+            or not isinstance(row.get(name), str)
+            or not row[name].strip()
+        ]
+        reason = "incomplete_vacancy" if missing else None
+        invalid_text = []
+        if not missing:
+            try:
+                link = urlsplit(row["job_apply_link"])
+                if link.scheme not in {"http", "https"} or not link.hostname:
+                    reason = "invalid_vacancy_link"
+            except ValueError:
+                reason = "invalid_vacancy_link"
+            invalid_text = [
+                name
+                for name in ("job_posted_at_datetime_utc", "job_description")
+                if row.get(name) is not None and not isinstance(row[name], str)
+            ]
+            if invalid_text:
+                reason = "invalid_vacancy_text"
+        if reason:
+            rejected += 1
+            # A bad row must not discard the remaining complete vacancies.
+            # Only fixed field names and the row number reach public logs.
+            logging.warning(
+                "event=jsearch_vacancy state=received->excluded row=%d "
+                "reason=%s invalid_fields=%s",
+                index,
+                reason,
+                ",".join(missing or invalid_text) or "job_apply_link",
+            )
+            continue
+        # Optional salary fields must not crash later filtering or archiving.
+        for field in ("job_salary_currency", "job_salary_period"):
+            if row.get(field) is not None and not isinstance(row[field], str):
+                logging.warning(
+                    "event=jsearch_salary state=received->unknown row=%d field=%s",
+                    index,
+                    field,
+                )
+                row = {**row, field: None}
         jobs.append(
             {
                 "id": f"jsearch:{row['job_id']}",
@@ -142,8 +175,13 @@ def fetch_jsearch(config, key):
             }
         )
     logging.info(
-        "event=jsearch_request state=requested->received jobs=%d pages=%d",
+        "event=jsearch_request state=requested->received jobs=%d pages=%d "
+        "returned=%d rejected=%d",
         len(jobs),
         config["num_pages"],
+        len(rows),
+        rejected,
     )
+    if rows and not jobs:
+        raise ValueError("JSearch returned no usable vacancies")
     return jobs

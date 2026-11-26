@@ -393,3 +393,15 @@ token-limit failure. Each batch records vacancy/question counts, description
 characters and request bytes. These sizes are not token measurements; actual
 token usage is available only after successful calls. Arbitrary provider error
 bodies are excluded from public logs and receipts to protect private data.
+
+JSearch excludes malformed individual vacancies with a warning naming the row
+and missing/invalid fields. Complete vacancies continue to ranking. The logs
+show returned and rejected totals; if every returned vacancy is unusable, the
+search fails visibly instead of reporting that no matching jobs exist.
+
+If Jev explicitly rejects a batch for exceeding its context, the bot splits
+that batch in half and tries the smaller groups. Attempts stay within the
+configured `ranking.max_calls` and elapsed-time limits. A single vacancy that
+still exceeds the limit causes a visible failure rather than a partial email.
+Optional salary metadata with invalid types becomes unknown. Invalid advert
+URLs skip enrichment rather than stopping the bulletin.

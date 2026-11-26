@@ -152,3 +152,47 @@ class JSearchTests(unittest.TestCase):
                 fetch_jsearch(self.config, "synthetic")
         self.assertEqual(opener.return_value.open.call_count, 3)
         self.assertEqual(sleep.call_count, 2)
+
+    def test_incomplete_vacancy_does_not_discard_valid_jobs_or_retry(self):
+        """A single missing field must not prevent the remaining jobs reaching Jev."""
+        malformed = {**self.job, "job_location": None}
+        with self.assertLogs(level="WARNING") as logs:
+            rows, request = self._fetch({"data": {"jobs": [malformed, self.job]}})
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["id"], "jsearch:abc")
+        request.assert_called_once()
+        self.assertIn("job_location", " ".join(logs.output))
+        self.assertIn("row=1", " ".join(logs.output))
+
+    def test_bad_links_and_text_leave_complete_vacancies_available(self):
+        """Reject unusable rows visibly without inventing their missing data."""
+        rows, request = self._fetch(
+            {
+                "data": {
+                    "jobs": [
+                        {**self.job, "job_apply_link": "javascript:bad"},
+                        {**self.job, "job_description": []},
+                        self.job,
+                    ]
+                }
+            }
+        )
+        self.assertEqual(len(rows), 1)
+        request.assert_called_once()
+
+    def test_all_incomplete_rows_fail_instead_of_claiming_no_matches(self):
+        """An unusable nonempty provider response is still a search failure."""
+        with self.assertRaisesRegex(ValueError, "no usable vacancies"):
+            self._fetch({"data": {"jobs": [{"job_id": "incomplete"}]}})
+
+    def test_invalid_optional_salary_metadata_becomes_unknown(self):
+        """Non-string optional pay metadata must not crash the salary screen."""
+        from jobs_bot.screening import screen_jobs
+
+        self.job.update(job_salary_currency=123, job_salary_period=[])
+        rows, _ = self._fetch({"data": {"jobs": [self.job]}})
+        self.assertEqual(rows[0]["salary_currency"], "currency not supplied")
+        self.assertEqual(rows[0]["salary_period"], "")
+        self.assertEqual(
+            len(screen_jobs(rows, {"max_salary_gbp": 50000}, "jsearch")), 1
+        )

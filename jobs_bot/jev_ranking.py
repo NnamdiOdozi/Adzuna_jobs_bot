@@ -137,8 +137,16 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
         "truncation": [job["id"] for job in candidates if job["description_truncated"]],
     }
     started = time.monotonic()
-    for start in range(0, len(candidates), settings["batch_size"]):
-        batch = candidates[start : start + settings["batch_size"]]
+    pending = [
+        candidates[start : start + settings["batch_size"]]
+        for start in range(0, len(candidates), settings["batch_size"])
+    ]
+    while pending:
+        if receipt["attempted_calls"] >= config["ranking"]["max_calls"]:
+            failure = RankingFailure("request_budget_exceeded")
+            failure.receipt = receipt
+            raise failure
+        batch = pending.pop(0)
         questions = {}
         for i, job in enumerate(batch):
             advert = {
@@ -253,6 +261,20 @@ def rank_jobs(jobs, seen, config, *, api_key=None):
                 request_bytes,
                 details["message"],
             )
+            if details["reason"] == "max_tokens_exceeded" and len(batch) > 1:
+                # Retry smaller groups, never the identical oversized payload.
+                # Attempt and elapsed-time budgets still apply to every call.
+                middle = len(batch) // 2
+                pending[:0] = [batch[:middle], batch[middle:]]
+                logging.warning(
+                    "event=jev_request state=rejected->split batch=%d "
+                    "vacancies=%d left=%d right=%d",
+                    batch_number,
+                    len(batch),
+                    middle,
+                    len(batch) - middle,
+                )
+                continue
             failure = RankingFailure(
                 "jev_request_failed",
                 batch=batch_number,
