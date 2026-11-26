@@ -1,0 +1,1 @@
+Today's job shortlist could not be prepared because the JSearch API failed. This is a search failure, not a confirmation that no matching jobs are available. We will try again at the next regular morning run.

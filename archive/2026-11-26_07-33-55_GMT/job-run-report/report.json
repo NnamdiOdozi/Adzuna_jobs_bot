@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-26",
+  "mode": "send",
+  "state": "accepted",
+  "run_id": "45776261953",
+  "commit": "f899f248e40e6b66835ce8aa0bbeec09d608e500",
+  "method": "jev",
+  "provider": "JSearch",
+  "model": "None / unavailable",
+  "model_calls": 0,
+  "fetched": 0,
+  "assessed": 0,
+  "selected": 0,
+  "subject": "JSearch London finance jobs — 2026-11-26 (JSearch API failed)",
+  "ranking_records": []
+}
